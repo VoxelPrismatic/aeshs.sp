@@ -17,9 +17,9 @@ def diff(t1):
     return (t1-t2).total_seconds()
 def nextP():
     sched = eval(doc.getElementById("sched").innerHTML)
-    for per in sched:
-        if diff(sched[per]) >= 0:
-            return per, dt.combine(dt.today(), sched[per]), dt.now()
+    for per, end in sched:
+        if diff(end) >= 0:
+            return per, dt.combine(dt.today(), end), dt.now()
 def zf(itm):
     return str(itm).zfill(2)
 def get():
