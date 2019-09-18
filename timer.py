@@ -10,6 +10,8 @@ try:
     return doc.getElementById("time")
  def perm():
     return doc.getElementById("per")
+ def stats(st):
+    doc.getElementById("status").innerHTML = str(st)
  elem().innerHTML = "~"
  def diff(t1):
     t2 = dt.now()
@@ -22,14 +24,13 @@ try:
  def zf(itm):
     return str(itm).zfill(2)
  def get():
-    doc.write('0')
+    stats(0)
     period, end, rn = nextP()
-    doc.write('1')
-    doc.write(zf(2))
+    stats(1)
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
-    doc.write('2')
+    stats(2)
     perm().innerHTML = f"PERIOD {period} // {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
-    doc.write('3')
+    stats(3)
  win.setInterval(get, 900)
 except Exception as ex:
-    doc.write(str(ex))
+    stats(str(ex))
