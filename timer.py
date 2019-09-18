@@ -25,6 +25,8 @@ try:
     doc.write('0')
     period, end, rn = nextP()
     doc.write('1')
+    doc.write(period)
+    doc.write(str(end-rn))
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     doc.write('2')
     perm().innerHTML = f"PERIOD {period} // {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
