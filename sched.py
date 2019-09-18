@@ -17,3 +17,11 @@ norm = {"Early": time(8,25,0),
         "7": time(14,33,0),
         "7 -> 8": time(14,38,0),
         "8": time(3,25,0)}
+nrmH = {"Early": time(8,25,0),
+        "Early -> 1A": time(8,30,0),
+        "1A": time(8,54,0),
+        "1A -> 1B": time(9,1,0),
+        "1B": time(9,21,0),
+        "1B -> 2A": time(9,26,0),
+        "2A": time(9,46,0)}
+document.getElementById("sched").innerHTML = str(norm)
