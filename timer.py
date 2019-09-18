@@ -1,17 +1,26 @@
 from browser import document as doc, window as win
-from datetime import time, timedelta as td, datetime as dt, combine as cb, now
+from datetime import time, timedelta as td, datetime as dt, combine as cb
+
 global sched
 sched = eval(doc.getElementById("sched").innerHTML)
-doc.getElementById("sched").innerHTML = ""
+doc.getElementById("sched").innerHTML = "LOL"
 def elem():
     return doc.getElementById("time")
+def perm():
+    return doc.getElementById("per")
 elem().innerHTML = "0"
-def diff(t1, t2):
-    return (t1-dt(1970,1,1)).total_seconds()-(t2-dt(1970,1,1)).total_seconds()
+def diff(t1):
+    t2 = dt.now()
+    t1 = cb(dt.today(), t1)
+    return (t1-t2).total_seconds()
 def nextP():
     for per in sched:
-        if diff(sched[per],now()) >= 0:
+        if diff(sched[per]) >= 0:
+            return per, sched[per], dt.now()
+def zf(itm):
+    return str(itm).zfill(2)
 def get():
-    elem().innerHTML = str(int(elem().innerHTML)+1)
-
-win.setInterval(get, 1000)
+    period, end, rn = nextP()
+    elem().innerHTML = ':'.join(zf(x) for x in str(end-now).split('.')[0].split(':'))
+    perm().innerHTML = f"PERIOD {period} [{zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}]
+win.setInterval(get, 500)
