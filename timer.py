@@ -26,4 +26,4 @@ try:
     perm().innerHTML = f"PERIOD {period} // {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
  win.setInterval(get, 500)
 except Exception as ex:
-    doc.write(ex)
+    doc.write(str(ex))
