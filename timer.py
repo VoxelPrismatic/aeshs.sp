@@ -1,7 +1,7 @@
 try:
  from browser import document as doc, window as win
- from datetime import time, timedelta as td, datetime
- dt = datetime
+ import datetime
+ from datetime import time, timedelta as td, datetime as dt
  
  global sched
  sched = eval(doc.getElementById("sched").innerHTML)
