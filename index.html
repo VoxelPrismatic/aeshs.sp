@@ -6,15 +6,24 @@
         <title>PRIZM.SPACE</title>
     </head>
     <body style="background-color: #112222ff; color: #00ffffff; font-family: Ubuntu Mono;" onload="brython()">
-        <div style="text-align: center;">
-            <div id="time" style="width: 100vw; font-size: 18vw; text-align: center;">
-                #
-            </div>
-            <div id="per" style="font-size: 3vw;">PERIOD X // 00:00:00</div>
-            <div id="status"></div>
-            <div id="sched" style="opacity: 0; font-size: 1px;">LOADING SCHEDULE</div>
-            <div id="list" style="width: 80vw; font-size: 3vw; text-align: left;">LOADING SCHEDULE</div>
+        <div id="time" style="width: 100vw; font-size: 18vw; text-align: center;">
+            #
         </div>
+        <div id="per" style="font-size: 5vw; text-align: center;">PERIOD X // 00:00:00</div>
+        <div id="per" style="font-size: 2vw;">NORMAL SCHEDULE</div>
+        <div id="status"></div>
+        <div id="list" style="width: 80vw; font-size: 3vw; text-align: left;">LOADING SCHEDULE</div>
+        <div id="norm"></div>
+        <div id="norm_half"></div>
+        <div id="late"></div>
+        <div id="act"></div>
+        <div id="act_half"></div>
+        <div id="pm"></div>
+        <div id="pm_half"></div>
+        <div id="norm_half"></div>
+        <div id="final"></div>
+        <div id="summer"></div>
+        <div id="sched" style="opacity: 0; font-size: 1px;"></div>
         <script src="sched.py" type="text/python"></script>
         <script src="timer.py" type="text/python"></script>
     </body>
