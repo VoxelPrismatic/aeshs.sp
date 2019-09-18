@@ -1,7 +1,7 @@
 try:
  from browser import document as doc, window as win
  from datetime import time, timedelta as td, datetime as dt
- """
+ 
  global sched
  sched = eval(doc.getElementById("sched").innerHTML)
  doc.getElementById("sched").innerHTML = "LOL"
@@ -10,6 +10,7 @@ try:
  def perm():
     return doc.getElementById("per")
  elem().innerHTML = "0"
+ """
  def diff(t1):
     t2 = dt.now()
     t1 = dt.combine(dt.today(), t1)
