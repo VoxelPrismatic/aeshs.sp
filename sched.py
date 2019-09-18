@@ -9,4 +9,4 @@ if len(doc.cookie):
             doc.body.style.backgroundColor = "#00ffffff" if ck.split('=')[1] == 'dark' else "#aaffffff"
 else:
     doc.cookie="color=#00ffffff; theme=dark; sched=norm"
-    document.getElementById("sched").innerHTML = document.getElementById("norm").innerHTML
+    doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
