@@ -28,6 +28,6 @@ def get():
     #stats(1)
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     #stats(2)
-    perm().innerHTML = f"{period} // {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
+    perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
     #stats(3)
 win.setInterval(get, 500)
