@@ -18,7 +18,7 @@ norm = [("SCHOOL STARTS", time(7,30)),
         ("PERIOD 7",      time(14,33)),
         ("PASSING TO 8",  time(14,38)),
         ("PERIOD 8",      time(15,25)),
-        ("SCHOOL IS TMO", time(23,59,59)]
+        ("SCHOOL IS TMO", time(23,59,59))]
 nrmH = {"EB": time(8,25),
         "EB -> 1A": time(8,30),
         "1A": time(8,54),
