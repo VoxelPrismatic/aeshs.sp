@@ -17,6 +17,7 @@ try:
     return (t1-t2).total_seconds()
  def nextP():
     for per in sched:
+        doc.write('.')
         if diff(sched[per]) >= 0:
             return per, dt.combine(dt.today(), sched[per]), dt.now()
  def zf(itm):
