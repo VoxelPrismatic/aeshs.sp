@@ -9,8 +9,8 @@ try:
     return doc.getElementById("time")
  def perm():
     return doc.getElementById("per")
- elem().innerHTML = "0"
  """
+ elem().innerHTML = "0"
  def diff(t1):
     t2 = dt.now()
     t1 = dt.combine(dt.today(), t1)
