@@ -9,6 +9,7 @@
             .tL { text-align: left; }
             .tR { text-align: center; }
             .inv { font-size: 1px; opacity: 0 }
+        </style>
     </head>
     <body style="background-color: #112222ff; color: #00ffffff; font-family: Ubuntu Mono;" onload="brython()">
         <div id="time" class="tC" style="font-size: 18vw;">
@@ -19,7 +20,26 @@
         <div id="status"></div>
         <div id="list" class="tL" style="width: 80vw; font-size: 3vw;">LOADING SCHEDULE</div>
         <div class="inv" id="norm"></div>
-        <div class="inv" id="norm_half"></div>
+        <div class="inv" id="norm_half">
+            [("SCHOOL STARTS", time(7,30)),  ("EARLY BIRD", time(8,25)),
+             ("PASSING TO 1A", time(8,30)),  ("PERIOD 1A",  time(8,54)),
+             ("PASSING TO 1B", time(9,1)),   ("PERIOD 1B",  time(9,21)),
+             ("PASSING TO 2A", time(9,26)),  ("PERIOD 2A",  time(9,46)),
+             ("PASSING TO 2B", time(9,53)),  ("PERIOD 2B",  time(10,13)),
+             ("PASSING TO 3A", time(10,18)), ("PERIOD 3A",  time(10,38)),
+             ("PASSING TO 3B", time(10,45)), ("PERIOD 3B",  time(11,5)),
+             ("PASSING TO 4A", time(11,10)), ("PERIOD 4A",  time(11,30)),
+             ("PASSING TO 4B", time(11,37)), ("PERIOD 4B",  time(11,57)),
+             ("PASSING TO 5A", time(12,2)),  ("PERIOD 5A",  time(12,22)),
+             ("PASSING TO 5B", time(12,29)), ("PERIOD 5B",  time(12,49)),
+             ("PASSING TO 6A", time(12,54)), ("PERIOD 6A",  time(13,14)),
+             ("PASSING TO 6B", time(13,21)), ("PERIOD 6B",  time(13,41)),
+             ("PASSING TO 7A", time(13,46)), ("PERIOD 7A",  time(14,6)),
+             ("PASSING TO 7B", time(14,13)), ("PERIOD 7B",  time(14,33)),
+             ("PASSING TO 8A", time(14,38)), ("PERIOD 8A",  time(14,58)),
+             ("PASSING TO 8B", time(15,5)),  ("PERIOD 8B",  time(15,25)),
+             ("SCHOOL IS TMO", time(23,59,59))]
+        </div>
         <div class="inv" id="late"></div>
         <div class="inv" id="act"></div>
         <div class="inv" id="act_half"></div>
