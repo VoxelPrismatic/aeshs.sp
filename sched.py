@@ -1,7 +1,8 @@
 from browser import document
 from datetime import time
-norm = {"Early": time(8,25),
-        "Early -> 1": time(8,30),
+norm = {"START": time(7,30),
+        "EB": time(8,25),
+        "EB -> 1": time(8,30),
         "1": time(9,21),
         "1 -> 2": time(9,26),
         "2": time(10,13),
@@ -17,9 +18,9 @@ norm = {"Early": time(8,25),
         "7": time(14,33),
         "7 -> 8": time(14,38),
         "8": time(15,25),
-        "TMO": time(23,59)}
-nrmH = {"Early": time(8,25),
-        "Early -> 1A": time(8,30),
+        "END": time(23,59)}
+nrmH = {"EB": time(8,25),
+        "EB -> 1A": time(8,30),
         "1A": time(8,54),
         "1A -> 1B": time(9,1),
         "1B": time(9,21),
