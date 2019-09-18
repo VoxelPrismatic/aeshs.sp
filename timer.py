@@ -30,4 +30,4 @@ def get():
     #stats(2)
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
     #stats(3)
-win.setInterval(get, 500)
+win.setInterval(get, 250)
