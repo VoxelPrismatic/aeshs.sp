@@ -1,5 +1,5 @@
 from browser import document as doc, window as win
-from time import sleep
+from datetime import *
 x = 0
 doc.getElementById("time").innerHTML = "0"
 def i():
