@@ -6,14 +6,16 @@
         <title>PRIZM.SPACE</title>
     </head>
     <body style="background-color: #112222ff; color: #00ffffff; font-family: Ubuntu Mono;" onload="brython()">
-        <div id="time" style="width: 100vw; font-size: 18vw; text-align: center;">
-            WAIT
+        <div style="text-align: center;">
+            <div id="time" style="width: 100vw; font-size: 18vw; text-align: center;">
+                #
+            </div>
+            <div id="per">PERIOD X // 00:00:00</div>
+            <div id="status"></div>
+            <div id="sched" style="opacity: 0; font-size: 1px;">LOADING SCHEDULE</div>
+            <div id="list" style="width: 80vw; font-size: 3vw;">LOADING SCHEDULE</div>
         </div>
-        <div id="per" style="width: 100vw; font-size: 5vw; text-align: center;">PERIOD X // 00:00:00</div>
-        <div id="status"></div>
         <script src="sched.py" type="text/python"></script>
         <script src="timer.py" type="text/python"></script>
-        <div id="sched" style="opacity: 0; font-size: 1px;">LOADING SCHEDULE</div>
-        <div id="list" style="width: 100vw; font-size: 3vw; text-align: center;">LOADING SCHEDULE</div>
     </body>
 </html>
