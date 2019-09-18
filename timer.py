@@ -22,11 +22,13 @@ try:
  def zf(itm):
     return str(itm).zfill(2)
  def get():
-    doc.write('get')
+    doc.write('0')
     period, end, rn = nextP()
+    doc.write('1')
     elem().innerHTML = ':'.join(zf(x) for x in str(end-now).split('.')[0].split(':'))
+    doc.write('2')
     perm().innerHTML = f"PERIOD {period} // {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
-    doc.write('hi')
- win.setInterval(get, 500)
+    doc.write('3')
+ win.setInterval(get, 900)
 except Exception as ex:
     doc.write(str(ex))
