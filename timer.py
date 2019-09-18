@@ -4,14 +4,13 @@ from datetime import time, timedelta as td, datetime as dt
  
 global sched
 sched = eval(doc.getElementById("sched").innerHTML)
-doc.getElementById("sched").innerHTML = ""
 def elem():
     return doc.getElementById("time")
 def perm():
     return doc.getElementById("per")
 def stats(st):
     doc.getElementById("status").innerHTML = str(st)
- elem().innerHTML = "~"
+elem().innerHTML = "~"
 def diff(t1):
     t2 = dt.now()
     t1 = dt.combine(dt.today(), t1)
