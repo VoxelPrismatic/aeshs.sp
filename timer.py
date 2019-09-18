@@ -17,7 +17,6 @@ try:
     return (t1-t2).total_seconds()
  def nextP():
     for per in sched:
-        doc.write('.')
         if diff(sched[per]) >= 0:
             return per, dt.combine(dt.today(), sched[per]), dt.now()
  def zf(itm):
@@ -26,7 +25,7 @@ try:
     doc.write('0')
     period, end, rn = nextP()
     doc.write('1')
-    elem().innerHTML = ':'.join(zf(x) for x in str(end-now).split('.')[0].split(':'))
+    elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     doc.write('2')
     perm().innerHTML = f"PERIOD {period} // {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
     doc.write('3')
