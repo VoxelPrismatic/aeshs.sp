@@ -5,12 +5,12 @@ try:
  
  global sched
  sched = eval(doc.getElementById("sched").innerHTML)
- doc.getElementById("sched").innerHTML = "LOL"
+ doc.getElementById("sched").innerHTML = ""
  def elem():
     return doc.getElementById("time")
  def perm():
     return doc.getElementById("per")
- elem().innerHTML = "0"
+ elem().innerHTML = "~"
  def diff(t1):
     t2 = dt.now()
     t1 = dt.combine(dt.today(), t1)
@@ -22,10 +22,11 @@ try:
  def zf(itm):
     return str(itm).zfill(2)
  def get():
+    doc.write('get')
     period, end, rn = nextP()
     elem().innerHTML = ':'.join(zf(x) for x in str(end-now).split('.')[0].split(':'))
     perm().innerHTML = f"PERIOD {period} // {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
+    doc.write('hi')
  win.setInterval(get, 500)
 except Exception as ex:
     doc.write(str(ex))
-    doc.write("hi")
