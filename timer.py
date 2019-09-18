@@ -1,6 +1,7 @@
 try:
  from browser import document as doc, window as win
- from datetime import time, timedelta as td, datetime as dt
+ from datetime import time, timedelta as td, datetime
+ dt = datetime
  
  global sched
  sched = eval(doc.getElementById("sched").innerHTML)
@@ -9,7 +10,6 @@ try:
     return doc.getElementById("time")
  def perm():
     return doc.getElementById("per")
- """
  elem().innerHTML = "0"
  def diff(t1):
     t2 = dt.now()
@@ -26,7 +26,6 @@ try:
     elem().innerHTML = ':'.join(zf(x) for x in str(end-now).split('.')[0].split(':'))
     perm().innerHTML = f"PERIOD {period} // {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
  win.setInterval(get, 500)
- """
 except Exception as ex:
     doc.write(str(ex))
     doc.write("hi")
