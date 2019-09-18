@@ -1,36 +1,34 @@
-try:
- from browser import document as doc, window as win
- import datetime
- from datetime import time, timedelta as td, datetime as dt
+from browser import document as doc, window as win
+import datetime
+from datetime import time, timedelta as td, datetime as dt
  
- global sched
- sched = eval(doc.getElementById("sched").innerHTML)
- doc.getElementById("sched").innerHTML = ""
- def elem():
+global sched
+sched = eval(doc.getElementById("sched").innerHTML)
+doc.getElementById("sched").innerHTML = ""
+def elem():
     return doc.getElementById("time")
- def perm():
+def perm():
     return doc.getElementById("per")
- def stats(st):
+def stats(st):
     doc.getElementById("status").innerHTML = str(st)
  elem().innerHTML = "~"
- def diff(t1):
+def diff(t1):
     t2 = dt.now()
     t1 = dt.combine(dt.today(), t1)
     return (t1-t2).total_seconds()
- def nextP():
+def nextP():
+    sched = eval(doc.getElementById("sched").innerHTML)
     for per in sched:
         if diff(sched[per]) >= 0:
             return per, dt.combine(dt.today(), sched[per]), dt.now()
- def zf(itm):
+def zf(itm):
     return str(itm).zfill(2)
- def get():
-    stats(0)
+def get():
+    #stats(0)
     period, end, rn = nextP()
-    stats(1)
+    #stats(1)
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
-    stats(2)
+    #stats(2)
     perm().innerHTML = f"PERIOD {period} // {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
-    stats(3)
- win.setInterval(get, 900)
-except Exception as ex:
-    stats(str(ex))
+    #stats(3)
+win.setInterval(get, 500)
