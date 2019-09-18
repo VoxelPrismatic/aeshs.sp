@@ -19,11 +19,4 @@ norm = [("SCHOOL STARTS", time(7,30)),
         ("PASSING TO 8",  time(14,38)),
         ("PERIOD 8",      time(15,25)),
         ("SCHOOL IS TMO", time(23,59,59))]
-nrmH = {"EB": time(8,25),
-        "EB -> 1A": time(8,30),
-        "1A": time(8,54),
-        "1A -> 1B": time(9,1),
-        "1B": time(9,21),
-        "1B -> 2A": time(9,26),
-        "2A": time(9,46)}
 document.getElementById("sched").innerHTML = str(norm)
