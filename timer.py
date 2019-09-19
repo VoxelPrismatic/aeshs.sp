@@ -26,12 +26,5 @@ def get():
     period, end, rn = nextP()
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
-    sched = eval(doc.getElementById("sched").innerHTML)
-    slist = ""
-    itm = ""
-    for per, end in sched:
-        if itm:
-            slist += f"{per} {'-'*(19-len(per))} {zf(end.hour)}:{zf(end.minute)}<br>"
-        itm = end
-    doc.getElementById("list").innerHTML = slist
+    doc.getElementById("list").innerHTML = doc.getElementById("sched").innerHTML)
 win.setInterval(get, 1000)
