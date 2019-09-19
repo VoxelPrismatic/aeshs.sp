@@ -32,7 +32,7 @@ cat = {"norm": "NORMAL SCHEDULE",
 def get():
     theme = "dark" if doc.body.style.backgroundColor=='#112222ff' else "light"
     color = doc.body.style.color
-    cur = str(doc.getElementById("typ").innerHTML).split("_")[0]
+    cur = doc.getElementById("typ").innerHTML.replace("_half","")
     typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and cur not in ["late","summer"] not else "")
     doc.getElementById("typ").innerHTML = typ
     doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
