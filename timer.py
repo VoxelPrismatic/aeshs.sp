@@ -36,6 +36,7 @@ def get():
             period = per
             end = dt.combine(dt.today(), end)
             rn = dt.now()
+            break
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
     theme = "dark" if doc.body.style.backgroundColor=='#112222ff' else "light"
