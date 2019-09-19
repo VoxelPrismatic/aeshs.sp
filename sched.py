@@ -18,8 +18,18 @@ if len(doc.cookie):
             doc.body.style.color = ck.split('=')[1]
             doc.getElementById("color").innerHTML = ck.split('=')[1]
         elif ck.startswith('theme'):
-            doc.body.style.backgroundColor = "#112222ff" if ck.split('=')[1] == 'dark' else "#ccddddff"
-            doc.getElementById("theme").innerHTML = ck.split('=')[1]
+            if ck.split('=')[1] == 'dark':
+                doc.body.style.backgroundColor = "#112222ff"
+                doc.getElementById("theme").innerHTML = "dark"
+                doc.getElementById("change").onclick = "theme('#ccddddff')"
+                doc.getElementById("change").innerHTML = "[LIGHT THEME]"
+                doc.getElementById("change").style.color = "#ccddddff"
+            else:
+                doc.body.style.backgroundColor = "#ccddddff"
+                doc.getElementById("theme").innerHTML = "light"
+                doc.getElementById("change").onclick = "theme('#112222ff')"
+                doc.getElementById("change").innerHTML = "[DARK THEME]"
+                doc.getElementById("change").style.color = "#112222ff"
 else:
     doc.cookie="color=#00ffffff; theme=dark; sched=norm"
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
