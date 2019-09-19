@@ -16,7 +16,8 @@ def diff(t1):
     return (t1-t2).total_seconds()
 def zf(itm):
     return str(itm).zfill(2)
-    
+def rgb2hex(itm):
+    return "#"+"".join(zf(hex(int(x))[2:]) for x in itm[4:-1].split(','))+"ff"
 cat = {"norm": "NORMAL SCHEDULE",
        "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
        "act": "ACTIVITY PERIOD SCHEDULE",
@@ -29,8 +30,13 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
 def get():
-    theme = "dark" if doc.body.style.backgroundColor=='#112222ff' else "light"
+    theme = "dark" if rgb2hex(doc.body.style.backgroundColor) == '#112222ff' else "light"
     color = doc.body.style.color
+    if not color:
+        doc.body.style.color = "#00ffffff"
+        color = "#00ffffff"
+    else:
+        color = rgb2hex(color)
     cur = doc.getElementById("typ").innerHTML.split("_")[0]
     typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and cur not in ["late","summer"] else "")
     doc.getElementById("typ").innerHTML = typ
