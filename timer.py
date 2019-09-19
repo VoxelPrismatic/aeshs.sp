@@ -10,7 +10,6 @@ def perm():
     return doc.getElementById("per")
 def stats(st):
     doc.getElementById("status").innerHTML = str(st)
-elem().innerHTML = "--~--"
 def diff(t1):
     t2 = dt.now()
     t1 = dt.combine(dt.today(), t1)
@@ -55,5 +54,5 @@ def get():
         )
     except Exception as ex:
         doc.write(str(ex))
-elem().innerHTML = "---~---"
+elem().innerHTML = "--~--"
 win.setInterval(get, 1000)
