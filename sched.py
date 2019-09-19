@@ -19,7 +19,7 @@ if len(doc.cookie):
             doc.getElementById("color").innerHTML = ck.split('=')[1]
         elif ck.startswith('theme'):
             doc.body.style.backgroundColor = "#112222ff" if ck.split('=')[1] == 'dark' else "#ccddddff"
-            doc.getElementById("color").innerHTML = ck.split('=')[1]
+            doc.getElementById("theme").innerHTML = ck.split('=')[1]
 else:
     doc.cookie="color=#00ffffff; theme=dark; sched=norm"
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
