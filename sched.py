@@ -21,13 +21,11 @@ if len(doc.cookie):
             if ck.split('=')[1] == 'dark':
                 doc.body.style.backgroundColor = "#112222ff"
                 doc.getElementById("theme").innerHTML = "dark"
-                doc.getElementById("change").onclick = "theme('#ccddddff')"
                 doc.getElementById("change").innerHTML = "[LIGHT THEME]"
                 doc.getElementById("change").style.color = "#ccddddff"
             else:
                 doc.body.style.backgroundColor = "#ccddddff"
                 doc.getElementById("theme").innerHTML = "light"
-                doc.getElementById("change").onclick = "theme('#112222ff')"
                 doc.getElementById("change").innerHTML = "[DARK THEME]"
                 doc.getElementById("change").style.color = "#112222ff"
 else:
