@@ -30,7 +30,7 @@ def get():
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
     try:
         itm = eval(doc.getElementById("sched").innerHTML)
-        prs, tms = itm
+        prs, tms = [x[0] for x in itm], [x[1] for x in itm]
         doc.getElementById("list").innerHTML = '<br>'.join(
             f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])}" for x in range(1,len(prs))
         )
