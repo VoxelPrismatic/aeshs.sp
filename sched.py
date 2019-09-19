@@ -11,6 +11,8 @@ if len(doc.cookie):
         if ck.startswith('sched'):
             doc.getElementById("sched").innerHTML = doc.getElementById(ck.split('=')[1]).innerHTML
             doc.getElementById("typ").innerHTML = ck.split('=')[1]
+            if ck.split('=')[1].endswith("_half"):
+                doc.getElementById("half").innerHTML = "True"
         elif ck.startswith('color'):
             doc.body.style.color = ck.split('=')[1]
         elif ck.startswith('theme'):
