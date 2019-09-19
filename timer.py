@@ -31,7 +31,7 @@ def get():
     itm = eval(doc.getElementById("sched").innerHTML)
     prs, tms = itm
     doc.getElementById("list").innerHTML = '<br>'.join(
-        f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])}" for x in range(1,len(prs))
+        f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])}" for x in range(1,len(prs)
     )
 elem().innerHTML = "-----~-----"
 win.setInterval(get, 1000)
