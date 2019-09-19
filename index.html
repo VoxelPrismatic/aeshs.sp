@@ -9,6 +9,8 @@
             .tL { text-align: left; }
             .tR { text-align: center; }
             .inv { font-size: 1px; opacity: 0 }
+            button {
+                
         </style>
     </head>
     <body style="background-color: #112222ff; color: #00ffffff; font-family: Ubuntu Mono; width: 100vw" onload="brython()">
@@ -106,7 +108,8 @@
         <script src="sched.py" type="text/python"></script>
         <script src="timer.py" type="text/python"></script>
         <div class="tC">
-            <button onclick="sched('norm_half');"><div>[NORM HALF]</div></button>
+            <span onclick="sched('norm_half')">[NORM HALF]</div>
+            <span onclick="sched('norm')">[NORMAL]</div>
         </div>
         <script src="custom.js"></script>
     </body>
