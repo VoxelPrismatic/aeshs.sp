@@ -19,3 +19,4 @@ else:
     doc.cookie="color=#00ffffff; theme=dark; sched=norm"
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
 doc.getElementById("time").innerHTML = "-~-"
+doc.getElementById("cookie").innerHTML = doc.cookie
