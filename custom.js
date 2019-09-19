@@ -1,6 +1,6 @@
 function sched(s) {
     if (s == "half") {
-        if (document.getElementById("half").innerHTML.contains("True")) {
+        if (document.getElementById("half").innerHTML == "True") {
             document.getElementById("half").innerHTML = "False";
         } else {
             document.getElementById("half").innerHTML = "True";
