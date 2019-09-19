@@ -12,6 +12,6 @@ function sched(s) {
 function color(s) {
     document.body.style.color = s;
 }
-function theme(s,v) {
+function theme(s) {
     document.body.backgroundColor = s;
 }
