@@ -27,6 +27,31 @@
         <div id="prt" class="tC" style="font-size: 2vw;">NORMAL SCHEDULE</div>
         <div id="status"></div>
         <div id="list" class="tL" style="width: 80vw; font-size: 1vw;">LOADING SCHEDULE</div>
+        <!-- BUTTONS -->
+        <div class="tC">
+            <span onclick="sched('half')" id="toggle">[HALF PERIODS]</span>
+            //
+            <span onclick="sched('norm')">[NORMAL]</span>
+            //
+            <span onclick="sched('late')">[LATE ARRIVAL]</span>
+            //
+            <span onclick="sched('act')">[ACTIVITY PERIOD]</span>
+        </div>
+        <div class="tC">
+            <span onclick="theme('#ccddddff')" style="color: #ccddddff;" id="change" onload="wheme()">[LIGHT THEME]</span>
+        </div>
+        <div class="tC">
+            [<span onclick="color('#000000ff')" style="color: #000000ff;">[~]</span>]
+            [<span onclick="color('#888888ff')" style="color: #888888ff;">[~]</span>]
+            [<span onclick="color('#ffffffff')" style="color: #ffffffff;">[~]</span>]
+            [<span onclick="color('#ff0000ff')" style="color: #ff0000ff;">[~]</span>]
+            [<span onclick="color('#ff8800ff')" style="color: #ff8800ff;">[~]</span>]
+            [<span onclick="color('#ffff00ff')" style="color: #ffff00ff;">[~]</span>]
+            [<span onclick="color('#00ff00ff')" style="color: #00ff00ff;">[~]</span>]
+            [<span onclick="color('#00ffffff')" style="color: #00ffffff;">[~]</span>]
+            [<span onclick="color('#0000ffff')" style="color: #0000ffff;">[~]</span>]
+            [<span onclick="color('#ff00ffff')" style="color: #ff00ffff;">[~]</span>]
+        </div>
         <!-- SCHEDULES -->
         <div class="inv" id="norm">
             [("SCHOOL STARTS", time(7,30)),  ("EARLY BIRD", time(8,25)),
@@ -120,30 +145,6 @@
         <div class="inv" id="color"></div>
         <script src="sched.py" type="text/python"></script>
         <script src="timer.py" type="text/python"></script>
-        <div class="tC">
-            <span onclick="sched('half')" id="toggle">[HALF PERIODS]</span>
-            //
-            <span onclick="sched('norm')">[NORMAL]</span>
-            //
-            <span onclick="sched('late')">[LATE ARRIVAL]</span>
-            //
-            <span onclick="sched('act')">[ACTIVITY PERIOD]</span>
-        </div>
-        <div class="tC">
-            <span onclick="theme('#ccddddff')" style="color: #ccddddff;" id="change" onload="wheme()">[LIGHT THEME]</span>
-        </div>
-        <div class="tC">
-            [<span onclick="color('#000000ff')" style="color: #000000ff;">[~]</span>]
-            [<span onclick="color('#888888ff')" style="color: #888888ff;">[~]</span>]
-            [<span onclick="color('#ffffffff')" style="color: #ffffffff;">[~]</span>]
-            [<span onclick="color('#ff0000ff')" style="color: #ff0000ff;">[~]</span>]
-            [<span onclick="color('#ff8800ff')" style="color: #ff8800ff;">[~]</span>]
-            [<span onclick="color('#ffff00ff')" style="color: #ffff00ff;">[~]</span>]
-            [<span onclick="color('#00ff00ff')" style="color: #00ff00ff;">[~]</span>]
-            [<span onclick="color('#00ffffff')" style="color: #00ffffff;">[~]</span>]
-            [<span onclick="color('#0000ffff')" style="color: #0000ffff;">[~]</span>]
-            [<span onclick="color('#ff00ffff')" style="color: #ff00ffff;">[~]</span>]
-        </div>
         <script src="custom.js"></script>
     </body>
 </html>
