@@ -19,15 +19,7 @@ def zf(itm):
     return str(itm).zfill(2)
 def nextP():
     sched = eval(doc.getElementById("sched").innerHTML)
-    slist = []
-    itm = ""
     for per, end in sched:
-        if itm and itm != time(23,59,59):
-            slist.append(per+" ")
-            while len(slist[-1]) < 14:
-                slist[-1] += '-'
-            slist[-1] += f" {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
-        doc.getElementById("list").innerHTML = '<br>'.join(slist)
         if diff(end) >= 0:
             return per, dt.combine(dt.today(), end), dt.now()
         itm = end
@@ -39,4 +31,4 @@ def get():
     #stats(2)
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
     #stats(3)
-win.setInterval(get, 250)
+win.setInterval(get, 1000)
