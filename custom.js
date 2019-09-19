@@ -6,7 +6,7 @@ function sched(s) {
             document.getElementById("half").innerHTML = "True";
         }
     } else {
-        document.getElementById("sched").innerHTML = document.getElementById(s).innerHTML;
+        document.getElementById("typ").innerHTML = s;
     }
 }
 function color(s) {
