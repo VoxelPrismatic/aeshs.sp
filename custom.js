@@ -2,8 +2,10 @@ function sched(s) {
     if (s == "half") {
         if (document.getElementById("half").innerHTML == "True") {
             document.getElementById("half").innerHTML = "False";
+            document.getElementById("toggle").innerHTML = "[HALF PERIODS]"
         } else {
             document.getElementById("half").innerHTML = "True";
+            document.getElementById("toggle").innerHTML = "[FULL PERIODS]"
         }
     } else {
         document.getElementById("typ").innerHTML = s;
