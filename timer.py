@@ -18,10 +18,7 @@ def diff(t1):
 def zf(itm):
     return str(itm).zfill(2)
 def nextP():
-    sched = eval(doc.getElementById("sched").innerHTML)
-    for per, end in sched:
-        if diff(end) >= 0:
-            return per, dt.combine(dt.today(), end), dt.now()
+    
 cat = {"norm": "NORMAL SCHEDULE",
        "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
        "act": "ACTIVITY PERIOD SCHEDULE",
@@ -34,7 +31,12 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
 def get():
-    period, end, rn = nextP()
+    sched = eval(doc.getElementById("sched").innerHTML)
+    for per, end in sched:
+        if diff(end) >= 0:
+            period = per
+            end = dt.combine(dt.today(), end)
+            rn = dt.now()
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
     theme = "dark" if doc.body.style.backgroundColor=='#112222ff' else "light"
