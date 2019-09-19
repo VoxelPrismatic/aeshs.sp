@@ -59,4 +59,4 @@ def get():
     except Exception as ex:
         doc.write(str(ex))
 elem().innerHTML = "--~--"
-win.setInterval(get, 1000)
+win.setInterval(get, 999.9)
