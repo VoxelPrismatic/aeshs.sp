@@ -26,5 +26,9 @@ def get():
     period, end, rn = nextP()
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
-    doc.getElementById("list").innerHTML = doc.getElementById("sched").innerHTML
+    itm = eval(doc.getElementById("sched").innerHTML)
+    prs, tms = list(itm), itm.values()
+    doc.getElementById("list").innerHTML = '<br>'.join(
+        f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])}" for x in range(1,len(prs))
+    )
 win.setInterval(get, 1000)
