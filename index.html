@@ -19,7 +19,7 @@
                 margin: auto;
             }
             span {
-                color: #ff00ffff;
+                color: #00ffffff;
             }
         </style>
     </head>
@@ -115,12 +115,15 @@
         <div class="inv" id="final"></div>
         <div class="inv" id="summer"></div>
         <div class="inv" id="sched"></div>
+        <div class="inv" id="typ"></div>
         <script src="sched.py" type="text/python"></script>
         <script src="timer.py" type="text/python"></script>
         <div class="tC">
-            <span onclick="sched('half')" id="half_toggle">[HALF PERIODS]</span>//
-            <span onclick="sched('norm')">[NORMAL]</span>//
-            <span onclick="sched('late')">[LATE ARRIVAL]</span>
+            <span onclick="sched('half')" id="half_toggle"><u>[HALF PERIODS]</u></span>
+            //
+            <span onclick="sched('norm')"><u>[NORMAL]</u></span>
+            //
+            <span onclick="sched('late')"><u>[LATE ARRIVAL]</u></span>
         </div>
         <script src="custom.js"></script>
     </body>
