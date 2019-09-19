@@ -22,10 +22,27 @@ def nextP():
     for per, end in sched:
         if diff(end) >= 0:
             return per, dt.combine(dt.today(), end), dt.now()
+cat = {"norm": "NORMAL SCHEDULE",
+       "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
+       "act": "ACTIVITY PERIOD SCHEDULE",
+       "act_half": "ACTIVITY PERIOD SCHEDULE - HALF PERIODS",
+       "pm": "PM ASSEMBLY SCHEDULE",
+       "pm_half": "PM ASSEMBLY SCHEDULE - HALF PERIODS",
+       "late": "LATE ARRIVAL SCHEDULE",
+       "final": "FINALS SCHEDULE",
+       "early": "EARLY DISMISSAL SCHEDULE",
+       "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
+       "summer": "SUMMER SCHEDULE - KINDA USELESS"}
 def get():
     period, end, rn = nextP()
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
+    theme = "dark" if doc.body.style.backgroundColor=='#112222ff' else "light"
+    color = doc.body.style.color
+    cur = doc.getElementById("typ").innerHTML
+    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and cur not in ["late","summer"] "late" else "")
+    doc.getElementById("typ").innerHTML = typ
+    doc.cookie = f"color={color}; theme={theme}; sched={typ};"
     try:
         itm = eval(doc.getElementById("sched").innerHTML)
         prs, tms = [x[0] for x in itm], [x[1] for x in itm]
@@ -34,5 +51,7 @@ def get():
         )
     except Exception as ex:
         doc.write(str(ex))
+    doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
+    doc.getElementById("prt").innerHTML = cat[typ]
 elem().innerHTML = "---~---"
 win.setInterval(get, 1000)
