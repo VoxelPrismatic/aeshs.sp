@@ -23,7 +23,7 @@ def nextP():
     for per, end in sched:
         if diff(end) >= 0:
             return per, dt.combine(dt.today(), end), dt.now()
-elem().innerHTML = "----~----"
+elem().innerHTML = "--~--"
 def get():
     period, end, rn = nextP()
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
@@ -33,5 +33,5 @@ def get():
     doc.getElementById("list").innerHTML = '<br>'.join(
         f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])}" for x in range(1,len(prs)
     )
-elem().innerHTML = "-----~-----"
+elem().innerHTML = "-~-"
 win.setInterval(get, 1000)
