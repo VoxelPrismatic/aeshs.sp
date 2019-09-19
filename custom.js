@@ -11,6 +11,7 @@ function sched(s) {
 }
 function color(s) {
     document.body.style.color = s;
+    document.getElementById("color").innerHTML = s;
 }
 function theme(s) {
     document.body.backgroundColor = s;
