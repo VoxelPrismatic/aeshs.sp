@@ -22,13 +22,8 @@ def nextP():
     for per, end in sched:
         if diff(end) >= 0:
             return per, dt.combine(dt.today(), end), dt.now()
-        itm = end
 def get():
-    #stats(0)
     period, end, rn = nextP()
-    #stats(1)
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
-    #stats(2)
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
-    #stats(3)
 win.setInterval(get, 1000)
