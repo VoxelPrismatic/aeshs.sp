@@ -40,7 +40,7 @@ def get():
     theme = "dark" if doc.body.style.backgroundColor=='#112222ff' else "light"
     color = doc.body.style.color
     cur = doc.getElementById("typ").innerHTML
-    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and cur not in ["late","summer"] "late" else "")
+    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and cur not in ["late","summer"] else "")
     doc.getElementById("typ").innerHTML = typ
     doc.cookie = f"color={color}; theme={theme}; sched={typ};"
     try:
