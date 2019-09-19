@@ -20,14 +20,14 @@ function theme(s) {
     if (s == "#112222ff") {
         document.body.style.backgroundColor = "#112222ff";
         document.getElementById("change").style.color = "#ccddddff";
-        document.getElementById("change").onclick = "theme('#ccddddff')";
+        document.getElementById("change").onclick = theme('#ccddddff');
         document.getElementById("change").innerHTML = "[LIGHT THEME]";
-        document.getElementById("theme").innerHTML = "dark"
+        document.getElementById("theme").innerHTML = "dark";
     } else {
         document.body.style.backgroundColor = "#ccddddff";
-        document.getElementById("change").style.color = "#112222ff"
-        document.getElementById("change").onclick = "theme('#112222ff')"
-        document.getElementById("change").innerHTML = "[DARK THEME]"
-        document.getElementById("theme").innerHTML = "light"
+        document.getElementById("change").style.color = "#112222ff";
+        document.getElementById("change").onclick = theme('#112222ff');
+        document.getElementById("change").innerHTML = "[DARK THEME]";
+        document.getElementById("theme").innerHTML = "light";
     }
 }
