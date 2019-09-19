@@ -31,6 +31,14 @@ cat = {"norm": "NORMAL SCHEDULE",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
 def get():
     theme = "dark" if rgb2hex(doc.body.style.backgroundColor) == '#112222ff' else "light"
+    if theme == "dark":
+        doc.getElementById("change").style.color = "#ccddddff"
+        doc.getElementById("change").onclick = "theme('#ccddddff')"
+        doc.getElementById("change").innerHTML = "[LIGHT THEME]"
+    else:
+        doc.getElementById("change").style.color = "#112222ff"
+        doc.getElementById("change").onclick = "theme('#112222ff')"
+        doc.getElementById("change").innerHTML = "[DARK THEME]"
     color = doc.body.style.color
     if not color:
         doc.body.style.color = "#00ffffff"
