@@ -19,7 +19,7 @@
                 margin: auto;
             }
             span {
-                color: #aaffff;
+                color: #ff00ffff;
             }
         </style>
     </head>
@@ -30,7 +30,7 @@
         <div id="per" class="tC" style="font-size: 4vw;">PERIOD X // 00:00:00</div>
         <div id="per" class="tC" style="font-size: 2vw;">NORMAL SCHEDULE</div>
         <div id="status"></div>
-        <div id="list" class="tL" style="width: 80vw; font-size: 3vw;">LOADING SCHEDULE</div>
+        <div id="list" class="tL" style="width: 80vw; font-size: 1vw;">LOADING SCHEDULE</div>
         <div class="inv" id="norm">
             [("SCHOOL STARTS", time(7,30)),  ("EARLY BIRD", time(8,25)),
              ("PASSING TO 1",  time(8,30)),  ("PERIOD 1",   time(9,21)),
@@ -114,13 +114,13 @@
         <div class="inv" id="norm_half"></div>
         <div class="inv" id="final"></div>
         <div class="inv" id="summer"></div>
-        <div id="sched"></div>
+        <div class="inv" id="sched"></div>
         <script src="sched.py" type="text/python"></script>
         <script src="timer.py" type="text/python"></script>
         <div class="tC">
-            <span onclick="sched('norm_half')">[NORM HALF]</span>
-            //
-            <span onclick="sched('norm')">[NORMAL]</span>
+            <span onclick="sched('half')" id="half_toggle">[HALF PERIODS]</span>//
+            <span onclick="sched('norm')">[NORMAL]</span>//
+            <span onclick="sched('late')">[LATE ARRIVAL]</span>
         </div>
         <script src="custom.js"></script>
     </body>
