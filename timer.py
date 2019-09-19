@@ -30,21 +30,8 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
 def get():
-    theme = "dark" if rgb2hex(doc.body.style.backgroundColor) == '#112222ff' else "light"
-    if theme == "dark":
-        doc.getElementById("change").style.color = "#ccddddff"
-        doc.getElementById("change").onclick = "theme('#ccddddff')"
-        doc.getElementById("change").innerHTML = "[LIGHT THEME]"
-    else:
-        doc.getElementById("change").style.color = "#112222ff"
-        doc.getElementById("change").onclick = "theme('#112222ff')"
-        doc.getElementById("change").innerHTML = "[DARK THEME]"
-    color = doc.body.style.color
-    if not color:
-        doc.body.style.color = "#00ffffff"
-        color = "#00ffffff"
-    else:
-        color = rgb2hex(color)
+    theme = doc.getElementById("theme").innerHTML
+    color = doc.getElementById("color").innerHTML
     cur = doc.getElementById("typ").innerHTML.split("_")[0]
     typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and cur not in ["late","summer"] else "")
     doc.getElementById("typ").innerHTML = typ
