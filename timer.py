@@ -30,7 +30,14 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
 def get():
+    theme = "dark" if doc.body.style.backgroundColor=='#112222ff' else "light"
+    color = doc.body.style.color
+    cur = doc.getElementById("typ").innerHTML
+    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and cur not in ["late","summer"] else "")
+    doc.getElementById("typ").innerHTML = typ
+    doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
     sched = eval(doc.getElementById("sched").innerHTML)
+    doc.getElementById("prt").innerHTML = cat[typ]
     for per, end in sched:
         if diff(end) >= 0:
             period = per
@@ -39,11 +46,6 @@ def get():
             break
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
-    theme = "dark" if doc.body.style.backgroundColor=='#112222ff' else "light"
-    color = doc.body.style.color
-    cur = doc.getElementById("typ").innerHTML
-    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and cur not in ["late","summer"] else "")
-    doc.getElementById("typ").innerHTML = typ
     doc.cookie = f"color={color}; theme={theme}; sched={typ};"
     try:
         itm = eval(doc.getElementById("sched").innerHTML)
@@ -53,7 +55,5 @@ def get():
         )
     except Exception as ex:
         doc.write(str(ex))
-    doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
-    doc.getElementById("prt").innerHTML = cat[typ]
 elem().innerHTML = "---~---"
 win.setInterval(get, 1000)
