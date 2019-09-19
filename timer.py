@@ -29,7 +29,7 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early": "EARLY DISMISSAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
-def get():
+def load():
     theme = doc.getElementById("theme").innerHTML
     color = doc.getElementById("color").innerHTML
     cur = doc.getElementById("typ").innerHTML.split("_")[0]
@@ -41,6 +41,14 @@ def get():
     doc.cookie = f"theme={theme}"
     doc.cookie = f"sched={typ}"
     doc.getElementById("cookie").innerHTML = doc.cookie
+    perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
+    doc.cookie = f"color={color}; theme={theme}; sched={typ};"
+    itm = eval(doc.getElementById("sched").innerHTML)
+    prs, tms = [x[0] for x in itm], [x[1] for x in itm]
+    doc.getElementById("list").innerHTML = '<br>'.join(
+        f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])}" for x in range(1,len(prs))
+    )
+def get():
     for per, end in eval(doc.getElementById("sched").innerHTML):
         if diff(end) >= 0:
             period = per
@@ -48,15 +56,7 @@ def get():
             rn = dt.now()
             break
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
-    perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
-    doc.cookie = f"color={color}; theme={theme}; sched={typ};"
-    try:
-        itm = eval(doc.getElementById("sched").innerHTML)
-        prs, tms = [x[0] for x in itm], [x[1] for x in itm]
-        doc.getElementById("list").innerHTML = '<br>'.join(
-            f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])}" for x in range(1,len(prs))
-        )
-    except Exception as ex:
-        doc.write(str(ex))
+    
 elem().innerHTML = "--~--"
-win.setInterval(get, 999.9)
+win.setInterval(get, 1000)
+win.setInterval(load, 2000)
