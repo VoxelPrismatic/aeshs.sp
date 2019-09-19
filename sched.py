@@ -13,10 +13,13 @@ if len(doc.cookie):
             doc.getElementById("typ").innerHTML = ck.split('=')[1]
             if ck.split('=')[1].endswith("_half"):
                 doc.getElementById("half").innerHTML = "True"
+                doc.getElementById("toggle").innerHTML = "[FULL PERIODS]"
         elif ck.startswith('color'):
             doc.body.style.color = ck.split('=')[1]
+            doc.getElementById("color").innerHTML = ck.split('=')[1]
         elif ck.startswith('theme'):
             doc.body.style.backgroundColor = "#112222ff" if ck.split('=')[1] == 'dark' else "#ccddddff"
+            doc.getElementById("color").innerHTML = ck.split('=')[1]
 else:
     doc.cookie="color=#00ffffff; theme=dark; sched=norm"
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
