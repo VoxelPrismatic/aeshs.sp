@@ -36,9 +36,8 @@ def get():
     typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and cur not in ["late","summer"] else "")
     doc.getElementById("typ").innerHTML = typ
     doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
-    sched = eval(doc.getElementById("sched").innerHTML)
     doc.getElementById("prt").innerHTML = cat[typ]
-    for per, end in sched:
+    for per, end in eval(doc.getElementById("sched").innerHTML):
         if diff(end) >= 0:
             period = per
             end = dt.combine(dt.today(), end)
