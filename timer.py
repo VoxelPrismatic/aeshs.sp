@@ -10,7 +10,7 @@ def perm():
     return doc.getElementById("per")
 def stats(st):
     doc.getElementById("status").innerHTML = str(st)
-elem().innerHTML = "~"
+elem().innerHTML = "--~--"
 def diff(t1):
     t2 = dt.now()
     t1 = dt.combine(dt.today(), t1)
@@ -26,4 +26,12 @@ def get():
     period, end, rn = nextP()
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
+    sched = eval(doc.getElementById("sched").innerHTML)
+    slist = ""
+    itm = ""
+    for per, end in sched:
+        if itm:
+            slist += f"{per} {'-'*(19-len(per))} {zf(end.hour)}:{zf(end.minute)}<br>"
+        itm = end
+    doc.getElementById("list").innerHTML = slist
 win.setInterval(get, 1000)
