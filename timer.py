@@ -15,7 +15,6 @@ def diff(t1):
     t2 = dt.now()
     t1 = dt.combine(dt.today(), t1)
     return (t1-t2).total_seconds()
-elem().innerHTML = "---~---"
 def zf(itm):
     return str(itm).zfill(2)
 def nextP():
@@ -23,7 +22,6 @@ def nextP():
     for per, end in sched:
         if diff(end) >= 0:
             return per, dt.combine(dt.today(), end), dt.now()
-elem().innerHTML = "--~--"
 def get():
     period, end, rn = nextP()
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
@@ -36,5 +34,5 @@ def get():
         )
     except Exception as ex:
         doc.write(str(ex))
-elem().innerHTML = "-~-"
+elem().innerHTML = "---~---"
 win.setInterval(get, 1000)
