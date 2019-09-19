@@ -17,7 +17,6 @@ def diff(t1):
     return (t1-t2).total_seconds()
 def zf(itm):
     return str(itm).zfill(2)
-def nextP():
     
 cat = {"norm": "NORMAL SCHEDULE",
        "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
