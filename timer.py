@@ -36,7 +36,9 @@ def get():
     doc.getElementById("typ").innerHTML = typ
     doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
     doc.getElementById("prt").innerHTML = cat[typ]
-    doc.cookie = f"color={color}; theme={theme}; sched={typ};"
+    doc.cookie = f"color={color}"
+    doc.cookie = f"theme={theme}"
+    doc.cookie = f"sched={typ}"
     doc.getElementById("cookie").innerHTML = doc.cookie
     for per, end in eval(doc.getElementById("sched").innerHTML):
         if diff(end) >= 0:
