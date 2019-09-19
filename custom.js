@@ -31,3 +31,17 @@ function theme(s) {
         document.getElementById("theme").innerHTML = "light";
     }
 }
+
+function wheme() {
+    if (document.getElementById("theme").innerHTML == "light") {
+        document.body.style.backgroundColor = "#ccddddff";
+        document.getElementById("change").style.color = "#112222ff";
+        document.getElementById("change").onclick = theme('#112222ff');
+        document.getElementById("change").innerHTML = "[DARK THEME]";
+    } else {
+        document.body.style.backgroundColor = "#112222ff";
+        document.getElementById("change").style.color = "#ccddddff";
+        document.getElementById("change").onclick = theme('#ccddddff');
+        document.getElementById("change").innerHTML = "[LIGHT THEME]";
+    }
+}
