@@ -1,5 +1,4 @@
 from browser import document as doc
-from re import sub
 doc.getElementById("time").innerHTML = "•~•"
 try:
   if len(doc.cookie):
@@ -19,9 +18,6 @@ try:
                "custom8=": altered,
                "custom9=": altered
               }
-    for key in default:
-        if key not in doc.cookie or key+"; " in doc.cookie:
-            doc.cookie = key+sub(r", *","&~",default[ck])
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
         if ck.startswith('sched'):
@@ -46,7 +42,7 @@ try:
                 doc.getElementById("change").style.color = "#112222ff"
         elif ck.startswith('custom') and not ck.startswith("custom="):
             st = ck.split("=")[0]+"<br>"
-            doc.getElementById(ck.split('=')[0]).innerHTML = ck[8:].replace("&~",", ")
+            doc.getElementById(ck.split('=')[0]).innerHTML = "[("+ck[8:].replace('"time(',', time(').replace(')"',')),("')+")]"
           
   else:
     doc.cookie="color=#00ffffff"
