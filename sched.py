@@ -2,7 +2,6 @@ from browser import document as doc
 try:
   if len(doc.cookie):
     norm_sched = doc.getElementById("norm").innerHTML
-    doc.write("hi")
     default = {"color=": "#00ffffff",
                "theme=": "dark",
                "sched=": "norm",
@@ -43,6 +42,7 @@ try:
                 doc.getElementById("change").innerHTML = "[DARK THEME]"
                 doc.getElementById("change").style.color = "#112222ff"
         elif ck.startswith('custom') and ck != "custom":
+            doc.write(doc.cookie)
             doc.getElementById(ck.split('=')[0]).innerHTML = ck[8:]
           
   else:
