@@ -21,13 +21,13 @@ try:
             doc.cookie = key+default[key]
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
-        doc.write(ck)
         if ck in default:
-            doc.cookie = ck+default[ck]
+            doc.cookie = f"{ck}{default[ck]}"
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
         if ck.startswith('sched'):
             doc.getElementById("sched").innerHTML = doc.getElementById(ck.split('=')[1]).innerHTML
+            doc.write("brokk")
             doc.getElementById("typ").innerHTML = ck.split('=')[1]
             if ck.split('=')[1].endswith("_half"):
                 doc.getElementById("half").innerHTML = "True"
@@ -65,6 +65,7 @@ try:
     doc.cookie = "custom8="+norm_sched
     doc.cookie = "custom9="+norm_sched
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
-except Exception as ex: doc.write(str(ex))
+except Exception as ex: 
+    doc.write(str(ex))
 doc.getElementById("time").innerHTML = "-~-"
 doc.getElementById("cookie").innerHTML = doc.cookie
