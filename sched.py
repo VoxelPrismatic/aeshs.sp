@@ -4,6 +4,7 @@ try:
   if len(doc.cookie):
     norm_sched = doc.getElementById("norm").innerHTML
     altered = "".join(f"'{pr}'{tm}" for pr, tm in norm_sched)
+    doc.getElementById("time").innerHTML = ">~<"
     default = {"color=": "#00ffffff",
                "theme=": "dark",
                "sched=": "norm",
