@@ -44,6 +44,11 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early": "EARLY DISMISSAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
+def custom(label):
+    try:
+        return "".join(f"'{pr}'{tm}" for pr, tm in eval(doc.getElementById(label).innerHTML))
+    except:
+        return '"END"time(23,59,59)'
 def load(period, end):
     theme = doc.getElementById("theme").innerHTML
     color = doc.getElementById("color").innerHTML
@@ -55,6 +60,8 @@ def load(period, end):
     doc.cookie = f"color={color}"
     doc.cookie = f"theme={theme}"
     doc.cookie = f"sched={typ}"
+    for x in range(10):
+        doc.cookie = f"custom{x}={custom('custom'+str(x))}"
     doc.getElementById("cookie").innerHTML = doc.cookie
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}"
     doc.cookie = f"color={color}; theme={theme}; sched={typ};"
