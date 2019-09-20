@@ -7,6 +7,15 @@ function sched(s) {
             document.getElementById("half").innerHTML = "True";
             document.getElementById("toggle").innerHTML = "[FULL PERIODS]"
         }
+        if (s.startsWith("custom")) {
+            document.getElementById("customizer").className="cc"
+            document.getElementById("customizer").value=document.getElementById(s).innerHTML;
+            document.getElementById("customizer").onchange = function(){changer(s, this);};
+        } else {
+            document.getElementById("customizer").className="inv cc"
+            document.getElementById("customizer").onchange = null;
+            document.getElementById("customizer").value="";
+        }
     } else {
         document.getElementById("typ").innerHTML = s;
     }
@@ -44,4 +53,8 @@ function wheme() {
         document.getElementById("change").onclick = function(){theme('#ccddddff');};
         document.getElementById("change").innerHTML = "[LIGHT THEME]";
     }
+}
+
+function changer(str, itm) {
+    document.getElementById(str).innerHTML = itm.value;
 }
