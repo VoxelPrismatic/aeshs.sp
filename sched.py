@@ -1,5 +1,6 @@
 from browser import document as doc
-if len(doc.cookie):
+try:
+  if len(doc.cookie):
     norm_sched = doc.getElementById("norm").innerHTML
     default = {"color=": "#00ffffff",
                "theme=": "dark",
@@ -43,7 +44,7 @@ if len(doc.cookie):
         elif ck.startswith('custom'):
             doc.getElementById(ck.split('=')[0]).innerHTML = ck[8:]
           
-else:
+  else:
     doc.cookie="color=#00ffffff"
     doc.cookie="theme=dark"
     doc.cookie="sched=norm"
@@ -59,5 +60,6 @@ else:
     doc.cookie = "custom8="+norm_sched
     doc.cookie = "custom9="+norm_sched
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
+except Exception as ex: doc.write(str(ex))
 doc.getElementById("time").innerHTML = "-~-"
 doc.getElementById("cookie").innerHTML = doc.cookie
