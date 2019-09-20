@@ -46,7 +46,7 @@ cat = {"norm": "NORMAL SCHEDULE",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
 def custom(label):
     try:
-        return "".join(f"'{pr}'{tm}" for pr, tm in eval(doc.getElementById(label).innerHTML))
+        return "".join(f"'{pr}'time({tm.replace(':',',')})" for pr, tm in eval(doc.getElementById(label).innerHTML))
     except:
         return '"END"time(23,59,59)'
 def load(period, end):
