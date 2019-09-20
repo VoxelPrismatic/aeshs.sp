@@ -1,9 +1,8 @@
 from browser import document as doc
 from datetime import time
-doc.getElementById("time").innerHTML = "•~•"
+doc.getElementById("time").innerHTML = "-~-"
 try:
   if len(doc.cookie):
-    doc.getElementById("time").innerHTML = ".~."
     norm_sched = eval(doc.getElementById("norm").innerHTML)
     altered = "".join(f"'{pr}'{tm}" for pr, tm in norm_sched)
     doc.getElementById("time").innerHTML = ">~<"
