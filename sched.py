@@ -4,20 +4,20 @@ doc.getElementById("time").innerHTML = "•~•"
 try:
   if len(doc.cookie):
     norm_sched = doc.getElementById("norm").innerHTML
-    altered = 
+    altered = "".join(f"'{pr}'{tm}" for pr, tm in norm_sched)
     default = {"color=": "#00ffffff",
                "theme=": "dark",
                "sched=": "norm",
-               "custom0=": norm_sched,
-               "custom1=": norm_sched,
-               "custom2=": norm_sched,
-               "custom3=": norm_sched,
-               "custom4=": norm_sched,
-               "custom5=": norm_sched,
-               "custom6=": norm_sched,
-               "custom7=": norm_sched,
-               "custom8=": norm_sched,
-               "custom9=": norm_sched
+               "custom0=": altered,
+               "custom1=": altered,
+               "custom2=": altered,
+               "custom3=": altered,
+               "custom4=": altered,
+               "custom5=": altered,
+               "custom6=": altered,
+               "custom7=": altered,
+               "custom8=": altered,
+               "custom9=": altered
               }
     for key in default:
         if key not in doc.cookie or key+"; " in doc.cookie:
