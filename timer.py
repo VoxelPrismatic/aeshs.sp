@@ -48,7 +48,7 @@ def load(period, end):
     itm = eval(doc.getElementById("sched").innerHTML)
     prs, tms = [x[0] for x in itm], [x[1] for x in itm]
     doc.getElementById("list").innerHTML = '<br>'.join(
-        f"{prs[x]} {'-'*(18-len(prs[x]))} {':'.join(str(tms[x-1]).split(':')[:-1])}" for x in range(1,len(prs))
+        f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
     )
 def get():
     for per, end in eval(doc.getElementById("sched").innerHTML):
