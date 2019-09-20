@@ -21,6 +21,7 @@ try:
             doc.cookie = key+default[key]
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
+        doc.write(ck)
         if ck in default:
             doc.cookie = ck+default[ck]
     for ck in doc.cookie.split(';'):
