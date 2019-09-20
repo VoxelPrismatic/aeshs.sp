@@ -36,8 +36,20 @@
             <span onclick="sched('late')">[LATE ARRIVAL]</span>
             //
             <span onclick="sched('act')">[ACTIVITY PERIOD]</span>
-            //
+        </div>
+        <div class="tC">
             <span onclick="sched('pm')">[PM ASSEMBLY]</span>
+            //
+            <span onclick="sched('early')">[EARLY DISMISSAL]</span>
+            //
+            <span onclick="sched('early')">[SUMMER]</span>
+        </div>
+        <div class="tC">
+            <span onclick="sched('final1')">[FINALS DAY 1]</span>
+            //
+            <span onclick="sched('final2')">[FINALS DAY 2]</span>
+            //
+            <span onclick="sched('final3')">[FINALS DAY 3]</span>
         </div>
         <div class="tC">
             <span onclick="theme('#ccddddff')" style="color: #ccddddff;" id="change" onload="wheme()">[LIGHT THEME]</span>
@@ -159,27 +171,81 @@
         <div class="inv" id="pm_half">
             [("SCHOOL STARTS", time(7,30)),  ("EARLY BIRD", time(8,25)),
              ("PASSING TO 1A", time(8,30)),  ("PERIOD 1A",  time(8,51)),
-             ("PASSING TO 1B", time(9,1)),   ("PERIOD 1B",  time(9,21)),
-             ("PASSING TO 2A", time(9,26)),  ("PERIOD 2A",  time(9,46)),
-             ("PASSING TO 2B", time(9,53)),  ("PERIOD 2B",  time(10,13)),
-             ("PASSING TO 3A", time(10,18)), ("PERIOD 3A",  time(10,38)),
-             ("PASSING TO 3B", time(10,45)), ("PERIOD 3B",  time(11,5)),
-             ("PASSING TO 4A", time(11,10)), ("PERIOD 4A",  time(11,30)),
-             ("PASSING TO 4B", time(11,37)), ("PERIOD 4B",  time(11,57)),
-             ("PASSING TO 5A", time(12,2)),  ("PERIOD 5A",  time(12,22)),
-             ("PASSING TO 5B", time(12,29)), ("PERIOD 5B",  time(12,49)),
-             ("PASSING TO 6A", time(12,54)), ("PERIOD 6A",  time(13,14)),
-             ("PASSING TO 6B", time(13,21)), ("PERIOD 6B",  time(13,41)),
-             ("PASSING TO 7A", time(13,46)), ("PERIOD 7A",  time(14,6)),
-             ("PASSING TO 7B", time(14,13)), ("PERIOD 7B",  time(14,33)),
-             ("PASSING TO 8A", time(14,38)), ("PERIOD 8A",  time(14,58)),
-             ("PASSING TO 8B", time(15,5)),  ("PERIOD 8B",  time(15,25)),
+             ("PASSING TO 1B", time(9,1)),   ("PERIOD 1B",  time(9,15)),
+             ("PASSING TO 2A", time(9,20)),  ("PERIOD 2A",  time(9,37)),
+             ("PASSING TO 2B", time(9,44)),  ("PERIOD 2B",  time(10,1)),
+             ("PASSING TO 3A", time(10,6)),  ("PERIOD 3A",  time(10,23)),
+             ("PASSING TO 3B", time(10,30)), ("PERIOD 3B",  time(10,37)),
+             ("PASSING TO 4A", time(10,52)), ("PERIOD 4A",  time(11,9)),
+             ("PASSING TO 4B", time(11,16)), ("PERIOD 4B",  time(11,33)),
+             ("PASSING TO 5A", time(11,38)), ("PERIOD 5A",  time(11,55)),
+             ("PASSING TO 5B", time(12,2)),  ("PERIOD 5B",  time(12,19)),
+             ("PASSING TO 6A", time(12,24)), ("PERIOD 6A",  time(12,41)),
+             ("PASSING TO 6B", time(12,48)), ("PERIOD 6B",  time(13,5)),
+             ("PASSING TO 7A", time(13,10)), ("PERIOD 7A",  time(13,27)),
+             ("PASSING TO 7B", time(13,34)), ("PERIOD 7B",  time(13,51)),
+             ("PASSING TO 8A", time(13,56)), ("PERIOD 8A",  time(14,13)),
+             ("PASSING TO 8B", time(14,20)), ("PERIOD 8B",  time(14,37)),
+             ("GO TO ASSEMBLY",time(14,42)), ("ASSEMBLY",   time(15,25)),
              ("SCHOOL IS TMO", time(23,59,59))]
         </div>
-        <div class="inv" id="early"></div>
-        <div class="inv" id="early_half"></div>
-        <div class="inv" id="final"></div>
-        <div class="inv" id="summer"></div>
+        <div class="inv" id="early">
+            [("SCHOOL STARTS", time(7,30)),  ("EARLY BIRD", time(8,25)),
+             ("PASSING TO 1",  time(8,30)),  ("PERIOD 1",   time(9,15)),
+             ("PASSING TO 2",  time(9,20)),  ("PERIOD 2",   time(10,1)),
+             ("PASSING TO 3",  time(10,6)),  ("PERIOD 3",   time(10,47)),
+             ("PASSING TO 4",  time(10,52)), ("PERIOD 4",   time(11,33)),
+             ("PASSING TO 5",  time(11,38)), ("PERIOD 5",   time(12,19)),
+             ("PASSING TO 6",  time(12,24)), ("PERIOD 6",   time(13,5)),
+             ("PASSING TO 7",  time(13,10)), ("PERIOD 7",   time(13,51)),
+             ("PASSING TO 8",  time(13,56)), ("PERIOD 8",   time(15,37)),
+             ("SCHOOL IS TMO", time(23,59,59))]
+        </div>
+        <div class="inv" id="early_half">
+            [("SCHOOL STARTS", time(7,30)),  ("EARLY BIRD", time(8,25)),
+             ("PASSING TO 1A", time(8,30)),  ("PERIOD 1A",  time(8,51)),
+             ("PASSING TO 1B", time(8,58)),  ("PERIOD 1B",  time(9,15)),
+             ("PASSING TO 2A", time(9,20)),  ("PERIOD 2A",  time(9,37)),
+             ("PASSING TO 2B", time(9,44)),  ("PERIOD 2B",  time(10,1)),
+             ("PASSING TO 3A", time(10,6)),  ("PERIOD 3A",  time(10,23)),
+             ("PASSING TO 3B", time(10,30)), ("PERIOD 3B",  time(10,47)),
+             ("PASSING TO 4A", time(10,42)), ("PERIOD 4A",  time(11,9)),
+             ("PASSING TO 4B", time(11,16)), ("PERIOD 4B",  time(11,33)),
+             ("PASSING TO 5A", time(11,38)), ("PERIOD 5A",  time(11,55)),
+             ("PASSING TO 5B", time(12,2)),  ("PERIOD 5B",  time(12,19)),
+             ("PASSING TO 6A", time(12,24)), ("PERIOD 6A",  time(12,41)),
+             ("PASSING TO 6B", time(12,48)), ("PERIOD 6B",  time(13,5)),
+             ("PASSING TO 7A", time(13,10)), ("PERIOD 7A",  time(13,27)),
+             ("PASSING TO 7B", time(13,34)), ("PERIOD 7B",  time(13,51)),
+             ("PASSING TO 8A", time(13,56)), ("PERIOD 8A",  time(14,13)),
+             ("PASSING TO 8B", time(14,20)), ("PERIOD 8B",  time(14,37)),
+             ("SCHOOL IS TMO", time(23,59,59))]
+        </div>
+        <div class="inv" id="final1">
+            [("SCHOOL STARTS", time(7,30)),  ("EARLY BIRD", time(8,25)),
+             ("PASSING TO 1",  time(8,30)),  ("PERIOD 1",   time(10)),
+             ("PASSING TO 2",  time(10,10)), ("PERIOD 2",   time(11,40)),
+             ("PASSING TO 4",  time(11,50)), ("PERIOD 4",   time(13,20))
+             ("SCHOOL IS TMO", time(23,59,59))]
+        </div>
+        <div class="inv" id="final2">
+            [("SCHOOL STARTS", time(7,30)),  ("EARLY BIRD", time(8,25)),
+             ("PASSING TO 3",  time(8,30)),  ("PERIOD 3",   time(10)),
+             ("PASSING TO 7",  time(10,10)), ("PERIOD 7",   time(11,40)),
+             ("PASSING TO 5",  time(11,50)), ("PERIOD 5",   time(13,20))
+             ("SCHOOL IS TMO", time(23,59,59))]
+        </div>
+        <div class="inv" id="final3">
+            [("SCHOOL STARTS", time(7,30)),  ("EARLY BIRD", time(8,25)),
+             ("PASSING TO 8",  time(8,30)),  ("PERIOD 8",   time(10)),
+             ("PASSING TO 6",  time(10,10)), ("PERIOD 6",   time(11,40)),
+             ("GO TO MAKEUPS", time(11,50)), ("MAKEUPS",    time(13,20))
+             ("SEMESTER IS OVER, GG M8", time(23,59,59))]
+        </div>
+        <div class="inv" id="summer">
+            [("SCHOOL STARTS", time(7,40)),  ("GO TO CLASS", time(7,45)),
+             ("SUMMER SCHOOL", time(12,59)), ("SCHOOL IS TMO", time(23,59,59))]
+        </div>
         <div class="inv" id="sched"></div>
         <!-- REGISTERS -->
         <div class="inv" id="typ">norm</div>
