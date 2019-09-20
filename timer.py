@@ -56,6 +56,6 @@ def get():
             rn = dt.now()
             break
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
-    load(period, end)
+    win.setTimeout(load(period, end),1000)
 elem().innerHTML = "--~--"
-win.setInterval(get, 499.99)
+win.setInterval(get, 1000)
