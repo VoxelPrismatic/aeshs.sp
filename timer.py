@@ -56,7 +56,8 @@ def get():
             rn = dt.now()
             break
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
-    load()
+    try:load()
+    except Exception ex ex: document.write(str(ex))
     
 elem().innerHTML = "--~--"
 win.setInterval(get, 499.99)
