@@ -41,8 +41,7 @@ try:
                 doc.getElementById("theme").innerHTML = "light"
                 doc.getElementById("change").innerHTML = "[DARK THEME]"
                 doc.getElementById("change").style.color = "#112222ff"
-        elif ck.startswith('custom') and ck != "custom":
-            doc.write(doc.cookie)
+        elif ck.startswith('custom') and not ck.startswith("custom="):
             doc.getElementById(ck.split('=')[0]).innerHTML = ck[8:]
           
   else:
