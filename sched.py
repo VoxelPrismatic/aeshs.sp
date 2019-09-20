@@ -4,6 +4,7 @@ doc.getElementById("time").innerHTML = "•~•"
 try:
   if len(doc.cookie):
     norm_sched = doc.getElementById("norm").innerHTML
+    altered = 
     default = {"color=": "#00ffffff",
                "theme=": "dark",
                "sched=": "norm",
@@ -19,12 +20,8 @@ try:
                "custom9=": norm_sched
               }
     for key in default:
-        if key not in doc.cookie:
+        if key not in doc.cookie or key+"; " in doc.cookie:
             doc.cookie = key+sub(r", *","&~",default[ck])
-    for ck in doc.cookie.split(';'):
-        ck = ck.strip()
-        if ck in default:
-            doc.cookie = f'{ck}{sub(r", *","&~",default[ck])}'
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
         if ck.startswith('sched'):
