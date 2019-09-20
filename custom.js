@@ -13,7 +13,7 @@ function sched(s) {
         if (s.startsWith("custom")) {
             document.getElementById("customizer").className = "cc";
             document.getElementById("customizer").value = document.getElementById(s).innerHTML;
-            document.getElementById("customizer").onchange = function(){changer(s, document.getElementById("customizer"));};
+            document.getElementById("customizer").onchange = function(){changer(s);};
             document.getElementById("verbose").innerHTML = "changes";
         } else {
             document.getElementById("customizer").className = "inv cc";
@@ -58,5 +58,5 @@ function wheme() {
 }
 
 function changer(str, itm) {
-    document.getElementById(str).innerHTML = itm.value;
+    document.getElementById(str).innerHTML = document.getElementById("customizer").value;
 }
