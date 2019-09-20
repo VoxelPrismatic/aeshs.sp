@@ -18,6 +18,7 @@ function sched(s) {
         }
     } else {
         document.getElementById("typ").innerHTML = s;
+        document.getElementById("sched").innerHTML = document.getElementById(s).innerHTML
     }
 }
 function color(s) {
