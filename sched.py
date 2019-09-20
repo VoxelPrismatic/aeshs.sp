@@ -24,7 +24,7 @@ try:
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
         if ck in default:
-            doc.cookie = f"{ck}{sub(r", *","&~",default[ck])}"
+            doc.cookie = f'{ck}{sub(r", *","&~",default[ck])}'
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
         if ck.startswith('sched'):
