@@ -45,7 +45,7 @@ def load(period, end):
     theme = doc.getElementById("theme").innerHTML
     color = doc.getElementById("color").innerHTML
     cur = doc.getElementById("typ").innerHTML.split("_")[0]
-    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) else "") and doc.getElementById(cur+"_half")
+    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and doc.getElementById(cur+"_half") else "")
     doc.getElementById("typ").innerHTML = typ
     doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
     doc.getElementById("prt").innerHTML = cat[typ]
