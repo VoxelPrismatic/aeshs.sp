@@ -59,7 +59,7 @@ def get():
     try:
         load()
     except Exception as ex: 
-        document.write(str(ex))
+        doc.write(str(ex))
     
 elem().innerHTML = "--~--"
 win.setInterval(get, 499.99)
