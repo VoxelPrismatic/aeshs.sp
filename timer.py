@@ -29,7 +29,7 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early": "EARLY DISMISSAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
-def load():
+def load(period, end):
     theme = doc.getElementById("theme").innerHTML
     color = doc.getElementById("color").innerHTML
     cur = doc.getElementById("typ").innerHTML.split("_")[0]
@@ -56,10 +56,6 @@ def get():
             rn = dt.now()
             break
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
-    try:
-        load()
-    except Exception as ex: 
-        doc.write(str(ex))
-    
+    load(period, end)
 elem().innerHTML = "--~--"
 win.setInterval(get, 499.99)
