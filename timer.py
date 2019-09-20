@@ -25,7 +25,9 @@ cat = {"norm": "NORMAL SCHEDULE",
        "pm": "PM ASSEMBLY SCHEDULE",
        "pm_half": "PM ASSEMBLY SCHEDULE - HALF PERIODS",
        "late": "LATE ARRIVAL SCHEDULE",
-       "final": "FINALS SCHEDULE",
+       "final1": "FINALS DAY 1 SCHEDULE",
+       "final2": "FINALS DAY 2 SCHEDULE",
+       "final3": "FINALS DAY 3 SCHEDULE",
        "early": "EARLY DISMISSAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
@@ -41,12 +43,12 @@ def load(period, end):
     doc.cookie = f"theme={theme}"
     doc.cookie = f"sched={typ}"
     doc.getElementById("cookie").innerHTML = doc.cookie
-    perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}:{zf(end.second)}"
+    perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}"
     doc.cookie = f"color={color}; theme={theme}; sched={typ};"
     itm = eval(doc.getElementById("sched").innerHTML)
     prs, tms = [x[0] for x in itm], [x[1] for x in itm]
     doc.getElementById("list").innerHTML = '<br>'.join(
-        f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])}" for x in range(1,len(prs))
+        f"{prs[x]} {'-'*(18-len(prs[x]))} {':'.join(str(tms[x-1]).split(':')[:-1])}" for x in range(1,len(prs))
     )
 def get():
     for per, end in eval(doc.getElementById("sched").innerHTML):
