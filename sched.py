@@ -27,7 +27,6 @@ try:
         ck = ck.strip()
         if ck.startswith('sched'):
             doc.getElementById("sched").innerHTML = doc.getElementById(ck.split('=')[1]).innerHTML
-            doc.write("brokk")
             doc.getElementById("typ").innerHTML = ck.split('=')[1]
             if ck.split('=')[1].endswith("_half"):
                 doc.getElementById("half").innerHTML = "True"
