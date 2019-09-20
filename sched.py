@@ -21,6 +21,10 @@ try:
             doc.cookie = key+default[key]
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
+        if ck in default:
+            doc.cookie = ck+default[ck]
+    for ck in doc.cookie.split(';'):
+        ck = ck.strip()
         if ck.startswith('sched'):
             doc.getElementById("sched").innerHTML = doc.getElementById(ck.split('=')[1]).innerHTML
             doc.getElementById("typ").innerHTML = ck.split('=')[1]
