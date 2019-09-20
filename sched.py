@@ -47,7 +47,7 @@ try:
                 doc.getElementById("change").innerHTML = "[DARK THEME]"
                 doc.getElementById("change").style.color = "#112222ff"
         elif ck.startswith('custom') and not ck.startswith("custom="):
-            doc.write(ck.split("=")[0]+"<br>")
+            st = ck.split("=")[0]+"<br>"
             doc.getElementById(ck.split('=')[0]).innerHTML = ck[8:]
           
   else:
@@ -67,7 +67,7 @@ try:
     doc.cookie = "custom9="+norm_sched
     doc.getElementById("sched").innerHTML = norm_sched
 except Exception as ex: 
-    doc.write(str(ex))
+    doc.write(str(ex)+"<br>"+ck)
 doc.getElementById("time").innerHTML = "-~-"
 doc.getElementById("cookie").innerHTML = doc.cookie
 doc.write("complete")
