@@ -30,6 +30,8 @@ if len(doc.cookie):
                 doc.getElementById("theme").innerHTML = "light"
                 doc.getElementById("change").innerHTML = "[DARK THEME]"
                 doc.getElementById("change").style.color = "#112222ff"
+        elif ck.startswith('custom'):
+            doc.getElementById("custom").innerHTML = ck[7:]
 else:
     doc.cookie="color=#00ffffff"
     doc.cookie="theme=dark"
