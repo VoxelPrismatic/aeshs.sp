@@ -69,4 +69,3 @@ except Exception as ex:
     doc.write(str(ex)+"<br>"+ck)
 doc.getElementById("time").innerHTML = "-~-"
 doc.getElementById("cookie").innerHTML = doc.cookie
-doc.write("complete")
