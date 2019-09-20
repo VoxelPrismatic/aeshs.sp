@@ -2,6 +2,7 @@ from browser import document as doc
 try:
   if len(doc.cookie):
     norm_sched = doc.getElementById("norm").innerHTML
+    doc.write("hi")
     default = {"color=": "#00ffffff",
                "theme=": "dark",
                "sched=": "norm",
