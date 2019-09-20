@@ -8,11 +8,12 @@ function sched(s) {
             document.getElementById("toggle").innerHTML = "[FULL PERIODS]"
         }
         if (s.startsWith("custom")) {
-            document.getElementById("customizer").className="cc"
-            document.getElementById("customizer").value=document.getElementById(s).innerHTML;
+            document.getElementById("customizer").className = "cc
+            document.getElementById("customizer").value = document.getElementById(s).innerHTML;
             document.getElementById("customizer").onchange = function(){changer(s, this);};
+            document.getElementById("verbose").innerHTML = "changes"
         } else {
-            document.getElementById("customizer").className="inv cc"
+            document.getElementById("customizer").className = "inv cc"
             document.getElementById("customizer").onchange = null;
             document.getElementById("customizer").value="";
         }
