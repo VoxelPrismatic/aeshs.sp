@@ -1,11 +1,13 @@
 from browser import document as doc
 if len(doc.cookie):
     if "color=" not in doc.cookie:
-        doc.cookie="color=#00ffffff"
+        doc.cookie = "color=#00ffffff"
     if "theme=" not in doc.cookie:
-        doc.cookie="theme=dark"
+        doc.cookie = "theme=dark"
     if "sched=" not in doc.cookie:
-        doc.cookie="sched=norm"
+        doc.cookie = "sched=norm"
+    if "custom=" not in doc.cookie:
+        doc.cookie = "custom="+doc.getElementById("norm").innerHTML
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
         if ck.startswith('sched'):
@@ -29,7 +31,10 @@ if len(doc.cookie):
                 doc.getElementById("change").innerHTML = "[DARK THEME]"
                 doc.getElementById("change").style.color = "#112222ff"
 else:
-    doc.cookie="color=#00ffffff; theme=dark; sched=norm"
+    doc.cookie="color=#00ffffff"
+    doc.cookie="theme=dark"
+    doc.cookie="sched=norm"
+    doc.cookie = "custom="+doc.getElementById("norm").innerHTML
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
 doc.getElementById("time").innerHTML = "-~-"
 doc.getElementById("cookie").innerHTML = doc.cookie
