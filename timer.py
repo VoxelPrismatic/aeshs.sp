@@ -70,4 +70,8 @@ def get():
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     win.setTimeout(load(period, end),1000)
 elem().innerHTML = "--~--"
+try:
+    get()
+except Exception as ex:
+    doc.write(str(ex))
 win.setInterval(get, 1000)
