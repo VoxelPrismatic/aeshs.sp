@@ -28,6 +28,16 @@ cat = {"norm": "NORMAL SCHEDULE",
        "final1": "FINALS DAY 1 SCHEDULE",
        "final2": "FINALS DAY 2 SCHEDULE",
        "final3": "FINALS DAY 3 SCHEDULE",
+       "custom0": "CUSTOM SCHEDULE 0",
+       "custom1": "CUSTOM SCHEDULE 1",
+       "custom2": "CUSTOM SCHEDULE 2",
+       "custom3": "CUSTOM SCHEDULE 3",
+       "custom4": "CUSTOM SCHEDULE 4",
+       "custom5": "CUSTOM SCHEDULE 5",
+       "custom6": "CUSTOM SCHEDULE 6",
+       "custom7": "CUSTOM SCHEDULE 7",
+       "custom8": "CUSTOM SCHEDULE 8",
+       "custom9": "CUSTOM SCHEDULE 9",
        "early": "EARLY DISMISSAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"}
@@ -35,7 +45,7 @@ def load(period, end):
     theme = doc.getElementById("theme").innerHTML
     color = doc.getElementById("color").innerHTML
     cur = doc.getElementById("typ").innerHTML.split("_")[0]
-    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and cur not in ["late","summer"] else "")
+    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) else "")
     doc.getElementById("typ").innerHTML = typ
     doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
     doc.getElementById("prt").innerHTML = cat[typ]
