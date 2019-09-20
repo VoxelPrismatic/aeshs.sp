@@ -58,7 +58,7 @@ def get():
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     try:
         load()
-    except Exception ex: 
+    except Exception as ex: 
         document.write(str(ex))
     
 elem().innerHTML = "--~--"
