@@ -7,19 +7,19 @@ function sched(s) {
             document.getElementById("half").innerHTML = "True";
             document.getElementById("toggle").innerHTML = "[FULL PERIODS]"
         }
-        if (s.startsWith("custom")) {
-            document.getElementById("customizer").className = "cc";
-            document.getElementById("customizer").value = document.getElementById(s).innerHTML;
-            document.getElementById("customizer").onchange = function(){changer(s, this);};
-            document.getElementById("verbose").innerHTML = "changes";
-        } else {
-            document.getElementById("customizer").className = "inv cc"
-            document.getElementById("customizer").onchange = null;
-            document.getElementById("customizer").value="";
-        }
     } else {
         document.getElementById("typ").innerHTML = s;
         document.getElementById("sched").innerHTML = document.getElementById(s).innerHTML
+        if (s.startsWith("custom")) {
+            document.getElementById("customizer").className = "cc";
+            document.getElementById("customizer").value = document.getElementById(s).innerHTML;
+            document.getElementById("customizer").onchange = function(){changer(s, document.getElementById("customizer"));};
+            document.getElementById("verbose").innerHTML = "changes";
+        } else {
+            document.getElementById("customizer").className = "inv cc"
+            document.getElementById("customizer").onchange = function(){};
+            document.getElementById("customizer").value="";
+        }
     }
 }
 function color(s) {
@@ -60,3 +60,4 @@ function wheme() {
 function changer(str, itm) {
     document.getElementById(str).innerHTML = itm.value;
 }
+function verbose(
