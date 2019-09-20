@@ -3,7 +3,10 @@ import datetime
 from datetime import time, timedelta as td, datetime as dt
  
 global sched
-sched = eval(doc.getElementById("sched").innerHTML)
+try:
+    sched = eval(doc.getElementById("sched").innerHTML)
+except:
+    sched = eval(doc.getElementById("norm").innerHTML)
 def elem():
     return doc.getElementById("time")
 def perm():
