@@ -44,7 +44,7 @@ try:
                 doc.getElementById("change").style.color = "#112222ff"
         elif ck.startswith('custom') and not ck.startswith("custom="):
             st = ck.split("=")[0]+"<br>"
-            doc.getElementById(ck.split('=')[0]).innerHTML = "[("+ck[8:].replace('"time(',', time(').replace(')"',')),("')+")]"
+            doc.getElementById(ck.split('=')[0]).innerHTML = "[("+ck[8:].replace('"time(','", time(').replace(')"',')),("')+")]"
           
   else:
     doc.cookie="color=#00ffffff"
