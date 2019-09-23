@@ -52,11 +52,10 @@ def cookies():
     typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and doc.getElementById(cur+"_half") else "")
     doc.getElementById("typ").innerHTML = typ
     doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
-    doc.getElementById("prt").innerHTML = cat[typ]
     doc.cookie = f"color={color}; theme={theme}; sched={typ}"
-    doc.getElementById("custom").innerHTML = "<br>".join("".join(
-            f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById(f"custom{x}").innerHTML))
-        ) for x in range(10))
+    doc.getElementById("custom").innerHTML = "".join(
+            f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById(f"custom{0}").innerHTML))
+        )
     for x in range(10):
         doc.cookie = f"custom{x}=" + "".join(
             f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById(f"custom{x}").innerHTML))
@@ -76,7 +75,7 @@ def get():
     doc.getElementById("list").innerHTML = '<br>'.join(
         f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
     )
-    win.setTimeout(load(),1000)
+    win.setTimeout(load(),2000)
 elem().innerHTML = "--~--"
 if not doc.getElementById("sched").innerHTML:
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
