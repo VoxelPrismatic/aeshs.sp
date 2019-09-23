@@ -46,6 +46,7 @@ function theme(s) {
         gID("change").innerHTML = "[LIGHT THEME]";
         gID("theme").innerHTML = "dark";
         document.cookie = "theme=dark";
+        gID("customizer").style.backgroundColor = "#223333ff";
     } else {
         document.body.style.backgroundColor = "#ccddddff";
         gID("change").style.color = "#112222ff";
@@ -53,6 +54,7 @@ function theme(s) {
         gID("change").innerHTML = "[DARK THEME]";
         gID("theme").innerHTML = "light";
         document.cookie = "theme=light";
+        gID("customizer").style.backgroundColor = "#bbccccff";
     }
 }
 
