@@ -45,13 +45,9 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"
       }
-def cookies():
+def cookies(typ):
     theme = doc.getElementById("theme").innerHTML
     color = doc.getElementById("color").innerHTML
-    cur = doc.getElementById("typ").innerHTML.split("_")[0]
-    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and doc.getElementById(cur+"_half") else "")
-    doc.getElementById("typ").innerHTML = typ
-    doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
     doc.cookie = f"color={color}; theme={theme}; sched={typ}"
     doc.getElementById("custom").innerHTML = "".join(
             f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById(f"custom{0}").innerHTML))
@@ -72,10 +68,14 @@ def get():
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}"
     prs, tms = [x[0] for x in currentsched], [x[1] for x in currentsched]
+    cur = doc.getElementById("typ").innerHTML.split("_")[0]
+    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and doc.getElementById(cur+"_half") else "")
+    doc.getElementById("typ").innerHTML = typ
+    doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
     doc.getElementById("list").innerHTML = '<br>'.join(
         f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
     )
-    win.setTimeout(cookies(),10)
+    win.setTimeout(cookies(typ),10)
 elem().innerHTML = "--~--"
 if not doc.getElementById("sched").innerHTML:
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
