@@ -3,24 +3,26 @@ import datetime
 from datetime import time, timedelta as td, datetime as dt
  
 global sched
+def gID(st):
+    return doc.getElementById(st)
+def gHTML(st):
+    return gID(st).innerHTML
 try:
-    sched = eval(doc.getElementById("sched").innerHTML)
+    sched = eval(gHTML("sched"))
 except:
-    sched = eval(doc.getElementById("norm").innerHTML)
+    sched = eval(gHTML("norm"))
 def elem():
-    return doc.getElementById("time")
+    return gID("time")
 def perm():
-    return doc.getElementById("per")
+    return gID("per")
 def stats(st):
-    doc.getElementById("status").innerHTML = str(st)
+    gID("status").innerHTML = str(st)
 def diff(t1):
     t2 = dt.now()
     t1 = dt.combine(dt.today(), t1)
     return (t1-t2).total_seconds()
 def zf(itm):
     return str(itm).zfill(2)
-def rgb2hex(itm):
-    return "#"+"".join(zf(hex(int(x))[2:]) for x in itm[4:-1].split(','))+"ff"
 cat = {"norm": "NORMAL SCHEDULE",
        "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
        "act": "ACTIVITY PERIOD SCHEDULE",
@@ -45,20 +47,14 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"
       }
-def cookies(typ):
-    theme = doc.getElementById("theme").innerHTML
-    color = doc.getElementById("color").innerHTML
-    doc.cookie = f"color={color}; theme={theme}; sched={typ}"
-    doc.getElementById("custom").innerHTML = "".join(
-            f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById(f"custom{0}").innerHTML))
-        )
+def cookies():
     for x in range(10):
         doc.cookie = f"custom{x}=" + "".join(
-            f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById(f"custom{x}").innerHTML))
+            f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(gHTML(f"custom{x}")))
         )
-    doc.getElementById("cookie").innerHTML = doc.cookie
+    gID("cookie").innerHTML = doc.cookie
 def get():
-    currentsched = eval(doc.getElementById("sched").innerHTML)
+    currentsched = eval(gHTML("sched"))
     for per, end in currentsched:
         if diff(end) >= 0:
             period = per
@@ -68,15 +64,17 @@ def get():
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}"
     prs, tms = [x[0] for x in currentsched], [x[1] for x in currentsched]
-    cur = doc.getElementById("typ").innerHTML.split("_")[0]
-    typ = cur + ("_half" if eval(doc.getElementById("half").innerHTML) and doc.getElementById(cur+"_half") else "")
-    doc.getElementById("typ").innerHTML = typ
-    doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
-    doc.getElementById("list").innerHTML = '<br>'.join(
+    cur = gHTML("typ").split("_")[0]
+    typ = cur + ("_half" if eval(gHTML("half")) and gID(cur+"_half") else "")
+    gID("typ").innerHTML = typ
+    gID("sched").innerHTML = gHTML(typ)
+    gID("list").innerHTML = '<br>'.join(
         f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
     )
-    win.setTimeout(cookies(typ),10)
+    gID("prt").innerHTML = cat[typ]
+    doc.cookie = f"sched={typ}"
+    win.setTimeout(cookies(),10)
 elem().innerHTML = "--~--"
-if not doc.getElementById("sched").innerHTML:
-    doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
+if not gHTML("sched"):
+    gID("sched").innerHTML = gHTML("norm")
 win.setInterval(get, 1000)
