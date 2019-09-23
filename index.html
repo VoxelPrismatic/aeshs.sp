@@ -19,7 +19,7 @@
             }
         </style>
     </head>
-    <body style="color: #00ffffff; background-color: #112222ff;" onload="brython(); wheme()">
+    <body style="color: #00ffffff; background-color: #112222ff;" onload="brython()">
         <div id="time" class="tC" style="font-size: 18vw;">
             ~
         </div>
@@ -273,6 +273,8 @@
         <div class="inv" id="color"></div>
         <script src="sched.py" type="text/python"></script>
         <script src="timer.py" type="text/python"></script>
-        <script src="custom.js"></script>
+        <script src="custom.js" type="text/javascript">
+            wheme();
+        </script>
     </body>
 </html>
