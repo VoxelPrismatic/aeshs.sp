@@ -52,6 +52,9 @@ def cookies():
         doc.cookie = f"custom{x}=" + "".join(
             f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(gHTML(f"custom{x}")))
         )
+    doc.cookie = f"sched={typ}"
+    d = dt.now()
+    doc.cookie = dt(d.year+4,d.month,d.day,d.hour,d.minute,d.second).strftime("%a, %d %b %Y %H:%M:%S UTC")
     gID("cookie").innerHTML = doc.cookie
 def get():
     cur = gHTML("typ").split("_")[0]
@@ -72,9 +75,6 @@ def get():
     gID("list").innerHTML = '<br>'.join(
         f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
     )
-    doc.cookie = f"sched={typ}"
-    d = dt.now()
-    doc.cookie = dt(d.year+4,d.month,d.day,d.hour,d.minute,d.second).strftime("%a, %d %b %Y %H:%M:%S UTC")
     win.setTimeout(cookies(),10)
 elem().innerHTML = "-~-"
 if not gHTML("sched"):
