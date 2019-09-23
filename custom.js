@@ -4,6 +4,9 @@ function gID(st) {
 function gHTML(st) {
     return gID(st).innerHTML;
 }
+function gSTYLE(st) {
+    return gID(st).style;
+}
 function sched(s) {
     if (s == "half") {
         if (gID("half").innerHTML == "True") {
@@ -20,14 +23,14 @@ function sched(s) {
             gID("customizer").className = "cc";
             gID("customizer").value = document.getElementById(s).innerHTML;
             gID("customizer").onchange = function(){changer(s);};
-            gID("customizer").style.height = "30vw";
-            gID("customizer").style.width = "90vw";
+            gSTYLE("customizer").height = "30vw";
+            gSTYLE("customizer").width = "90vw";
         } else {
             gID("customizer").className = "inv cc";
             gID("customizer").onchange = function(){};
             gID("customizer").value="";
-            gID("customizer").style.height = "0px";
-            gID("customizer").style.width = "0px";
+            gSTYLE("customizer").height = "0px";
+            gSTYLE("customizer").width = "0px";
         }
     }
 }
@@ -35,62 +38,62 @@ function color(s) {
     document.body.style.color = s;
     gID("color").innerHTML = s;
     document.cookie="color="+s;
-    gID("customizer").style.color = s;
+    gSTYLE("customizer").color = s;
 }
 function theme(s) {
     document.body.backgroundColor = s;
     if (s == "#112222ff") {
         document.body.style.backgroundColor = "#112222ff";
-        gID("change").style.color = "#ccddddff";
+        gSTYLE("change").color = "#ccddddff";
         gID("change").onclick = function(){theme('#ccddddff');};
         gID("change").innerHTML = "[LIGHT THEME]";
         gID("theme").innerHTML = "dark";
         document.cookie = "theme=dark";
-        gID("customizer").style.backgroundColor = "#223333ff";
+        gSTYLE("customizer").backgroundColor = "#223333ff";
     } else {
         document.body.style.backgroundColor = "#ccddddff";
-        gID("change").style.color = "#112222ff";
+        gSTYLE("change").color = "#112222ff";
         gID("change").onclick = function(){theme('#112222ff');};
         gID("change").innerHTML = "[DARK THEME]";
         gID("theme").innerHTML = "light";
         document.cookie = "theme=light";
-        gID("customizer").style.backgroundColor = "#bbccccff";
+        gSTYLE("customizer").backgroundColor = "#bbccccff";
     }
 }
 
 function wheme() {
     if (gHTML("theme") == "light") {
         document.body.style.backgroundColor = "#ccddddff";
-        gID("change").style.color = "#112222ff";
+        gSTYLE("change").color = "#112222ff";
         gID("change").onclick = function(){theme('#112222ff');};
         gID("change").innerHTML = "[DARK THEME]";
     } else {
         document.body.style.backgroundColor = "#112222ff";
-        gID("change").style.color = "#ccddddff";
+        gSTYLE("change").color = "#ccddddff";
         gID("change").onclick = function(){theme('#ccddddff');};
         gID("change").innerHTML = "[LIGHT THEME]";
     }
 }
 
 function textareaTheme() {
-    gID("customizer").style.color = gHTML("color");
+    gSTYLE("customizer").color = gHTML("color");
     if (gHTML("theme") == "light") {
-        gID("customizer").style.backgroundColor = "#bbccccff";
+        gSTYLE("customizer").backgroundColor = "#bbccccff";
     } else {
-        gID("customizer").style.backgroundColor = "#223333ff";
+        gSTYLE("customizer").backgroundColor = "#223333ff";
     }
     if (gHTML("typ").startsWith("custom")) {
         gID("customizer").className = "cc";
         gID("customizer").value = document.getElementById(s).innerHTML;
         gID("customizer").onchange = function(){changer(s);};
-        gID("customizer").style.height = "30vw";
-        gID("customizer").style.width = "90vw";
+        gSTYLE("customizer").height = "30vw";
+        gSTYLE("customizer").width = "90vw";
     } else {
         gID("customizer").className = "inv cc";
         gID("customizer").onchange = function(){};
         gID("customizer").value="";
-        gID("customizer").style.height = "0px";
-        gID("customizer").style.width = "0px";
+        gSTYLE("customizer").height = "0px";
+        gSTYLE("customizer").width = "0px";
     }
 }
 function changer(str, itm) {
