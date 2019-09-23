@@ -47,8 +47,8 @@ cat = {"norm": "NORMAL SCHEDULE",
 def custom(label):
     try:
         return "".join(f"'{pr}'time({tm.replace(':',',')})" for pr, tm in eval(doc.getElementById(label).innerHTML))
-    except:
-        return '"END"time(23,59,59)'
+    except Exception as ex:
+        doc.write(str(ex)+"<br>")
 def load(period, end):
     theme = doc.getElementById("theme").innerHTML
     color = doc.getElementById("color").innerHTML
