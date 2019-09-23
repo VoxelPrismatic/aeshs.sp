@@ -68,16 +68,9 @@ else:
     doc.cookie="theme=dark"
     doc.cookie="sched=norm"
     altered = "".join(f"'{pr}'{tm}" for pr, tm in eval(gHTML("norm")))
-    doc.cookie = "custom0="+altered
-    doc.cookie = "custom1="+altered
-    doc.cookie = "custom2="+altered
-    doc.cookie = "custom3="+altered
-    doc.cookie = "custom4="+altered
-    doc.cookie = "custom5="+altered
-    doc.cookie = "custom6="+altered
-    doc.cookie = "custom7="+altered
-    doc.cookie = "custom8="+altered
-    doc.cookie = "custom9="+altered
+    for x in range(10):
+        doc.cookie = f"custom{x}={altered}"
+        gID(f"custom{x}").innerHTML = gHTML("norm")
     doc.getElementById("sched").innerHTML = gHTML("norm")
 
 gID("time").innerHTML = "•~•"
