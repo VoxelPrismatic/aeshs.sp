@@ -7,16 +7,16 @@ def gID(st):
     return doc.getElementById(st)
 def gHTML(st):
     return gID(st).innerHTML
+def gSTYLE(st):
+    return gID(st).style
+def gEDIT(st, val):
+    gID(st).innerHTML = val
 try:
     sched = eval(gHTML("sched"))
 except:
     sched = eval(gHTML("norm"))
-def elem():
-    return gID("time")
-def perm():
-    return gID("per")
 def stats(st):
-    gID("status").innerHTML = str(st)
+    gEDIT("status", str(st))
 def diff(t1):
     t2 = dt.now()
     t1 = dt.combine(dt.today(), t1)
@@ -55,13 +55,13 @@ def cookies():
     doc.cookie = f"sched={typ}"
     d = dt.now()
     doc.cookie = dt(d.year+4,d.month,d.day,d.hour,d.minute,d.second).strftime("%a, %d %b %Y %H:%M:%S UTC")
-    gID("cookie").innerHTML = doc.cookie
+    gEDIT("cookie", doc.cookie)
 def get():
     cur = gHTML("typ").split("_")[0]
     typ = cur + ("_half" if eval(gHTML("half")) and gID(cur+"_half") else "")
-    gID("typ").innerHTML = typ
-    gID("sched").innerHTML = gHTML(typ)
-    gID("prt").innerHTML = cat[typ]
+    gEDIT("typ", typ)
+    gEDIT("sched", gHTML(typ))
+    gEDIT("prt", cat[typ])
     currentsched = eval(gHTML("sched"))
     for per, end in currentsched:
         if diff(end) >= 0:
@@ -69,14 +69,12 @@ def get():
             end = dt.combine(dt.today(), end)
             rn = dt.now()
             break
-    elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
-    perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}"
+    gEDIT("time", ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':')))
+    gEDIT("per", f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}")
     prs, tms = [x[0] for x in currentsched], [x[1] for x in currentsched]
-    gID("list").innerHTML = '<br>'.join(
-        f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
-    )
+    gEDIT("list", '<br>'.join(f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs)))
     win.setTimeout(cookies(),10)
 elem().innerHTML = "-~-"
 if not gHTML("sched"):
-    gID("sched").innerHTML = gHTML("norm")
+    gEDIT("sched", gHTML("norm"))
 win.setInterval(get, 1000)
