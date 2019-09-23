@@ -74,7 +74,7 @@ def get():
     gID("prt").innerHTML = cat[typ]
     doc.cookie = f"sched={typ}"
     win.setTimeout(cookies(),10)
-elem().innerHTML = "--~--"
+elem().innerHTML = "-~-"
 if not gHTML("sched"):
     gID("sched").innerHTML = gHTML("norm")
 win.setInterval(get, 1000)
