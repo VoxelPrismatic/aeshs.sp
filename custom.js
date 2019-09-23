@@ -35,6 +35,7 @@ function color(s) {
     document.body.style.color = s;
     gID("color").innerHTML = s;
     document.cookie="color="+s;
+    gID("customizer").style.color = s;
 }
 function theme(s) {
     document.body.backgroundColor = s;
@@ -56,18 +57,24 @@ function theme(s) {
 }
 
 function wheme() {
-    gID("customizer").style.color = gHTML("color")
-    if (gID("theme").innerHTML == "light") {
+    if (gHTML("theme") == "light") {
         document.body.style.backgroundColor = "#ccddddff";
         gID("change").style.color = "#112222ff";
         gID("change").onclick = function(){theme('#112222ff');};
         gID("change").innerHTML = "[DARK THEME]";
-        gID("customizer").style.backgroundColor = "#bbccccff";
     } else {
         document.body.style.backgroundColor = "#112222ff";
         gID("change").style.color = "#ccddddff";
         gID("change").onclick = function(){theme('#ccddddff');};
         gID("change").innerHTML = "[LIGHT THEME]";
+    }
+}
+
+function textareaTheme() {
+    gID("customizer").style.color = gHTML("color");
+    if (gHTML("theme") == "light") {
+        gID("customizer").style.backgroundColor = "#bbccccff";
+    } else {
         gID("customizer").style.backgroundColor = "#223333ff";
     }
     if (gHTML("typ").startsWith("custom")) {
@@ -84,7 +91,6 @@ function wheme() {
         gID("customizer").style.width = "0px";
     }
 }
-
 function changer(str, itm) {
     gID(str).innerHTML = gID("customizer").value;
 }
