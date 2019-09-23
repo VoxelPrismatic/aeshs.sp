@@ -49,8 +49,14 @@ def custom(label):
     try:
         x = "get"
         sched = eval(str(doc.getElementById(label).innerHTML))
-        x = "return"
-        return "".join(f"'{pr}'time({tm.replace(':',',')})" for pr, tm in sched)
+        x = "loop"
+        st = ""
+        for pr, tm in sched:
+            x = "write"
+            st += f"'{pr}'time({str(tm).replace(':',',')})"
+            x = "finished"
+        x = "rtn"
+        return st
     except Exception as ex:
         doc.write(str(ex)+"<br>")
         doc.write(str(x)+"<br>")
