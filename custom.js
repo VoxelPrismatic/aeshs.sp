@@ -25,6 +25,7 @@ function sched(s) {
 function color(s) {
     document.body.style.color = s;
     document.getElementById("color").innerHTML = s;
+    document.cookie="color=s";
 }
 function theme(s) {
     document.body.backgroundColor = s;
@@ -34,12 +35,14 @@ function theme(s) {
         document.getElementById("change").onclick = function(){theme('#ccddddff');};
         document.getElementById("change").innerHTML = "[LIGHT THEME]";
         document.getElementById("theme").innerHTML = "dark";
+        document.cookie = "theme=dark";
     } else {
         document.body.style.backgroundColor = "#ccddddff";
         document.getElementById("change").style.color = "#112222ff";
         document.getElementById("change").onclick = function(){theme('#112222ff');};
         document.getElementById("change").innerHTML = "[DARK THEME]";
         document.getElementById("theme").innerHTML = "light";
+        document.cookie = "theme=light";
     }
 }
 
