@@ -73,6 +73,7 @@ def load():
     doc.cookie = f"sched={typ}"
     for x in range(10):
         doc.cookie = f"custom{x}={custom('custom'+str(x))}"
+    doc.getElementById("verbose").innerHTML = custom("custom0")
     doc.getElementById("cookie").innerHTML = doc.cookie
     itm = eval(doc.getElementById("sched").innerHTML)
     prs, tms = [x[0] for x in itm], [x[1] for x in itm]
