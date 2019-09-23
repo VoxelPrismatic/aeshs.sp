@@ -1,65 +1,81 @@
+function gID(st) {
+    return document.getElementById(st);
+}
+function gHTML(st) {
+    return gID(st).innerHTML;
+}
 function sched(s) {
     if (s == "half") {
-        if (document.getElementById("half").innerHTML == "True") {
-            document.getElementById("half").innerHTML = "False";
-            document.getElementById("toggle").innerHTML = "[HALF PERIODS]";
+        if (gID("half").innerHTML == "True") {
+            gID("half").innerHTML = "False";
+            gID("toggle").innerHTML = "[HALF PERIODS]";
         } else {
-            document.getElementById("half").innerHTML = "True";
-            document.getElementById("toggle").innerHTML = "[FULL PERIODS]";
+            gID("half").innerHTML = "True";
+            gID("toggle").innerHTML = "[FULL PERIODS]";
         }
     } else {
-        document.getElementById("typ").innerHTML = s;
-        document.getElementById("sched").innerHTML = document.getElementById(s).innerHTML;
+        gID("typ").innerHTML = s;
+        gID("sched").innerHTML = gHTML(s);
         if (s.startsWith("custom")) {
-            document.getElementById("customizer").className = "cc";
-            document.getElementById("customizer").value = document.getElementById(s).innerHTML;
-            document.getElementById("customizer").onchange = function(){changer(s);};
-            document.getElementById("verbose").innerHTML = "changes";
+            gID("customizer").className = "cc";
+            gID("customizer").value = document.getElementById(s).innerHTML;
+            gID("customizer").onchange = function(){changer(s);};
         } else {
-            document.getElementById("customizer").className = "inv cc";
-            document.getElementById("customizer").onchange = function(){};
-            document.getElementById("customizer").value="";
+            gID("customizer").className = "inv cc";
+            gID("customizer").onchange = function(){};
+            gID("customizer").value="";
         }
     }
 }
 function color(s) {
     document.body.style.color = s;
-    document.getElementById("color").innerHTML = s;
-    document.cookie="color=s";
+    gID("color").innerHTML = s;
+    document.cookie="color="+s;
 }
 function theme(s) {
     document.body.backgroundColor = s;
     if (s == "#112222ff") {
         document.body.style.backgroundColor = "#112222ff";
-        document.getElementById("change").style.color = "#ccddddff";
-        document.getElementById("change").onclick = function(){theme('#ccddddff');};
-        document.getElementById("change").innerHTML = "[LIGHT THEME]";
-        document.getElementById("theme").innerHTML = "dark";
+        gID("change").style.color = "#ccddddff";
+        gID("change").onclick = function(){theme('#ccddddff');};
+        gID("change").innerHTML = "[LIGHT THEME]";
+        gID("theme").innerHTML = "dark";
         document.cookie = "theme=dark";
     } else {
         document.body.style.backgroundColor = "#ccddddff";
-        document.getElementById("change").style.color = "#112222ff";
-        document.getElementById("change").onclick = function(){theme('#112222ff');};
-        document.getElementById("change").innerHTML = "[DARK THEME]";
-        document.getElementById("theme").innerHTML = "light";
+        gID("change").style.color = "#112222ff";
+        gID("change").onclick = function(){theme('#112222ff');};
+        gID("change").innerHTML = "[DARK THEME]";
+        gID("theme").innerHTML = "light";
         document.cookie = "theme=light";
     }
 }
 
 function wheme() {
-    if (document.getElementById("theme").innerHTML == "light") {
+    if (gID("theme").innerHTML == "light") {
         document.body.style.backgroundColor = "#ccddddff";
-        document.getElementById("change").style.color = "#112222ff";
-        document.getElementById("change").onclick = function(){theme('#112222ff');};
-        document.getElementById("change").innerHTML = "[DARK THEME]";
+        gID("change").style.color = "#112222ff";
+        gID("change").onclick = function(){theme('#112222ff');};
+        gID("change").innerHTML = "[DARK THEME]";
+        gID("customizer").style.color = "#bbccccff";
     } else {
         document.body.style.backgroundColor = "#112222ff";
-        document.getElementById("change").style.color = "#ccddddff";
-        document.getElementById("change").onclick = function(){theme('#ccddddff');};
-        document.getElementById("change").innerHTML = "[LIGHT THEME]";
+        gID("change").style.color = "#ccddddff";
+        gID("change").onclick = function(){theme('#ccddddff');};
+        gID("change").innerHTML = "[LIGHT THEME]";
+        gID("customizer").style.color = "#223333ff";
+    }
+    if (gHTML("typ").startsWith("custom")) {
+        gID("customizer").className = "cc";
+        gID("customizer").value = document.getElementById(s).innerHTML;
+        gID("customizer").onchange = function(){changer(s);};
+    } else {
+        gID("customizer").className = "inv cc";
+        gID("customizer").onchange = function(){};
+        gID("customizer").value="";
     }
 }
 
 function changer(str, itm) {
-    document.getElementById(str).innerHTML = document.getElementById("customizer").value;
+    gID(str).innerHTML = gID("customizer").value;
 }
