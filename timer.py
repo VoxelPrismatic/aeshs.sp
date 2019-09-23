@@ -73,6 +73,8 @@ def get():
         f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
     )
     doc.cookie = f"sched={typ}"
+    d = dt.now()
+    doc.cookie = dt(d.year+4,d.month,d.day,d.hour,d.minute,d.second).strftime("%a, %d %b %Y %H:%M:%S UTC")
     win.setTimeout(cookies(),10)
 elem().innerHTML = "-~-"
 if not gHTML("sched"):
