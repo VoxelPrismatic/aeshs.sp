@@ -20,10 +20,14 @@ function sched(s) {
             gID("customizer").className = "cc";
             gID("customizer").value = document.getElementById(s).innerHTML;
             gID("customizer").onchange = function(){changer(s);};
+            gID("customizer").style.height = "30vw";
+            gID("customizer").style.width = "90vw";
         } else {
             gID("customizer").className = "inv cc";
             gID("customizer").onchange = function(){};
             gID("customizer").value="";
+            gID("customizer").style.height = "0px";
+            gID("customizer").style.width = "0px";
         }
     }
 }
@@ -52,27 +56,32 @@ function theme(s) {
 }
 
 function wheme() {
+    gID("customizer").style.color = gHTML("color")
     if (gID("theme").innerHTML == "light") {
         document.body.style.backgroundColor = "#ccddddff";
         gID("change").style.color = "#112222ff";
         gID("change").onclick = function(){theme('#112222ff');};
         gID("change").innerHTML = "[DARK THEME]";
-        gID("customizer").style.color = "#bbccccff";
+        gID("customizer").style.backgroundColor = "#bbccccff";
     } else {
         document.body.style.backgroundColor = "#112222ff";
         gID("change").style.color = "#ccddddff";
         gID("change").onclick = function(){theme('#ccddddff');};
         gID("change").innerHTML = "[LIGHT THEME]";
-        gID("customizer").style.color = "#223333ff";
+        gID("customizer").style.backgroundColor = "#223333ff";
     }
     if (gHTML("typ").startsWith("custom")) {
         gID("customizer").className = "cc";
         gID("customizer").value = document.getElementById(s).innerHTML;
         gID("customizer").onchange = function(){changer(s);};
+        gID("customizer").style.height = "30vw";
+        gID("customizer").style.width = "90vw";
     } else {
         gID("customizer").className = "inv cc";
         gID("customizer").onchange = function(){};
         gID("customizer").value="";
+        gID("customizer").style.height = "0px";
+        gID("customizer").style.width = "0px";
     }
 }
 
