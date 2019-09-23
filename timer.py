@@ -43,13 +43,18 @@ cat = {"norm": "NORMAL SCHEDULE",
        "custom9": "CUSTOM SCHEDULE 9",
        "early": "EARLY DISMISSAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
-       "summer": "SUMMER SCHEDULE - KINDA USELESS"}
+       "summer": "SUMMER SCHEDULE - KINDA USELESS"
+      }
 def custom(label):
     try:
-        return "".join(f"'{pr}'time({tm.replace(':',',')})" for pr, tm in eval(doc.getElementById(label).innerHTML))
+        x = "get"
+        sched = eval(str(doc.getElementById(label).innerHTML))
+        x = "return"
+        return "".join(f"'{pr}'time({tm.replace(':',',')})" for pr, tm in sched)
     except Exception as ex:
         doc.write(str(ex)+"<br>")
-def load(period, end):
+        doc.write(str(x)+"<br>")
+def load():
     theme = doc.getElementById("theme").innerHTML
     color = doc.getElementById("color").innerHTML
     cur = doc.getElementById("typ").innerHTML.split("_")[0]
@@ -63,8 +68,6 @@ def load(period, end):
     for x in range(10):
         doc.cookie = f"custom{x}={custom('custom'+str(x))}"
     doc.getElementById("cookie").innerHTML = doc.cookie
-    perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}"
-    doc.cookie = f"color={color}; theme={theme}; sched={typ};"
     itm = eval(doc.getElementById("sched").innerHTML)
     prs, tms = [x[0] for x in itm], [x[1] for x in itm]
     doc.getElementById("list").innerHTML = '<br>'.join(
@@ -78,7 +81,8 @@ def get():
             rn = dt.now()
             break
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
-    win.setTimeout(load(period, end),1000)
+    perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}"
+    win.setTimeout(load(),1000)
 elem().innerHTML = "--~--"
 if not doc.getElementById("sched").innerHTML:
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
