@@ -95,4 +95,5 @@ function textareaTheme() {
 }
 function changer(str, itm) {
     gID(str).innerHTML = gID("customizer").value;
+    gID("sched").innerHTML = gID("customizer").value;
 }
