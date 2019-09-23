@@ -75,7 +75,7 @@ def get():
     doc.getElementById("list").innerHTML = '<br>'.join(
         f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
     )
-    win.setTimeout(cookies(),2000)
+    win.setTimeout(cookies(),10)
 elem().innerHTML = "--~--"
 if not doc.getElementById("sched").innerHTML:
     doc.getElementById("sched").innerHTML = doc.getElementById("norm").innerHTML
