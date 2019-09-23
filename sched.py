@@ -1,11 +1,14 @@
 from browser import document as doc
 from datetime import time
-doc.getElementById("time").innerHTML = "-~-"
-try:
-  if len(doc.cookie):
-    norm_sched = eval(doc.getElementById("norm").innerHTML)
+def gID(st):
+    return doc.getElementById(st)
+def gHTML(st):
+    return gID(st).innerHTML
+gID("time").innerHTML = "•~•"
+if len(doc.cookie):
+    norm_sched = eval(gHTML("norm"))
     altered = "".join(f"'{pr}'{tm}" for pr, tm in norm_sched)
-    doc.getElementById("time").innerHTML = ">~<"
+    gID("time").innerHTML = ">~<"
     default = {"color=": "#00ffffff",
                "theme=": "dark",
                "sched=": "norm",
@@ -23,25 +26,25 @@ try:
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
         if ck.startswith('sched'):
-            doc.getElementById("sched").innerHTML = doc.getElementById(ck.split('=')[1]).innerHTML
-            doc.getElementById("typ").innerHTML = ck.split('=')[1]
+            gID("sched").innerHTML = gHTML(ck.split('=')[1])
+            gID("typ").innerHTML = ck.split('=')[1]
             if ck.split('=')[1].endswith("_half"):
-                doc.getElementById("half").innerHTML = "True"
-                doc.getElementById("toggle").innerHTML = "[FULL PERIODS]"
+                gID("half").innerHTML = "True"
+                gID("toggle").innerHTML = "[FULL PERIODS]"
         elif ck.startswith('color'):
             doc.body.style.color = ck.split('=')[1]
-            doc.getElementById("color").innerHTML = ck.split('=')[1]
+            gID("color").innerHTML = ck.split('=')[1]
         elif ck.startswith('theme'):
             if ck.split('=')[1] == 'dark':
                 doc.body.style.backgroundColor = "#112222ff"
-                doc.getElementById("theme").innerHTML = "dark"
-                doc.getElementById("change").innerHTML = "[LIGHT THEME]"
-                doc.getElementById("change").style.color = "#ccddddff"
+                gID("theme").innerHTML = "dark"
+                gID("change").innerHTML = "[LIGHT THEME]"
+                gID("change").style.color = "#ccddddff"
             else:
                 doc.body.style.backgroundColor = "#ccddddff"
-                doc.getElementById("theme").innerHTML = "light"
-                doc.getElementById("change").innerHTML = "[DARK THEME]"
-                doc.getElementById("change").style.color = "#112222ff"
+                gID("theme").innerHTML = "light"
+                gID("change").innerHTML = "[DARK THEME]"
+                gID("change").style.color = "#112222ff"
         elif ck.startswith('custom') and not ck.startswith("custom="):
             st = ck.split("=")[0]+"<br>"
             rep = {"'time(": "', time(",
@@ -59,9 +62,9 @@ try:
             itm = ck[8:]
             for r in rep:
                 itm = itm.replace(r,rep[r])
-            doc.getElementById(ck.split('=')[0]).innerHTML = f"[({itm})]"
+            gID(ck.split('=')[0]).innerHTML = f"[({itm})]"
           
-  else:
+else:
     doc.cookie="color=#00ffffff"
     doc.cookie="theme=dark"
     doc.cookie="sched=norm"
@@ -77,7 +80,6 @@ try:
     doc.cookie = "custom8="+norm_sched
     doc.cookie = "custom9="+norm_sched
     doc.getElementById("sched").innerHTML = norm_sched
-except Exception as ex: 
-    doc.write(str(ex)+"<br>"+ck)
-doc.getElementById("time").innerHTML = "-~-"
-doc.getElementById("cookie").innerHTML = doc.cookie
+
+gID("time").innerHTML = "•~•"
+gID("cookie").innerHTML = doc.cookie
