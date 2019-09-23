@@ -74,7 +74,7 @@ def load():
     for x in range(10):
         doc.cookie = f"custom{x}={custom('custom'+str(x))}"
     doc.getElementById("verbose").innerHTML = "".join(
-        f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById(label).innerHTML))
+        f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById("custom0").innerHTML))
     )
     doc.getElementById("cookie").innerHTML = doc.cookie
     itm = eval(doc.getElementById("sched").innerHTML)
