@@ -45,21 +45,6 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"
       }
-def custom(label):
-    try:
-        x = "get"
-        sched = eval(str(doc.getElementById(label).innerHTML))
-        x = "loop"
-        st = ""
-        for pr, tm in sched:
-            x = "write"
-            st += f"'{pr}'time({str(tm).replace(':',',')})"
-            x = "finished"
-        x = "rtn"
-        return st
-    except Exception as ex:
-        doc.write(str(ex)+"<br>")
-        doc.write(str(x)+"<br>")
 def cookies():
     theme = doc.getElementById("theme").innerHTML
     color = doc.getElementById("color").innerHTML
@@ -68,9 +53,10 @@ def cookies():
     doc.getElementById("typ").innerHTML = typ
     doc.getElementById("sched").innerHTML = doc.getElementById(typ).innerHTML
     doc.getElementById("prt").innerHTML = cat[typ]
-    doc.cookie = f"color={color}"
-    doc.cookie = f"theme={theme}"
-    doc.cookie = f"sched={typ}"
+    doc.cookie = f"color={color}; theme={theme}; sched={typ}"
+    doc.getElementById("custom").innerHTML = "<br>".join("".join(
+            f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById(f"custom{x}").innerHTML))
+        ) for x in range(10))
     for x in range(10):
         doc.cookie = f"custom{x}=" + "".join(
             f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById(f"custom{x}").innerHTML))
