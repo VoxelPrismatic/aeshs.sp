@@ -60,7 +60,7 @@ def custom(label):
     except Exception as ex:
         doc.write(str(ex)+"<br>")
         doc.write(str(x)+"<br>")
-def load():
+def cookies():
     theme = doc.getElementById("theme").innerHTML
     color = doc.getElementById("color").innerHTML
     cur = doc.getElementById("typ").innerHTML.split("_")[0]
@@ -72,16 +72,10 @@ def load():
     doc.cookie = f"theme={theme}"
     doc.cookie = f"sched={typ}"
     for x in range(10):
-        doc.cookie = f"custom{x}={custom('custom'+str(x))}"
-    doc.getElementById("verbose").innerHTML = "".join(
-        f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById("custom0").innerHTML))
-    )
+        doc.cookie = f"custom{x}=" + "".join(
+            f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(doc.getElementById(f"custom{x}").innerHTML))
+        )
     doc.getElementById("cookie").innerHTML = doc.cookie
-    itm = eval(doc.getElementById("sched").innerHTML)
-    prs, tms = [x[0] for x in itm], [x[1] for x in itm]
-    doc.getElementById("list").innerHTML = '<br>'.join(
-        f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
-    )
 def get():
     for per, end in eval(doc.getElementById("sched").innerHTML):
         if diff(end) >= 0:
@@ -91,6 +85,10 @@ def get():
             break
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}"
+    prs, tms = eval(doc.getElementById("sched").innerHTML)
+    doc.getElementById("list").innerHTML = '<br>'.join(
+        f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
+    )
     win.setTimeout(load(),1000)
 elem().innerHTML = "--~--"
 if not doc.getElementById("sched").innerHTML:
