@@ -6,8 +6,7 @@ def gHTML(st):
     return gID(st).innerHTML
 gID("time").innerHTML = "•~•"
 if len(doc.cookie):
-    norm_sched = eval(gHTML("norm"))
-    altered = "".join(f"'{pr}'{tm}" for pr, tm in norm_sched)
+    altered = "".join(f"'{pr}'{tm}" for pr, tm in eval(gHTML("norm")))
     gID("time").innerHTML = ">~<"
     default = {"color=": "#00ffffff",
                "theme=": "dark",
@@ -68,18 +67,18 @@ else:
     doc.cookie="color=#00ffffff"
     doc.cookie="theme=dark"
     doc.cookie="sched=norm"
-    norm_sched = doc.getElementById("norm").innerHTML
-    doc.cookie = "custom0="+norm_sched
-    doc.cookie = "custom1="+norm_sched
-    doc.cookie = "custom2="+norm_sched
-    doc.cookie = "custom3="+norm_sched
-    doc.cookie = "custom4="+norm_sched
-    doc.cookie = "custom5="+norm_sched
-    doc.cookie = "custom6="+norm_sched
-    doc.cookie = "custom7="+norm_sched
-    doc.cookie = "custom8="+norm_sched
-    doc.cookie = "custom9="+norm_sched
-    doc.getElementById("sched").innerHTML = norm_sched
+    altered = "".join(f"'{pr}'{tm}" for pr, tm in eval(gHTML("norm")))
+    doc.cookie = "custom0="+altered
+    doc.cookie = "custom1="+altered
+    doc.cookie = "custom2="+altered
+    doc.cookie = "custom3="+altered
+    doc.cookie = "custom4="+altered
+    doc.cookie = "custom5="+altered
+    doc.cookie = "custom6="+altered
+    doc.cookie = "custom7="+altered
+    doc.cookie = "custom8="+altered
+    doc.cookie = "custom9="+altered
+    doc.getElementById("sched").innerHTML = gHTML("norm")
 
 gID("time").innerHTML = "•~•"
 gID("cookie").innerHTML = doc.cookie
