@@ -4,6 +4,8 @@ def gID(st):
     return doc.getElementById(st)
 def gHTML(st):
     return gID(st).innerHTML
+def gSTYLE(st):
+    return gID(st).style
 gID("time").innerHTML = "•~•"
 if len(doc.cookie):
     altered = "".join(f"'{pr}'{tm}" for pr, tm in eval(gHTML("norm")))
@@ -38,12 +40,12 @@ if len(doc.cookie):
                 doc.body.style.backgroundColor = "#112222ff"
                 gID("theme").innerHTML = "dark"
                 gID("change").innerHTML = "[LIGHT THEME]"
-                gID("change").style.color = "#ccddddff"
+                gSTYLE("change").color = "#ccddddff"
             else:
                 doc.body.style.backgroundColor = "#ccddddff"
                 gID("theme").innerHTML = "light"
                 gID("change").innerHTML = "[DARK THEME]"
-                gID("change").style.color = "#112222ff"
+                gSTYLE("change").color = "#112222ff"
         elif ck.startswith('custom') and not ck.startswith("custom="):
             st = ck.split("=")[0]+"<br>"
             rep = {"'time(": "', time(",
@@ -71,7 +73,7 @@ else:
     for x in range(10):
         doc.cookie = f"custom{x}={altered}"
         gID(f"custom{x}").innerHTML = gHTML("norm")
-    doc.getElementById("sched").innerHTML = gHTML("norm")
+    gID("sched").innerHTML = gHTML("norm")
 
 gID("time").innerHTML = "•~•"
 gID("cookie").innerHTML = doc.cookie
