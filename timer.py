@@ -54,6 +54,11 @@ def cookies():
         )
     gID("cookie").innerHTML = doc.cookie
 def get():
+    cur = gHTML("typ").split("_")[0]
+    typ = cur + ("_half" if eval(gHTML("half")) and gID(cur+"_half") else "")
+    gID("typ").innerHTML = typ
+    gID("sched").innerHTML = gHTML(typ)
+    gID("prt").innerHTML = cat[typ]
     currentsched = eval(gHTML("sched"))
     for per, end in currentsched:
         if diff(end) >= 0:
@@ -64,14 +69,9 @@ def get():
     elem().innerHTML = ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':'))
     perm().innerHTML = f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}"
     prs, tms = [x[0] for x in currentsched], [x[1] for x in currentsched]
-    cur = gHTML("typ").split("_")[0]
-    typ = cur + ("_half" if eval(gHTML("half")) and gID(cur+"_half") else "")
-    gID("typ").innerHTML = typ
-    gID("sched").innerHTML = gHTML(typ)
     gID("list").innerHTML = '<br>'.join(
         f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))
     )
-    gID("prt").innerHTML = cat[typ]
     doc.cookie = f"sched={typ}"
     win.setTimeout(cookies(),10)
 elem().innerHTML = "-~-"
