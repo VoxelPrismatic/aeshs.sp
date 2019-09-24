@@ -74,7 +74,7 @@ def get():
     prs, tms = [x[0] for x in currentsched], [x[1] for x in currentsched]
     gEDIT("list", '<br>'.join(f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs)))
     win.setTimeout(cookies(),10)
-elem().innerHTML = "-~-"
+gEDIT("time", "-~-")
 if not gHTML("sched"):
     gEDIT("sched", gHTML("norm"))
 win.setInterval(get, 1000)
