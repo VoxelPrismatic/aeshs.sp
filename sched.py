@@ -6,10 +6,12 @@ def gHTML(st):
     return gID(st).innerHTML
 def gSTYLE(st):
     return gID(st).style
+def gEDIT(st, val):
+    gID(st).innerHTML = val
 gID("time").innerHTML = "•~•"
 if len(doc.cookie):
     altered = "".join(f"'{pr}'{tm}" for pr, tm in eval(gHTML("norm")))
-    gID("time").innerHTML = ">~<"
+    gEDIT("time", ">~<")
     default = {"color=": "#00ffffff",
                "theme=": "dark",
                "sched=": "norm",
@@ -27,24 +29,24 @@ if len(doc.cookie):
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
         if ck.startswith('sched'):
-            gID("sched").innerHTML = gHTML(ck.split('=')[1])
-            gID("typ").innerHTML = ck.split('=')[1]
+            gEDIT("sched", gHTML(ck.split('=')[1]))
+            gEDIT("typ", ck.split('=')[1])
             if ck.split('=')[1].endswith("_half"):
-                gID("half").innerHTML = "True"
-                gID("toggle").innerHTML = "[FULL PERIODS]"
+                gEDIT("half", "True")
+                gEDIT("toggle", "[FULL PERIODS]")
         elif ck.startswith('color'):
             doc.body.style.color = ck.split('=')[1]
-            gID("color").innerHTML = ck.split('=')[1]
+            gEDIT("color", ck.split('=')[1])
         elif ck.startswith('theme'):
             if ck.split('=')[1] == 'dark':
                 doc.body.style.backgroundColor = "#112222ff"
-                gID("theme").innerHTML = "dark"
-                gID("change").innerHTML = "[LIGHT THEME]"
+                gEDIT("theme", "dark")
+                gEDIT("change", "[LIGHT THEME]")
                 gSTYLE("change").color = "#ccddddff"
             else:
                 doc.body.style.backgroundColor = "#ccddddff"
-                gID("theme").innerHTML = "light"
-                gID("change").innerHTML = "[DARK THEME]"
+                gEDIT("theme", "light")
+                gEDIT("change", "[DARK THEME]")
                 gSTYLE("change").color = "#112222ff"
         elif ck.startswith('custom') and not ck.startswith("custom="):
             st = ck.split("=")[0]+"<br>"
@@ -63,7 +65,7 @@ if len(doc.cookie):
             itm = ck[8:]
             for r in rep:
                 itm = itm.replace(r,rep[r])
-            gID(ck.split('=')[0]).innerHTML = f"[({itm})]"
+            gEDIT(ck.split('=')[0], f"[({itm})]")
           
 else:
     doc.cookie="color=#00ffffff"
@@ -72,8 +74,8 @@ else:
     altered = "".join(f"'{pr}'{tm}" for pr, tm in eval(gHTML("norm")))
     for x in range(10):
         doc.cookie = f"custom{x}={altered}"
-        gID(f"custom{x}").innerHTML = gHTML("norm")
-    gID("sched").innerHTML = gHTML("norm")
+        gEDIT(f"custom{x}", gHTML("norm"))
+    gEDIT("sched", gHTML("norm"))
 
-gID("time").innerHTML = "•~•"
-gID("cookie").innerHTML = doc.cookie
+gEDIT("time", "•~•")
+gEDIT("cookie", doc.cookie)
