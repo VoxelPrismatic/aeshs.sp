@@ -7,21 +7,24 @@ function gHTML(st) {
 function gSTYLE(st) {
     return gID(st).style;
 }
+function gEDIT(st, val) {
+    gID(st).innerHTML = val;
+}
 function sched(s) {
     if (s == "half") {
-        if (gID("half").innerHTML == "True") {
-            gID("half").innerHTML = "False";
-            gID("toggle").innerHTML = "[HALF PERIODS]";
+        if (gHTML("half") == "True") {
+            gEDIT("half", "False");
+            gEDIT("toggle", "[HALF PERIODS]");
         } else {
-            gID("half").innerHTML = "True";
-            gID("toggle").innerHTML = "[FULL PERIODS]";
+            gEDIT("half", "True");
+            gEDIT("toggle", "[FULL PERIODS]");
         }
     } else {
-        gID("typ").innerHTML = s;
-        gID("sched").innerHTML = gHTML(s);
+        gEDIT("typ", s);
+        gEDIT("sched", gHTML(s));
         if (s.startsWith("custom")) {
             gID("customizer").className = "cc";
-            gID("customizer").value = document.getElementById(s).innerHTML;
+            gID("customizer").value = gHTML(s);
             gID("customizer").onchange = function(){changer(s);};
             gSTYLE("customizer").height = "30vw";
             gSTYLE("customizer").width = "90vw";
@@ -36,7 +39,7 @@ function sched(s) {
 }
 function color(s) {
     document.body.style.color = s;
-    gID("color").innerHTML = s;
+    gEDIT("color", s);
     document.cookie="color="+s;
     gSTYLE("customizer").color = s;
 }
@@ -46,16 +49,16 @@ function theme(s) {
         document.body.style.backgroundColor = "#112222ff";
         gSTYLE("change").color = "#ccddddff";
         gID("change").onclick = function(){theme('#ccddddff');};
-        gID("change").innerHTML = "[LIGHT THEME]";
-        gID("theme").innerHTML = "dark";
+        gEDIT("change", "[LIGHT THEME]");
+        gEDIT("theme", "dark");
         document.cookie = "theme=dark";
         gSTYLE("customizer").backgroundColor = "#223333ff";
     } else {
         document.body.style.backgroundColor = "#ccddddff";
         gSTYLE("change").color = "#112222ff";
         gID("change").onclick = function(){theme('#112222ff');};
-        gID("change").innerHTML = "[DARK THEME]";
-        gID("theme").innerHTML = "light";
+        gEDIT("change", "[DARK THEME]");
+        gEDIT("theme", "light");
         document.cookie = "theme=light";
         gSTYLE("customizer").backgroundColor = "#bbccccff";
     }
@@ -66,12 +69,12 @@ function wheme() {
         document.body.style.backgroundColor = "#ccddddff";
         gSTYLE("change").color = "#112222ff";
         gID("change").onclick = function(){theme('#112222ff');};
-        gID("change").innerHTML = "[DARK THEME]";
+        gEDIT("change", "[DARK THEME]");
     } else {
         document.body.style.backgroundColor = "#112222ff";
         gSTYLE("change").color = "#ccddddff";
         gID("change").onclick = function(){theme('#ccddddff');};
-        gID("change").innerHTML = "[LIGHT THEME]";
+        gEDIT("change","[LIGHT THEME]");
     }
 }
 
@@ -84,7 +87,7 @@ function textareaTheme() {
     }
     if (gHTML("typ").startsWith("custom")) {
         gID("customizer").className = "cc";
-        gID("customizer").value = document.getElementById(s).innerHTML;
+        gID("customizer").value = gHTML(s);
         gID("customizer").onchange = function(){changer(s);};
         gSTYLE("customizer").height = "30vw";
         gSTYLE("customizer").width = "90vw";
@@ -97,6 +100,6 @@ function textareaTheme() {
     }
 }
 function changer(str, itm) {
-    gID(str).innerHTML = gID("customizer").value;
-    gID("sched").innerHTML = gID("customizer").value;
+    gEDIT(str, gID("customizer").value);
+    gEDIT("sched", gID("customizer").value);
 }
