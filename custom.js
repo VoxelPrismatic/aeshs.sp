@@ -102,4 +102,6 @@ function textareaTheme() {
 function changer(str, itm) {
     gEDIT(str, gID("customizer").value);
     gEDIT("sched", gID("customizer").value);
+    document.cookie="expires="+gHTML("date");
+    document.cookie="path=/";
 }
