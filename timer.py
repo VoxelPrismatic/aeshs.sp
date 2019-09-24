@@ -53,13 +53,13 @@ def cookies():
             f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(gHTML(f"custom{x}")))
         )
     d = dt.now()
-    doc.cookie = "expires="+dt(d.year+4,d.month,d.day,d.hour,d.minute,d.second).strftime("%a, %d %b %Y %H:%M:%S UTC")
+    gEDIT("date", dt(d.year+4,d.month,d.day,d.hour,d.minute,d.second).strftime("%a, %d %b %Y %H:%M:%S UTC"))
     gEDIT("cookie", doc.cookie)
 def get():
     cur = gHTML("typ").split("_")[0]
     typ = cur + ("_half" if eval(gHTML("half")) and gID(cur+"_half") else "")
     gEDIT("typ", typ)
-    doc.cookie = f"sched={typ}"
+    doc.cookie = f"sched={typ}; path=/"
     gEDIT("sched", gHTML(typ))
     gEDIT("prt", cat[typ])
     currentsched = eval(gHTML("sched"))
