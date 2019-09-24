@@ -72,7 +72,7 @@ def get():
     gEDIT("time", ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':')))
     gEDIT("per", f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}")
     prs, tms = [x[0] for x in currentsched], [x[1] for x in currentsched]
-    gEDIT("list", '<br>'.join(f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs)))
+    gEDIT("list", '<br>'.join(f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))))
     win.setTimeout(cookies(),10)
 gEDIT("time", "-~-")
 if not gHTML("sched"):
