@@ -52,7 +52,6 @@ def cookies():
         doc.cookie = f"custom{x}=" + "".join(
             f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(gHTML(f"custom{x}")))
         )
-    doc.cookie = f"sched={typ}"
     d = dt.now()
     doc.cookie = dt(d.year+4,d.month,d.day,d.hour,d.minute,d.second).strftime("%a, %d %b %Y %H:%M:%S UTC")
     gEDIT("cookie", doc.cookie)
@@ -60,6 +59,7 @@ def get():
     cur = gHTML("typ").split("_")[0]
     typ = cur + ("_half" if eval(gHTML("half")) and gID(cur+"_half") else "")
     gEDIT("typ", typ)
+    doc.cookie = f"sched={typ}"
     gEDIT("sched", gHTML(typ))
     gEDIT("prt", cat[typ])
     currentsched = eval(gHTML("sched"))
@@ -73,7 +73,7 @@ def get():
     gEDIT("per", f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}")
     prs, tms = [x[0] for x in currentsched], [x[1] for x in currentsched]
     gEDIT("list", '<br>'.join(f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))))
-    win.setTimeout(cookies(),10)
+    win.setTimeout(cookies(),1000)
 gEDIT("time", "-~-")
 if not gHTML("sched"):
     gEDIT("sched", gHTML("norm"))
