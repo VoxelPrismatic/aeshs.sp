@@ -40,7 +40,7 @@ function sched(s) {
 function color(s) {
     document.body.style.color = s;
     gEDIT("color", s);
-    document.cookie="color="+s;
+    document.cookie=`color=${s}; expires=${gHTML("date")}`;
     gSTYLE("customizer").color = s;
 }
 function theme(s) {
@@ -51,7 +51,7 @@ function theme(s) {
         gID("change").onclick = function(){theme('#ccddddff');};
         gEDIT("change", "[LIGHT THEME]");
         gEDIT("theme", "dark");
-        document.cookie = "theme=dark";
+        document.cookie = `theme=dark; expires=${gHTML("date")}`;
         gSTYLE("customizer").backgroundColor = "#223333ff";
     } else {
         document.body.style.backgroundColor = "#ccddddff";
@@ -59,7 +59,7 @@ function theme(s) {
         gID("change").onclick = function(){theme('#112222ff');};
         gEDIT("change", "[DARK THEME]");
         gEDIT("theme", "light");
-        document.cookie = "theme=light";
+        document.cookie = `theme=light; expires=${gHTML("date")}`;
         gSTYLE("customizer").backgroundColor = "#bbccccff";
     }
 }
