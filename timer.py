@@ -46,20 +46,24 @@ cat = {"norm": "NORMAL SCHEDULE",
        "early": "EARLY DISMISSAL SCHEDULE",
        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
        "summer": "SUMMER SCHEDULE - KINDA USELESS"
-      }
+       }
 def cookies():
     for x in range(10):
         doc.cookie = f"custom{x}=" + "".join(
             f"'{pr}'time({str(tm).replace(':',',')})" for pr, tm in eval(str(gHTML(f"custom{x}")))
         )
 def get():
-    cur = gHTML("typ").split("_")[0]
-    typ = cur + ("_half" if eval(gHTML("half")) and gID(cur+"_half") else "")
-    gEDIT("typ", typ)
-    doc.cookie = f"sched={typ}; path=/"
-    gEDIT("sched", gHTML(typ))
-    gEDIT("prt", cat[typ])
     currentsched = eval(gHTML("sched"))
+    if cat[gHTML("typ")] == gHTML("prt") and gHTML("typ") in cat:
+        cur = gHTML("typ").split("_")[0]
+        typ = cur + ("_half" if eval(gHTML("half")) and gID(cur+"_half") else "")
+        gEDIT("typ", typ)
+        doc.cookie = f"sched={typ}; path=/"
+        gEDIT("sched", gHTML(typ))
+        gEDIT("prt", cat[typ])
+        currentsched = eval(gHTML("sched"))
+        prs, tms = [x[0] for x in currentsched], [x[1] for x in currentsched]
+        gEDIT("list", '<br>'.join(f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))))
     for per, end in currentsched:
         if diff(end) >= 0:
             period = per
@@ -68,12 +72,10 @@ def get():
             break
     gEDIT("time", ':'.join(zf(x) for x in str(end-rn).split('.')[0].split(':')))
     gEDIT("per", f"{period} // ENDS AT {zf(end.hour)}:{zf(end.minute)}")
-    prs, tms = [x[0] for x in currentsched], [x[1] for x in currentsched]
-    gEDIT("list", '<br>'.join(f"{prs[x]} {'-'*(18-len(prs[x]))} {str(tms[x-1])[:-3]}" for x in range(1,len(prs))))
     d = dt.now()
     gEDIT("date", dt(d.year+4,d.month,d.day,d.hour,d.minute,d.second).strftime("%a, %d %b %Y %H:%M:%S UTC"))
     gEDIT("cookie", doc.cookie)
-    win.setTimeout(cookies(),1000)
+    win.setTimeout(cookies,1000)
 gEDIT("time", "-~-")
 if not gHTML("sched"):
     gEDIT("sched", gHTML("norm"))
