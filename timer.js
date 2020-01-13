@@ -68,15 +68,17 @@ function get() {
     for(var x of currentsched) {
         var per = x[0];
         var end = x[1];
-        var line = per + " ";
-        while(line.length < 18)
-            line += "-";
-        line += " " + zf(end.getHours()) + ":" + zf(end.getMinutes());
-        ls += line + "<br>"
         if(!found && end - Date.now() >= 0) {
             var period = per;
             var rn = new Date();
             found = true;
+        }
+        if(found) {
+            var line = per + " ";
+            while(line.length < 18)
+                line += "-";
+            line += " " + zf(end.getHours()) + ":" + zf(end.getMinutes());
+            ls += line + "<br>";
         }
     }
     setHtml("list", ls);
