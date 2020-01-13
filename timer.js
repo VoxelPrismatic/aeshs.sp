@@ -74,21 +74,17 @@ function get() {
     for(var x of currentsched) {
        var per = x[0];
        var end = x[1];
-       if(end >= 0) {
+       if(end - Date.now() >= 0) {
            var period = per;
            var rn = new Date();
            break;
        }
     }
     var st = ""
-    var thing = end - rn;
-    st += zf(thing % 3600) + ":";
-    thing -= 3600 * (thing % 3600);
-    st += zf(thing % 60) + ":";
-    thing -= 60 * (thing % 60);
-    st += zf(thing);
-    setHtml("time", st);
-    setHtml("per", `${period} // ENDS AT ${end.getHours()}:{end.getMinute()}`);
+    st += zf(end.getHours() - rn.getHours()) + ":";
+    st += zf(end.getMinutes() - rn.getMinutes()) + ":";
+    st += zf(end.getSeconds() - rn.getSeconds());
+    setHtml("per", `${period} // ENDS AT ${end.getHours()}:${end.getMinute()}`);
     var d = new Date;
     setHtml("date", d.toDateString());
 }
