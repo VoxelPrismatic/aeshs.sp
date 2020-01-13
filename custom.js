@@ -36,6 +36,7 @@ function sched(s) {
             gSTYLE("customizer").width = "0px";
         }
     }
+    get();
 }
 function color(s) {
     document.body.style.color = s;
