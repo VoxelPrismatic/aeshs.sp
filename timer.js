@@ -56,7 +56,7 @@ function get() {
     if(cat[findHtml("typ")] == findHtml("prt") && cat.constructor.keys(cat).includes(findHtml("typ"))) {
         var cur = findHtml("typ").split("_")[0];
         var typ = cur;
-        if(findHtml("half") && find(cur + "_half") != null) {
+        if(findHtml("half") == "True" && find(cur + "_half") != null) {
             typ += "_half";
         }
         setHtml("typ", typ);
@@ -64,22 +64,24 @@ function get() {
         setHtml("prt", cat[typ]);
         document.cookie = `sched=${typ}; path=/`;
         currentsched = eval(findHtml("sched"));
-        var prs = [];
-        var tms = [];
-        for(var x of currentsched) {
-            prs.push(x[0]);
-            tms.push(x[1]);
+    }
+    var ls = "";
+    var found = false;
+    for(var x of currentsched) {
+        var per = x[0];
+        var end = x[1];
+        var line = per + " ";
+        while(line.length < 18)
+            line += "-";
+        line += " " + end.getHours() + ":" + end.getMinutes();
+        ls += line + "<br>"
+        if(!found && end - Date.now() >= 0) {
+            var period = per;
+            var rn = new Date();
+            found = true;
         }
     }
-    for(var x of currentsched) {
-       var per = x[0];
-       var end = x[1];
-       if(end - Date.now() >= 0) {
-           var period = per;
-           var rn = new Date();
-           break;
-       }
-    }
+    setHtml("list", ls);
     var st = ""
     st += zf(end.getHours() - rn.getHours()) + ":";
     st += zf(end.getMinutes() - rn.getMinutes()) + ":";
