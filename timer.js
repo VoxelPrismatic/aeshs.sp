@@ -1,4 +1,4 @@
-function time(hr, mn, sc = 0) {
+function time(hr = 0, mn = 0, sc = 0) {
     var now = new Date();
     now.setHours(hr);
     now.setMinutes(mn);
