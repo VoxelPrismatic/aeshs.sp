@@ -84,7 +84,8 @@ function get() {
     st += zf(end.getHours() - rn.getHours()) + ":";
     st += zf(end.getMinutes() - rn.getMinutes()) + ":";
     st += zf(end.getSeconds() - rn.getSeconds());
-    setHtml("per", `${period} // ENDS AT ${end.getHours()}:${end.getMinute()}`);
+    setHtml("time", st)
+    setHtml("per", `${period} // ENDS AT ${end.getHours()}:${end.getMinutes()}`);
     var d = new Date;
     setHtml("date", d.toDateString());
 }
