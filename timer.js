@@ -1,5 +1,5 @@
 function time(hr, mn, sc = 0) {
-    var now = new Date.now();
+    var now = new Date();
     now.setHours(hr);
     now.setMinutes(mn);
     now.setSeconds(sc);
@@ -76,7 +76,7 @@ function get() {
        var end = x[1];
        if(end >= 0) {
            var period = per;
-           var rn = new Date.now();
+           var rn = new Date();
            break;
        }
     }
@@ -89,7 +89,7 @@ function get() {
     st += zf(thing);
     setHtml("time", st);
     setHtml("per", `${period} // ENDS AT ${end.getHours()}:{end.getMinute()}`);
-    var d = new Date.now();
+    var d = new Date;
     setHtml("date", d.toDateString());
 }
 setHtml("time", "-~-");
