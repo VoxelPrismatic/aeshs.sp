@@ -12,20 +12,21 @@ gID("time").innerHTML = "•~•"
 if len(doc.cookie):
     altered = "".join(f"'{pr}'{tm}" for pr, tm in eval(gHTML("norm")))
     gEDIT("time", ">~<")
-    default = {"color=": "#00ffffff",
-               "theme=": "dark",
-               "sched=": "norm",
-               "custom0=": altered,
-               "custom1=": altered,
-               "custom2=": altered,
-               "custom3=": altered,
-               "custom4=": altered,
-               "custom5=": altered,
-               "custom6=": altered,
-               "custom7=": altered,
-               "custom8=": altered,
-               "custom9=": altered
-              }
+    default = {
+        "color=": "#00ffffff",
+        "theme=": "dark",
+        "sched=": "norm",
+        "custom0=": altered,
+        "custom1=": altered,
+        "custom2=": altered,
+        "custom3=": altered,
+        "custom4=": altered,
+        "custom5=": altered,
+        "custom6=": altered,
+        "custom7=": altered,
+        "custom8=": altered,
+        "custom9=": altered
+    }
     for ck in doc.cookie.split(';'):
         ck = ck.strip()
         if ck.startswith('sched'):
