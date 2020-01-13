@@ -71,7 +71,7 @@ function get() {
         var line = per + " ";
         while(line.length < 18)
             line += "-";
-        line += " " + end.getHours() + ":" + end.getMinutes();
+        line += " " + zf(end.getHours()) + ":" + zf(end.getMinutes());
         ls += line + "<br>"
         if(!found && end - Date.now() >= 0) {
             var period = per;
