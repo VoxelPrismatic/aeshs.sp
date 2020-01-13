@@ -96,4 +96,3 @@ setHtml("time", "-~-");
 if(!findHtml("sched"))
     setHtml("sched", findHtml("norm"));
 window.setInterval(get, 1000);
-}
