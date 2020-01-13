@@ -71,7 +71,7 @@ function get() {
             tms.push(x[1]);
         }
     }
-    for(var x of currentshed) {
+    for(var x of currentsched) {
        var per = x[0];
        var end = x[1];
        if(end >= 0) {
