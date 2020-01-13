@@ -53,18 +53,16 @@ cat = {
 
 function get() {
     var currentsched = eval(findHtml("sched"));
-    if(cat[findHtml("typ")] == findHtml("prt") && cat.constructor.keys(cat).includes(findHtml("typ"))) {
-        var cur = findHtml("typ").split("_")[0];
-        var typ = cur;
-        if(findHtml("half") == "True" && find(cur + "_half") != null) {
-            typ += "_half";
-        }
-        setHtml("typ", typ);
-        setHtml("sched", findHtml(typ));
-        setHtml("prt", cat[typ]);
-        document.cookie = `sched=${typ}; path=/`;
-        currentsched = eval(findHtml("sched"));
-    }
+    var cur = findHtml("typ").split("_")[0];
+    var typ = cur;
+    if(findHtml("half") == "True" && find(cur + "_half") != null)
+        typ += "_half";
+    setHtml("typ", typ);
+    setHtml("sched", findHtml(typ));
+    setHtml("prt", cat[typ]);
+    document.cookie = `sched=${typ}; path=/`;
+    currentsched = eval(findHtml("sched"));
+
     var ls = "";
     var found = false;
     for(var x of currentsched) {
