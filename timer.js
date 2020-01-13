@@ -1,6 +1,3 @@
-doc = document;
-win = window;
-
 function time(hr, mn, sc = 0) {
     var now = new Date.now();
     now.setHours(hr);
@@ -25,11 +22,7 @@ function diff(t1) {
 }
 
 function zf(itm) {
-    var st = String(itm);
-    if(st.length != 2) {
-        st = "0" + st;
-    }
-    return st;
+    return String(itm).padStart(2, "0");
 }
 
 cat = {
@@ -83,8 +76,24 @@ function get() {
        var end = x[1];
        if(end >= 0) {
            var period = per;
-           rn = Date.now();
+           var rn = new Date.now();
+           break;
        }
     }
-    var st = "";
+    var st = ""
+    var thing = end - rn;
+    st += zf(thing % 3600) + ":";
+    thing -= 3600 * (thing % 3600);
+    st += zf(thing % 60) + ":";
+    thing -= 60 * (thing % 60);
+    st += zf(thing);
+    setHtml("time", st);
+    setHtml("per", `${period} // ENDS AT ${end.getHours()}:{end.getMinute()}`);
+    var d = new Date.now();
+    setHtml("date", d.toDateString());
+}
+setHtml("time", "-~-");
+if(!findHtml("sched"))
+    setHtml("sched", findHtml("norm"));
+window.setInterval(get, 1000);
 }
