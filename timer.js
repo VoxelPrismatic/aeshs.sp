@@ -94,12 +94,16 @@ function get() {
     setHtml("list", ls);
     var st = ""
     var tD = diffTime(rn, end);
-    var hrs = tD % 3600;
-    while(tD >= 3600)
+    var hrs = 0;
+    while(tD >= 3600) {
         tD -= 3600;
-    var mns = tD % 60;
-    while(tD >= 60)
+        hrs += 1;
+    }
+    var mns = 0;
+    while(tD >= 60) {
         tD -= 60;
+        mns += 1;
+    }
     var scs = tD;
     st += zf(hrs) + ":";
     st += zf(mns) + ":";
