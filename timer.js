@@ -21,6 +21,12 @@ function diff(t1) {
     return new Date(Date.now() - t1);
 }
 
+function diffTime(a, b) {
+    var tA = a.getSeconds() + 60 * a.getMinutes() + 60 * 60 + a.getHours();
+    var tB = b.getSeconds() + 60 * b.getMinutes() + 60 * 60 + b.getHours();
+    return Math.abs(tA - tB);
+}
+
 function zf(itm) {
     return String(itm).padStart(2, "0");
 }
@@ -87,9 +93,17 @@ function get() {
     }
     setHtml("list", ls);
     var st = ""
-    st += zf(Math.abs(rn.getHours() - end.getHours()) - 1) + ":";
-    st += zf(59 - Math.abs(rn.getMinutes() - end.getMinutes())) + ":";
-    st += zf(59 - Math.abs(rn.getSeconds() - end.getSeconds()));
+    var tD = diffTime(rn, end);
+    var hrs = tD % 3600;
+    while(tD >= 3600)
+        tD -= 3600;
+    var mns = tD % 60;
+    while(tD >= 60)
+        tD -= 60;
+    var scs = tD;
+    st += zf(hrs) + ":";
+    st += zf(mns) + ":";
+    st += zf(scs);
     setHtml("time", st)
     setHtml("per", `${period} // ENDS AT ${zf(end.getHours())}:${zf(end.getMinutes())}`);
     var d = new Date;
