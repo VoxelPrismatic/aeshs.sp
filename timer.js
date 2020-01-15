@@ -87,11 +87,11 @@ function get() {
     }
     setHtml("list", ls);
     var st = ""
-    st += zf(Math.abs(end.getHours() - rn.getHours())) + ":";
-    st += zf(Math.abs(end.getMinutes() - rn.getMinutes())) + ":";
-    st += zf(59 - Math.abs(end.getSeconds() - rn.getSeconds()));
+    st += zf(Math.abs(rn.getHours() - end.getHours()) - 1) + ":";
+    st += zf(Math.abs(rn.getMinutes() - end.getMinutes()) - 1) + ":";
+    st += zf(Math.abs(rn.getSeconds() - end.getSeconds()) - 1);
     setHtml("time", st)
-    setHtml("per", `${period} // ENDS AT ${end.getHours()}:${end.getMinutes()}`);
+    setHtml("per", `${period} // ENDS AT ${zf(end.getHours())}:${zf(end.getMinutes())}`);
     var d = new Date;
     setHtml("date", d.toDateString());
 }
