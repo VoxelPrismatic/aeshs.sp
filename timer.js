@@ -64,16 +64,20 @@ function get() {
     currentsched = eval(findHtml("sched"));
 
     var ls = "";
-    var found = false;
+    var now = Date.now()
     for(var x of currentsched) {
         var per = x[0];
         var end = x[1];
-        if(!found && end - Date.now() >= 0) {
+        if(!found && end - now >= 0) {
             var period = per;
             var rn = new Date();
-            found = true;
+            break;
         }
-        if(found) {
+    }
+    for(var x of currentsched) {
+        var per = x[0];
+        var end = x[1];
+        if(end - now >= 0) {
             var line = per + " ";
             while(line.length < 18)
                 line += "-";
