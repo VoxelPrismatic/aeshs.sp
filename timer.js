@@ -65,9 +65,9 @@ function get() {
 
     var ls = "";
     var now = Date.now()
-    for(var x ) {
-        var per = x[0];
-        var end = x[1];
+    for(var x = 0; x < currentsched.length - 1; x += 1) {
+        var per = currentsched[x + 1][0];
+        var end = currentsched[x][1];
         if(end - now >= 0) {
             var line = per + " ";
             while(line.length < 18)
