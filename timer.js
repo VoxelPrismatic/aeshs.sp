@@ -88,8 +88,8 @@ function get() {
     setHtml("list", ls);
     var st = ""
     st += zf(Math.abs(rn.getHours() - end.getHours()) - 1) + ":";
-    st += zf(Math.abs(rn.getMinutes() - end.getMinutes()) - 1) + ":";
-    st += zf(Math.abs(rn.getSeconds() - end.getSeconds()) - 1);
+    st += zf(59 - Math.abs(rn.getMinutes() - end.getMinutes())) + ":";
+    st += zf(59 - Math.abs(rn.getSeconds() - end.getSeconds()));
     setHtml("time", st)
     setHtml("per", `${period} // ENDS AT ${zf(end.getHours())}:${zf(end.getMinutes())}`);
     var d = new Date;
