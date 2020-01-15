@@ -65,7 +65,7 @@ function get() {
 
     var ls = "";
     var now = Date.now()
-    for(var x of currentsched) {
+    for(var x ) {
         var per = x[0];
         var end = x[1];
         if(end - now >= 0) {
@@ -87,8 +87,8 @@ function get() {
     }
     setHtml("list", ls);
     var st = ""
-    st += zf(23 - Math.abs(end.getHours() - rn.getHours())) + ":";
-    st += zf(59 - Math.abs(end.getMinutes() - rn.getMinutes())) + ":";
+    st += zf(Math.abs(end.getHours() - rn.getHours())) + ":";
+    st += zf(Math.abs(end.getMinutes() - rn.getMinutes())) + ":";
     st += zf(59 - Math.abs(end.getSeconds() - rn.getSeconds()));
     setHtml("time", st)
     setHtml("per", `${period} // ENDS AT ${end.getHours()}:${end.getMinutes()}`);
