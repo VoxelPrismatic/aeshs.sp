@@ -68,7 +68,7 @@ function get() {
     for(var x of currentsched) {
         var per = x[0];
         var end = x[1];
-        if(!found && end - now >= 0) {
+        if(end - now >= 0) {
             var period = per;
             var rn = new Date();
             break;
