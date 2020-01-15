@@ -69,20 +69,20 @@ function get() {
         var per = x[0];
         var end = x[1];
         if(end - now >= 0) {
-            var period = per;
-            var rn = new Date();
-            break;
+            var line = per + " ";
+            while(line.length < 18)
+                line += "-";
+            line += " " + zf(end.getHours()) + ":" + zf(end.getMinutes());
+            ls += line + "<br>";
         }
     }
     for(var x of currentsched) {
         var per = x[0];
         var end = x[1];
         if(end - now >= 0) {
-            var line = per + " ";
-            while(line.length < 18)
-                line += "-";
-            line += " " + zf(end.getHours()) + ":" + zf(end.getMinutes());
-            ls += line + "<br>";
+            var period = per;
+            var rn = new Date();
+            break;
         }
     }
     setHtml("list", ls);
