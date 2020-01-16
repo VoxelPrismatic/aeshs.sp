@@ -24,7 +24,10 @@ function diff(t1) {
 function diffTime(a, b) {
     var tA = a.getSeconds() + 60 * a.getMinutes() + 60 * 60 + a.getHours();
     var tB = b.getSeconds() + 60 * b.getMinutes() + 60 * 60 + b.getHours();
-    var tD = -Math.abs(tA - tB);
+    var tD = tA - tB;
+    if(tD > 0)
+        tD = tB - tA;
+    tD = Math.abs(tD);
     console.log(tD);
     return tD;
 }
