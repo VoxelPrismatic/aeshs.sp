@@ -24,8 +24,9 @@ function diff(t1) {
 function diffTime(a, b) {
     var tA = a.getSeconds() + 60 * a.getMinutes() + 60 * 60 + a.getHours();
     var tB = b.getSeconds() + 60 * b.getMinutes() + 60 * 60 + b.getHours();
-    console.log(tA - tB);
-    return Math.abs(tA - tB);
+    var tD = -Math.abs(tA - tB);
+    console.log(tD);
+    return tD;
 }
 
 function zf(itm) {
