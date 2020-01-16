@@ -57,6 +57,24 @@ cat = {
     "summer": "SUMMER SCHEDULE - KINDA USELESS"
 }
 
+var colors = [
+    "00", "44", "88", "cc", "ff"
+];
+var i = 0;
+var st = "";
+for(var r of colors) {
+    for(var g of colors) {
+        for(var b of colors) {
+            if(i != 0 && i % 9 == 0)
+                st += "<br>";
+            st += `<span onclick="color(this.style.color)"`;
+            st += `style="color: #${r}${g}${b}ff;">[~]</span>`;
+            i += 1;
+        }
+    }
+}
+setHtml("clr", st);
+
 function get() {
     var currentsched = eval(findHtml("sched"));
     var cur = findHtml("typ").split("_")[0];
