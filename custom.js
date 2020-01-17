@@ -39,12 +39,22 @@ function sched(s) {
     get();
 }
 function color(s) {
+    var re = [
+        /^#[A-Fa-f0-9]{3}$/gm,
+        /^#[A-Fa-f0-9]{4}$/gm,
+        /^#[A-Fa-f0-9]{6}$/gm,
+        /^#[A-Fa-f0-9]{8}$/gm
+    ];
     if(s == "")
         return;
-    document.body.style.color = s;
-    gEDIT("color", s);
-    document.cookie=`color=${s}; expires=${gHTML("date")}`;
-    gSTYLE("customizer").color = s;
+    for(var r of re) {
+        if(s.replace(r, "") == "") {
+            document.body.style.color = s;
+            gEDIT("color", s);
+            document.cookie=`color=${s}; expires=${gHTML("date")}`;
+            gSTYLE("customizer").color = s;
+        }
+    }
 }
 function theme(s) {
     document.body.backgroundColor = s;
