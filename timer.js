@@ -112,6 +112,7 @@ function get() {
     setHtml("list", ls);
     var st = ""
     var tD = diffTime(rn, end);
+    console.log(tD);
     var hrs = 0;
     while(tD >= 3600) {
         tD -= 3600;
