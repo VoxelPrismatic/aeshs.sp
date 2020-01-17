@@ -21,9 +21,16 @@ function diff(t1) {
     return new Date(Date.now() - t1);
 }
 
-function diffTime(a, b) {
-    var tA = a.getSeconds() + 60 * a.getMinutes() + 60 * 60 + a.getHours();
-    var tB = b.getSeconds() + 60 * b.getMinutes() + 60 * 60 + b.getHours();
+function diffTime(a, b = 0) {
+    try {
+        var tA = a.getSeconds() + 60 * a.getMinutes() + 60 * 60 + a.getHours();
+    } catch(err) {
+        var tA = a;
+    } try {
+        var tB = b.getSeconds() + 60 * b.getMinutes() + 60 * 60 + b.getHours();
+    } catch(err) {
+        var tB = b;
+    }
     return Math.max(tA, tB) - Math.min(tA, tB);
 }
 
@@ -113,7 +120,7 @@ function get() {
     var st = ""
     var tD = diffTime(rn, end);
     console.log(tD);
-    console.log(diffTime(rn, 0) + " " + diffTime(end, 0));
+    console.log(diffTime(rn) + " " + diffTime(end));
     var hrs = 0;
     while(tD >= 3600) {
         tD -= 3600;
