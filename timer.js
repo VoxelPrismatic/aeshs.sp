@@ -21,17 +21,8 @@ function diff(t1) {
     return new Date(Date.now() - t1);
 }
 
-function diffTime(a, b = 0) {
-    try {
-        var tA = a.getSeconds() + 60 * a.getMinutes() + 60 * 60 + a.getHours();
-    } catch(err) {
-        var tA = a;
-    } try {
-        var tB = b.getSeconds() + 60 * b.getMinutes() + 60 * 60 + b.getHours();
-    } catch(err) {
-        var tB = b;
-    }
-    return Math.max(tA, tB) - Math.min(tA, tB);
+function diffTime(a, b = new Date(0)) {
+    return Math.round((Math.abs(a - b) / 1000), 0);
 }
 
 function zf(itm) {
@@ -119,8 +110,6 @@ function get() {
     setHtml("list", ls);
     var st = ""
     var tD = diffTime(rn, end);
-    console.log(tD);
-    console.log(diffTime(rn) + " " + diffTime(end));
     var hrs = 0;
     while(tD >= 3600) {
         tD -= 3600;
