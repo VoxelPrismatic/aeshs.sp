@@ -67,8 +67,11 @@
                   id="change" onload="wheme()">[LIGHT THEME]</span>
         </div>
         <div class="tC" onclick="find('clr').classList.toggle('inv');">
-            [TOGGLE COLORS]
-        </div>
+            COLOR ] 
+            <textarea style="background-color: #0000; width: 50vw; height: 5vw; color: inherit" 
+                      onkeyup="color(this.value)">
+                #00ffff
+            </textarea>
         <div class="tC inv" id="clr" style="font-size: small;">
         </div>
         <!-- CUSTOM SCHEDULES -->
