@@ -65,10 +65,10 @@ var st = "";
 for(var r of colors) {
     for(var g of colors) {
         for(var b of colors) {
-            if(i % 10 == 0)
+            if(i % 15 == 0)
                 st += "<br>";
             st += `<span onclick="color(this.style.color)"`;
-            st += `style="color: #${r}${g}${b}ff;">[~]</span>`;
+            st += `style="color: #${r}${g}${b}ff;">[~]</span> `;
             i += 1;
         }
     }
