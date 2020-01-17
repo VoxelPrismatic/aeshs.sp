@@ -113,6 +113,7 @@ function get() {
     var st = ""
     var tD = diffTime(rn, end);
     console.log(tD);
+    console.log(diffTime(rn, 0) + " " + diffTime(end, 0));
     var hrs = 0;
     while(tD >= 3600) {
         tD -= 3600;
