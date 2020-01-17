@@ -39,6 +39,8 @@ function sched(s) {
     get();
 }
 function color(s) {
+    if(s == "")
+        return;
     document.body.style.color = s;
     gEDIT("color", s);
     document.cookie=`color=${s}; expires=${gHTML("date")}`;
