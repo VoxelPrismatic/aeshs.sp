@@ -39,6 +39,8 @@ function sched(s) {
     get();
 }
 function color(s) {
+    s = s.strip();
+    gEDIT("colorswap", s);
     var re = [
         /^#[A-Fa-f0-9]{3}$/gm,
         /^#[A-Fa-f0-9]{4}$/gm,
