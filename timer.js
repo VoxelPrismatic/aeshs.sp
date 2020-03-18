@@ -17,7 +17,7 @@ var cookie = document.cookie;
 if(find_cookie("theme") == "light") {
     theme("#ccddddff");
 }
-setHtml("sched", find_cookie("sched") || "norm");
+setHtml("typ", find_cookie("sched") || "norm");
 document.body.style.color = find_cookie("color") || "#00ffff";
 
 try {
@@ -80,7 +80,7 @@ function get() {
     setHtml("sched", findHtml(typ));
     setHtml("prt", cat[typ]);
     
-    document.cookie = `sched=${typ};`;
+    document.cookie = `sched=${findHtml("typ")};`;
     document.cookie = `color=${document.body.style.color};`;
     document.cookie = `path=/`;
     if(document.body.style.backgroundColor == "rgb(17, 34, 34)") {
