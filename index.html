@@ -281,7 +281,39 @@
     <div class="inv" id="color"></div>
     <!-- SCRIPTS -->
     <div id="noscript" style="display: block;">
-      <h1>NORMAL SCHEDULE</h1>
+      <h1>JUMP TO SCHEDULE</h1>
+      <table>
+        <tr><th>Full periods</th><th>Half periods</th></tr>
+        <tr>
+          <td><a href="#NORMAL">NORMAL</a></td>
+          <td><a href="#NORMAL+HALF">&nbsp; + HALF</a></td>
+        </tr><tr>
+          <td><a href="#ACTIVITY">ACTIVITY</a></td>
+          <td><a href="#ACTIVITY+HALF">&nbsp; + HALF</a></td>
+        </tr><tr>
+          <td><a href="#PM-">PM ASSEMBLY</a></td>
+          <td><a href="#PM+HALF">&nbsp; + HALF</a></td>
+        </tr><tr>
+          <td><a href="#ODYSSEY">ODYSSEY</a></td>
+          <td>&nbsp; -</td>
+        </tr><tr>
+          <td><a href="#LATE-">LATE</a></td>
+          <td>&nbsp; -</td>
+        </tr><tr>
+          <td><a href="#FDAY1">FINALS 1</a></td>
+          <td>&nbsp; -</td>
+        </tr><tr>
+          <td><a href="#FDAY2">FINALS 2</a></td>
+          <td>&nbsp; -</td>
+        </tr><tr>
+          <td><a href="#FDAY3">FINALS 3</a></td>
+          <td>&nbsp; -</td>
+        </tr><tr>
+          <td><a href="#EARLY-">EARLY</a></td>
+          <td><a href="#EARLY+HALF">&nbsp; + HALF</a></td>
+        </tr>
+      </table>
+      <h1 id="NORMAL">NORMAL SCHEDULE</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -304,7 +336,7 @@
         <tr><td>PERIOD 8</td><td>15:25:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>NORMAL SCHEDULE - HALF PERIODS</h1>
+      <h1 id="NORMAL+HALF">NORMAL SCHEDULE - HALF PERIODS</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -343,7 +375,7 @@
         <tr><td>PERIOD 8B</td><td>15:25:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>ACTIVITY PERIOD SCHEDULE</h1>
+      <h1 id="ACTIVITY">ACTIVITY PERIOD SCHEDULE</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -368,7 +400,7 @@
         <tr><td>PERIOD 8</td><td>15:25:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>ACTIVITY PERIOD SCHEDULE - HALF PERIODS</h1>
+      <h1 id="ACTIVITY+HALF">ACTIVITY PERIOD SCHEDULE - HALF PERIODS</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -409,7 +441,7 @@
         <tr><td>PERIOD 8B</td><td>15:25:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>PM ASSEMBLY SCHEDULE</h1>
+      <h1 id="PM-">PM ASSEMBLY SCHEDULE</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -434,7 +466,7 @@
         <tr><td>ASSEMBLY</td><td>15:25:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>PM ASSEMBLY SCHEDULE - HALF PERIODS</h1>
+      <h1 id="PM+HALF">PM ASSEMBLY SCHEDULE - HALF PERIODS</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -475,7 +507,7 @@
         <tr><td>ASSEMBLY</td><td>15:25:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>ODYSSEY SCHEDULE</h1>
+      <h1 id="ODYSSEY">ODYSSEY SCHEDULE</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>ODYSSEY STARTS</td><td>10:15:00</td></tr>
@@ -492,7 +524,7 @@
         <tr><td>ODYSSEY 5</td><td>15:25:00</td></tr>
         <tr><td>ODYSSEY/SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>LATE ARRIVAL SCHEDULE</h1>
+      <h1 id="LATE-">LATE ARRIVAL SCHEDULE</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>09:30:00</td></tr>
@@ -515,7 +547,7 @@
         <tr><td>PERIOD 8</td><td>15:25:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>FINALS DAY 1 SCHEDULE</h1>
+      <h1 id="FDAY1">FINALS DAY 1 SCHEDULE</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -528,7 +560,7 @@
         <tr><td>PERIOD 4</td><td>13:20:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>FINALS DAY 2 SCHEDULE</h1>
+      <h1 id="FDAY2">FINALS DAY 2 SCHEDULE</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -541,7 +573,7 @@
         <tr><td>PERIOD 5</td><td>13:20:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>FINALS DAY 3 SCHEDULE</h1>
+      <h1 id="FDAY3">FINALS DAY 3 SCHEDULE</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -554,7 +586,7 @@
         <tr><td>MAKEUPS</td><td>13:20:00</td></tr>
         <tr><td>SEMESTER IS OVER, GG M8</td><td>23:59:59</td></tr>
       </table>
-      <h1>EARLY DISMISSAL SCHEDULE</h1>
+      <h1 id="EARLY-">EARLY DISMISSAL SCHEDULE</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -577,7 +609,7 @@
         <tr><td>PERIOD 8</td><td>15:37:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>EARLY DISMISSAL SCHEDULE - HALF PERIODS</h1>
+      <h1 id="EARLY+HALF">EARLY DISMISSAL SCHEDULE - HALF PERIODS</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
@@ -616,7 +648,7 @@
         <tr><td>PERIOD 8B</td><td>14:37:00</td></tr>
         <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
       </table>
-      <h1>SUMMER SCHEDULE - KINDA USELESS</h1>
+      <h1 id="SUMMER-">SUMMER SCHEDULE - KINDA USELESS</h1>
       <table>
         <tr><th>Period</th><th>Ending Time</th></tr>
         <tr><td>SCHOOL STARTS</td><td>07:40:00</td></tr>
