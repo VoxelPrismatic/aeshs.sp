@@ -77,8 +77,6 @@
                 </textarea>
             </div>
         </div>
-        <div id="noscript" style="display: block;">
-        </div>
         <!-- CUSTOM SCHEDULES -->
         <div class="inv" id="custom0"></div>
         <div class="inv" id="custom1"></div>
@@ -92,9 +90,6 @@
         <div class="inv" id="custom9"></div>
         <textarea class="inv" id="customizer" onload="textareaTheme()"></textarea>
         <!-- ACTUAL SCHEDULES -->
-        <noscript>
-            Sorry, scripts are needed here
-        </noscript>
         <div class="inv" id="norm">
             [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
              ["PASSING TO 1",  time(8,30)],  ["PERIOD 1",   time(9,21)],
@@ -284,56 +279,1258 @@
         <div class="inv" id="custom"></div>
         <div class="inv" id="color"></div>
         <!-- SCRIPTS -->
-        <script type="text/javascript">
-            // Used for old phones and things like that 
-            function time(hr = 0, mn = 0, sc = 0) {
-                var st = "";
-                if(hr < 10)
-                    st += "0";
-                st += hr + ":";
-                if(mn < 10)
-                    st += "0";
-                st += mn + ":";
-                if(sc < 10)
-                    st += "0";
-                st += sc;
-                return st;
-            }
-            var cats = {
-                "norm": "NORMAL SCHEDULE",
-                "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
-                "act": "ACTIVITY PERIOD SCHEDULE",
-                "act_half": "ACTIVITY PERIOD SCHEDULE - HALF PERIODS",  
-                "pm": "PM ASSEMBLY SCHEDULE",
-                "pm_half": "PM ASSEMBLY SCHEDULE - HALF PERIODS",
-                "odd": "ODYSSEY SCHEDULE",
-                "late": "LATE ARRIVAL SCHEDULE",
-                "final1": "FINALS DAY 1 SCHEDULE",
-                "final2": "FINALS DAY 2 SCHEDULE",
-                "final3": "FINALS DAY 3 SCHEDULE",
-                "early": "EARLY DISMISSAL SCHEDULE",
-                "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
-                "summer": "SUMMER SCHEDULE - KINDA USELESS"
-            }
-            var noscript = document.getElementById("noscript");
-            for(var key of cats.constructor.keys(cats)) {
-                var header = document.createElement("H1");
-                var text = document.createTextNode(cats[key]);
-                header.appendChild(text);
-                noscript.appendChild(header);
-                for(var cls of eval(document.getElementById(key).innerHTML)) {
-                    var div = document.createElement("DIV");
-                    var bit = document.createTextNode(cls[0] + " --- " + cls[1]);
-                    div.appendChild(bit);
-                    noscript.appendChild(bit);
-                    noscript.appendChild(document.createElement("BR"));
-                }
-            }
-        </script>
         <!--<script src="sched.js" type="text/javascript"></script>-->
         <script src="finder.js" type="text/javascript"></script>
         <script src="custom.js" type="text/javascript"></script>
         <script src="timer.js" type="text/javascript"></script>
         <script src="custom.js" type="text/javascript"></script>
+        <div id="noscript" style="display: block;">
+            <h1>NORMAL SCHEDULE</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1</td>
+                    <td>09:21:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2</td>
+                    <td>09:26:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2</td>
+                    <td>10:13:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3</td>
+                    <td>10:18:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3</td>
+                    <td>11:05:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4</td>
+                    <td>11:10:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4</td>
+                    <td>11:57:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5</td>
+                    <td>12:02:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5</td>
+                    <td>12:49:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6</td>
+                    <td>12:54:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6</td>
+                    <td>13:41:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7</td>
+                    <td>13:46:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7</td>
+                    <td>14:33:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8</td>
+                    <td>14:38:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8</td>
+                    <td>15:25:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>NORMAL SCHEDULE - HALF PERIODS</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1A</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1A</td>
+                    <td>08:54:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1B</td>
+                    <td>09:01:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1B</td>
+                    <td>09:21:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2A</td>
+                    <td>09:26:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2A</td>
+                    <td>09:46:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2B</td>
+                    <td>09:53:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2B</td>
+                    <td>10:13:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3A</td>
+                    <td>10:18:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3A</td>
+                    <td>10:38:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3B</td>
+                    <td>10:45:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3B</td>
+                    <td>11:05:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4A</td>
+                    <td>11:10:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4A</td>
+                    <td>11:30:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4B</td>
+                    <td>11:37:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4B</td>
+                    <td>11:57:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5A</td>
+                    <td>12:02:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5A</td>
+                    <td>12:22:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5B</td>
+                    <td>12:29:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5B</td>
+                    <td>12:49:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6A</td>
+                    <td>12:54:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6A</td>
+                    <td>13:14:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6B</td>
+                    <td>13:21:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6B</td>
+                    <td>13:41:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7A</td>
+                    <td>13:46:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7A</td>
+                    <td>14:06:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7B</td>
+                    <td>14:13:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7B</td>
+                    <td>14:33:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8A</td>
+                    <td>14:38:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8A</td>
+                    <td>14:58:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8B</td>
+                    <td>15:05:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8B</td>
+                    <td>15:25:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>ACTIVITY PERIOD SCHEDULE</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1</td>
+                    <td>09:15:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2</td>
+                    <td>09:20:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2</td>
+                    <td>10:01:00</td>
+                </tr>
+                <tr>
+                    <td>GO TO ACTIVITY</td>
+                    <td>10:06:00</td>
+                </tr>
+                <tr>
+                    <td>ACTIVITY</td>
+                    <td>10:49:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3</td>
+                    <td>10:54:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3</td>
+                    <td>11:35:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4</td>
+                    <td>11:40:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4</td>
+                    <td>12:21:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5</td>
+                    <td>12:26:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5</td>
+                    <td>13:07:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6</td>
+                    <td>13:12:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6</td>
+                    <td>13:53:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7</td>
+                    <td>13:58:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7</td>
+                    <td>14:39:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8</td>
+                    <td>14:55:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8</td>
+                    <td>15:25:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>ACTIVITY PERIOD SCHEDULE - HALF PERIODS</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1A</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1A</td>
+                    <td>08:21:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1B</td>
+                    <td>08:58:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1B</td>
+                    <td>09:15:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2A</td>
+                    <td>09:20:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2A</td>
+                    <td>09:37:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2B</td>
+                    <td>09:44:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2B</td>
+                    <td>10:01:00</td>
+                </tr>
+                <tr>
+                    <td>GO TO ACTIVITY</td>
+                    <td>10:06:00</td>
+                </tr>
+                <tr>
+                    <td>ACTIVITY</td>
+                    <td>10:49:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3A</td>
+                    <td>10:54:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3A</td>
+                    <td>11:11:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3B</td>
+                    <td>11:18:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3B</td>
+                    <td>11:35:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4A</td>
+                    <td>11:40:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4A</td>
+                    <td>11:57:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4B</td>
+                    <td>12:04:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4B</td>
+                    <td>12:21:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5A</td>
+                    <td>12:26:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5A</td>
+                    <td>12:43:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5B</td>
+                    <td>12:50:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5B</td>
+                    <td>13:07:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6A</td>
+                    <td>13:12:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6A</td>
+                    <td>13:29:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6B</td>
+                    <td>13:36:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6B</td>
+                    <td>13:53:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7A</td>
+                    <td>13:58:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7A</td>
+                    <td>14:15:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7B</td>
+                    <td>14:22:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7B</td>
+                    <td>14:39:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8A</td>
+                    <td>14:44:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8A</td>
+                    <td>15:01:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8B</td>
+                    <td>15:08:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8B</td>
+                    <td>15:25:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>PM ASSEMBLY SCHEDULE</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1</td>
+                    <td>09:15:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2</td>
+                    <td>09:20:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2</td>
+                    <td>10:01:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3</td>
+                    <td>10:06:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3</td>
+                    <td>10:47:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4</td>
+                    <td>10:52:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4</td>
+                    <td>11:33:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5</td>
+                    <td>11:38:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5</td>
+                    <td>12:19:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6</td>
+                    <td>12:24:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6</td>
+                    <td>13:05:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7</td>
+                    <td>13:10:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7</td>
+                    <td>13:51:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8</td>
+                    <td>13:56:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8</td>
+                    <td>14:37:00</td>
+                </tr>
+                <tr>
+                    <td>GO TO ASSEMBLY</td>
+                    <td>14:42:00</td>
+                </tr>
+                <tr>
+                    <td>ASSEMBLY</td>
+                    <td>15:25:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>PM ASSEMBLY SCHEDULE - HALF PERIODS</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1A</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1A</td>
+                    <td>08:51:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1B</td>
+                    <td>09:01:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1B</td>
+                    <td>09:15:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2A</td>
+                    <td>09:20:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2A</td>
+                    <td>09:37:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2B</td>
+                    <td>09:44:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2B</td>
+                    <td>10:01:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3A</td>
+                    <td>10:06:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3A</td>
+                    <td>10:23:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3B</td>
+                    <td>10:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3B</td>
+                    <td>10:37:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4A</td>
+                    <td>10:52:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4A</td>
+                    <td>11:09:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4B</td>
+                    <td>11:16:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4B</td>
+                    <td>11:33:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5A</td>
+                    <td>11:38:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5A</td>
+                    <td>11:55:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5B</td>
+                    <td>12:02:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5B</td>
+                    <td>12:19:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6A</td>
+                    <td>12:24:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6A</td>
+                    <td>12:41:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6B</td>
+                    <td>12:48:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6B</td>
+                    <td>13:05:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7A</td>
+                    <td>13:10:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7A</td>
+                    <td>13:27:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7B</td>
+                    <td>13:34:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7B</td>
+                    <td>13:51:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8A</td>
+                    <td>13:56:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8A</td>
+                    <td>14:13:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8B</td>
+                    <td>14:20:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8B</td>
+                    <td>14:37:00</td>
+                </tr>
+                <tr>
+                    <td>GO TO ASSEMBLY</td>
+                    <td>14:42:00</td>
+                </tr>
+                <tr>
+                    <td>ASSEMBLY</td>
+                    <td>15:25:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>ODYSSEY SCHEDULE</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>ODYSSEY STARTS</td>
+                    <td>10:15:00</td>
+                </tr>
+                <tr>
+                    <td>HOMEROOM [P2]</td>
+                    <td>10:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1</td>
+                    <td>10:35:00</td>
+                </tr>
+                <tr>
+                    <td>ODYSSEY 1</td>
+                    <td>11:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2</td>
+                    <td>11:35:00</td>
+                </tr>
+                <tr>
+                    <td>ODYSSEY 2</td>
+                    <td>12:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3</td>
+                    <td>12:35:00</td>
+                </tr>
+                <tr>
+                    <td>ODYSSEY 3</td>
+                    <td>13:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4</td>
+                    <td>13:35:00</td>
+                </tr>
+                <tr>
+                    <td>ODYSSEY 4</td>
+                    <td>14:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5</td>
+                    <td>14:35:00</td>
+                </tr>
+                <tr>
+                    <td>ODYSSEY 5</td>
+                    <td>15:25:00</td>
+                </tr>
+                <tr>
+                    <td>ODYSSEY/SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>LATE ARRIVAL SCHEDULE</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>09:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>10:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1</td>
+                    <td>10:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1</td>
+                    <td>11:05:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2</td>
+                    <td>11:10:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2</td>
+                    <td>11:40:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3</td>
+                    <td>11:45:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3</td>
+                    <td>12:15:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4</td>
+                    <td>12:20:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4</td>
+                    <td>12:55:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5</td>
+                    <td>13:00:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5</td>
+                    <td>13:35:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6</td>
+                    <td>13:40:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6</td>
+                    <td>14:15:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7</td>
+                    <td>14:20:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7</td>
+                    <td>14:50:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8</td>
+                    <td>14:44:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8</td>
+                    <td>15:25:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>FINALS DAY 1 SCHEDULE</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1</td>
+                    <td>10:00:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2</td>
+                    <td>10:10:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2</td>
+                    <td>11:40:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4</td>
+                    <td>11:50:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4</td>
+                    <td>13:20:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>FINALS DAY 2 SCHEDULE</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3</td>
+                    <td>10:00:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7</td>
+                    <td>10:10:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7</td>
+                    <td>11:40:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5</td>
+                    <td>11:50:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5</td>
+                    <td>13:20:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>FINALS DAY 3 SCHEDULE</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8</td>
+                    <td>10:00:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6</td>
+                    <td>10:10:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6</td>
+                    <td>11:40:00</td>
+                </tr>
+                <tr>
+                    <td>GO TO MAKEUPS</td>
+                    <td>11:50:00</td>
+                </tr>
+                <tr>
+                    <td>MAKEUPS</td>
+                    <td>13:20:00</td>
+                </tr>
+                <tr>
+                    <td>SEMESTER IS OVER, GG M8</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>EARLY DISMISSAL SCHEDULE</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1</td>
+                    <td>09:15:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2</td>
+                    <td>09:20:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2</td>
+                    <td>10:01:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3</td>
+                    <td>10:06:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3</td>
+                    <td>10:47:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4</td>
+                    <td>10:52:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4</td>
+                    <td>11:33:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5</td>
+                    <td>11:38:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5</td>
+                    <td>12:19:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6</td>
+                    <td>12:24:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6</td>
+                    <td>13:05:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7</td>
+                    <td>13:10:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7</td>
+                    <td>13:51:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8</td>
+                    <td>13:56:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8</td>
+                    <td>15:37:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>EARLY DISMISSAL SCHEDULE - HALF PERIODS</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:30:00</td>
+                </tr>
+                <tr>
+                    <td>EARLY BIRD</td>
+                    <td>08:25:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1A</td>
+                    <td>08:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1A</td>
+                    <td>08:51:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 1B</td>
+                    <td>08:58:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 1B</td>
+                    <td>09:15:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2A</td>
+                    <td>09:20:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2A</td>
+                    <td>09:37:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 2B</td>
+                    <td>09:44:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 2B</td>
+                    <td>10:01:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3A</td>
+                    <td>10:06:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3A</td>
+                    <td>10:23:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 3B</td>
+                    <td>10:30:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 3B</td>
+                    <td>10:47:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4A</td>
+                    <td>10:42:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4A</td>
+                    <td>11:09:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 4B</td>
+                    <td>11:16:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 4B</td>
+                    <td>11:33:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5A</td>
+                    <td>11:38:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5A</td>
+                    <td>11:55:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 5B</td>
+                    <td>12:02:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 5B</td>
+                    <td>12:19:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6A</td>
+                    <td>12:24:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6A</td>
+                    <td>12:41:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 6B</td>
+                    <td>12:48:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 6B</td>
+                    <td>13:05:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7A</td>
+                    <td>13:10:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7A</td>
+                    <td>13:27:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 7B</td>
+                    <td>13:34:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 7B</td>
+                    <td>13:51:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8A</td>
+                    <td>13:56:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8A</td>
+                    <td>14:13:00</td>
+                </tr>
+                <tr>
+                    <td>PASSING TO 8B</td>
+                    <td>14:20:00</td>
+                </tr>
+                <tr>
+                    <td>PERIOD 8B</td>
+                    <td>14:37:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+            <h1>SUMMER SCHEDULE - KINDA USELESS</h1>
+            <table>
+                <tr>
+                    <th>Period</th>
+                    <th>Time</th>
+                </tr>
+                <tr>
+                    <td>SCHOOL STARTS</td>
+                    <td>07:40:00</td>
+                </tr>
+                <tr>
+                    <td>GO TO CLASS</td>
+                    <td>07:45:00</td>
+                </tr>
+                <tr>
+                    <td>SUMMER SCHOOL</td>
+                    <td>12:59:00</td>
+                </tr>
+                <tr>
+                    <td>SCHOOL IS TMO</td>
+                    <td>23:59:59</td>
+                </tr>
+            </table>
+        </div>
     </body>
 </html>
