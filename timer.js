@@ -36,6 +36,7 @@ cat = {
     "act_half": "ACTIVITY PERIOD SCHEDULE - HALF PERIODS",  
     "pm": "PM ASSEMBLY SCHEDULE",
     "pm_half": "PM ASSEMBLY SCHEDULE - HALF PERIODS",
+    "odd": "ODYSSEY SCHEDULE",
     "late": "LATE ARRIVAL SCHEDULE",
     "final1": "FINALS DAY 1 SCHEDULE",
     "final2": "FINALS DAY 2 SCHEDULE",
