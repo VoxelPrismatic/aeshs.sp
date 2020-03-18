@@ -10,6 +10,11 @@ function gSTYLE(st) {
 function gEDIT(st, val) {
     gID(st).innerHTML = val;
 }
+function nextYear() {
+    var inAYear = new Date();
+    inAYear.setFullYear(inAYear.getFullYear() + 1);
+    return inAYear.toDateString();
+}
 function sched(s) {
     if (s == "half") {
         if (gHTML("half") == "True") {
@@ -37,12 +42,6 @@ function sched(s) {
         }
     }
     get();
-}
-function nextYear() {
-    var inAYear = Date.now();
-    inAYear += 60 * 60 * 24 * 365 * 1000;
-    inAYear = Date(inAYear);
-    return inAYear.toString();
 }
 function color(s) {
     s = s.trim();
