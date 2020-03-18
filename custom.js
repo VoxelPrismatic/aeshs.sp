@@ -15,6 +15,13 @@ function nextYear() {
     inAYear.setFullYear(inAYear.getFullYear() + 1);
     return inAYear.toDateString();
 }
+function time(hr = 0, mn = 0, sc = 0) {
+    var now = new Date();
+    now.setHours(hr);
+    now.setMinutes(mn);
+    now.setSeconds(sc);
+    return now;
+}
 function sched(s) {
     if (s == "half") {
         if (gHTML("half") == "True") {
