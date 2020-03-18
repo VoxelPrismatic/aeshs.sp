@@ -321,7 +321,7 @@
                 var text = document.createTextNode(cat[key]);
                 header.appendChild(text);
                 noscript.appendChild(header);
-                for(var cls of eval(document.getElementById(key))) {
+                for(var cls of eval(document.getElementById(key).innerHTML)) {
                     var div = document.createTextElement("DIV");
                     var bit = document.createTextNode(cls[0] + " --- " + cls[1]);
                     div.appendChild(bit);
