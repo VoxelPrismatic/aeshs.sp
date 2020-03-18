@@ -140,4 +140,6 @@ setHtml("time", "-~-");
 if(!findHtml("sched"))
     setHtml("sched", findHtml("norm"));
 window.setInterval(get, 1000);
+find("block").style.display = "block";
+find("noscript").style.display = "none";
 get();
