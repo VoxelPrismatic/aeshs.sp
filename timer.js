@@ -65,7 +65,17 @@ function get() {
     setHtml("typ", typ);
     setHtml("sched", findHtml(typ));
     setHtml("prt", cat[typ]);
-    document.cookie = `sched=${typ}; path=/`;
+    
+    document.cookie = `sched=${typ};`;
+    document.cookie = `color=${document.body.style.color};`;
+    document.cookie = `path=/`;
+    if(document.body.style.backgroundColor == "rgb(17, 34, 34)") {
+        document.cookie = `theme=dark`;
+    } else {
+        document.cookie = `theme=light`;
+    }
+    document.cookie = `expires=${nextYear()}`;
+    
     currentsched = eval(findHtml("sched"));
 
     var ls = "";
