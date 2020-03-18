@@ -20,14 +20,6 @@ if(find_cookie("theme") == "light") {
 setHtml("sched", find_cookie("sched") || "norm");
 document.body.style.color = find_cookie("color") || "#00ffff";
 
-function time(hr = 0, mn = 0, sc = 0) {
-    var now = new Date();
-    now.setHours(hr);
-    now.setMinutes(mn);
-    now.setSeconds(sc);
-    return now;
-}
-
 try {
     sched = eval(findHtml("sched"));
 } catch(err) {
