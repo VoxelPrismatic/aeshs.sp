@@ -299,7 +299,7 @@
                 st += sc;
                 return st;
             }
-            var cat = {
+            var cats = {
                 "norm": "NORMAL SCHEDULE",
                 "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
                 "act": "ACTIVITY PERIOD SCHEDULE",
@@ -316,16 +316,17 @@
                 "summer": "SUMMER SCHEDULE - KINDA USELESS"
             }
             var noscript = document.getElementById("noscript");
-            for(var key of cat.constructor.keys(cat)) {
+            for(var key of cats.constructor.keys(cats)) {
                 var header = document.createElement("H1");
-                var text = document.createTextNode(cat[key]);
+                var text = document.createTextNode(cats[key]);
                 header.appendChild(text);
                 noscript.appendChild(header);
                 for(var cls of eval(document.getElementById(key).innerHTML)) {
-                    var div = document.createTextElement("DIV");
+                    var div = document.createElement("DIV");
                     var bit = document.createTextNode(cls[0] + " --- " + cls[1]);
                     div.appendChild(bit);
                     noscript.appendChild(bit);
+                    noscript.appendChild(document.createElement("BR"));
                 }
             }
         </script>
