@@ -27,53 +27,57 @@
         </style>
     </head>
     <body style="color: #00ffffff; background-color: #112222ff;">
-        <div id="time" class="tC" style="font-size: 18vw;">
-            ~
+        <div id="block" style="display: none;">
+            <div id="time" class="tC" style="font-size: 18vw;">
+                ~
+            </div>
+            <div id="per" class="tC" style="font-size: 4vw;">PERIOD 0 // 00:00:00</div>
+            <div id="prt" class="tC" style="font-size: 2vw;">UNKNOWN SCHEDULE</div>
+            <div id="status"></div>
+            <div id="list" class="tL" style="width: 80vw; font-size: smaller;">LOADING SCHEDULE</div>
+            <!-- BUTTONS -->
+            <div class="tC">
+                <span onclick="sched('half')" id="toggle">[HALF PERIODS]</span>
+                <span onclick="sched('norm')">[NORMAL]</span>
+                <span onclick="sched('late')">[LATE ARRIVAL]</span>
+                <span onclick="sched('act')">[ACTIVITY PERIOD]</span>
+                <span onclick="sched('pm')">[PM ASSEMBLY]</span>
+                <span onclick="sched('summer')">[SUMMER]</span>
+            </div>
+            <div class="tC">
+                <span onclick="sched('early')">[EARLY DISMISSAL]</span>
+                <span onclick="sched('final1')">[FINALS DAY 1]</span>
+                <span onclick="sched('final2')">[FINALS DAY 2]</span>
+                <span onclick="sched('final3')">[FINALS DAY 3]</span>
+                <span onclick="sched('odd')">[ODYSSEY]</span>
+            </div>
+            <!-- IDK how to have custom schedules yet
+            <div class="tC">
+                <span onclick="sched('custom0')">[CUSTOM 0]</span>
+                <span onclick="sched('custom1')">[CUSTOM 1]</span>
+                <span onclick="sched('custom2')">[CUSTOM 2]</span>
+                <span onclick="sched('custom3')">[CUSTOM 3]</span>
+                <span onclick="sched('custom4')">[CUSTOM 4]</span>
+            </div>
+            <div class="tC">
+                <span onclick="sched('custom5')">[CUSTOM 5]</span>
+                <span onclick="sched('custom6')">[CUSTOM 6]</span>
+                <span onclick="sched('custom7')">[CUSTOM 7]</span>
+                <span onclick="sched('custom8')">[CUSTOM 8]</span>
+                <span onclick="sched('custom9')">[CUSTOM 9]</span>
+            </div> -->
+            <div class="tC">
+                <span onclick="theme('#ccddddff')" style="color: #ccddddff;" 
+                    id="change" onload="wheme()">[LIGHT THEME]</span>
+            </div>
+            <div class="tC">
+                COLOR [HEX]<br>
+                <textarea id="colorswap" rows="1" cols="12" onkeyup="color(this.value)">
+                    #00ffff
+                </textarea>
+            </div>
         </div>
-        <div id="per" class="tC" style="font-size: 4vw;">PERIOD 0 // 00:00:00</div>
-        <div id="prt" class="tC" style="font-size: 2vw;">UNKNOWN SCHEDULE</div>
-        <div id="status"></div>
-        <div id="list" class="tL" style="width: 80vw; font-size: smaller;">LOADING SCHEDULE</div>
-        <!-- BUTTONS -->
-        <div class="tC">
-            <span onclick="sched('half')" id="toggle">[HALF PERIODS]</span>
-            <span onclick="sched('norm')">[NORMAL]</span>
-            <span onclick="sched('late')">[LATE ARRIVAL]</span>
-            <span onclick="sched('act')">[ACTIVITY PERIOD]</span>
-            <span onclick="sched('pm')">[PM ASSEMBLY]</span>
-            <span onclick="sched('summer')">[SUMMER]</span>
-        </div>
-        <div class="tC">
-            <span onclick="sched('early')">[EARLY DISMISSAL]</span>
-            <span onclick="sched('final1')">[FINALS DAY 1]</span>
-            <span onclick="sched('final2')">[FINALS DAY 2]</span>
-            <span onclick="sched('final3')">[FINALS DAY 3]</span>
-            <span onclick="sched('odd')">[ODYSSEY]</span>
-        </div>
-        <!-- IDK how to have custom schedules yet
-        <div class="tC">
-            <span onclick="sched('custom0')">[CUSTOM 0]</span>
-            <span onclick="sched('custom1')">[CUSTOM 1]</span>
-            <span onclick="sched('custom2')">[CUSTOM 2]</span>
-            <span onclick="sched('custom3')">[CUSTOM 3]</span>
-            <span onclick="sched('custom4')">[CUSTOM 4]</span>
-        </div>
-        <div class="tC">
-            <span onclick="sched('custom5')">[CUSTOM 5]</span>
-            <span onclick="sched('custom6')">[CUSTOM 6]</span>
-            <span onclick="sched('custom7')">[CUSTOM 7]</span>
-            <span onclick="sched('custom8')">[CUSTOM 8]</span>
-            <span onclick="sched('custom9')">[CUSTOM 9]</span>
-        </div> -->
-        <div class="tC">
-            <span onclick="theme('#ccddddff')" style="color: #ccddddff;" 
-                  id="change" onload="wheme()">[LIGHT THEME]</span>
-        </div>
-        <div class="tC">
-            COLOR [HEX]<br>
-            <textarea id="colorswap" rows="1" cols="12" onkeyup="color(this.value)">
-                #00ffff
-            </textarea>
+        <div id="noscript" style="display: block;">
         </div>
         <!-- CUSTOM SCHEDULES -->
         <div class="inv" id="custom0"></div>
@@ -271,7 +275,6 @@
         </div>
         <div class="inv" id="sched"></div>
         <!-- REGISTERS -->
-        <!-- used so py can talk to js -->
         <div class="inv" id="typ">norm</div>
         <div class="inv" id="half">False</div>
         <div class="inv" id="cookie"></div>
@@ -281,6 +284,51 @@
         <div class="inv" id="custom"></div>
         <div class="inv" id="color"></div>
         <!-- SCRIPTS -->
+        <script type="text/javascript">
+            // Used for old phones and things like that 
+            function time(hr = 0, mn = 0, sc = 0) {
+                var st = "";
+                if(hr < 10)
+                    st += "0";
+                st += hr + ":";
+                if(mn < 10)
+                    st += "0";
+                st += mn + ":";
+                if(sc < 10)
+                    st += "0";
+                st += sc;
+                return st;
+            }
+            var cat = {
+                "norm": "NORMAL SCHEDULE",
+                "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
+                "act": "ACTIVITY PERIOD SCHEDULE",
+                "act_half": "ACTIVITY PERIOD SCHEDULE - HALF PERIODS",  
+                "pm": "PM ASSEMBLY SCHEDULE",
+                "pm_half": "PM ASSEMBLY SCHEDULE - HALF PERIODS",
+                "odd": "ODYSSEY SCHEDULE",
+                "late": "LATE ARRIVAL SCHEDULE",
+                "final1": "FINALS DAY 1 SCHEDULE",
+                "final2": "FINALS DAY 2 SCHEDULE",
+                "final3": "FINALS DAY 3 SCHEDULE",
+                "early": "EARLY DISMISSAL SCHEDULE",
+                "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
+                "summer": "SUMMER SCHEDULE - KINDA USELESS"
+            }
+            var noscript = document.getElementById("noscript");
+            for(var key of cat.constructor.keys(cat)) {
+                var header = document.createElement("H1");
+                var text = document.createTextNode(cat[key]);
+                header.appendChild(text);
+                noscript.appendChild(header);
+                for(var cls of eval(document.getElementById(key))) {
+                    var div = document.createTextElement("DIV");
+                    var bit = document.createTextNode(cls[0] + " --- " + cls[1]);
+                    div.appendChild(bit);
+                    noscript.appendChild(bit);
+                }
+            }
+        </script>
         <!--<script src="sched.js" type="text/javascript"></script>-->
         <script src="finder.js" type="text/javascript"></script>
         <script src="custom.js" type="text/javascript"></script>
