@@ -26,7 +26,7 @@ try {
 
 for(var typ of "0123456789") {
     if(!find_cookie("custom" + typ))
-        document.cookie = `custom${typ}=end|23:59:59`
+        document.cookie = `custom${typ}=end|23:59:59`;
     customSchedule(find_cookie("custom" + typ).replace(/ /gm, "\n"), "custom" + typ);
 }
 
@@ -46,7 +46,7 @@ function zf(itm) {
     return String(itm).padStart(2, "0");
 }
 
-cat = {
+let cat_ = {
     "norm": "NORMAL SCHEDULE",
     "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
     "act": "ACTIVITY PERIOD SCHEDULE",
@@ -81,7 +81,7 @@ function get() {
         typ += "_half";
     setHtml("typ", typ);
     setHtml("sched", findHtml(typ));
-    setHtml("prt", cat[typ]);
+    setHtml("prt", cat_[typ]);
     
     document.cookie = `sched=${findHtml("typ")};`;
     document.cookie = `color=${find("colorswap").value};`;
