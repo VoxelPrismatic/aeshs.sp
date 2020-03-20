@@ -146,3 +146,19 @@ function changer(str, itm) {
     document.cookie="expires="+nextYear();
     document.cookie="path=/";
 }
+
+
+function customSchedule(txt) {
+    var custom = "[";
+    for(var period of txt.split("\n")) {
+        var p = "";
+        if(period.includes("|")) {
+            p += "[\"" + period.split("|")[0].strip() + "\",";
+            p += `time(${period.split("|")[1].split(":")[0].strip()},`;
+            p += `${period.split("|")[1].split(":")[0].strip()})],`;
+        }
+        custom += p;
+    }
+    custom = custom.slice(0, -1) + "]";
+    setHtml(findHtml("sched"), custom);
+}
