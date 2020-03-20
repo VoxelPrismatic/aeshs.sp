@@ -104,12 +104,12 @@ function get() {
     for(var x = 0; x < currentsched.length - 1; x += 1) {
         var per = currentsched[x + 1][0];
         var end = currentsched[x][1];
-        if(end - now >= 0) {
-            var line = per + " ";
-            line = line.padEnd(20, "-") + " ";
-            line += " " + zf(end.getHours()) + ":" + zf(end.getMinutes());
-            ls += line + "<br>";
-        }
+        var line = per + " ";
+        line = line.padEnd(20, "-") + " ";
+        line += " " + zf(end.getHours()) + ":" + zf(end.getMinutes());
+        if(end - now < 0)
+            line = "<s>" + line + "</s>";
+        ls += line + "<br>";
     }
     for(var x of currentsched) {
         var per = x[0];
