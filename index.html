@@ -12,11 +12,13 @@
       .tL {text-align: left;}
       .tR {text-align: center;}
       .inv {display: none;}
+      .mustinv {display: none !important;}
       tr {margin: 0px;}
       th {background-color: #00ffff88;}
       * {font-family: "Ubuntu Mono";}
       .cc {left: 0; right: 0; margin: auto;}
       body {width: 90vw; left: 0; right: 0; margin: auto;}
+      .bottom {position: absolute; bottom: 5px;}
       #colorswap {
         background-color: #223333ff; 
         width: 16vw; color: inherit;
@@ -38,6 +40,7 @@
   <body style="color: #00ffffff; background-color: #112222ff;">
     <div id="block" style="display: none;">
       <div id="main">
+        <div id="space" style="height:0px"></div>
         <div id="time" class="tC" style="font-size: 18vw;">~</div>
         <div id="per" class="tC" style="font-size: 4vw;">PERIOD 0 // 00:00:00</div>
       </div>
@@ -73,7 +76,7 @@
           <div onclick="find('customizer').classList.toggle('inv')" id="hider"></div>
           <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)">
         </div>
-        <span onclick="fullScreen()">[TOGGLE FULL SCREEN]</span>
+        <span onclick="fullScreen()" id="fuller">[TOGGLE FULL SCREEN]</span>
       </div>
     </div>
     <textarea class="inv" id="customizer" onload="textareaTheme()" onkeyup="customSchedule(this.value)"></textarea>
