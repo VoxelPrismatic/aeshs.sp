@@ -93,7 +93,7 @@ function wheme() {
         bg = "#112222ff";
         color = "#ccddddff";
         onclick = function(){theme('#ccddddff');};
-        text = "[LIGHT THEME]
+        text = "[LIGHT THEME]";
         cookie = "theme=dark";
     }
     document.body.style.backgroundColor = bg;
