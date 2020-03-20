@@ -37,7 +37,7 @@ function sched(s) {
         if (s.startsWith("custom")) {
             gID("customizer").className = "cc";
             gID("customizer").value = "period name | ending time\n" + 
-                                      find_cookie(s).replace(/ /gm, "\n").replace(/\|/gm, " | ");
+                                      find_cookie(s).replace(/\~/gm, "\n").replace(/\|/gm, " | ");
             gID("customizer").onchange = function(){changer(s);};
             gSTYLE("customizer").height = "30vw";
             gSTYLE("customizer").width = "90vw";
@@ -169,6 +169,6 @@ function customSchedule(txt, typ = findHtml("typ")) {
         custom = "[[\"invalid schedule\", time(23,59,59)]]";
     setHtml("sched", custom);
     setHtml(typ, custom);
-    document.cookie = `${typ}=${txt.split("\n").slice(1).join("~").replace(/ | /gm,"|")}`;
+    document.cookie = `${typ}=${txt.split("\n").slice(1).join("~").replace(/ \| /gm,"|")}`;
     get();
 }
