@@ -36,7 +36,7 @@ function sched(s) {
         gEDIT("sched", gHTML(s));
         if (s.startsWith("custom")) {
             gID("customizer").className = "cc";
-            gID("customizer").value = "period name | ending time\n" + 
+            gID("customizer").value = "period name | ending time [24hr]\n" + 
                                       find_cookie(s).replace(/\~/gm, "\n").replace(/\|/gm, " | ");
             gID("customizer").onchange = function(){changer(s);};
             gSTYLE("customizer").height = "30vw";
