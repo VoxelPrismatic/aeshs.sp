@@ -184,7 +184,7 @@ function fullScreen() {
     find("buttons").classList.toggle("inv");
     find("list").classList.toggle("inv");
     if(find("prt").classList.toggle("inv")) {
-        find("time").style.fontSize = "23vw";
+        find("time").style.fontSize = "20vw";
         var height = window.innerHeight / 2;
         for(var x = 0; x < height; x += 1) {
             find("space").style.height = x + "px";
