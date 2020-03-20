@@ -41,14 +41,14 @@ function sched(s) {
             gID("customizer").onchange = function(){changer(s);};
             gSTYLE("customizer").height = "30vw";
             gSTYLE("customizer").width = "90vw";
-            find("hider").style.display = "block";
+            find("hider").innerHTML = "[TOGGLE CUSTOM SCHEDULE EDITOR]";
         } else {
             gID("customizer").className = "inv cc";
             gID("customizer").onchange = function(){};
             gID("customizer").value="";
             gSTYLE("customizer").height = "0px";
             gSTYLE("customizer").width = "0px";
-            find("hider").style.display = "none";
+            find("hider").innerHTML = " ";
         }
     }
     get();
