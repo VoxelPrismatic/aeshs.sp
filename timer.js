@@ -14,20 +14,22 @@ function find_cookie(cname) {
     return "";
 }
 var cookie = document.cookie;
-setHtml("typ", find_cookie("sched") || "norm");
 color(find_cookie("color"));
+
+for(var typ of "0123456789") {
+    if(!find_cookie("custom" + typ))
+        document.cookie = `custom${typ}=end|23:59:59`;
+    customSchedule(find_cookie("custom" + typ).replace(/ /gm, "\n"), "custom" + typ);
+}
+
+setHtml("typ", find_cookie("sched") || "norm");
+setHtml("sched", findHtml(find_cookie("sched")));
 
 try {
     sched = eval(findHtml("sched"));
 } catch(err) {
     console.log(err);
     sched = eval(findHtml("norm"));
-}
-
-for(var typ of "0123456789") {
-    if(!find_cookie("custom" + typ))
-        document.cookie = `custom${typ}=end|23:59:59`;
-    customSchedule(find_cookie("custom" + typ).replace(/ /gm, "\n"), "custom" + typ);
 }
 
 function stats(st) {
@@ -46,34 +48,33 @@ function zf(itm) {
     return String(itm).padStart(2, "0");
 }
 
-var cate = {
-    "norm": "NORMAL SCHEDULE",
-    "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
-    "act": "ACTIVITY PERIOD SCHEDULE",
-    "act_half": "ACTIVITY PERIOD SCHEDULE - HALF PERIODS",  
-    "pm": "PM ASSEMBLY SCHEDULE",
-    "pm_half": "PM ASSEMBLY SCHEDULE - HALF PERIODS",
-    "odd": "ODYSSEY SCHEDULE",
-    "late": "LATE ARRIVAL SCHEDULE",
-    "final1": "FINALS DAY 1 SCHEDULE",
-    "final2": "FINALS DAY 2 SCHEDULE",
-    "final3": "FINALS DAY 3 SCHEDULE",
-    "custom0": "CUSTOM SCHEDULE 0",
-    "custom1": "CUSTOM SCHEDULE 1",
-    "custom2": "CUSTOM SCHEDULE 2",
-    "custom3": "CUSTOM SCHEDULE 3",
-    "custom4": "CUSTOM SCHEDULE 4",
-    "custom5": "CUSTOM SCHEDULE 5",
-    "custom6": "CUSTOM SCHEDULE 6",
-    "custom7": "CUSTOM SCHEDULE 7",
-    "custom8": "CUSTOM SCHEDULE 8",
-    "custom9": "CUSTOM SCHEDULE 9",
-    "early": "EARLY DISMISSAL SCHEDULE",
-    "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
-    "summer": "SUMMER SCHEDULE - KINDA USELESS"
-}
-
 function get() {
+    let cate = {
+        "norm": "NORMAL SCHEDULE",
+        "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
+        "act": "ACTIVITY PERIOD SCHEDULE",
+        "act_half": "ACTIVITY PERIOD SCHEDULE - HALF PERIODS",  
+        "pm": "PM ASSEMBLY SCHEDULE",
+        "pm_half": "PM ASSEMBLY SCHEDULE - HALF PERIODS",
+        "odd": "ODYSSEY SCHEDULE",
+        "late": "LATE ARRIVAL SCHEDULE",
+        "final1": "FINALS DAY 1 SCHEDULE",
+        "final2": "FINALS DAY 2 SCHEDULE",
+        "final3": "FINALS DAY 3 SCHEDULE",
+        "custom0": "CUSTOM SCHEDULE 0",
+        "custom1": "CUSTOM SCHEDULE 1",
+        "custom2": "CUSTOM SCHEDULE 2",
+        "custom3": "CUSTOM SCHEDULE 3",
+        "custom4": "CUSTOM SCHEDULE 4",
+        "custom5": "CUSTOM SCHEDULE 5",
+        "custom6": "CUSTOM SCHEDULE 6",
+        "custom7": "CUSTOM SCHEDULE 7",
+        "custom8": "CUSTOM SCHEDULE 8",
+        "custom9": "CUSTOM SCHEDULE 9",
+        "early": "EARLY DISMISSAL SCHEDULE",
+        "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
+        "summer": "SUMMER SCHEDULE - KINDA USELESS"
+    }   
     var currentsched = eval(findHtml("sched"));
     var cur = findHtml("typ").split("_")[0];
     var typ = cur;
@@ -81,7 +82,7 @@ function get() {
         typ += "_half";
     setHtml("typ", typ);
     setHtml("sched", findHtml(typ));
-    setHtml("prt", globalThis.cate[typ]);
+    setHtml("prt", cate[typ]);
     
     document.cookie = `sched=${findHtml("typ")};`;
     document.cookie = `color=${find("colorswap").value};`;
