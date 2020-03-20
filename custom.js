@@ -36,7 +36,8 @@ function sched(s) {
         gEDIT("sched", gHTML(s));
         if (s.startsWith("custom")) {
             gID("customizer").className = "cc";
-            gID("customizer").value = find_cookie(s).replace(/ /gm, "\n").replace(/\|/gm, " | ");
+            gID("customizer").value = "period name | ending time\n" + 
+                                      find_cookie(s).replace(/ /gm, "\n").replace(/\|/gm, " | ");
             gID("customizer").onchange = function(){changer(s);};
             gSTYLE("customizer").height = "30vw";
             gSTYLE("customizer").width = "90vw";
@@ -152,7 +153,7 @@ function customSchedule(txt, typ = findHtml("typ")) {
     var custom = "[";
     for(var period of txt.split("\n")) {
         var p = "";
-        if(period.includes("|")) {
+        if(period.includes("|") && period.includes(":")) {
             p += "[\"" + period.split("|")[0].trim() + "\",";
             var time = period.split("|")[1].split(":");
             p += `time(${time[0].trim()},`;
