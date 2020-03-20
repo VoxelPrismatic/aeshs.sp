@@ -83,11 +83,7 @@ function get() {
     document.cookie = `sched=${findHtml("typ")};`;
     document.cookie = `color=${document.body.style.color};`;
     document.cookie = `path=/`;
-    if(document.body.style.backgroundColor == "rgb(17, 34, 34)") {
-        document.cookie = `theme=dark`;
-    } else {
-        document.cookie = `theme=light`;
-    }
+    document.cookie = `theme=${gHTML("theme")}`;
     document.cookie = `expires=${nextYear()}`;
     
     currentsched = eval(findHtml("sched"));
