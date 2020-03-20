@@ -153,9 +153,11 @@ function changer(str, itm) {
 
 function customSchedule(txt, typ = findHtml("typ")) {
     var custom = "[";
+    var cc = "";
     for(var period of txt.split("\n")) {
         var p = "";
         if(period.includes("|") && period.includes(":")) {
+            cc += period.split("|")[0].trim() + "|" + period.split("|")[1].trim() + "~"
             p += "[\"" + period.split("|")[0].trim() + "\",";
             var time = period.split("|")[1].split(":");
             p += `time(${time[0].trim()},`;
@@ -167,14 +169,13 @@ function customSchedule(txt, typ = findHtml("typ")) {
         custom += p;
     }
     custom = custom.slice(0, -1) + "]";
-    if(custom == "]")
+    cc = cc.slice(0, -1);
+    if(custom == "]") {
         custom = "[[\"invalid schedule\", time(23,59,59)]]";
+        cc = "invalid schedule|23:59:59";
+    }
     setHtml("sched", custom);
     setHtml(typ, custom);
-    var cc = ""
-    for(var block of eval(custom)) {
-        cc += block[0] + "|" + block[1].replace(/(time\(|\))/gm, "").replace(/,/gm, ":") + "~";
-    }
     document.cookie = `${typ}=${cc}`;
     get();
 }
