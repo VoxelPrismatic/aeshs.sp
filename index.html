@@ -22,10 +22,14 @@
         width: 16vw; color: inherit;
         border: 2px solid #88888888;
         height: 5vh;
-      }
-      td, th {
+      } td, th {
         border: 2px solid #88888888;
         padding: 5px; margin: 0px;
+      } colors {
+        width: 200px;
+        background-color: #112222;
+        border: 8px #112222 solid;
+        border-radius: 5px;
       }
     </style>
   </head>
@@ -72,7 +76,7 @@
           id="change" onload="wheme()">[LIGHT THEME]</span>
       </div>
       <div class="tC">
-        COLOR [HEX]<br>
+        <input id="colors" type="color" value="#00ffff" onchange="color(this.value)">
         <textarea id="colorswap" rows="1" cols="12" onkeyup="color(this.value)">
           #00ffff
         </textarea>
