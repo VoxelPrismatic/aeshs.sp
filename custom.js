@@ -53,64 +53,72 @@ function sched(s) {
 function color(s) {
     gID("colorswap").value = s;
     document.body.style.color = s;
+    var c = [
+        Math.floor(Number.parseInt(s.slice(1, 3), 16) / 10),
+        Math.floor(Number.parseInt(s.slice(3, 5), 16) / 10),
+        Math.floor(Number.parseInt(s.slice(5, 7), 16) / 10)
+    ];
+    if(c[0] == 0)
+        c[0] = Math.floor((c[1] + c[2]) / 4);
+    if(c[1] == 0)
+        c[1] = Math.floor((c[0] + c[2]) / 4);
+    if(c[2] == 0)
+        c[2] = Math.floor((c[1] + c[0]) / 4);
+    var bg_dark = `rgb(${c[0]}, ${c[1]}, ${c[2]}`;
+    var bg_light = `rgb(${255 - c[0]}, ${255 - c[1]}, ${255 - c[2]}`;
+    var bg = bg_dark;
+    var bg_inv = bg_light;
+    var bg_des = `rgb(${c[0] + 10}, ${c[1] + 10}, ${c[2] + 10}`;
+    if(gHTML("theme") == "light") {
+        bg = bg_light;
+        bg_inv = bg_dark;
+        bg_des = `rgb(${245 - c[0]}, ${245 - c[1]}, ${245 - c[2]}`;
+    }
     gEDIT("color", s);
+    document.body.style.backgroundColor = bg;
+    gSTYLE("change").color = bg_inv;
+    gSTYLE("customizer").backgroundColor = bg_des;
+    gSTYLE("colorswap").backgroundColor = bg_des;
+    gSTYLE("colorswap").borderColor = bg_des;
     document.cookie = `color=${s}`;
     document.cookie = `expires=${nextYear()}`;
 }
 function theme(s) {
     if (s == "#112222ff") {
-        document.body.style.backgroundColor = "#112222ff";
-        gSTYLE("change").color = "#ccddddff";
         gID("change").onclick = function(){theme('#ccddddff');};
         gEDIT("change", "[LIGHT THEME]");
         gEDIT("theme", "dark");
         document.cookie = 'theme=dark;'
         document.cookie = `expires=${nextYear()}`;
-        gSTYLE("customizer").backgroundColor = "#223333ff";
-        gSTYLE("colorswap").backgroundColor = "#223333ff";
-        gSTYLE("colorswap").borderColor = "#223333ff";
     } else {
-        document.body.style.backgroundColor = "#ccddddff";
-        gSTYLE("change").color = "#112222ff";
         gID("change").onclick = function(){theme('#112222ff');};
         gEDIT("change", "[DARK THEME]");
         gEDIT("theme", "light");
         document.cookie = 'theme=light;'
         document.cookie = `expires=${nextYear()}`;
-        gSTYLE("customizer").backgroundColor = "#bbccccff";
-        gSTYLE("colorswap").backgroundColor = "#bbccccff";
-        gSTYLE("colorswap").borderColor = "#bbccccff";
     }
+    color(gID("colorswap").value);
 }
 
 function wheme() {
-    var bg = "#ccddddff";
     var onclick = function(){theme("#112222ff");};
     var cookie = "theme=light";
     var text = "[DARK THEME]";
-    var color = "#112222ff";
     if (gHTML("theme") != "light") {
-        bg = "#112222ff";
-        color = "#ccddddff";
         onclick = function(){theme('#ccddddff');};
         text = "[LIGHT THEME]";
         cookie = "theme=dark";
     }
-    document.body.style.backgroundColor = bg;
-    gSTYLE("change").color = color;
     gID("change").onclick = onclick;
     gEDIT("change", text);
     document.cookie = cookie
     document.cookie = `expires=${nextYear()}`;
+    color(gID("colorswap").value);
 }
 
 function textareaTheme() {
     gSTYLE("customizer").color = gHTML("color");
-    if (gHTML("theme") == "light") {
-        gSTYLE("customizer").backgroundColor = "#bbccccff";
-    } else {
-        gSTYLE("customizer").backgroundColor = "#223333ff";
-    }
+    color(gID("colorswap").value);
     if (gHTML("typ").startsWith("custom")) {
         gID("customizer").className = "cc";
         gID("customizer").value = gHTML(s);
