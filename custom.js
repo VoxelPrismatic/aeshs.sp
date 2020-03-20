@@ -148,18 +148,22 @@ function changer(str, itm) {
 }
 
 
-function customSchedule(txt) {
+function customSchedule(txt, typ = findHtml("sched")) {
     var custom = "[";
     for(var period of txt.split("\n")) {
         var p = "";
         if(period.includes("|")) {
             p += "[\"" + period.split("|")[0].strip() + "\",";
-            p += `time(${period.split("|")[1].split(":")[0].strip()},`;
-            p += `${period.split("|")[1].split(":")[0].strip()})],`;
+            var time = period.split("|")[1].split(":");
+            p += `time(${time[0].strip()},`;
+            p += `${time[1].strip()}`;
+            if(time.length == 3)
+                p += `,${time[2].strip()}`;
+            p += ")],";
         }
         custom += p;
     }
     custom = custom.slice(0, -1) + "]";
-    setHtml(findHtml("sched"), custom);
-    document.cookie = `${findHtml("sched")}=${txt.replace(/ /gm,"").replace(/\n/gm," ")}`;
+    setHtml(typ, custom);
+    document.cookie = `${typ}=${txt.replace(/ /gm,"").replace(/\n/gm," ")}`;
 }
