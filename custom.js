@@ -51,28 +51,11 @@ function sched(s) {
     get();
 }
 function color(s) {
-    s = s.trim();
     gID("colorswap").value = s;
-    if(s == "")
-        return;
-    var re = [
-        /^#[A-Fa-f0-9]{3}$/gm,
-        /^#[A-Fa-f0-9]{4}$/gm,
-        /^#[A-Fa-f0-9]{6}$/gm,
-        /^#[A-Fa-f0-9]{8}$/gm,
-        /^rgb\((\d+(\.\d+)?,?){3}\)/gm,
-        /^rgba\((\d+(\.\d+)?,?){4}\)/gm,
-        /^hsl\((\d+(\.\d+|%)?,?){3}\)/gm
-    ];
-    for(var r of re) {
-        if(s.replace(r, "") == "") {
-            document.body.style.color = s;
-            gEDIT("color", s);
-            document.cookie = `color=${s}`;
-            document.cookie = `expires=${nextYear()}`;
-            gSTYLE("customizer").color = s;
-        }
-    }
+    document.body.style.color = s;
+    gEDIT("color", s);
+    document.cookie = `color=${s}`;
+    document.cookie = `expires=${nextYear()}`;
 }
 function theme(s) {
     if (s == "#112222ff") {
@@ -84,6 +67,8 @@ function theme(s) {
         document.cookie = 'theme=dark;'
         document.cookie = `expires=${nextYear()}`;
         gSTYLE("customizer").backgroundColor = "#223333ff";
+        gSTYLE("colorswap").backgroundColor = "#223333ff";
+        gSTYLE("colorswap").borderColor = "#223333ff";
     } else {
         document.body.style.backgroundColor = "#ccddddff";
         gSTYLE("change").color = "#112222ff";
@@ -93,25 +78,30 @@ function theme(s) {
         document.cookie = 'theme=light;'
         document.cookie = `expires=${nextYear()}`;
         gSTYLE("customizer").backgroundColor = "#bbccccff";
+        gSTYLE("colorswap").backgroundColor = "#bbccccff";
+        gSTYLE("colorswap").borderColor = "#bbccccff";
     }
 }
 
 function wheme() {
-    if (gHTML("theme") == "light") {
-        document.body.style.backgroundColor = "#ccddddff";
-        gSTYLE("change").color = "#112222ff";
-        gID("change").onclick = function(){theme('#112222ff');};
-        gEDIT("change", "[DARK THEME]");
-        document.cookie = 'theme=light;'
-        document.cookie = `expires=${nextYear()}`;
-    } else {
-        document.body.style.backgroundColor = "#112222ff";
-        gSTYLE("change").color = "#ccddddff";
-        gID("change").onclick = function(){theme('#ccddddff');};
-        gEDIT("change","[LIGHT THEME]");
-        document.cookie = 'theme=dark;'
-        document.cookie = `expires=${nextYear()}`;
+    var bg = "#ccddddff";
+    var onclick = function(){theme("#112222ff");};
+    var cookie = "theme=light";
+    var text = "[DARK THEME]";
+    var color = "#112222ff";
+    if (gHTML("theme") != "light") {
+        bg = "#112222ff";
+        color = "#ccddddff";
+        onclick = function(){theme('#ccddddff');};
+        text = "[LIGHT THEME]
+        cookie = "theme=dark";
     }
+    document.body.style.backgroundColor = bg;
+    gSTYLE("change").color = color;
+    gID("change").onclick = onclick;
+    gEDIT("change", text);
+    document.cookie = cookie
+    document.cookie = `expires=${nextYear()}`;
 }
 
 function textareaTheme() {
