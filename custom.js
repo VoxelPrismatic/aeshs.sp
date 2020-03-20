@@ -161,4 +161,5 @@ function customSchedule(txt) {
     }
     custom = custom.slice(0, -1) + "]";
     setHtml(findHtml("sched"), custom);
+    document.cookie = `${findHtml("sched")}=${txt.replace(/ /gm,"").replace(/\n/gm," ")}`;
 }
