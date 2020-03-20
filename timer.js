@@ -105,7 +105,7 @@ function get() {
         var per = currentsched[x + 1][0];
         var end = currentsched[x][1];
         var line = per + " ";
-        line = line.padEnd(20, "-") + " ";
+        line = line.padEnd(25, "-") + " ";
         line += " " + zf(end.getHours()) + ":" + zf(end.getMinutes());
         if(end - now < 0)
             line = "<s>" + line + "</s>";
