@@ -27,7 +27,7 @@ try {
 for(var typ of "0123456789") {
     if(!find_cookie("custom" + typ))
         document.cookie = `custom${typ}=end|23:59:59`
-    customSchedule(find_cookie("custom" + typ).replace(/ /gm, "\n"));
+    customSchedule(find_cookie("custom" + typ).replace(/ /gm, "\n"), "custom" + typ);
 }
 
 function stats(st) {
