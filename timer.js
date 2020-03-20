@@ -14,11 +14,8 @@ function find_cookie(cname) {
     return "";
 }
 var cookie = document.cookie;
-if(find_cookie("theme") == "light") {
-    theme("#ccddddff");
-}
 setHtml("typ", find_cookie("sched") || "norm");
-document.body.style.color = find_cookie("color") || "#00ffff";
+color(find_cookie("color"));
 
 try {
     sched = eval(findHtml("sched"));
@@ -81,7 +78,7 @@ function get() {
     setHtml("prt", cat[typ]);
     
     document.cookie = `sched=${findHtml("typ")};`;
-    document.cookie = `color=${document.body.style.color};`;
+    document.cookie = `color=${find("colorswap").value};`;
     document.cookie = `path=/`;
     document.cookie = `theme=${gHTML("theme")}`;
     document.cookie = `expires=${nextYear()}`;
