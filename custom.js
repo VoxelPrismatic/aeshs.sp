@@ -165,7 +165,7 @@ function customSchedule(txt, typ = findHtml("typ")) {
         custom += p;
     }
     custom = custom.slice(0, -1) + "]";
-    if(custom == "]") {
+    if(custom == "]")
         custom = "[[\"invalid schedule\", time(23,59,59)]]";
     setHtml("sched", custom);
     setHtml(typ, custom);
