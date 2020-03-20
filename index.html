@@ -18,18 +18,16 @@
       .cc {left: 0; right: 0; margin: auto;}
       body {width: 90vw; left: 0; right: 0; margin: auto;}
       #colorswap {
-        background-color: #00000000; 
+        background-color: #223333ff; 
         width: 16vw; color: inherit;
         border: 2px solid #88888888;
         height: 5vh;
+        width: 200px;
+        border: 8px #223333ff solid;
+        border-radius: 5px;
       } td, th {
         border: 2px solid #88888888;
         padding: 5px; margin: 0px;
-      } colors {
-        width: 200px;
-        background-color: #112222;
-        border: 8px #112222 solid;
-        border-radius: 5px;
       }
     </style>
   </head>
@@ -76,12 +74,10 @@
           id="change" onload="wheme()">[LIGHT THEME]</span>
       </div>
       <div class="tC">
-        <input id="colors" type="color" value="#00ffff" onchange="color(this.value)">
-        <textarea id="colorswap" rows="1" cols="12" onkeyup="color(this.value)">
-          #00ffff
-        </textarea>
+        <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)">
       </div>
     </div>
+    <textarea class="inv" id="customizer" onload="textareaTheme()"></textarea>
     <!-- CUSTOM SCHEDULES -->
     <div class="inv" id="custom0"></div>
     <div class="inv" id="custom1"></div>
@@ -93,7 +89,6 @@
     <div class="inv" id="custom7"></div>
     <div class="inv" id="custom8"></div>
     <div class="inv" id="custom9"></div>
-    <textarea class="inv" id="customizer" onload="textareaTheme()"></textarea>
     <!-- ACTUAL SCHEDULES -->
     <div class="inv" id="norm">
       [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
