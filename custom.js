@@ -167,6 +167,6 @@ function customSchedule(txt, typ = findHtml("typ")) {
     custom = custom.slice(0, -1) + "]";
     setHtml("sched", custom);
     setHtml(typ, custom);
-    document.cookie = `${typ}=${txt.replace(/ | /gm,"|").replace(/\n/gm,"-")}`;
+    document.cookie = `${typ}=${txt.replace(/ | /gm,"|").replace(/\n/gm,"~")}`;
     get();
 }
