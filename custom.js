@@ -148,7 +148,7 @@ function changer(str, itm) {
 }
 
 
-function customSchedule(txt, typ = findHtml("sched")) {
+function customSchedule(txt, typ = findHtml("typ")) {
     var custom = "[";
     for(var period of txt.split("\n")) {
         var p = "";
@@ -164,6 +164,8 @@ function customSchedule(txt, typ = findHtml("sched")) {
         custom += p;
     }
     custom = custom.slice(0, -1) + "]";
+    setHtml("sched", custom);
     setHtml(typ, custom);
     document.cookie = `${typ}=${txt.replace(/ /gm,"").replace(/\n/gm," ")}`;
+    get();
 }
