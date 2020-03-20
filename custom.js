@@ -53,17 +53,24 @@ function sched(s) {
 function color(s) {
     gID("colorswap").value = s;
     document.body.style.color = s;
-    var c = [
+    var colors = [
         Math.floor(Number.parseInt(s.slice(1, 3), 16) / 10),
         Math.floor(Number.parseInt(s.slice(3, 5), 16) / 10),
         Math.floor(Number.parseInt(s.slice(5, 7), 16) / 10)
     ];
-    if(c[0] == 0)
-        c[0] = Math.floor((c[1] + c[2]) / 4);
-    if(c[1] == 0)
-        c[1] = Math.floor((c[0] + c[2]) / 4);
-    if(c[2] == 0)
-        c[2] = Math.floor((c[1] + c[0]) / 4);
+    var c = [0, 0, 0]
+    if(colors[0] == 0)
+        c[0] = Math.floor((colors[1] + colors[2]) / 4);
+    else
+        c[0] = colors[0];
+    if(colors[1] == 0)
+        c[1] = Math.floor((colors[0] + colors[2]) / 4);
+    else
+        c[1] = colors[1];
+    if(colors[2] == 0)
+        c[2] = Math.floor((colors[1] + colors[0]) / 4);
+    else
+        c[2] = colors[2];
     var bg_dark = `rgb(${c[0]}, ${c[1]}, ${c[2]}`;
     var bg_light = `rgb(${255 - c[0]}, ${255 - c[1]}, ${255 - c[2]}`;
     var bg = bg_dark;
