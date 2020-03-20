@@ -183,6 +183,8 @@ function customSchedule(txt, typ = findHtml("typ")) {
 function fullScreen() {
     find("buttons").classList.toggle("inv");
     find("list").classList.toggle("inv");
+    find("fuller").classList.toggle("bottom");
+    find("customizer").classList.toggle("mustinv");
     if(find("prt").classList.toggle("inv")) {
         find("time").style.fontSize = "20vw";
         var height = window.innerHeight / 2;
@@ -196,4 +198,3 @@ function fullScreen() {
         find("space").style.height = "0px";
     }
 }
-    
