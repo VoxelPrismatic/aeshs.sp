@@ -44,31 +44,34 @@
       <div id="list" class="tL" style="width: 80vw; font-size: smaller;">LOADING SCHEDULE</div>
       <!-- BUTTONS -->
       <div class="tC">
-        <span onclick="sched('half')" id="toggle">[HALF PERIODS]</span>
-        <span onclick="sched('norm')">[NORMAL]</span>
-        <span onclick="sched('late')">[LATE ARRIVAL]</span>
-        <span onclick="sched('act')">[ACTIVITY PERIOD]</span>
-        <span onclick="sched('pm')">[PM ASSEMBLY]</span>
-        <span onclick="sched('summer')">[SUMMER]</span><br>
-        <span onclick="sched('early')">[EARLY DISMISSAL]</span>
-        <span onclick="sched('final1')">[FINALS DAY 1]</span>
-        <span onclick="sched('final2')">[FINALS DAY 2]</span>
-        <span onclick="sched('final3')">[FINALS DAY 3]</span>
-        <span onclick="sched('odd')">[ODYSSEY]</span><br>
-        <span onclick="sched('custom0')">[CUSTOM 0]</span>
-        <span onclick="sched('custom1')">[CUSTOM 1]</span>
-        <span onclick="sched('custom2')">[CUSTOM 2]</span>
-        <span onclick="sched('custom3')">[CUSTOM 3]</span>
-        <span onclick="sched('custom4')">[CUSTOM 4]</span><br>
-        <span onclick="sched('custom5')">[CUSTOM 5]</span>
-        <span onclick="sched('custom6')">[CUSTOM 6]</span>
-        <span onclick="sched('custom7')">[CUSTOM 7]</span>
-        <span onclick="sched('custom8')">[CUSTOM 8]</span>
-        <span onclick="sched('custom9')">[CUSTOM 9]</span><br>
-        <span onclick="theme('#ccddddff')" style="color: #ccddddff;" 
-          id="change" onload="wheme()">[LIGHT THEME]</span><br>
-        <div onclick="find('customizer').classList.toggle('inv')" id="hider"></div>
-        <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)">
+        <div id="buttons">
+          <span onclick="sched('half')" id="toggle">[HALF PERIODS]</span>
+          <span onclick="sched('norm')">[NORMAL]</span>
+          <span onclick="sched('late')">[LATE ARRIVAL]</span>
+          <span onclick="sched('act')">[ACTIVITY PERIOD]</span>
+          <span onclick="sched('pm')">[PM ASSEMBLY]</span>
+          <span onclick="sched('summer')">[SUMMER]</span><br>
+        ` <span onclick="sched('early')">[EARLY DISMISSAL]</span>
+          <span onclick="sched('final1')">[FINALS DAY 1]</span>
+          <span onclick="sched('final2')">[FINALS DAY 2]</span>
+          <span onclick="sched('final3')">[FINALS DAY 3]</span>
+          <span onclick="sched('odd')">[ODYSSEY]</span><br>
+          <span onclick="sched('custom0')">[CUSTOM 0]</span>
+          <span onclick="sched('custom1')">[CUSTOM 1]</span>
+          <span onclick="sched('custom2')">[CUSTOM 2]</span>
+          <span onclick="sched('custom3')">[CUSTOM 3]</span>
+          <span onclick="sched('custom4')">[CUSTOM 4]</span><br>
+          <span onclick="sched('custom5')">[CUSTOM 5]</span>
+          <span onclick="sched('custom6')">[CUSTOM 6]</span>
+          <span onclick="sched('custom7')">[CUSTOM 7]</span>
+          <span onclick="sched('custom8')">[CUSTOM 8]</span>
+          <span onclick="sched('custom9')">[CUSTOM 9]</span><br>
+          <span onclick="theme('#ccddddff')" style="color: #ccddddff;" 
+            id="change" onload="wheme()">[LIGHT THEME]</span><br>
+          <div onclick="find('customizer').classList.toggle('inv')" id="hider"></div>
+          <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)">
+        </div>
+        <span onclick="fullScreen()">[TOGGLE FULL SCREEN]</span>
       </div>
     </div>
     <textarea class="inv" id="customizer" onload="textareaTheme()" onkeyup="customSchedule(this.value)"></textarea>
