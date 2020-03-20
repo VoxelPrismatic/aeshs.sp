@@ -171,6 +171,10 @@ function customSchedule(txt, typ = findHtml("typ")) {
         custom = "[[\"invalid schedule\", time(23,59,59)]]";
     setHtml("sched", custom);
     setHtml(typ, custom);
-    document.cookie = `${typ}=${txt.split("\n").slice(1).join("~").replace(/ \| /gm,"|")}`;
+    var cc = ""
+    for(var block of eval(custom)) {
+        cc += block[0] + "|" + block[1].replace(/(time\(|\))/gm, "").replace(/,/gm, ":") + "~";
+    }
+    document.cookie = `${typ}=${cc}`;
     get();
 }
