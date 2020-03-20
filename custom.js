@@ -153,6 +153,7 @@ function customSchedule(txt, typ = findHtml("sched")) {
     for(var period of txt.split("\n")) {
         var p = "";
         if(period.includes("|")) {
+            console.log(period)
             p += "[\"" + period.split("|")[0].strip() + "\",";
             var time = period.split("|")[1].split(":");
             p += `time(${time[0].strip()},`;
