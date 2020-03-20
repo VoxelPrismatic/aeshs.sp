@@ -33,7 +33,11 @@ try {
 } catch(err) {
     console.log(err);
     sched = eval(findHtml("norm"));
+    schedtyp = "norm";
 }
+
+sched(schedtyp);
+
 
 function stats(st) {
     setHtml("status", st);
