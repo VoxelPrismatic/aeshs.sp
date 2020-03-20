@@ -46,7 +46,7 @@ function zf(itm) {
     return String(itm).padStart(2, "0");
 }
 
-let cat_ = {
+var cate = {
     "norm": "NORMAL SCHEDULE",
     "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
     "act": "ACTIVITY PERIOD SCHEDULE",
@@ -81,7 +81,7 @@ function get() {
         typ += "_half";
     setHtml("typ", typ);
     setHtml("sched", findHtml(typ));
-    setHtml("prt", cat_[typ]);
+    setHtml("prt", globalThis.cate[typ]);
     
     document.cookie = `sched=${findHtml("typ")};`;
     document.cookie = `color=${find("colorswap").value};`;
