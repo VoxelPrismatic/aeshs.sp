@@ -15,6 +15,7 @@ function find_cookie(cname) {
 }
 
 var schedtyp = find_cookie("sched") || "norm"
+scheddy = sched
 
 var cookie = document.cookie;
 color(find_cookie("color"));
@@ -36,8 +37,7 @@ try {
     schedtyp = "norm";
 }
 
-sched(schedtyp);
-
+scheddy(schedtyp);
 
 function stats(st) {
     setHtml("status", st);
