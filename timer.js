@@ -21,9 +21,9 @@ for(var typ of "0123456789") {
         document.cookie = `custom${typ}=end|23:59:59`;
     customSchedule(find_cookie("custom" + typ).replace(/~/gm, "\n"), "custom" + typ);
 }
-
-setHtml("typ", find_cookie("sched") || "norm");
-setHtml("sched", findHtml(find_cookie("sched")));
+var typ = find_cookie("sched") || "norm"
+setHtml("typ", typ);
+setHtml("sched", findHtml(typ));
 
 try {
     sched = eval(findHtml("sched"));
