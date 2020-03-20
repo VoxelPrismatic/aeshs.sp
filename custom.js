@@ -187,10 +187,10 @@ function fullScreen() {
     find("customizer").classList.toggle("mustinv");
     if(find("prt").classList.toggle("inv")) {
         find("time").style.fontSize = "20vw";
-        var height = window.innerHeight / 2;
+        var height = window.innerHeight.slice(0, -2) / 2;
         for(var x = 0; x < height; x += 1) {
             find("space").style.height = x + "px";
-            if(window.getComputedStyle("main").height >= height)
+            if(window.getComputedStyle("main").height.slice(0, -2) >= height)
                 break;
         }
     } else {
