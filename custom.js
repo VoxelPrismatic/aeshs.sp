@@ -72,14 +72,14 @@ function color(s) {
     else
         c[2] = colors[2];
     var bg_dark = `rgb(${c[0]}, ${c[1]}, ${c[2]}`;
-    var bg_light = `rgb(${255 - c[0]}, ${255 - c[1]}, ${255 - c[2]}`;
+    var bg_light = `rgb(${200 + c[0]}, ${200 + c[1]}, ${200 + c[2]}`;
     var bg = bg_dark;
     var bg_inv = bg_light;
     var bg_des = `rgb(${c[0] + 10}, ${c[1] + 10}, ${c[2] + 10}`;
     if(gHTML("theme") == "light") {
         bg = bg_light;
         bg_inv = bg_dark;
-        bg_des = `rgb(${245 - c[0]}, ${245 - c[1]}, ${245 - c[2]}`;
+        bg_des = `rgb(${190 + c[0]}, ${190 + c[1]}, ${190 + c[2]}`;
     }
     gEDIT("color", s);
     document.body.style.backgroundColor = bg;
