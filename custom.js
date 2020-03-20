@@ -179,3 +179,21 @@ function customSchedule(txt, typ = findHtml("typ")) {
     document.cookie = `${typ}=${cc}`;
     get();
 }
+
+function fullScreen() {
+    find("buttons").classList.toggle("inv");
+    find("list").classList.toggle("inv");
+    if(find("prt").classList.toggle("inv")) {
+        find("time").style.fontSize = "23vw";
+        var height = window.innerHeight / 2;
+        for(var x = 0; x < height; x += 1) {
+            find("space").style.height = x + "px";
+            if(window.getComputedStyle("main").height >= height)
+                break;
+        }
+    } else {
+        find("time").style.fontSize = "18vw";
+        find("space").style.height = "0px";
+    }
+}
+    
