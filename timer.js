@@ -99,8 +99,7 @@ function get() {
         var end = currentsched[x][1];
         if(end - now >= 0) {
             var line = per + " ";
-            while(line.length < 18)
-                line += "-";
+            line = line.padEnd(20, "-") + " ";
             line += " " + zf(end.getHours()) + ":" + zf(end.getMinutes());
             ls += line + "<br>";
         }
