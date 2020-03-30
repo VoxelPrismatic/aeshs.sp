@@ -65,6 +65,7 @@ function get() {
         "pm_half": "PM ASSEMBLY SCHEDULE - HALF PERIODS",
         "odd": "ODYSSEY SCHEDULE",
         "late": "LATE ARRIVAL SCHEDULE",
+        "elearn": "E-LEARNING SCHEDULE",
         "final1": "FINALS DAY 1 SCHEDULE",
         "final2": "FINALS DAY 2 SCHEDULE",
         "final3": "FINALS DAY 3 SCHEDULE",
