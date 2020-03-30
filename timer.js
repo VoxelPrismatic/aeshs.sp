@@ -121,6 +121,7 @@ function get() {
             break;
         }
     }
+    ls = "PERIOD NAME ------------ START TIME [24hr]\n" + ls;
     setHtml("list", ls);
     var st = ""
     var tD = diffTime(rn, end);
