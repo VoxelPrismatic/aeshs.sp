@@ -199,11 +199,11 @@ function fullScreen() {
     }
 }
 if(document.cookie.includes("theme=light")) {
-    window.setTimeout(() => find("change").click(), 250);
+    window.setTimeout(() => find("change").click(), 100);
     document.cookie = "theme=dark;";
 }
 thing = document.cookie.split("sched=")[1].split(";")[0];
 if(thing.includes("_half")) {
-    window.setTimeout(() => find("toggle").click(), 250);
+    window.setTimeout(() => find("toggle").click(), 100);
     document.cookie = "sched=" + thing.split("_half")[0];
 }
