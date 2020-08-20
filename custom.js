@@ -198,3 +198,7 @@ function fullScreen() {
         find("space").style.height = "0px";
     }
 }
+if(document.cookie.includes("theme=light")) {
+    window.setTimeout(() => find("change").click(), 500);
+    document.cookie = "theme=dark;";
+}
