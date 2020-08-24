@@ -36,13 +36,19 @@
         padding: 5px;
       } input, span[onclick] {
         cursor: pointer;
+      } .reader-only {
+        opacity: 0;
+        height: 0px;
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
       }
     </style>
   </head>
   <body style="color: #00ffffff; background-color: #112222ff;">
     <div id="block" style="display: none;">
-      <h1 style="display: none">DO NOT USE READER MODE</h1>
-      <h2 style="display: none">
+      <h1 class="reader-only">DO NOT USE READER MODE</h1>
+      <h2 class="reader-only">
         Reader mode does not update and shows nonsense that you will not understand.
       </h2>
       <div id="main">
