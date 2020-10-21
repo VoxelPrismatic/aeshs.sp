@@ -15,7 +15,7 @@ function time(hr = 0, mn = 0, sc = 0) {
 custom_schedule = false;
 elearn_schedule = false;
 finals_schedule = false;
-hr12 = Number(localStorage.getItem("12hour") || 0);
+hr12 = false;
 half_period = false;
 light_theme = Number(localStorage.getItem("light_theme") || 0);
 
@@ -184,7 +184,7 @@ schedules = {
         "ODYSSEY 5":      time(15, 25),
         "ODYSSEY/SCHOOL IS TOMORROW": time(23, 59, 59),
     },
-    "summer_school": {
+    "summer": {
         "SCHOOL STARTS": time( 7, 40),
         "GO TO CLASS":   time( 7, 45),
         "SUMMER SCHOOL": time(12, 59),
@@ -500,7 +500,10 @@ schedules = {
     }
 }
 function get() {
-    var ls = "PERIOD NAME ---------------- START<br>";
+    if(hr12)
+        var ls = "PERIOD NAME ------------------- START<br>";
+    else
+        var ls = "PERIOD NAME ---------------- START<br>";
     var now = Date.now()
     for(var x of Object.keys(current_schedule)) {
         var per = x;
@@ -516,9 +519,21 @@ function get() {
         var end2 = Object.values(current_schedule)[x];
         var line = per + " ";
         line = line.padEnd(28, "-") + " ";
-        line += " " + zf(end2.getHours()) + ":" + zf(end2.getMinutes());
+        hr = end2.getHours()
+        if(hr12) {
+            if(hr > 12) {
+                hr -= 12
+                ampm = " PM"
+            } else {
+                ampm = " AM"
+            }
+        } else {
+            ampm = ""
+        }
+
+        line += `${zf(hr)}:${zf(end2.getMinutes())}${ampm}`;
         if(per == period)
-            line = "<b><i>" + line + "</i></b>"
+            line = "<b class='glow'><i>" + line + "</i></b>"
         else if(end2 - now < 0)
             line = "<s>" + line + "</s>";
         ls += line + "<br>";
@@ -655,6 +670,7 @@ function color(s) {
     $("#customizer").style.backgroundColor = bg_des
     $("#colorswap").style.backgroundColor = bg_des;
     $("#colorswap").style.borderColor = bg_des;
+    $("hr").style.borderColor = s;
     localStorage.setItem("current_color", s);
 }
 
@@ -779,6 +795,7 @@ function toggleHour() {
 
 function fullScreen() {
     $("#buttons").classList.toggle("inv");
+    $("#options").classList.toggle("inv");
     $("#list").classList.toggle("inv");
     $("#fuller").classList.toggle("bottom");
     $("#customizer").classList.toggle("mustinv");
@@ -857,3 +874,5 @@ if(Number(localStorage.getItem("custom_enabled")))
     toggleCustom();
 if(Number(localStorage.getItem("full_screen")))
     fullScreen();
+if(Number(localStorage.getItem("12hour")))
+    toggleHour();

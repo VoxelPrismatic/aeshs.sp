@@ -114,12 +114,15 @@
                         <span onclick="setSchedule('finals', '2')">[FINALS DAY 2]</span>
                         <span onclick="setSchedule('finals', '3')">[FINALS DAY 3]</span>
                     </div>
-                </div><br>
-                <span onclick="toggleTheme()" style="color: #ccddddff;" id="change" onload="wheme()">[LIGHT THEME]</span><br>
-                <div onclick="$('#customizer').classList.toggle('inv')" id="hider"></div>
-                <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)"><br>
+                </div>
+                <div id="options">
+                    <br><hr style="width: 30%; height: 4px; border: 4px solid #00ffff; border-radius: 10px;">
+                    <span onclick="toggleTheme()" style="color: #ccddddff;" id="change">[LIGHT THEME]</span>
+                    <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)">
+                    <span onclick="$('#customizer').classList.toggle('inv')" id="hider"></span>
+                    <span onclick="toggleHour()" id="toggle-hour">[12 HOUR]</span>
+                </div>
                 <span onclick="fullScreen()" id="fuller">[TOGGLE FULL SCREEN]</span>
-                <span onclick="toggleHour()" id="toggle-hour">[12 HOUR]</span>
                 <textarea class="inv" id="customizer" onload="textareaTheme()" onkeyup="customSchedule(this.value)"></textarea>
             </div>
         </div>
