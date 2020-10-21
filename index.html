@@ -1,737 +1,133 @@
+<!doctype html>
 <html>
-  <head>
-    <title>PRIZM.SPACE</title>
-    <style>
-      @font-face {
-        font-family: 'Ubuntu Mono';
-        font-style: normal;
-        font-weight: 400;
-        src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url('https://fonts.gstatic.com/s/ubuntumono/v9/KFOjCneDtsqEr0keqCMhbCc6CsQ.woff2') format('woff2');
-      }
-      .tC {text-align: center;}
-      .tL {text-align: left;}
-      .tR {text-align: center;}
-      .inv {display: none;}
-      .mustinv {display: none !important;}
-      tr {margin: 0px;}
-      th {background-color: #00ffff88;}
-      * {font-family: "Ubuntu Mono";}
-      .cc {left: 0; right: 0; margin: auto;}
-      body {width: 90vw; left: 0; right: 0; margin: auto;}
-      .bottom {position: absolute; bottom: 5px; left: 0px; right: 0px;}
-      #colorswap {
-        background-color: #223333ff; 
-        width: 16vw; color: inherit;
-        border: 2px solid #88888888;
-        height: 24px; width: 200px;
-        border: 8px #223333ff solid;
-        border-radius: 5px;
-        margin: 10px;
-      } td, th {
-        border: 2px solid #88888888;
-        padding: 5px; margin: 0px;
-      } #customizer {
-        color: inherit;
-        border: none;
-        padding: 5px;
-      } input, span[onclick] {
-        cursor: pointer;
-      } .reader-only {
-        opacity: 0;
-        height: 0px;
-        margin: 0px;
-        padding: 0px;
-        overflow: hidden;
-      }
-    </style>
-  </head>
-  <body style="color: #00ffffff; background-color: #112222ff;">
-    <div id="block" style="display: none;">
-      <h1 class="reader-only">DO NOT USE READER MODE</h1>
-      <h2 class="reader-only">
-        Reader mode does not update and shows nonsense that you will not understand.
-      </h2>
-      <div id="main">
-        <div id="space" style="height:0px"></div>
-        <div id="time" class="tC" style="font-size: 18vw; text-shadow: 0px 0px 2vw;">~</div>
-        <div id="per" class="tC" style="font-size: 4vw;">PERIOD 0 // 00:00:00</div>
-      </div>
-      <div id="prt" class="tC" style="font-size: 2vw;">UNKNOWN SCHEDULE</div>
-      <div id="status"></div>
-      <div id="list" class="tL" style="width: 80vw; font-size: smaller;">LOADING SCHEDULE</div>
-      <!-- BUTTONS -->
-      <div class="tC">
-        <div id="buttons">
-          <span onclick="sched('half')" id="toggle">[HALF PERIODS]</span>
-          <span onclick="sched('norm')">[NORMAL]</span>
-          <span onclick="sched('late')">[LATE ARRIVAL]</span>
-          <span onclick="sched('act')">[ACTIVITY PERIOD]</span><br>
-          <span onclick="sched('pm')">[PM ASSEMBLY]</span>
-          <span onclick="sched('summer')">[SUMMER SCHOOL]</span>
-          <span onclick="sched('early')">[EARLY DISMISSAL]</span>
-          <span onclick="sched('elearn')">[E-LEARNING]</span><br>
-          <span onclick="sched('final1')">[FINALS DAY 1]</span>
-          <span onclick="sched('final2')">[FINALS DAY 2]</span>
-          <span onclick="sched('final3')">[FINALS DAY 3]</span>
-          <span onclick="sched('odd')">[ODYSSEY]</span><br>
-          <span onclick="sched('custom0')">[CUSTOM 0]</span>
-          <span onclick="sched('custom1')">[CUSTOM 1]</span>
-          <span onclick="sched('custom2')">[CUSTOM 2]</span>
-          <span onclick="sched('custom3')">[CUSTOM 3]</span>
-          <span onclick="sched('custom4')">[CUSTOM 4]</span><br>
-          <span onclick="sched('custom5')">[CUSTOM 5]</span>
-          <span onclick="sched('custom6')">[CUSTOM 6]</span>
-          <span onclick="sched('custom7')">[CUSTOM 7]</span>
-          <span onclick="sched('custom8')">[CUSTOM 8]</span>
-          <span onclick="sched('custom9')">[CUSTOM 9]</span><br>
-          <span onclick="theme('#ccddddff')" style="color: #ccddddff;" 
-            id="change" onload="wheme()">[LIGHT THEME]</span><br>
-          <div onclick="find('customizer').classList.toggle('inv')" id="hider"></div>
-          <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)">
+    <head>
+        <title>PRIZM.SPACE</title>
+        <style>
+            .tC {text-align: center;}
+            .tL {text-align: left;}
+            .tR {text-align: center;}
+            .inv {display: none;}
+            .mustinv {display: none !important;}
+            tr {margin: 0px;}
+            th {background-color: #00ffff88;}
+            * {font-family: "Ubuntu Mono";}
+            .cc {left: 0; right: 0; margin: auto;}
+            body {width: 90vw; left: 0; right: 0; margin: auto;}
+            .bottom {position: absolute; bottom: 5px; left: 0px; right: 0px;}
+            #colorswap {
+                background-color: #223333ff;
+                width: 16vw; color: inherit;
+                border: 2px solid #88888888;
+                height: 24px; width: 200px;
+                border: 8px #223333ff solid;
+                border-radius: 5px;
+                margin: 10px;
+            } td, th {
+                border: 2px solid #88888888;
+                padding: 5px; margin: 0px;
+            } #customizer {
+                color: inherit;
+                border: none;
+                padding: 5px;
+            } input, span[onclick] {
+                cursor: pointer;
+            } .reader-only {
+                opacity: 0;
+                height: 0px;
+                margin: 0px;
+                padding: 0px;
+                overflow: hidden;
+            } .selected {
+                font-weight: bold;
+                font-style: italic;
+                text-shadow: 0px 0px 1vw;
+            } .glow {
+                text-shadow: 0px 0px 1vw;
+            }
+        </style>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    </head>
+    <body style="color: #00ffffff; background-color: #112222ff;">
+        <div id="block">
+            <h1 class="reader-only">DO NOT USE READER MODE</h1>
+            <h2 class="reader-only">
+                Reader mode does not update and shows nonsense that you will not understand.
+            </h2>
+            <div id="main">
+                <div id="space" style="height:0px"></div>
+                <div id="time" class="tC" style="font-size: 18vw; text-shadow: 0px 0px 2vw;">~</div>
+                <div id="per" class="tC" style="font-size: 4vw;">PERIOD 0 // 00:00:00</div>
+            </div>
+            <div id="prt" class="tC" style="font-size: 2vw;">UNKNOWN SCHEDULE</div>
+            <div id="status"></div>
+            <div id="list" class="tL" style="width: 80vw; font-size: smaller;">LOADING SCHEDULE</div>
+            <!-- BUTTONS -->
+            <div class="tC">
+                <div id="buttons">
+                    <h3>-- SCHEDULES --</h3>
+                    <span onclick="toggleHalf()" id="toggle-half">[HALF PERIODS]</span>
+                    <span onclick="toggleELearning()" id="toggle-corona">[E-LEARNING]</span>
+                    <span onclick="toggleFinals()" id="toggle-final">[FINALS]</span>
+                    <span onclick="toggleCustom()" id="toggle-custom">[CUSTOM]</span>
+                    <div id="full_schedules">
+                        <h4>FULL PERIODS</h4>
+                        <span onclick="setSchedule('normal')" class="selected">[NORMAL]</span>
+                        <span onclick="setSchedule('late_arrival')">[LATE ARRIVAL]</span>
+                        <span onclick="setSchedule('activity')">[ACTIVITY PERIOD]</span>
+                        <span onclick="setSchedule('pm_assembly')">[PM ASSEMBLY]</span>
+                        <span onclick="setSchedule('summer')">[SUMMER SCHOOL]</span><br>
+                        <span onclick="setSchedule('early_dismissal')">[EARLY DISMISSAL]</span>
+                        <span onclick="setSchedule('odyssey')">[ODYSSEY]</span>
+                    </div>
+                    <div id="half_schedules" class="inv">
+                        <h4>HALF PERIODS</h4>
+                        <span onclick="setSchedule('half', 'normal')">[NORMAL]</span>
+                        <span onclick="setSchedule('half', 'activity')">[ACTIVITY PERIOD]</span>
+                        <span onclick="setSchedule('half', 'pm_assembly')">[PM ASSEMBLY]</span>
+                        <span onclick="setSchedule('half', 'early_dismissal')">[EARLY DISMISSAL]</span>
+                    </div>
+                    <div id="c19_full_schedules" class="inv">
+                        <h4>E-LEARNING FULL PERIODS</h4>
+                        <span onclick="setSchedule('corona', 'normal')">[NORMAL]</span>
+                        <span onclick="setSchedule('corona', 'late_arrival')">[LATE ARRIVAL]</span>
+                    </div>
+                    <div id="c19_half_schedules" class="inv">
+                        <h4>E-LEARNING HALF PERIODS</h4>
+                        <span onclick="setSchedule('corona', 'half', 'normal')">[NORMAL]</span>
+                    </div>
+                    <div id="custom_schedules" class="inv">
+                        <h4>YOUR CUSTOM SCHEDULES</h4>
+                        <span onclick="setSchedule('custom', '0')">[CUSTOM 0]</span>
+                        <span onclick="setSchedule('custom', '1')">[CUSTOM 1]</span>
+                        <span onclick="setSchedule('custom', '2')">[CUSTOM 2]</span>
+                        <span onclick="setSchedule('custom', '3')">[CUSTOM 3]</span>
+                        <span onclick="setSchedule('custom', '4')">[CUSTOM 4]</span><br>
+                        <span onclick="setSchedule('custom', '5')">[CUSTOM 5]</span>
+                        <span onclick="setSchedule('custom', '6')">[CUSTOM 6]</span>
+                        <span onclick="setSchedule('custom', '7')">[CUSTOM 7]</span>
+                        <span onclick="setSchedule('custom', '8')">[CUSTOM 8]</span>
+                        <span onclick="setSchedule('custom', '9')">[CUSTOM 9]</span>
+                    </div>
+                    <div id="finals_schedules" class="inv">
+                        <h4>FINALS SCHEDULES</h4>
+                        <span onclick="setSchedule('finals', '1')">[FINALS DAY 1]</span>
+                        <span onclick="setSchedule('finals', '2')">[FINALS DAY 2]</span>
+                        <span onclick="setSchedule('finals', '3')">[FINALS DAY 3]</span>
+                    </div>
+                </div><br>
+                <span onclick="toggleTheme()" style="color: #ccddddff;" id="change" onload="wheme()">[LIGHT THEME]</span><br>
+                <div onclick="$('#customizer').classList.toggle('inv')" id="hider"></div>
+                <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)"><br>
+                <span onclick="fullScreen()" id="fuller">[TOGGLE FULL SCREEN]</span>
+                <span onclick="toggleHour()" id="toggle-hour">[12 HOUR]</span>
+                <textarea class="inv" id="customizer" onload="textareaTheme()" onkeyup="customSchedule(this.value)"></textarea>
+            </div>
         </div>
-        <span onclick="fullScreen()" id="fuller">[TOGGLE FULL SCREEN]</span>
-      </div>
     </div>
-    <textarea class="inv" id="customizer" onload="textareaTheme()" onkeyup="customSchedule(this.value)"></textarea>
-    <!-- CUSTOM SCHEDULES -->
-    <div class="inv" id="custom0"></div>
-    <div class="inv" id="custom1"></div>
-    <div class="inv" id="custom2"></div>
-    <div class="inv" id="custom3"></div>
-    <div class="inv" id="custom4"></div>
-    <div class="inv" id="custom5"></div>
-    <div class="inv" id="custom6"></div>
-    <div class="inv" id="custom7"></div>
-    <div class="inv" id="custom8"></div>
-    <div class="inv" id="custom9"></div>
-    <!-- ACTUAL SCHEDULES -->
-    <div class="inv" id="norm">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 1",  time(8,30)],  ["PERIOD 1",   time(9,21)],
-       ["PASSING TO 2",  time(9,26)],  ["PERIOD 2",   time(10,13)],
-       ["PASSING TO 3",  time(10,18)], ["PERIOD 3",   time(11,5)],
-       ["PASSING TO 4",  time(11,10)], ["PERIOD 4",   time(11,57)],
-       ["PASSING TO 5",  time(12,2)],  ["PERIOD 5",   time(12,49)],
-       ["PASSING TO 6",  time(12,54)], ["PERIOD 6",   time(13,41)],
-       ["PASSING TO 7",  time(13,46)], ["PERIOD 7",   time(14,33)],
-       ["PASSING TO 8",  time(14,38)], ["PERIOD 8",   time(15,25)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="norm_half">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 1A", time(8,30)],  ["PERIOD 1A",  time(8,54)],
-       ["PASSING TO 1B", time(9,1)],   ["PERIOD 1B",  time(9,21)],
-       ["PASSING TO 2A", time(9,26)],  ["PERIOD 2A",  time(9,46)],
-       ["PASSING TO 2B", time(9,53)],  ["PERIOD 2B",  time(10,13)],
-       ["PASSING TO 3A", time(10,18)], ["PERIOD 3A",  time(10,38)],
-       ["PASSING TO 3B", time(10,45)], ["PERIOD 3B",  time(11,5)],
-       ["PASSING TO 4A", time(11,10)], ["PERIOD 4A",  time(11,30)],
-       ["PASSING TO 4B", time(11,37)], ["PERIOD 4B",  time(11,57)],
-       ["PASSING TO 5A", time(12,2)],  ["PERIOD 5A",  time(12,22)],
-       ["PASSING TO 5B", time(12,29)], ["PERIOD 5B",  time(12,49)],
-       ["PASSING TO 6A", time(12,54)], ["PERIOD 6A",  time(13,14)],
-       ["PASSING TO 6B", time(13,21)], ["PERIOD 6B",  time(13,41)],
-       ["PASSING TO 7A", time(13,46)], ["PERIOD 7A",  time(14,6)],
-       ["PASSING TO 7B", time(14,13)], ["PERIOD 7B",  time(14,33)],
-       ["PASSING TO 8A", time(14,38)], ["PERIOD 8A",  time(14,58)],
-       ["PASSING TO 8B", time(15,5)],  ["PERIOD 8B",  time(15,25)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="late">
-      [["SCHOOL STARTS", time(9,30)],  ["EARLY BIRD", time(10,25)],
-       ["PASSING TO 1",  time(10,30)], ["PERIOD 1",   time(11,5)],
-       ["PASSING TO 2",  time(11,10)], ["PERIOD 2",   time(11,40)],
-       ["PASSING TO 3",  time(11,45)], ["PERIOD 3",   time(12,15)],
-       ["PASSING TO 4",  time(12,20)], ["PERIOD 4",   time(12,55)],
-       ["PASSING TO 5",  time(13,0)],  ["PERIOD 5",   time(13,35)],
-       ["PASSING TO 6",  time(13,40)], ["PERIOD 6",   time(14,15)],
-       ["PASSING TO 7",  time(14,20)], ["PERIOD 7",   time(14,50)],
-       ["PASSING TO 8",  time(14,44)], ["PERIOD 8",   time(15,25)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="act">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 1",  time(8,30)],  ["PERIOD 1",   time(9,15)],
-       ["PASSING TO 2",  time(9,20)],  ["PERIOD 2",   time(10,1)],
-       ["GO TO ACTIVITY",time(10,6)],  ["ACTIVITY",   time(10,49)],
-       ["PASSING TO 3",  time(10,54)], ["PERIOD 3",   time(11,35)],
-       ["PASSING TO 4",  time(11,40)], ["PERIOD 4",   time(12,21)],
-       ["PASSING TO 5",  time(12,26)], ["PERIOD 5",   time(13,7)],
-       ["PASSING TO 6",  time(13,12)], ["PERIOD 6",   time(13,53)],
-       ["PASSING TO 7",  time(13,58)], ["PERIOD 7",   time(14,39)],
-       ["PASSING TO 8",  time(14,55)], ["PERIOD 8",   time(15,25)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="act_half">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 1A", time(8,30)],  ["PERIOD 1A",  time(8,21)],
-       ["PASSING TO 1B", time(8,58)],  ["PERIOD 1B",  time(9,15)],
-       ["PASSING TO 2A", time(9,20)],  ["PERIOD 2A",  time(9,37)],
-       ["PASSING TO 2B", time(9,44)],  ["PERIOD 2B",  time(10,1)],
-       ["GO TO ACTIVITY",time(10,6)],  ["ACTIVITY",   time(10,49)],
-       ["PASSING TO 3A", time(10,54)], ["PERIOD 3A",  time(11,11)],
-       ["PASSING TO 3B", time(11,18)], ["PERIOD 3B",  time(11,35)],
-       ["PASSING TO 4A", time(11,40)], ["PERIOD 4A",  time(11,57)],
-       ["PASSING TO 4B", time(12,4)],  ["PERIOD 4B",  time(12,21)],
-       ["PASSING TO 5A", time(12,26)], ["PERIOD 5A",  time(12,43)],
-       ["PASSING TO 5B", time(12,50)], ["PERIOD 5B",  time(13,7)],
-       ["PASSING TO 6A", time(13,12)], ["PERIOD 6A",  time(13,29)],
-       ["PASSING TO 6B", time(13,36)], ["PERIOD 6B",  time(13,53)],
-       ["PASSING TO 7A", time(13,58)], ["PERIOD 7A",  time(14,15)],
-       ["PASSING TO 7B", time(14,22)], ["PERIOD 7B",  time(14,39)],
-       ["PASSING TO 8A", time(14,44)], ["PERIOD 8A",  time(15,1)],
-       ["PASSING TO 8B", time(15,8)],  ["PERIOD 8B",  time(15,25)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="pm">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 1",  time(8,30)],  ["PERIOD 1",   time(9,15)],
-       ["PASSING TO 2",  time(9,20)],  ["PERIOD 2",   time(10,1)],
-       ["PASSING TO 3",  time(10,6)],  ["PERIOD 3",   time(10,47)],
-       ["PASSING TO 4",  time(10,52)], ["PERIOD 4",   time(11,33)],
-       ["PASSING TO 5",  time(11,38)], ["PERIOD 5",   time(12,19)],
-       ["PASSING TO 6",  time(12,24)], ["PERIOD 6",   time(13,5)],
-       ["PASSING TO 7",  time(13,10)], ["PERIOD 7",   time(13,51)],
-       ["PASSING TO 8",  time(13,56)], ["PERIOD 8",   time(14,37)],
-       ["GO TO ASSEMBLY",time(14,42)], ["ASSEMBLY",   time(15,25)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="pm_half">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 1A", time(8,30)],  ["PERIOD 1A",  time(8,51)],
-       ["PASSING TO 1B", time(9,1)],   ["PERIOD 1B",  time(9,15)],
-       ["PASSING TO 2A", time(9,20)],  ["PERIOD 2A",  time(9,37)],
-       ["PASSING TO 2B", time(9,44)],  ["PERIOD 2B",  time(10,1)],
-       ["PASSING TO 3A", time(10,6)],  ["PERIOD 3A",  time(10,23)],
-       ["PASSING TO 3B", time(10,30)], ["PERIOD 3B",  time(10,37)],
-       ["PASSING TO 4A", time(10,52)], ["PERIOD 4A",  time(11,9)],
-       ["PASSING TO 4B", time(11,16)], ["PERIOD 4B",  time(11,33)],
-       ["PASSING TO 5A", time(11,38)], ["PERIOD 5A",  time(11,55)],
-       ["PASSING TO 5B", time(12,2)],  ["PERIOD 5B",  time(12,19)],
-       ["PASSING TO 6A", time(12,24)], ["PERIOD 6A",  time(12,41)],
-       ["PASSING TO 6B", time(12,48)], ["PERIOD 6B",  time(13,5)],
-       ["PASSING TO 7A", time(13,10)], ["PERIOD 7A",  time(13,27)],
-       ["PASSING TO 7B", time(13,34)], ["PERIOD 7B",  time(13,51)],
-       ["PASSING TO 8A", time(13,56)], ["PERIOD 8A",  time(14,13)],
-       ["PASSING TO 8B", time(14,20)], ["PERIOD 8B",  time(14,37)],
-       ["GO TO ASSEMBLY",time(14,42)], ["ASSEMBLY",   time(15,25)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="early">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 1",  time(8,30)],  ["PERIOD 1",   time(9,15)],
-       ["PASSING TO 2",  time(9,20)],  ["PERIOD 2",   time(10,1)],
-       ["PASSING TO 3",  time(10,6)],  ["PERIOD 3",   time(10,47)],
-       ["PASSING TO 4",  time(10,52)], ["PERIOD 4",   time(11,33)],
-       ["PASSING TO 5",  time(11,38)], ["PERIOD 5",   time(12,19)],
-       ["PASSING TO 6",  time(12,24)], ["PERIOD 6",   time(13,5)],
-       ["PASSING TO 7",  time(13,10)], ["PERIOD 7",   time(13,51)],
-       ["PASSING TO 8",  time(13,56)], ["PERIOD 8",   time(15,37)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="early_half">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 1A", time(8,30)],  ["PERIOD 1A",  time(8,51)],
-       ["PASSING TO 1B", time(8,58)],  ["PERIOD 1B",  time(9,15)],
-       ["PASSING TO 2A", time(9,20)],  ["PERIOD 2A",  time(9,37)],
-       ["PASSING TO 2B", time(9,44)],  ["PERIOD 2B",  time(10,1)],
-       ["PASSING TO 3A", time(10,6)],  ["PERIOD 3A",  time(10,23)],
-       ["PASSING TO 3B", time(10,30)], ["PERIOD 3B",  time(10,47)],
-       ["PASSING TO 4A", time(10,42)], ["PERIOD 4A",  time(11,9)],
-       ["PASSING TO 4B", time(11,16)], ["PERIOD 4B",  time(11,33)],
-       ["PASSING TO 5A", time(11,38)], ["PERIOD 5A",  time(11,55)],
-       ["PASSING TO 5B", time(12,2)],  ["PERIOD 5B",  time(12,19)],
-       ["PASSING TO 6A", time(12,24)], ["PERIOD 6A",  time(12,41)],
-       ["PASSING TO 6B", time(12,48)], ["PERIOD 6B",  time(13,5)],
-       ["PASSING TO 7A", time(13,10)], ["PERIOD 7A",  time(13,27)],
-       ["PASSING TO 7B", time(13,34)], ["PERIOD 7B",  time(13,51)],
-       ["PASSING TO 8A", time(13,56)], ["PERIOD 8A",  time(14,13)],
-       ["PASSING TO 8B", time(14,20)], ["PERIOD 8B",  time(14,37)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="elearn">
-      [["E-LEARNING STARTS", time(8,45)], ["PASSING TO 1", time(9,00)],
-       ["PERIOD 1", time(9,30)],  ["PASSING TO 2", time(9,45)],
-       ["PERIOD 2", time(10,15)], ["PASSING TO 3", time(10,30)],
-       ["PERIOD 3", time(11,00)], ["PASSING TO 4", time(11,15)],
-       ["PERIOD 4", time(11,45)], ["PASSING TO 5", time(12,00)],
-       ["PERIOD 5", time(12,30)], ["PASSING TO 6", time(12,45)],
-       ["PERIOD 6", time(13,15)], ["PASSING TO 7", time(13,30)],
-       ["PERIOD 7", time(14,00)], ["PASSING TO 8", time(14,15)],
-       ["PERIOD 8", time(14,45)], ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="final1">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 1",  time(8,30)],  ["PERIOD 1",   time(10)],
-       ["PASSING TO 2",  time(10,10)], ["PERIOD 2",   time(11,40)],
-       ["PASSING TO 4",  time(11,50)], ["PERIOD 4",   time(13,20)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="final2">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 3",  time(8,30)],  ["PERIOD 3",   time(10)],
-       ["PASSING TO 7",  time(10,10)], ["PERIOD 7",   time(11,40)],
-       ["PASSING TO 5",  time(11,50)], ["PERIOD 5",   time(13,20)],
-       ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="final3">
-      [["SCHOOL STARTS", time(7,30)],  ["EARLY BIRD", time(8,25)],
-       ["PASSING TO 8",  time(8,30)],  ["PERIOD 8",   time(10)],
-       ["PASSING TO 6",  time(10,10)], ["PERIOD 6",   time(11,40)],
-       ["GO TO MAKEUPS", time(11,50)], ["MAKEUPS",  time(13,20)],
-       ["SEMESTER IS OVER, GG M8", time(23,59,59)]]
-    </div>
-    <div class="inv" id="odd">
-      [["ODYSSEY STARTS", time(10,15)], ["HOMEROOM [P2]", time(10,25)],
-       ["PASSING TO 1",   time(10,35)], ["ODYSSEY 1", time(11,25)],
-       ["PASSING TO 2",   time(11,35)], ["ODYSSEY 2", time(12,25)],
-       ["PASSING TO 3",   time(12,35)], ["ODYSSEY 3", time(13,25)],
-       ["PASSING TO 4",   time(13,35)], ["ODYSSEY 4", time(14,25)],
-       ["PASSING TO 5",   time(14,35)], ["ODYSSEY 5", time(15,25)],
-       ["ODYSSEY/SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="summer">
-      [["SCHOOL STARTS", time(7,40)],  ["GO TO CLASS", time(7,45)],
-       ["SUMMER SCHOOL", time(12,59)], ["SCHOOL IS TMO", time(23,59,59)]]
-    </div>
-    <div class="inv" id="sched"></div>
-    <!-- REGISTERS -->
-    <div class="inv" id="typ">norm</div>
-    <div class="inv" id="half">False</div>
-    <div class="inv" id="cookie"></div>
-    <div class="inv" id="date"></div>
-    <div class="inv" id="theme"></div>
-    <div class="inv" id="verbose"></div>
-    <div class="inv" id="custom"></div>
-    <div class="inv" id="color"></div>
     <!-- SCRIPTS -->
     <div class="tC">
-      Check out my other <a href="/prizm.dev" target="_blank" style="color: inherit;">stuff</a>!
+        Check out my other <a href="/prizm.dev" target="_blank" style="color: inherit;">stuff</a>!
     </div>
-    <div id="noscript" style="display: block;">
-      <h1 id="JUMPTOP">JUMP TO SCHEDULE</h1>
-      <table>
-        <tr><th>Full periods</th><th>Half periods</th></tr>
-        <tr>
-          <td><a href="#NORMAL">NORMAL</a></td>
-          <td><a href="#NORMAL+HALF">+ HALF</a></td>
-        </tr><tr>
-          <td><a href="#ACTIVITY">ACTIVITY</a></td>
-          <td><a href="#ACTIVITY+HALF">+ HALF</a></td>
-        </tr><tr>
-          <td><a href="#PM-">PM ASSEMBLY</a></td>
-          <td><a href="#PM+HALF">+ HALF</a></td>
-        </tr><tr>
-          <td><a href="#ODYSSEY">ODYSSEY</a></td>
-          <td>-</td>
-        </tr><tr>
-          <td><a href="#LATE-">LATE</a></td>
-          <td>-</td>
-        </tr><tr>
-          <td><a href="#EARLY-">EARLY</a></td>
-          <td><a href="#EARLY+HALF">+ HALF</a></td>
-        </tr><tr>
-          <td><a href="#ONLINE">E-LEARNING</a></td>
-          <td>-</td>
-        </tr><tr>
-          <td><a href="#FDAY1">FINALS 1</a></td>
-          <td>-</td>
-        </tr><tr>
-          <td><a href="#FDAY2">FINALS 2</a></td>
-          <td>-</td>
-        </tr><tr>
-          <td><a href="#FDAY3">FINALS 3</a></td>
-          <td>-</td>
-        </tr><tr>
-          <td><a href="#SUMMER-">SUMMER</a></td>
-          <td>-</td>
-        </tr>
-      </table>
-      <h1 id="NORMAL">NORMAL SCHEDULE</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 1</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 1</td><td>09:21:00</td></tr>
-        <tr><td>PASSING TO 2</td><td>09:26:00</td></tr>
-        <tr><td>PERIOD 2</td><td>10:13:00</td></tr>
-        <tr><td>PASSING TO 3</td><td>10:18:00</td></tr>
-        <tr><td>PERIOD 3</td><td>11:05:00</td></tr>
-        <tr><td>PASSING TO 4</td><td>11:10:00</td></tr>
-        <tr><td>PERIOD 4</td><td>11:57:00</td></tr>
-        <tr><td>PASSING TO 5</td><td>12:02:00</td></tr>
-        <tr><td>PERIOD 5</td><td>12:49:00</td></tr>
-        <tr><td>PASSING TO 6</td><td>12:54:00</td></tr>
-        <tr><td>PERIOD 6</td><td>13:41:00</td></tr>
-        <tr><td>PASSING TO 7</td><td>13:46:00</td></tr>
-        <tr><td>PERIOD 7</td><td>14:33:00</td></tr>
-        <tr><td>PASSING TO 8</td><td>14:38:00</td></tr>
-        <tr><td>PERIOD 8</td><td>15:25:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="NORMAL+HALF">NORMAL SCHEDULE - HALF PERIODS</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 1A</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 1A</td><td>08:54:00</td></tr>
-        <tr><td>PASSING TO 1B</td><td>09:01:00</td></tr>
-        <tr><td>PERIOD 1B</td><td>09:21:00</td></tr>
-        <tr><td>PASSING TO 2A</td><td>09:26:00</td></tr>
-        <tr><td>PERIOD 2A</td><td>09:46:00</td></tr>
-        <tr><td>PASSING TO 2B</td><td>09:53:00</td></tr>
-        <tr><td>PERIOD 2B</td><td>10:13:00</td></tr>
-        <tr><td>PASSING TO 3A</td><td>10:18:00</td></tr>
-        <tr><td>PERIOD 3A</td><td>10:38:00</td></tr>
-        <tr><td>PASSING TO 3B</td><td>10:45:00</td></tr>
-        <tr><td>PERIOD 3B</td><td>11:05:00</td></tr>
-        <tr><td>PASSING TO 4A</td><td>11:10:00</td></tr>
-        <tr><td>PERIOD 4A</td><td>11:30:00</td></tr>
-        <tr><td>PASSING TO 4B</td><td>11:37:00</td></tr>
-        <tr><td>PERIOD 4B</td><td>11:57:00</td></tr>
-        <tr><td>PASSING TO 5A</td><td>12:02:00</td></tr>
-        <tr><td>PERIOD 5A</td><td>12:22:00</td></tr>
-        <tr><td>PASSING TO 5B</td><td>12:29:00</td></tr>
-        <tr><td>PERIOD 5B</td><td>12:49:00</td></tr>
-        <tr><td>PASSING TO 6A</td><td>12:54:00</td></tr>
-        <tr><td>PERIOD 6A</td><td>13:14:00</td></tr>
-        <tr><td>PASSING TO 6B</td><td>13:21:00</td></tr>
-        <tr><td>PERIOD 6B</td><td>13:41:00</td></tr>
-        <tr><td>PASSING TO 7A</td><td>13:46:00</td></tr>
-        <tr><td>PERIOD 7A</td><td>14:06:00</td></tr>
-        <tr><td>PASSING TO 7B</td><td>14:13:00</td></tr>
-        <tr><td>PERIOD 7B</td><td>14:33:00</td></tr>
-        <tr><td>PASSING TO 8A</td><td>14:38:00</td></tr>
-        <tr><td>PERIOD 8A</td><td>14:58:00</td></tr>
-        <tr><td>PASSING TO 8B</td><td>15:05:00</td></tr>
-        <tr><td>PERIOD 8B</td><td>15:25:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="ACTIVITY">ACTIVITY PERIOD SCHEDULE</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 1</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 1</td><td>09:15:00</td></tr>
-        <tr><td>PASSING TO 2</td><td>09:20:00</td></tr>
-        <tr><td>PERIOD 2</td><td>10:01:00</td></tr>
-        <tr><td>GO TO ACTIVITY</td><td>10:06:00</td></tr>
-        <tr><td>ACTIVITY</td><td>10:49:00</td></tr>
-        <tr><td>PASSING TO 3</td><td>10:54:00</td></tr>
-        <tr><td>PERIOD 3</td><td>11:35:00</td></tr>
-        <tr><td>PASSING TO 4</td><td>11:40:00</td></tr>
-        <tr><td>PERIOD 4</td><td>12:21:00</td></tr>
-        <tr><td>PASSING TO 5</td><td>12:26:00</td></tr>
-        <tr><td>PERIOD 5</td><td>13:07:00</td></tr>
-        <tr><td>PASSING TO 6</td><td>13:12:00</td></tr>
-        <tr><td>PERIOD 6</td><td>13:53:00</td></tr>
-        <tr><td>PASSING TO 7</td><td>13:58:00</td></tr>
-        <tr><td>PERIOD 7</td><td>14:39:00</td></tr>
-        <tr><td>PASSING TO 8</td><td>14:55:00</td></tr>
-        <tr><td>PERIOD 8</td><td>15:25:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="ACTIVITY+HALF">ACTIVITY PERIOD SCHEDULE - HALF PERIODS</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 1A</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 1A</td><td>08:21:00</td></tr>
-        <tr><td>PASSING TO 1B</td><td>08:58:00</td></tr>
-        <tr><td>PERIOD 1B</td><td>09:15:00</td></tr>
-        <tr><td>PASSING TO 2A</td><td>09:20:00</td></tr>
-        <tr><td>PERIOD 2A</td><td>09:37:00</td></tr>
-        <tr><td>PASSING TO 2B</td><td>09:44:00</td></tr>
-        <tr><td>PERIOD 2B</td><td>10:01:00</td></tr>
-        <tr><td>GO TO ACTIVITY</td><td>10:06:00</td></tr>
-        <tr><td>ACTIVITY</td><td>10:49:00</td></tr>
-        <tr><td>PASSING TO 3A</td><td>10:54:00</td></tr>
-        <tr><td>PERIOD 3A</td><td>11:11:00</td></tr>
-        <tr><td>PASSING TO 3B</td><td>11:18:00</td></tr>
-        <tr><td>PERIOD 3B</td><td>11:35:00</td></tr>
-        <tr><td>PASSING TO 4A</td><td>11:40:00</td></tr>
-        <tr><td>PERIOD 4A</td><td>11:57:00</td></tr>
-        <tr><td>PASSING TO 4B</td><td>12:04:00</td></tr>
-        <tr><td>PERIOD 4B</td><td>12:21:00</td></tr>
-        <tr><td>PASSING TO 5A</td><td>12:26:00</td></tr>
-        <tr><td>PERIOD 5A</td><td>12:43:00</td></tr>
-        <tr><td>PASSING TO 5B</td><td>12:50:00</td></tr>
-        <tr><td>PERIOD 5B</td><td>13:07:00</td></tr>
-        <tr><td>PASSING TO 6A</td><td>13:12:00</td></tr>
-        <tr><td>PERIOD 6A</td><td>13:29:00</td></tr>
-        <tr><td>PASSING TO 6B</td><td>13:36:00</td></tr>
-        <tr><td>PERIOD 6B</td><td>13:53:00</td></tr>
-        <tr><td>PASSING TO 7A</td><td>13:58:00</td></tr>
-        <tr><td>PERIOD 7A</td><td>14:15:00</td></tr>
-        <tr><td>PASSING TO 7B</td><td>14:22:00</td></tr>
-        <tr><td>PERIOD 7B</td><td>14:39:00</td></tr>
-        <tr><td>PASSING TO 8A</td><td>14:44:00</td></tr>
-        <tr><td>PERIOD 8A</td><td>15:01:00</td></tr>
-        <tr><td>PASSING TO 8B</td><td>15:08:00</td></tr>
-        <tr><td>PERIOD 8B</td><td>15:25:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="PM-">PM ASSEMBLY SCHEDULE</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 1</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 1</td><td>09:15:00</td></tr>
-        <tr><td>PASSING TO 2</td><td>09:20:00</td></tr>
-        <tr><td>PERIOD 2</td><td>10:01:00</td></tr>
-        <tr><td>PASSING TO 3</td><td>10:06:00</td></tr>
-        <tr><td>PERIOD 3</td><td>10:47:00</td></tr>
-        <tr><td>PASSING TO 4</td><td>10:52:00</td></tr>
-        <tr><td>PERIOD 4</td><td>11:33:00</td></tr>
-        <tr><td>PASSING TO 5</td><td>11:38:00</td></tr>
-        <tr><td>PERIOD 5</td><td>12:19:00</td></tr>
-        <tr><td>PASSING TO 6</td><td>12:24:00</td></tr>
-        <tr><td>PERIOD 6</td><td>13:05:00</td></tr>
-        <tr><td>PASSING TO 7</td><td>13:10:00</td></tr>
-        <tr><td>PERIOD 7</td><td>13:51:00</td></tr>
-        <tr><td>PASSING TO 8</td><td>13:56:00</td></tr>
-        <tr><td>PERIOD 8</td><td>14:37:00</td></tr>
-        <tr><td>GO TO ASSEMBLY</td><td>14:42:00</td></tr>
-        <tr><td>ASSEMBLY</td><td>15:25:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="PM+HALF">PM ASSEMBLY SCHEDULE - HALF PERIODS</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 1A</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 1A</td><td>08:51:00</td></tr>
-        <tr><td>PASSING TO 1B</td><td>09:01:00</td></tr>
-        <tr><td>PERIOD 1B</td><td>09:15:00</td></tr>
-        <tr><td>PASSING TO 2A</td><td>09:20:00</td></tr>
-        <tr><td>PERIOD 2A</td><td>09:37:00</td></tr>
-        <tr><td>PASSING TO 2B</td><td>09:44:00</td></tr>
-        <tr><td>PERIOD 2B</td><td>10:01:00</td></tr>
-        <tr><td>PASSING TO 3A</td><td>10:06:00</td></tr>
-        <tr><td>PERIOD 3A</td><td>10:23:00</td></tr>
-        <tr><td>PASSING TO 3B</td><td>10:30:00</td></tr>
-        <tr><td>PERIOD 3B</td><td>10:37:00</td></tr>
-        <tr><td>PASSING TO 4A</td><td>10:52:00</td></tr>
-        <tr><td>PERIOD 4A</td><td>11:09:00</td></tr>
-        <tr><td>PASSING TO 4B</td><td>11:16:00</td></tr>
-        <tr><td>PERIOD 4B</td><td>11:33:00</td></tr>
-        <tr><td>PASSING TO 5A</td><td>11:38:00</td></tr>
-        <tr><td>PERIOD 5A</td><td>11:55:00</td></tr>
-        <tr><td>PASSING TO 5B</td><td>12:02:00</td></tr>
-        <tr><td>PERIOD 5B</td><td>12:19:00</td></tr>
-        <tr><td>PASSING TO 6A</td><td>12:24:00</td></tr>
-        <tr><td>PERIOD 6A</td><td>12:41:00</td></tr>
-        <tr><td>PASSING TO 6B</td><td>12:48:00</td></tr>
-        <tr><td>PERIOD 6B</td><td>13:05:00</td></tr>
-        <tr><td>PASSING TO 7A</td><td>13:10:00</td></tr>
-        <tr><td>PERIOD 7A</td><td>13:27:00</td></tr>
-        <tr><td>PASSING TO 7B</td><td>13:34:00</td></tr>
-        <tr><td>PERIOD 7B</td><td>13:51:00</td></tr>
-        <tr><td>PASSING TO 8A</td><td>13:56:00</td></tr>
-        <tr><td>PERIOD 8A</td><td>14:13:00</td></tr>
-        <tr><td>PASSING TO 8B</td><td>14:20:00</td></tr>
-        <tr><td>PERIOD 8B</td><td>14:37:00</td></tr>
-        <tr><td>GO TO ASSEMBLY</td><td>14:42:00</td></tr>
-        <tr><td>ASSEMBLY</td><td>15:25:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="ODYSSEY">ODYSSEY SCHEDULE</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>ODYSSEY STARTS</td><td>10:15:00</td></tr>
-        <tr><td>HOMEROOM [P2]</td><td>10:25:00</td></tr>
-        <tr><td>PASSING TO 1</td><td>10:35:00</td></tr>
-        <tr><td>ODYSSEY 1</td><td>11:25:00</td></tr>
-        <tr><td>PASSING TO 2</td><td>11:35:00</td></tr>
-        <tr><td>ODYSSEY 2</td><td>12:25:00</td></tr>
-        <tr><td>PASSING TO 3</td><td>12:35:00</td></tr>
-        <tr><td>ODYSSEY 3</td><td>13:25:00</td></tr>
-        <tr><td>PASSING TO 4</td><td>13:35:00</td></tr>
-        <tr><td>ODYSSEY 4</td><td>14:25:00</td></tr>
-        <tr><td>PASSING TO 5</td><td>14:35:00</td></tr>
-        <tr><td>ODYSSEY 5</td><td>15:25:00</td></tr>
-        <tr><td>ODYSSEY/SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="LATE-">LATE ARRIVAL SCHEDULE</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>09:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>10:25:00</td></tr>
-        <tr><td>PASSING TO 1</td><td>10:30:00</td></tr>
-        <tr><td>PERIOD 1</td><td>11:05:00</td></tr>
-        <tr><td>PASSING TO 2</td><td>11:10:00</td></tr>
-        <tr><td>PERIOD 2</td><td>11:40:00</td></tr>
-        <tr><td>PASSING TO 3</td><td>11:45:00</td></tr>
-        <tr><td>PERIOD 3</td><td>12:15:00</td></tr>
-        <tr><td>PASSING TO 4</td><td>12:20:00</td></tr>
-        <tr><td>PERIOD 4</td><td>12:55:00</td></tr>
-        <tr><td>PASSING TO 5</td><td>13:00:00</td></tr>
-        <tr><td>PERIOD 5</td><td>13:35:00</td></tr>
-        <tr><td>PASSING TO 6</td><td>13:40:00</td></tr>
-        <tr><td>PERIOD 6</td><td>14:15:00</td></tr>
-        <tr><td>PASSING TO 7</td><td>14:20:00</td></tr>
-        <tr><td>PERIOD 7</td><td>14:50:00</td></tr>
-        <tr><td>PASSING TO 8</td><td>14:44:00</td></tr>
-        <tr><td>PERIOD 8</td><td>15:25:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="EARLY-">EARLY DISMISSAL SCHEDULE</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 1</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 1</td><td>09:15:00</td></tr>
-        <tr><td>PASSING TO 2</td><td>09:20:00</td></tr>
-        <tr><td>PERIOD 2</td><td>10:01:00</td></tr>
-        <tr><td>PASSING TO 3</td><td>10:06:00</td></tr>
-        <tr><td>PERIOD 3</td><td>10:47:00</td></tr>
-        <tr><td>PASSING TO 4</td><td>10:52:00</td></tr>
-        <tr><td>PERIOD 4</td><td>11:33:00</td></tr>
-        <tr><td>PASSING TO 5</td><td>11:38:00</td></tr>
-        <tr><td>PERIOD 5</td><td>12:19:00</td></tr>
-        <tr><td>PASSING TO 6</td><td>12:24:00</td></tr>
-        <tr><td>PERIOD 6</td><td>13:05:00</td></tr>
-        <tr><td>PASSING TO 7</td><td>13:10:00</td></tr>
-        <tr><td>PERIOD 7</td><td>13:51:00</td></tr>
-        <tr><td>PASSING TO 8</td><td>13:56:00</td></tr>
-        <tr><td>PERIOD 8</td><td>15:37:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="EARLY+HALF">EARLY DISMISSAL SCHEDULE - HALF PERIODS</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 1A</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 1A</td><td>08:51:00</td></tr>
-        <tr><td>PASSING TO 1B</td><td>08:58:00</td></tr>
-        <tr><td>PERIOD 1B</td><td>09:15:00</td></tr>
-        <tr><td>PASSING TO 2A</td><td>09:20:00</td></tr>
-        <tr><td>PERIOD 2A</td><td>09:37:00</td></tr>
-        <tr><td>PASSING TO 2B</td><td>09:44:00</td></tr>
-        <tr><td>PERIOD 2B</td><td>10:01:00</td></tr>
-        <tr><td>PASSING TO 3A</td><td>10:06:00</td></tr>
-        <tr><td>PERIOD 3A</td><td>10:23:00</td></tr>
-        <tr><td>PASSING TO 3B</td><td>10:30:00</td></tr>
-        <tr><td>PERIOD 3B</td><td>10:47:00</td></tr>
-        <tr><td>PASSING TO 4A</td><td>10:42:00</td></tr>
-        <tr><td>PERIOD 4A</td><td>11:09:00</td></tr>
-        <tr><td>PASSING TO 4B</td><td>11:16:00</td></tr>
-        <tr><td>PERIOD 4B</td><td>11:33:00</td></tr>
-        <tr><td>PASSING TO 5A</td><td>11:38:00</td></tr>
-        <tr><td>PERIOD 5A</td><td>11:55:00</td></tr>
-        <tr><td>PASSING TO 5B</td><td>12:02:00</td></tr>
-        <tr><td>PERIOD 5B</td><td>12:19:00</td></tr>
-        <tr><td>PASSING TO 6A</td><td>12:24:00</td></tr>
-        <tr><td>PERIOD 6A</td><td>12:41:00</td></tr>
-        <tr><td>PASSING TO 6B</td><td>12:48:00</td></tr>
-        <tr><td>PERIOD 6B</td><td>13:05:00</td></tr>
-        <tr><td>PASSING TO 7A</td><td>13:10:00</td></tr>
-        <tr><td>PERIOD 7A</td><td>13:27:00</td></tr>
-        <tr><td>PASSING TO 7B</td><td>13:34:00</td></tr>
-        <tr><td>PERIOD 7B</td><td>13:51:00</td></tr>
-        <tr><td>PASSING TO 8A</td><td>13:56:00</td></tr>
-        <tr><td>PERIOD 8A</td><td>14:13:00</td></tr>
-        <tr><td>PASSING TO 8B</td><td>14:20:00</td></tr>
-        <tr><td>PERIOD 8B</td><td>14:37:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="ONLINE">E-LEARNING SCHEDULE</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>E-LEARNING STARTS</td><td>8:45:00</td></tr>
-        <tr><td>PASSING TO 1</td><td>9:00:00</td></tr>
-        <tr><td>PERIOD 1</td><td>9:30:00</td></tr>
-        <tr><td>PASSING TO 2</td><td>9:45:00</td></tr>
-        <tr><td>PERIOD 2</td><td>10:15:00</td></tr>
-        <tr><td>PASSING TO 3</td><td>10:30:00</td></tr>
-        <tr><td>PERIOD 3</td><td>11:00:00</td></tr>
-        <tr><td>PASSING TO 4</td><td>11:15:00</td></tr>
-        <tr><td>PERIOD 4</td><td>11:45:00</td></tr>
-        <tr><td>PASSING TO 5</td><td>12:00:00</td></tr>
-        <tr><td>PERIOD 5</td><td>12:30:00</td></tr>
-        <tr><td>PASSING TO 6</td><td>12:45:00</td></tr>
-        <tr><td>PERIOD 6</td><td>13:15:00</td></tr>
-        <tr><td>PASSING TO 7</td><td>13:30:00</td></tr>
-        <tr><td>PERIOD 7</td><td>14:00:00</td></tr>
-        <tr><td>PASSING TO 8</td><td>14:15:00</td></tr>
-        <tr><td>PERIOD 8</td><td>14:45:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="FDAY1">FINALS DAY 1 SCHEDULE</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 1</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 1</td><td>10:00:00</td></tr>
-        <tr><td>PASSING TO 2</td><td>10:10:00</td></tr>
-        <tr><td>PERIOD 2</td><td>11:40:00</td></tr>
-        <tr><td>PASSING TO 4</td><td>11:50:00</td></tr>
-        <tr><td>PERIOD 4</td><td>13:20:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="FDAY2">FINALS DAY 2 SCHEDULE</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 3</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 3</td><td>10:00:00</td></tr>
-        <tr><td>PASSING TO 7</td><td>10:10:00</td></tr>
-        <tr><td>PERIOD 7</td><td>11:40:00</td></tr>
-        <tr><td>PASSING TO 5</td><td>11:50:00</td></tr>
-        <tr><td>PERIOD 5</td><td>13:20:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="FDAY3">FINALS DAY 3 SCHEDULE</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:30:00</td></tr>
-        <tr><td>EARLY BIRD</td><td>08:25:00</td></tr>
-        <tr><td>PASSING TO 8</td><td>08:30:00</td></tr>
-        <tr><td>PERIOD 8</td><td>10:00:00</td></tr>
-        <tr><td>PASSING TO 6</td><td>10:10:00</td></tr>
-        <tr><td>PERIOD 6</td><td>11:40:00</td></tr>
-        <tr><td>GO TO MAKEUPS</td><td>11:50:00</td></tr>
-        <tr><td>MAKEUPS</td><td>13:20:00</td></tr>
-        <tr><td>SEMESTER IS OVER, GG M8</td><td>23:59:59</td></tr>
-      </table>
-      <h1 id="SUMMER-">SUMMER SCHEDULE - KINDA USELESS</h1>
-      <a href="#JUMPTOP">JUMP TO TOP</a>
-      <table>
-        <tr><th>Period</th><th>Ending Time</th></tr>
-        <tr><td>SCHOOL STARTS</td><td>07:40:00</td></tr>
-        <tr><td>GO TO CLASS</td><td>07:45:00</td></tr>
-        <tr><td>SUMMER SCHOOL</td><td>12:59:00</td></tr>
-        <tr><td>SCHOOL IS TMO</td><td>23:59:59</td></tr>
-      </table>
-    </div>
-    <!--<script src="sched.js" type="text/javascript"></script>-->
-    <script src="finder.js" type="text/javascript"></script>
-    <script src="custom.js" type="text/javascript"></script>
-    <script src="timer.js" type="text/javascript"></script>
-    <script src="custom.js" type="text/javascript"></script>
-  </body>
+    <script src="script.js" type="text/javascript"></script>
+    </body>
 </html>

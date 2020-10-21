@@ -60,7 +60,7 @@ function get() {
         "norm": "NORMAL SCHEDULE",
         "norm_half": "NORMAL SCHEDULE - HALF PERIODS",
         "act": "ACTIVITY PERIOD SCHEDULE",
-        "act_half": "ACTIVITY PERIOD SCHEDULE - HALF PERIODS",  
+        "act_half": "ACTIVITY PERIOD SCHEDULE - HALF PERIODS",
         "pm": "PM ASSEMBLY SCHEDULE",
         "pm_half": "PM ASSEMBLY SCHEDULE - HALF PERIODS",
         "odd": "ODYSSEY SCHEDULE",
@@ -82,7 +82,7 @@ function get() {
         "early": "EARLY DISMISSAL SCHEDULE",
         "early_half": "EARLY DISMISSAL SCHEDULE - HALF PERIODS",
         "summer": "SUMMER SCHEDULE - KINDA USELESS"
-    }   
+    }
     var currentsched = eval(findHtml("sched"));
     var cur = findHtml("typ").split("_")[0];
     var typ = cur;
@@ -91,13 +91,13 @@ function get() {
     setHtml("typ", typ);
     setHtml("sched", findHtml(typ));
     setHtml("prt", cate[typ]);
-    
+
     document.cookie = `sched=${findHtml("typ")};`;
     document.cookie = `color=${find("colorswap").value};`;
     document.cookie = `path=/`;
     document.cookie = `theme=${gHTML("theme")}`;
     document.cookie = `expires=${nextYear()}`;
-    
+
     currentsched = eval(findHtml("sched"));
 
     var ls = "";
