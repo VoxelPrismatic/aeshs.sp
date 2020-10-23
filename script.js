@@ -18,6 +18,8 @@ finals_schedule = false;
 hr12 = false;
 half_period = false;
 light_theme = Number(localStorage.getItem("light_theme") || 0);
+last_time = 0;
+just_now = (new Date())
 
 schedule_names = {
     "normal": "NORMAL SCHEDULE",
@@ -500,11 +502,11 @@ schedules = {
     }
 }
 function get() {
-    if(hr12)
-        var ls = "PERIOD NAME ------------------- START<br>";
-    else
-        var ls = "PERIOD NAME ---------------- START<br>";
     var now = Date.now()
+    d = new Date()
+    if(d.getMonth() != just_now.getMonth() || d.getDate() != just_now.getDate() ||
+       d.getYear() != just_now.getYear() || d.getDay() != just_now.getDay())
+        window.location.reload()
     for(var x of Object.keys(current_schedule)) {
         var per = x;
         var end = current_schedule[x];
@@ -514,37 +516,13 @@ function get() {
             break;
         }
     }
-    for(var x = 0; x < Object.keys(current_schedule).length - 1; x += 1) {
-        var per = Object.keys(current_schedule)[x + 1];
-        var end2 = Object.values(current_schedule)[x];
-        var line = per + " ";
-        line = line.padEnd(28, "-") + " ";
-        hr = end2.getHours()
-        if(hr12) {
-            if(hr > 12) {
-                hr -= 12
-                ampm = " PM"
-            } else {
-                ampm = " AM"
-            }
-        } else {
-            ampm = ""
-        }
-
-        line += `${zf(hr)}:${zf(end2.getMinutes())}${ampm}`;
-        if(per == period)
-            line = "<b class='glow'><i>" + line + "</i></b>"
-        else if(end2 - now < 0)
-            line = "<s>" + line + "</s>";
-        ls += line + "<br>";
-    }
-    $("#list").innerHTML = ls;
     var scs = diffTime(rn, end);
+    refresh = last_time < scs
+    last_time = scs
     mns = Math.floor(scs / 60);
     scs %= 60;
     hrs = Math.floor(mns / 60);
     mns %= 60;
-    $("#prt").innerHTML = current_schedule_name;
     $("#time").innerHTML = `${zf(hrs)}:${zf(mns)}:${zf(scs)}`;
     endhr = end.getHours();
     if(hr12) {
@@ -557,7 +535,40 @@ function get() {
     } else {
         ampm = ""
     }
-    $("#per").innerHTML = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`
+    if(refresh) {
+        if(hr12)
+            var ls = "PERIOD NAME ------------------- START<br><div>";
+        else
+            var ls = "PERIOD NAME ---------------- START<br>";
+        for(var x = 0; x < Object.keys(current_schedule).length - 1; x += 1) {
+            var per = Object.keys(current_schedule)[x + 1];
+            var end2 = Object.values(current_schedule)[x];
+            var line = per + " ";
+            line = line.padEnd(28, "-") + " ";
+            hr = end2.getHours()
+            if(hr12) {
+                if(hr > 12) {
+                    hr -= 12
+                    ampm = " PM"
+                } else {
+                    ampm = " AM"
+                }
+            } else {
+                ampm = ""
+            }
+
+            line += `${zf(hr)}:${zf(end2.getMinutes())}${ampm}`;
+            if(per == period)
+                line = "<b class='glow'><i>" + line + "</i></b>"
+            else if(end2 - now < 0)
+                line = "<s>" + line + "</s>";
+            ls += line + "<br>";
+        }
+        $("#list").innerHTML = ls + "</div>";
+        if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && (new Date()) == 5)
+            period = "ENJOY THE WEEKEND";
+        $("#per").innerHTML = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`
+    }
 }
 
 for(var x = 0; x < 10; x += 1) {
@@ -624,12 +635,30 @@ function setSchedule(...args) {
         $("#hider").innerHTML = " ";
     }
     $(`span[onclick="setSchedule('${args.join("', '")}')"]`).classList.add("selected")
+    $("#prt").innerHTML = current_schedule_name;
+    last_time = 0;
     get();
 }
 
-window.setInterval(get, 1000);
-
 setSchedule(...eval(localStorage.getItem("current_schedule") + "") || ["normal"])
+if(just_now.getDay() == 6 || just_now.getDay() == 7) {
+    current_schedule = {
+        "ENJOY THE WEEKEND": time(23, 59, 59)
+    }
+    current_schedule_name = "WEEKEND"
+}
+
+
+date = Date()
+
+function toTheSecond() {
+    if(Date() == date)
+        return window.setTimeout(toTheSecond, 50)
+    window.setInterval(get, 1000)
+    get()
+}
+
+toTheSecond()
 
 function color(s) {
     $("#colorswap").value = s;
@@ -790,8 +819,11 @@ function toggleHour() {
     else
         $("#toggle-hour").innerHTML = "[12 HOUR]"
     setSchedule(...eval(localStorage.getItem("current_schedule") + ""))
+    last_time = 0;
     get();
 }
+
+full_screen = false
 
 function fullScreen() {
     $("#buttons").classList.toggle("inv");
@@ -801,17 +833,24 @@ function fullScreen() {
     $("#customizer").classList.toggle("mustinv");
     if($("#prt").classList.toggle("inv")) {
         $("#time").style.fontSize = "20vw";
-        var height = window.innerHeight / 3 * 2;
-        for(var x = 0; x < height; x += 1) {
-            $("#space").style.height = x + "px";
-            if(window.getComputedStyle($("#main")).height.slice(0, -2) >= height)
-                break;
-        }
+        var height = (window.innerHeight - window.getComputedStyle($("#main")).height.slice(0, -2)) / 2;
+        $("#space").style.height = height + "px"
         localStorage.setItem("full_screen", 1);
+        full_screen = true
     } else {
         $("#time").style.fontSize = "18vw";
         $("#space").style.height = "0px";
         localStorage.setItem("full_screen", 0);
+        full_screen = false
+    }
+}
+
+window.onresize = () => {
+    if(full_screen) {
+        $("#space").style.height = "0px";
+        var height = (window.innerHeight - window.getComputedStyle($("#main")).height.slice(0, -2)) / 2;
+        $("#space").style.height = height + "px"
+        localStorage.setItem("full_screen", 1);
     }
 }
 
@@ -844,6 +883,7 @@ function customSchedule(text) {
         console.log(st)
         localStorage.setItem("custom_" + current_schedule_name.split(" ").slice(-1)[0], st)
         current_schedule = dic;
+        last_time = 0;
         get();
     }
 }
