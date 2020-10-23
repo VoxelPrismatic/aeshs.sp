@@ -66,7 +66,7 @@
             <div id="list" class="tL" style="width: 80vw; font-size: smaller;">LOADING SCHEDULE</div>
             <!-- BUTTONS -->
             <div class="tC">
-                <details open="">
+                <details id="drawer" open="" onclick="localStorage.setItem('drawer_open', Number(!this.open))">
                     <summary></summary>
                     <div id="buttons">
                         <h3>-- SCHEDULES --</h3>

@@ -917,3 +917,6 @@ if(Number(localStorage.getItem("full_screen")))
     fullScreen();
 if(Number(localStorage.getItem("12hour")))
     toggleHour();
+n = Number(localStorage.getItem('drawer_open'))
+if(!isNaN(n))
+    $("#drawer").open = n
