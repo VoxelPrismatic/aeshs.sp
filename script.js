@@ -536,12 +536,16 @@ function get() {
         ampm = ""
     }
     if(refresh) {
+        if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
+            period = "ENJOY THE WEEKEND";
         if(hr12)
             var ls = "PERIOD NAME ------------------- START<br><div>";
         else
             var ls = "PERIOD NAME ---------------- START<br>";
         for(var x = 0; x < Object.keys(current_schedule).length - 1; x += 1) {
             var per = Object.keys(current_schedule)[x + 1];
+            if(per == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
+                per = "ENJOY THE WEEKEND";
             var end2 = Object.values(current_schedule)[x];
             var line = per + " ";
             line = line.padEnd(28, "-") + " ";
@@ -565,8 +569,6 @@ function get() {
             ls += line + "<br>";
         }
         $("#list").innerHTML = ls + "</div>";
-        if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && (new Date()) == 5)
-            period = "ENJOY THE WEEKEND";
         $("#per").innerHTML = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`
     }
 }
