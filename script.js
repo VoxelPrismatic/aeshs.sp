@@ -3,6 +3,7 @@ function $(...a) {
 } function $$(...a) {
     return document.querySelectorAll(...a);
 }
+$("#time").innerHTML = "-~-"
 
 function time(hr = 0, mn = 0, sc = 0) {
     var now = new Date();
@@ -501,6 +502,7 @@ schedules = {
         }
     }
 }
+
 function get() {
     var now = Date.now()
     d = new Date()
@@ -902,9 +904,6 @@ function diffTime(a, b = new Date(0)) {
 function zf(itm) {
     return String(itm).padStart(2, "0");
 }
-
-$("#time").innerHTML = "-~-"
-get();
 
 if(Number(localStorage.getItem("half_enabled")))
     toggleHalf();
