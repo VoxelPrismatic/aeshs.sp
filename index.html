@@ -13,7 +13,8 @@
             * {font-family: "Ubuntu Mono";}
             .cc {left: 0; right: 0; margin: auto;}
             body {width: 90vw; left: 0; right: 0; margin: auto;}
-            .bottom {position: absolute; bottom: 5px; left: 0px; right: 0px;}
+            .bottom {position: fixed; bottom: 5px; left: 0px; right: 0px;}
+            details:not([open]) {position: fixed; width: 90%; bottom: 25px;}
             #colorswap {
                 background-color: #223333ff;
                 width: 16vw; color: inherit;
@@ -65,74 +66,78 @@
             <div id="list" class="tL" style="width: 80vw; font-size: smaller;">LOADING SCHEDULE</div>
             <!-- BUTTONS -->
             <div class="tC">
-                <div id="buttons">
-                    <h3>-- SCHEDULES --</h3>
-                    <span onclick="toggleHalf()" id="toggle-half">[HALF PERIODS]</span>
-                    <span onclick="toggleELearning()" id="toggle-corona">[E-LEARNING]</span>
-                    <span onclick="toggleFinals()" id="toggle-final">[FINALS]</span>
-                    <span onclick="toggleCustom()" id="toggle-custom">[CUSTOM]</span>
-                    <div id="full_schedules">
-                        <h4>FULL PERIODS</h4>
-                        <span onclick="setSchedule('normal')" class="selected">[NORMAL]</span>
-                        <span onclick="setSchedule('late_arrival')">[LATE ARRIVAL]</span>
-                        <span onclick="setSchedule('activity')">[ACTIVITY PERIOD]</span>
-                        <span onclick="setSchedule('pm_assembly')">[PM ASSEMBLY]</span>
-                        <span onclick="setSchedule('summer')">[SUMMER SCHOOL]</span><br>
-                        <span onclick="setSchedule('early_dismissal')">[EARLY DISMISSAL]</span>
-                        <span onclick="setSchedule('odyssey')">[ODYSSEY]</span>
+                <details open="">
+                    <summary></summary>
+                    <div id="buttons">
+                        <h3>-- SCHEDULES --</h3>
+                        <span onclick="toggleHalf()" id="toggle-half">[HALF PERIODS]</span>
+                        <span onclick="toggleELearning()" id="toggle-corona">[E-LEARNING]</span>
+                        <span onclick="toggleFinals()" id="toggle-final">[FINALS]</span>
+                        <span onclick="toggleCustom()" id="toggle-custom">[CUSTOM]</span>
+                        <div id="full_schedules">
+                            <h4>FULL PERIODS</h4>
+                            <span onclick="setSchedule('normal')" class="selected">[NORMAL]</span>
+                            <span onclick="setSchedule('late_arrival')">[LATE ARRIVAL]</span>
+                            <span onclick="setSchedule('activity')">[ACTIVITY PERIOD]</span>
+                            <span onclick="setSchedule('pm_assembly')">[PM ASSEMBLY]</span>
+                            <span onclick="setSchedule('summer')">[SUMMER SCHOOL]</span><br>
+                            <span onclick="setSchedule('early_dismissal')">[EARLY DISMISSAL]</span>
+                            <span onclick="setSchedule('odyssey')">[ODYSSEY]</span>
+                        </div>
+                        <div id="half_schedules" class="inv">
+                            <h4>HALF PERIODS</h4>
+                            <span onclick="setSchedule('half', 'normal')">[NORMAL]</span>
+                            <span onclick="setSchedule('half', 'activity')">[ACTIVITY PERIOD]</span>
+                            <span onclick="setSchedule('half', 'pm_assembly')">[PM ASSEMBLY]</span>
+                            <span onclick="setSchedule('half', 'early_dismissal')">[EARLY DISMISSAL]</span>
+                        </div>
+                        <div id="c19_full_schedules" class="inv">
+                            <h4>E-LEARNING FULL PERIODS</h4>
+                            <span onclick="setSchedule('corona', 'normal')">[NORMAL]</span>
+                            <span onclick="setSchedule('corona', 'late_arrival')">[LATE ARRIVAL]</span>
+                        </div>
+                        <div id="c19_half_schedules" class="inv">
+                            <h4>E-LEARNING HALF PERIODS</h4>
+                            <span onclick="setSchedule('corona', 'half', 'normal')">[NORMAL]</span>
+                        </div>
+                        <div id="custom_schedules" class="inv">
+                            <h4>YOUR CUSTOM SCHEDULES</h4>
+                            <span onclick="setSchedule('custom', '0')">[CUSTOM 0]</span>
+                            <span onclick="setSchedule('custom', '1')">[CUSTOM 1]</span>
+                            <span onclick="setSchedule('custom', '2')">[CUSTOM 2]</span>
+                            <span onclick="setSchedule('custom', '3')">[CUSTOM 3]</span>
+                            <span onclick="setSchedule('custom', '4')">[CUSTOM 4]</span><br>
+                            <span onclick="setSchedule('custom', '5')">[CUSTOM 5]</span>
+                            <span onclick="setSchedule('custom', '6')">[CUSTOM 6]</span>
+                            <span onclick="setSchedule('custom', '7')">[CUSTOM 7]</span>
+                            <span onclick="setSchedule('custom', '8')">[CUSTOM 8]</span>
+                            <span onclick="setSchedule('custom', '9')">[CUSTOM 9]</span>
+                        </div>
+                        <div id="finals_schedules" class="inv">
+                            <h4>FINALS SCHEDULES</h4>
+                            <span onclick="setSchedule('finals', '1')">[FINALS DAY 1]</span>
+                            <span onclick="setSchedule('finals', '2')">[FINALS DAY 2]</span>
+                            <span onclick="setSchedule('finals', '3')">[FINALS DAY 3]</span>
+                        </div>
                     </div>
-                    <div id="half_schedules" class="inv">
-                        <h4>HALF PERIODS</h4>
-                        <span onclick="setSchedule('half', 'normal')">[NORMAL]</span>
-                        <span onclick="setSchedule('half', 'activity')">[ACTIVITY PERIOD]</span>
-                        <span onclick="setSchedule('half', 'pm_assembly')">[PM ASSEMBLY]</span>
-                        <span onclick="setSchedule('half', 'early_dismissal')">[EARLY DISMISSAL]</span>
+                    <div id="options">
+                        <br><hr style="width: 30%; height: 4px; border: 4px solid #00ffff; border-radius: 10px;">
+                        <span onclick="toggleTheme()" style="color: #ccddddff;" id="change">[LIGHT THEME]</span>
+                        <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)">
+                        <span onclick="$('#customizer').classList.toggle('inv')" id="hider"></span>
+                        <span onclick="toggleHour()" id="toggle-hour">[12 HOUR]</span>
                     </div>
-                    <div id="c19_full_schedules" class="inv">
-                        <h4>E-LEARNING FULL PERIODS</h4>
-                        <span onclick="setSchedule('corona', 'normal')">[NORMAL]</span>
-                        <span onclick="setSchedule('corona', 'late_arrival')">[LATE ARRIVAL]</span>
+                    <textarea class="inv" id="customizer" onload="textareaTheme()" onkeyup="customSchedule(this.value)"></textarea>
+                    <div id="bar">
+                        <span onclick="fullScreen()" id="fuller">[TOGGLE FULL SCREEN]</span>
+                        <span id="selfpromo"> // Check out my other <a href="/prizm.dev" target="_blank" style="color: inherit;">stuff</a>!</a>
                     </div>
-                    <div id="c19_half_schedules" class="inv">
-                        <h4>E-LEARNING HALF PERIODS</h4>
-                        <span onclick="setSchedule('corona', 'half', 'normal')">[NORMAL]</span>
-                    </div>
-                    <div id="custom_schedules" class="inv">
-                        <h4>YOUR CUSTOM SCHEDULES</h4>
-                        <span onclick="setSchedule('custom', '0')">[CUSTOM 0]</span>
-                        <span onclick="setSchedule('custom', '1')">[CUSTOM 1]</span>
-                        <span onclick="setSchedule('custom', '2')">[CUSTOM 2]</span>
-                        <span onclick="setSchedule('custom', '3')">[CUSTOM 3]</span>
-                        <span onclick="setSchedule('custom', '4')">[CUSTOM 4]</span><br>
-                        <span onclick="setSchedule('custom', '5')">[CUSTOM 5]</span>
-                        <span onclick="setSchedule('custom', '6')">[CUSTOM 6]</span>
-                        <span onclick="setSchedule('custom', '7')">[CUSTOM 7]</span>
-                        <span onclick="setSchedule('custom', '8')">[CUSTOM 8]</span>
-                        <span onclick="setSchedule('custom', '9')">[CUSTOM 9]</span>
-                    </div>
-                    <div id="finals_schedules" class="inv">
-                        <h4>FINALS SCHEDULES</h4>
-                        <span onclick="setSchedule('finals', '1')">[FINALS DAY 1]</span>
-                        <span onclick="setSchedule('finals', '2')">[FINALS DAY 2]</span>
-                        <span onclick="setSchedule('finals', '3')">[FINALS DAY 3]</span>
-                    </div>
-                </div>
-                <div id="options">
-                    <br><hr style="width: 30%; height: 4px; border: 4px solid #00ffff; border-radius: 10px;">
-                    <span onclick="toggleTheme()" style="color: #ccddddff;" id="change">[LIGHT THEME]</span>
-                    <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)">
-                    <span onclick="$('#customizer').classList.toggle('inv')" id="hider"></span>
-                    <span onclick="toggleHour()" id="toggle-hour">[12 HOUR]</span>
-                </div>
-                <span onclick="fullScreen()" id="fuller">[TOGGLE FULL SCREEN]</span>
-                <textarea class="inv" id="customizer" onload="textareaTheme()" onkeyup="customSchedule(this.value)"></textarea>
+                </details>
             </div>
         </div>
     </div>
+    <hr style="opacity: 0; height: 5px">
     <!-- SCRIPTS -->
-    <div class="tC">
-        Check out my other <a href="/prizm.dev" target="_blank" style="color: inherit;">stuff</a>!
-    </div>
     <script src="script.js" type="text/javascript"></script>
     </body>
 </html>

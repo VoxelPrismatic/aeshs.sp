@@ -833,7 +833,7 @@ function fullScreen() {
     $("#buttons").classList.toggle("inv");
     $("#options").classList.toggle("inv");
     $("#list").classList.toggle("inv");
-    $("#fuller").classList.toggle("bottom");
+    $("#bar").classList.toggle("bottom");
     $("#customizer").classList.toggle("mustinv");
     if($("#prt").classList.toggle("inv")) {
         $("#time").style.fontSize = "20vw";
