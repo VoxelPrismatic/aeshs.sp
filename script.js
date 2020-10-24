@@ -849,6 +849,10 @@ window.onresize = () => {
         $("#space").style.height = height + "px"
         localStorage.setItem("full_screen", 1);
     }
+    $("#drawer").classList.remove("drawer_bottom")
+    if(!window.scrollMaxY) {
+        $("#drawer").classList.add("drawer_bottom")
+    }
 }
 
 function customSchedule(text) {
@@ -882,6 +886,15 @@ function customSchedule(text) {
         current_schedule = dic;
         last_time = 0;
         get();
+    }
+}
+
+function drawerThing(elem) {
+    localStorage.setItem('drawer_open', Number(!elem.open))
+    if(window.scrollMaxY) {
+        elem.classList.remove("drawer_bottom")
+    } else {
+        elem.classList.add("drawer_bottom")
     }
 }
 
@@ -921,4 +934,10 @@ if(just_now.getDay() == 6 || just_now.getDay() == 7) {
     current_schedule_name = "WEEKEND"
     $("#prt").innerHTML = current_schedule_name;
     get();
+}
+
+if(window.scrollMaxY) {
+    $("#drawer").classList.remove("drawer_bottom")
+} else {
+    $("#drawer").classList.add("drawer_bottom")
 }

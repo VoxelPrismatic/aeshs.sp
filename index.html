@@ -15,6 +15,7 @@
             body {width: 90vw; left: 0; right: 0; margin: auto;}
             .bottom {position: fixed; bottom: 5px; left: 0px; right: 0px;}
             details:not([open]) {position: fixed; width: 90%; bottom: 25px;}
+            details.drawer_bottom[open] {position: fixed; width: 90%; bottom: 5px;}
             #colorswap {
                 background-color: #223333ff;
                 width: 16vw; color: inherit;
@@ -66,7 +67,7 @@
             <div id="list" class="tL" style="width: 80vw; font-size: smaller;">LOADING SCHEDULE</div>
             <!-- BUTTONS -->
             <div class="tC">
-                <details id="drawer" open="" onclick="localStorage.setItem('drawer_open', Number(!this.open))">
+                <details id="drawer" open="" onclick="drawerThing(this)">
                     <summary></summary>
                     <div id="buttons">
                         <h3>-- SCHEDULES --</h3>
