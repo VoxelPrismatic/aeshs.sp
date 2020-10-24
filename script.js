@@ -20,7 +20,7 @@ hr12 = false;
 half_period = false;
 light_theme = Number(localStorage.getItem("light_theme") || 0);
 last_time = 0;
-just_now = (new Date())
+just_now = new Date()
 
 schedule_names = {
     "normal": "NORMAL SCHEDULE",
@@ -645,13 +645,6 @@ function setSchedule(...args) {
 }
 
 setSchedule(...eval(localStorage.getItem("current_schedule") + "") || ["normal"])
-if(just_now.getDay() == 6 || just_now.getDay() == 7) {
-    current_schedule = {
-        "ENJOY THE WEEKEND": time(23, 59, 59)
-    }
-    current_schedule_name = "WEEKEND"
-}
-
 
 date = Date()
 
@@ -920,3 +913,12 @@ if(Number(localStorage.getItem("12hour")))
 n = Number(localStorage.getItem('drawer_open'))
 if(!isNaN(n))
     $("#drawer").open = n
+
+if(just_now.getDay() == 6 || just_now.getDay() == 7) {
+    current_schedule = {
+        "ENJOY THE WEEKEND": time(23, 59, 59)
+    }
+    current_schedule_name = "WEEKEND"
+    $("#prt").innerHTML = current_schedule_name;
+    get();
+}
