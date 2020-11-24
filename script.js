@@ -711,7 +711,7 @@ var date = Date()
 function toTheSecond() {
     if(Date() == date)
         return window.setTimeout(toTheSecond, 10)
-    window.setInterval(get, 1000)
+    console.log(window.setInterval(get, 1000));
     get()
 }
 
