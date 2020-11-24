@@ -883,6 +883,7 @@ function toggleHour() {
 full_screen = false
 
 function fullScreen() {
+    $("#main").classList.toggle("fullscreen");
     $("#buttons").classList.toggle("inv");
     $("#options").classList.toggle("inv");
     $("#list").classList.toggle("inv");
@@ -890,13 +891,13 @@ function fullScreen() {
     $("#customizer").classList.toggle("mustinv");
     if($("#prt").classList.toggle("inv")) {
         $("#time").style.fontSize = "20vw";
-        var height = (window.innerHeight - window.getComputedStyle($("#main")).height.slice(0, -2)) / 2;
-        $("#space").style.height = height + "px"
+        //var height = (window.innerHeight - window.getComputedStyle($("#main")).height.slice(0, -2)) / 2;
+        //$("#space").style.height = height + "px"
         localStorage.setItem("full_screen", 1);
         full_screen = true
     } else {
         $("#time").style.fontSize = "18vw";
-        $("#space").style.height = "0px";
+        //$("#space").style.height = "0px";
         localStorage.setItem("full_screen", 0);
         full_screen = false
     }
@@ -904,10 +905,10 @@ function fullScreen() {
 
 window.onresize = () => {
     if(full_screen) {
-        $("#space").style.height = "0px";
-        var height = (window.innerHeight - window.getComputedStyle($("#main")).height.slice(0, -2)) / 2;
-        $("#space").style.height = height + "px"
-        localStorage.setItem("full_screen", 1);
+        //$("#space").style.height = "0px";
+        //var height = (window.innerHeight - window.getComputedStyle($("#main")).height.slice(0, -2)) / 2;
+        //$("#space").style.height = height + "px"
+        //localStorage.setItem("full_screen", 1);
     }
     $("#drawer").classList.remove("drawer_bottom")
     if(!window.scrollMaxY) {
