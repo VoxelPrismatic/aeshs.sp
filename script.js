@@ -3,7 +3,7 @@ function $(...a) {
 } function $$(...a) {
     return document.querySelectorAll(...a);
 }
-$("#time").innerHTML = "-~-"
+$("#time").textContent = "-~-"
 
 function time(hr = 0, mn = 0, sc = 0) {
     var now = new Date();
@@ -13,16 +13,16 @@ function time(hr = 0, mn = 0, sc = 0) {
     return now;
 }
 
-custom_schedule = false;
-elearn_schedule = false;
-finals_schedule = false;
-hr12 = false;
-half_period = false;
-light_theme = Number(localStorage.getItem("light_theme") || 0);
-last_time = 0;
-just_now = new Date()
+var custom_schedule = false;
+var elearn_schedule = false;
+var finals_schedule = false;
+var hr12 = false;
+var half_period = false;
+var light_theme = Number(localStorage.getItem("light_theme") || 0);
+var last_time = 0;
+var just_now = new Date()
 
-schedule_names = {
+let schedule_names = {
     "normal": "NORMAL SCHEDULE",
     "late_arrival": "LATE ARRIVAL SCHEDULE",
     "activity": "ACTIVITY PERIOD SCHEDULE",
@@ -64,7 +64,7 @@ schedule_names = {
     }
 }
 
-schedules = {
+let schedules = {
     "normal": {
         "SCHOOL STARTS": time( 7, 30),
         "EARLY BIRD":    time( 8, 25),
@@ -565,7 +565,7 @@ schedules = {
 
 function get() {
     var now = Date.now()
-    d = new Date()
+    var d = new Date()
     if(d.getMonth() != just_now.getMonth() || d.getDate() != just_now.getDate() ||
        d.getYear() != just_now.getYear() || d.getDay() != just_now.getDay())
         window.location.reload()
@@ -579,23 +579,23 @@ function get() {
         }
     }
     var scs = diffTime(rn, end);
-    refresh = last_time < scs
+    var refresh = last_time < scs
     last_time = scs
-    mns = Math.floor(scs / 60);
+    var mns = Math.floor(scs / 60);
     scs %= 60;
-    hrs = Math.floor(mns / 60);
+    var hrs = Math.floor(mns / 60);
     mns %= 60;
-    $("#time").innerHTML = `${zf(hrs)}:${zf(mns)}:${zf(scs)}`;
-    endhr = end.getHours();
+    $("#time").textContent = `${zf(hrs)}:${zf(mns)}:${zf(scs)}`;
+    var endhr = end.getHours();
     if(hr12) {
         if(endhr > 12) {
             endhr -= 12;
-            ampm = " PM"
+            var ampm = " PM"
         } else {
-            ampm = " AM"
+            var ampm = " AM"
         }
     } else {
-        ampm = ""
+        var  = ""
     }
     if(refresh) {
         if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
@@ -611,7 +611,7 @@ function get() {
             var end2 = Object.values(current_schedule)[x];
             var line = per + " ";
             line = line.padEnd(28, "-") + " ";
-            hr = end2.getHours()
+            var hr = end2.getHours()
             if(hr12) {
                 if(hr > 12) {
                     hr -= 12
@@ -631,7 +631,7 @@ function get() {
             ls += line + "<br>";
         }
         $("#list").innerHTML = ls + "</div>";
-        $("#per").innerHTML = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`
+        $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
     }
 }
 
@@ -686,20 +686,20 @@ function setSchedule(...args) {
             $("#customizer").value +=
                 `${key.padEnd(28)}| ${hr}:${min}${sec}${ampm}\n`;
         }
-        $("#customizer").onchange = function(){changer(s);};
+        $("#customizer").onchange = function() { changer(s); };
         $("#customizer").style.height = "30vw";
         $("#customizer").style.width = "90vw";
-        $("#hider").innerHTML = "[TOGGLE CUSTOM SCHEDULE EDITOR]";
+        $("#hider").textContent = "[TOGGLE CUSTOM SCHEDULE EDITOR]";
     } else {
         $("#customizer").className = "inv cc";
         $("#customizer").onchange = function(){};
-        $("#customizer").value="";
+        $("#customizer").value = "";
         $("#customizer").style.height = "0px";
         $("#customizer").style.width = "0px";
-        $("#hider").innerHTML = " ";
+        $("#hider").textContent = " ";
     }
     $(`span[onclick="setSchedule('${args.join("', '")}')"]`).classList.add("selected")
-    $("#prt").innerHTML = current_schedule_name;
+    $("#prt").textContent = current_schedule_name;
     last_time = 0;
     get();
 }
@@ -715,7 +715,7 @@ function toTheSecond() {
     get()
 }
 
-toTheSecond()
+toTheSecond();
 
 function color(s) {
     $("#colorswap").value = s;
@@ -768,8 +768,8 @@ function toggleTheme() {
 
 color(localStorage.getItem("current_color") || "#00ffff");
 
-function hideScheds() {
-    elements = [
+function hideScheds(except) {
+    var elements = [
         "full_schedules",
         "half_schedules",
         "c19_full_schedules",
@@ -779,21 +779,22 @@ function hideScheds() {
     ]
     for(var e of elements)
         $("#" + e).classList.add("inv")
+    if(except)
+        $("#" + except).classList.remove("inv");
 }
 
 function toggleHalf() {
     half_period = !half_period
     if(finals_schedule || custom_schedule)
         return
-    hideScheds();
     sched_ls = [];
     if(half_period) {
         sched = "half_schedules";
         sched_ls.push("half");
-        $("#toggle-half").innerHTML = "[FULL PERIODS]"
+        $("#toggle-half").textContent = "[FULL PERIODS]"
     } else {
         sched = "full_schedules";
-        $("#toggle-half").innerHTML = "[HALF PERIODS]"
+        $("#toggle-half").textContent = "[HALF PERIODS]"
     }
     if(elearn_schedule) {
         sched = "c19_" + sched
@@ -802,14 +803,13 @@ function toggleHalf() {
     sched_ls.push(eval(localStorage.getItem("current_schedule") + "").slice(-1)[0])
     setSchedule(...sched_ls)
     localStorage.setItem("half_enabled", Number(half_period));
-    $("#" + sched).classList.remove("inv")
+    hideScheds(sched);
 }
 
 function toggleELearning() {
     elearn_schedule = !elearn_schedule
     if(finals_schedule || custom_schedule)
         return
-    hideScheds();
     sched_ls = [];
     if(half_period) {
         sched = "half_schedules";
@@ -820,26 +820,26 @@ function toggleELearning() {
     if(elearn_schedule) {
         sched = "c19_" + sched
         sched_ls = ["corona", ...sched_ls];
-        $("#toggle-corona").innerHTML = "[IRL LEARNING]"
+        $("#toggle-corona").textContent = "[IRL LEARNING]"
     } else {
-        $("#toggle-corona").innerHTML = "[E-LEARNING]"
+        $("#toggle-corona").textContent = "[E-LEARNING]"
     }
     sched_ls.push(eval(localStorage.getItem("current_schedule") + "").slice(-1)[0])
     setSchedule(...sched_ls)
     localStorage.setItem("corona_enabled", Number(elearn_schedule));
-    $("#" + sched).classList.remove("inv")
+    hideScheds(sched);
 }
 
 function toggleFinals() {
     finals_schedule = !finals_schedule
     hideScheds();
     if(finals_schedule) {
-        $("#toggle-final").innerHTML = "[NORMAL]"
+        $("#toggle-final").textContent = "[NORMAL]"
         $("#finals_schedules").classList.remove("inv");
         $("#toggle-half").classList.add("inv");
         $("#toggle-corona").classList.add("inv");
     } else {
-        $("#toggle-final").innerHTML = "[FINALS]"
+        $("#toggle-final").textContent = "[FINALS]"
         $("#toggle-half").classList.remove("inv");
         $("#toggle-corona").classList.remove("inv");
         toggleHalf();
@@ -852,13 +852,13 @@ function toggleCustom() {
     custom_schedule = !custom_schedule
     hideScheds();
     if(custom_schedule) {
-        $("#toggle-custom").innerHTML = "[PRESET]"
+        $("#toggle-custom").textContent = "[PRESET]"
         $("#custom_schedules").classList.remove("inv");
         $("#toggle-half").classList.add("inv");
         $("#toggle-final").classList.add("inv");
         $("#toggle-corona").classList.add("inv");
     } else {
-        $("#toggle-custom").innerHTML = "[CUSTOM]"
+        $("#toggle-custom").textContent = "[CUSTOM]"
         $("#toggle-half").classList.remove("inv");
         $("#toggle-final").classList.remove("inv");
         $("#toggle-corona").classList.remove("inv");
@@ -872,9 +872,9 @@ function toggleHour() {
     hr12 = !hr12
     localStorage.setItem("12hour", Number(hr12))
     if(hr12)
-        $("#toggle-hour").innerHTML = "[24 HOUR]"
+        $("#toggle-hour").textContent = "[24 HOUR]"
     else
-        $("#toggle-hour").innerHTML = "[12 HOUR]"
+        $("#toggle-hour").textContent = "[12 HOUR]"
     setSchedule(...eval(localStorage.getItem("current_schedule") + ""))
     last_time = 0;
     get();
@@ -883,33 +883,21 @@ function toggleHour() {
 full_screen = false
 
 function fullScreen() {
-    $("#main").classList.toggle("fullscreen");
+    full_screen = $("#main").classList.toggle("fullscreen");
+    $("#prt").classList.toggle("inv");
     $("#buttons").classList.toggle("inv");
     $("#options").classList.toggle("inv");
     $("#list").classList.toggle("inv");
     $("#bar").classList.toggle("bottom");
     $("#customizer").classList.toggle("mustinv");
-    if($("#prt").classList.toggle("inv")) {
+    localStorage.setItem("full_screen", Number(full_screen));
+    if(full_screen)
         $("#time").style.fontSize = "20vw";
-        //var height = (window.innerHeight - window.getComputedStyle($("#main")).height.slice(0, -2)) / 2;
-        //$("#space").style.height = height + "px"
-        localStorage.setItem("full_screen", 1);
-        full_screen = true
-    } else {
+    else
         $("#time").style.fontSize = "18vw";
-        //$("#space").style.height = "0px";
-        localStorage.setItem("full_screen", 0);
-        full_screen = false
-    }
 }
 
 window.onresize = () => {
-    if(full_screen) {
-        //$("#space").style.height = "0px";
-        //var height = (window.innerHeight - window.getComputedStyle($("#main")).height.slice(0, -2)) / 2;
-        //$("#space").style.height = height + "px"
-        //localStorage.setItem("full_screen", 1);
-    }
     $("#drawer").classList.remove("drawer_bottom")
     if(!window.scrollMaxY) {
         $("#drawer").classList.add("drawer_bottom")
@@ -917,22 +905,22 @@ window.onresize = () => {
 }
 
 function customSchedule(text) {
-    dic = {}
-    st = "{"
+    var dic = {}
+    var st = "{"
     for(var line of text.split("\n")) {
         if(line.search(/.+\| *\d{1,2}:\d{2}(:\d{2})?( *(am|pm))?/) > -1) {
-            per = line.split("|")[0].trim()
+            var per = line.split("|")[0].trim()
             console.log(line.split("|"))
-            tm = line.split("|")[1].trim()
-            hr = Number(tm.split(":")[0])
-            min = Number(tm.split(":")[1].slice(0, 2))
+            var tm = line.split("|")[1].trim()
+            var hr = Number(tm.split(":")[0])
+            var min = Number(tm.split(":")[1].slice(0, 2))
             try {
                 if(Number(tm.split(":")[2].slice(0, 2)))
-                    sec = Number(tm.split(":")[2])
+                    var sec = Number(tm.split(":")[2])
                 else
-                    sec = 0
+                    var sec = 0
             } catch(err) {
-                sec = 0
+                var sec = 0
             }
             if(line.trim().toLowerCase().endsWith("pm"))
                 hr += 12
@@ -988,12 +976,12 @@ n = Number(localStorage.getItem('drawer_open'))
 if(!isNaN(n))
     $("#drawer").open = n
 
-if(just_now.getDay() == 6 || just_now.getDay() == 7) {
+if(just_now.getDay() == 6 || just_now.getDay() == 0) {
     current_schedule = {
         "ENJOY THE WEEKEND": time(23, 59, 59)
     }
     current_schedule_name = "WEEKEND"
-    $("#prt").innerHTML = current_schedule_name;
+    $("#prt").textContent = current_schedule_name;
     get();
 }
 
