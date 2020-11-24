@@ -706,11 +706,11 @@ function setSchedule(...args) {
 
 setSchedule(...eval(localStorage.getItem("current_schedule") + "") || ["normal"])
 
-date = Date()
+var date = Date()
 
 function toTheSecond() {
     if(Date() == date)
-        return window.setTimeout(toTheSecond, 50)
+        return window.setTimeout(toTheSecond, 10)
     window.setInterval(get, 1000)
     get()
 }
