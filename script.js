@@ -595,8 +595,9 @@ function get() {
             var ampm = " AM"
         }
     } else {
-        var  = ""
+        var ampm = ""
     }
+    $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
     if(refresh) {
         if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
             period = "ENJOY THE WEEKEND";
@@ -631,7 +632,6 @@ function get() {
             ls += line + "<br>";
         }
         $("#list").innerHTML = ls + "</div>";
-        $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
     }
 }
 
