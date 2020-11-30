@@ -591,6 +591,8 @@ function get() {
         if(endhr > 12) {
             endhr -= 12;
             var ampm = " PM"
+        } else if(endhr == 12) {
+            var ampm = " PM"
         } else {
             var ampm = " AM"
         }
@@ -617,6 +619,8 @@ function get() {
                 if(hr > 12) {
                     hr -= 12
                     ampm = " PM"
+                } else if(endhr == 12) {
+                    var ampm = " PM"
                 } else {
                     ampm = " AM"
                 }
