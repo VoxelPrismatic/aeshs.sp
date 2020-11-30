@@ -586,21 +586,22 @@ function get() {
     var hrs = Math.floor(mns / 60);
     mns %= 60;
     $("#time").textContent = `${zf(hrs)}:${zf(mns)}:${zf(scs)}`;
-    var endhr = end.getHours();
-    if(hr12) {
-        if(endhr > 12) {
-            endhr -= 12;
-            var ampm = " PM"
-        } else if(endhr == 12) {
-            var ampm = " PM"
-        } else {
-            var ampm = " AM"
-        }
-    } else {
-        var ampm = ""
-    }
-    $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
+    
     if(refresh) {
+        var endhr = end.getHours();
+        if(hr12) {
+            if(endhr > 12) {
+                endhr -= 12;
+                var ampm = " PM"
+            } else if(endhr == 12) {
+                var ampm = " PM"
+            } else {
+                var ampm = " AM"
+            }
+        } else {
+            var ampm = ""
+        }
+        $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
         if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
             period = "ENJOY THE WEEKEND";
         if(hr12)
