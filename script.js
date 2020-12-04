@@ -820,7 +820,8 @@ function hideScheds(except) {
         "c19_full_schedules",
         "c19_half_schedules",
         "custom_schedules",
-        "finals_schedules"
+        "finals_schedules",
+        "c19_finals_schedules"
     ]
     for(var e of elements)
         $("#" + e).classList.add("inv")
@@ -859,6 +860,9 @@ function toggleELearning() {
     if(half_period && !finals_schedule) {
         sched = "half_schedules";
         sched_ls.push("half");
+    } else if(finals_schedule) {
+        sched = "finals_schedules";
+        sched_ls.push("finals");
     } else {
         sched = "full_schedules";
     }
@@ -880,7 +884,10 @@ function toggleFinals() {
     hideScheds();
     if(finals_schedule) {
         $("#toggle-final").textContent = "[NON-FINALS]"
-        $("#finals_schedules").classList.remove("inv");
+        if(elearn_schedule)
+            $("#c19_finals_schedules").classList.remove("inv");
+        else
+            $("#finals_schedules").classList.remove("inv");
         $("#toggle-half").classList.add("inv");
     } else {
         $("#toggle-final").textContent = "[FINALS]"
@@ -888,8 +895,6 @@ function toggleFinals() {
         toggleHalf();
         toggleHalf();
     }
-    toggleELearning();
-    toggleELearning();
     localStorage.setItem("finals_enabled", Number(finals_schedule));
 }
 
@@ -985,11 +990,11 @@ function customSchedule(text) {
 
 function drawerThing(elem) {
     localStorage.setItem('drawer_open', Number(!elem.open))
-    if(window.scrollMaxY) {
-        elem.classList.remove("drawer_bottom")
-    } else {
-        elem.classList.add("drawer_bottom")
-    }
+    elem.classList.remove("drawer_bottom")
+    window.setTimeout(() => {
+        if(!window.scrollMaxY)
+            elem.classList.add("drawer_bottom");
+    }, 1);
 }
 
 
