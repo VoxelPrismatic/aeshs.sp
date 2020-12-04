@@ -22,7 +22,7 @@ var light_theme = Number(localStorage.getItem("light_theme") || 0);
 var last_time = 0;
 var just_now = new Date()
 
-let schedule_names = {
+var schedule_names = {
     "normal": "NORMAL SCHEDULE",
     "late_arrival": "LATE ARRIVAL SCHEDULE",
     "activity": "ACTIVITY PERIOD SCHEDULE",
@@ -49,6 +49,11 @@ let schedule_names = {
         "normal": "NORMAL SCHEDULE - E-LEARNING",
         "late_arrival": "LATE ARRIVAL SCHEDULE - E-LEARNING",
         "early_dismissal": "EARLY DISMISSAL SCHEDULE - E-LEARNING",
+        "finals": {
+            "1": "FINALS DAY 1 SCHEDULE - E-LEARNING",
+            "2": "FINALS DAY 2 SCHEDULE - E-LEARNING",
+            "3": "FINALS DAY 3 SCHEDULE - E-LEARNING"
+        },
     },
     "custom": {
         "0": "CUSTOM SCHEDULE 0",
@@ -64,7 +69,7 @@ let schedule_names = {
     }
 }
 
-let schedules = {
+var schedules = {
     "normal": {
         "SCHOOL STARTS": time( 7, 30),
         "EARLY BIRD":    time( 8, 25),
@@ -526,6 +531,41 @@ let schedules = {
             "PASSING TO 8":  time(14,  1),
             "PERIOD 8":      time(14, 37),
             "SCHOOL IS TOMORROW": time(23, 59, 59),
+        },
+        "finals": {
+            "1": {
+                "SCHOOL STARTS": time( 7, 30),
+                "EARLY BIRD":    time( 8, 25),
+                "PASSING TO 1":  time( 8, 35),
+                "PERIOD 1":      time(10,  5),
+                "PASSING TO 2":  time(10, 15),
+                "PERIOD 2":      time(11, 45),
+                "PASSING TO 4":  time(11, 55),
+                "PERIOD 4":      time(13, 25),
+                "SCHOOL IS TOMORROW": time(23, 59, 59),
+            },
+            "2": {
+                "SCHOOL STARTS": time( 7, 30),
+                "EARLY BIRD":    time( 8, 25),
+                "PASSING TO 3":  time( 8, 35),
+                "PERIOD 3":      time(10,  5),
+                "PASSING TO 7":  time(10, 15),
+                "PERIOD 7":      time(11, 45),
+                "PASSING TO 5":  time(11, 55),
+                "PERIOD 5":      time(13, 25),
+                "SCHOOL IS TOMORROW": time(23, 59, 59),
+            },
+            "3": {
+                "SCHOOL STARTS": time( 7, 30),
+                "EARLY BIRD":    time( 8, 25),
+                "PASSING TO 8":  time( 8, 35),
+                "PERIOD 8":      time(10,  5),
+                "PASSING TO 6":  time(10, 15),
+                "PERIOD 6":      time(11, 45),
+                "GO TO MAKEUPS": time(11, 55),
+                "MAKEUPS":       time(13, 25),
+                "SEMESTER IS OVER, GG M8": time(23, 59, 59),
+            }
         }
     },
 
@@ -813,10 +853,10 @@ function toggleHalf() {
 
 function toggleELearning() {
     elearn_schedule = !elearn_schedule
-    if(finals_schedule || custom_schedule)
+    if(custom_schedule)
         return
     sched_ls = [];
-    if(half_period) {
+    if(half_period && !finals_schedule) {
         sched = "half_schedules";
         sched_ls.push("half");
     } else {
@@ -839,17 +879,17 @@ function toggleFinals() {
     finals_schedule = !finals_schedule
     hideScheds();
     if(finals_schedule) {
-        $("#toggle-final").textContent = "[NORMAL]"
+        $("#toggle-final").textContent = "[NON-FINALS]"
         $("#finals_schedules").classList.remove("inv");
         $("#toggle-half").classList.add("inv");
-        $("#toggle-corona").classList.add("inv");
     } else {
         $("#toggle-final").textContent = "[FINALS]"
         $("#toggle-half").classList.remove("inv");
-        $("#toggle-corona").classList.remove("inv");
         toggleHalf();
         toggleHalf();
     }
+    toggleELearning();
+    toggleELearning();
     localStorage.setItem("finals_enabled", Number(finals_schedule));
 }
 
