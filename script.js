@@ -619,7 +619,7 @@ var schedules = {
         },
         "end": {
             "ENJOY THE WEEKEND": time(23, 59, 59)
-        },
+        }
     }
 }
 
@@ -646,7 +646,7 @@ function get() {
     var hrs = Math.floor(mns / 60);
     mns %= 60;
     $("#time").textContent = `${zf(hrs)}:${zf(mns)}:${zf(scs)}`;
-    
+
     if(refresh) {
         var endhr = end.getHours();
         if(hr12) {
@@ -1047,12 +1047,13 @@ if(!isNaN(n))
     $("#drawer").open = n
 
 if(just_now.getDay() == 6 || just_now.getDay() == 0) {
-    current_schedule = {
-        "ENJOY THE WEEKEND": time(23, 59, 59)
-    }
-    current_schedule_name = "WEEKEND"
+    current_schedule = schedules["free"]["end"]
+    current_schedule_name = schedule_names["free"]["end"]
     $("#prt").textContent = current_schedule_name;
     get();
+} else {
+    t = just_now.getFullYear() + "/" + just_now.getMonth() + "/" + just_now.getDate()
+
 }
 
 if(window.scrollMaxY) {
