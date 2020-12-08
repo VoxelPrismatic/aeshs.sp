@@ -666,7 +666,7 @@ function get() {
     scs %= 60;
     var hrs = Math.floor(mns / 60);
     mns %= 60;
-    $("#time").textContent = `${zf(hrs)}:${zf(mns)}:<span id='seconds'>${zf(scs)}</span>`;
+    $("#time").innerHTML = `${zf(hrs)}:${zf(mns)}:<span id='seconds'>${zf(scs)}</span>`;
 
     if(refresh) {
         var endhr = end.getHours();
