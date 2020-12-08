@@ -637,7 +637,7 @@ var schedules = {
     }
 }
 
-function get()
+function get() {
     var now = Date.now()
     var d = new Date()
     if(d.getMonth() != just_now.getMonth() || d.getDate() != just_now.getDate() ||
