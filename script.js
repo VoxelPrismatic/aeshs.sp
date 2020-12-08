@@ -642,9 +642,9 @@ last_end = null
 function get() {
     var now = Date.now()
     var d = new Date()
-    var scs = diffTime(d, last_end);
-    if(last_time && $("#seconds") && scs % 60 != 59) {
-        $("#seconds").textContent = ((scs % 60) + "").padStart(2, "0")
+    var scs = diffTime(d, last_end) % 60;
+    if(last_time && scs != 59) {
+        $("#seconds").textContent = (scs + "").padStart(2, "0")
         return
     }
     if(d.getMonth() != just_now.getMonth() || d.getDate() != just_now.getDate() ||
