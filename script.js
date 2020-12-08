@@ -638,6 +638,13 @@ var schedules = {
 }
 
 function get() {
+    if($("#seconds")) {
+        n = $("#seconds").textContent
+        n -= 1
+        $("#seconds").textContent = n
+        if(n % 5)
+            return
+    }
     var now = Date.now()
     var d = new Date()
     if(d.getMonth() != just_now.getMonth() || d.getDate() != just_now.getDate() ||
@@ -659,7 +666,7 @@ function get() {
     scs %= 60;
     var hrs = Math.floor(mns / 60);
     mns %= 60;
-    $("#time").textContent = `${zf(hrs)}:${zf(mns)}:${zf(scs)}`;
+    $("#time").textContent = `${zf(hrs)}:${zf(mns)}:<span id='seconds'>${zf(scs)}</span>`;
 
     if(refresh) {
         var endhr = end.getHours();
