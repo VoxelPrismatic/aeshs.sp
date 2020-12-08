@@ -70,7 +70,7 @@ var schedule_names = {
     "free": {
         "winter": "WINTER BREAK",
         "spring": "SPRING BREAK",
-        "thanks": "THANKSGIVING BREAK"
+        "thanks": "THANKSGIVING BREAK",
         "off": "NO SCHOOL TODAY",
         "end": "WEEKEND"
     }
