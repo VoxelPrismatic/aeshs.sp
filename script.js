@@ -638,12 +638,13 @@ var schedules = {
 }
 
 function get() {
-    if($("#seconds")) {
+    if(last_time && $("#seconds")) {
         n = $("#seconds").textContent
         n -= 1
-        $("#seconds").textContent = n
-        if(n % 5)
+        if(n > 0 && n % 5) {
+            $("#seconds").textContent = (n + "").padStart(2, "0")
             return
+        }
     }
     var now = Date.now()
     var d = new Date()
