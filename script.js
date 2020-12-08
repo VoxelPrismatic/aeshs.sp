@@ -638,16 +638,16 @@ var schedules = {
 }
 
 function get() {
+    var now = Date.now()
+    var d = new Date()
+    var scs = diffTime(rn, end);
     if(last_time && $("#seconds")) {
-        n = $("#seconds").textContent
-        n -= 1
+        n = scs % 60
         if(n > 0 && n % 5) {
             $("#seconds").textContent = (n + "").padStart(2, "0")
             return
         }
     }
-    var now = Date.now()
-    var d = new Date()
     if(d.getMonth() != just_now.getMonth() || d.getDate() != just_now.getDate() ||
        d.getYear() != just_now.getYear() || d.getDay() != just_now.getDay())
         window.location.reload()
@@ -660,7 +660,6 @@ function get() {
             break;
         }
     }
-    var scs = diffTime(rn, end);
     var refresh = last_time < scs
     last_time = scs
     var mns = Math.floor(scs / 60);
