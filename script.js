@@ -70,6 +70,7 @@ var schedule_names = {
     "free": {
         "winter": "WINTER BREAK",
         "spring": "SPRING BREAK",
+        "thanks": "THANKSGIVING BREAK"
         "off": "NO SCHOOL TODAY",
         "end": "WEEKEND"
     }
@@ -614,6 +615,9 @@ var schedules = {
         "spring": {
             "ENJOY THE OUTSIDE": time(23, 59, 59)
         },
+        "thanks": {
+            "BE THANKFUL": time(23, 59, 59)
+        },
         "off": {
             "ENJOY YOUR DAY": time(23, 59, 59)
         },
@@ -1030,21 +1034,26 @@ function zf(itm) {
     return String(itm).padStart(2, "0");
 }
 
-if(Number(localStorage.getItem("half_enabled")))
-    toggleHalf();
-if(Number(localStorage.getItem("corona_enabled")))
-    toggleELearning();
-if(Number(localStorage.getItem("finals_enabled")))
-    toggleFinals();
-if(Number(localStorage.getItem("custom_enabled")))
-    toggleCustom();
-if(Number(localStorage.getItem("full_screen")))
-    fullScreen();
-if(Number(localStorage.getItem("12hour")))
-    toggleHour();
-n = Number(localStorage.getItem('drawer_open'))
-if(!isNaN(n))
-    $("#drawer").open = n
+function apply_storage() {
+    if(Number(localStorage.getItem("half_enabled")))
+        toggleHalf();
+    if(Number(localStorage.getItem("corona_enabled")))
+        toggleELearning();
+    if(Number(localStorage.getItem("finals_enabled")))
+        toggleFinals();
+    if(Number(localStorage.getItem("custom_enabled")))
+        toggleCustom();
+    if(Number(localStorage.getItem("full_screen")))
+        fullScreen();
+    if(Number(localStorage.getItem("12hour")))
+        toggleHour();
+    n = Number(localStorage.getItem('drawer_open'))
+    if(!isNaN(n))
+        $("#drawer").open = n
+}
+
+apply_storage()
+
 
 if(just_now.getDay() == 6 || just_now.getDay() == 0) {
     current_schedule = schedules["free"]["end"]
@@ -1052,8 +1061,69 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
     $("#prt").textContent = current_schedule_name;
     get();
 } else {
-    t = just_now.getFullYear() + "/" + just_now.getMonth() + "/" + just_now.getDate()
-
+    fetch("https://cors-anywhere.herokuapp.com/https://www.d125.org/cf_calendar/feed.cfm?type=ical&feedID=AF5167036E214C99B84D252995DB9199").then((resp) => {
+        resp.text((text) => {
+            tt = day.getFullYear() + "" + (d.getMonth() + 1 + "").padStart(2, "0") + (d.getDate() + "").padStart(2, "0")
+            for(var evt of text.split("BEGIN:VEVENT\n").slice(1)) {
+                day = evt.split("DTSTART:")[1].split("\n")[0].split(":").slice(-1)[0].split("T")[0];
+                if(day != tt)
+                    continue
+                summary = evt.split("SUMMARY:")[1].split("\n")[0];
+                thing = []
+                one = []
+                if(elearn_schedule) {
+                    one.push("corona")
+                    thing.push("corona")
+                }
+                if(half_enabled)
+                    thing.push("half")
+                switch(summary) {
+                    case "Spring Break":
+                        thing = ["free", "spring"];
+                        break;
+                    case "Activity Period":
+                        thing.push("activity");
+                        break;
+                    case "Early Dismissal":
+                        thing.push("early_dismissal");
+                        break;
+                    case "No School - Thanksgiving Break":
+                        thing = ["free", "thanks"];
+                        break;
+                    case "Late Arrival":
+                        one.push("late_arrival")
+                        thing = one
+                        break;
+                    case "Winter Break":
+                        thing = ["free", "winter"]
+                        break;
+                    case "Non-Attendance Day":
+                        thing = ["free", "off"]
+                        break;
+                    default:
+                        if(/Exams - Day \d$/i.test(summary)) {
+                            one.push("finals", summary.slice(-1)[0])
+                            thing = one
+                        } else if(summary.startsWith("No School")) {
+                            thing = ["free", "off"]
+                        } else if(summary.startsWith("Late Arrival")) {
+                            one.push("late_arrival")
+                            thing = one
+                        }
+                }
+                var c = schedules
+                var n = schedule_names
+                for(var t of thing) {
+                    c = c[t]
+                    n = n[t]
+                }
+                current_schedule = c
+                current_schedule_name = n
+                $("#prt").textContent = current_schedule_name;
+                get();
+            }
+        })
+    })
 }
 
 if(window.scrollMaxY) {
