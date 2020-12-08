@@ -643,12 +643,9 @@ function get() {
     var now = Date.now()
     var d = new Date()
     var scs = diffTime(d, last_end);
-    if(last_time && $("#seconds")) {
-        n = scs % 60
-        if(n > 0 && n % 5) {
-            $("#seconds").textContent = (n + "").padStart(2, "0")
-            return
-        }
+    if(last_time && $("#seconds") && scs % 60) {
+        $("#seconds").textContent = ((scs % 60) + "").padStart(2, "0")
+        return
     }
     if(d.getMonth() != just_now.getMonth() || d.getDate() != just_now.getDate() ||
        d.getYear() != just_now.getYear() || d.getDay() != just_now.getDay())
