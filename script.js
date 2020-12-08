@@ -578,33 +578,43 @@ var schedules = {
 
     "custom": {
         "0": {
+            "START": time(0, 0, 0),
             "END": time(23, 59, 59)
         },
         "1": {
+            "START": time(0, 0, 0),
             "END": time(23, 59, 59)
         },
         "2": {
+            "START": time(0, 0, 0),
             "END": time(23, 59, 59)
         },
         "3": {
+            "START": time(0, 0, 0),
             "END": time(23, 59, 59)
         },
         "4": {
+            "START": time(0, 0, 0),
             "END": time(23, 59, 59)
         },
         "5": {
+            "START": time(0, 0, 0),
             "END": time(23, 59, 59)
         },
         "6": {
+            "START": time(0, 0, 0),
             "END": time(23, 59, 59)
         },
         "7": {
+            "START": time(0, 0, 0),
             "END": time(23, 59, 59)
         },
         "8": {
+            "START": time(0, 0, 0),
             "END": time(23, 59, 59)
         },
         "9": {
+            "START": time(0, 0, 0),
             "END": time(23, 59, 59)
         }
     },
@@ -619,7 +629,7 @@ var schedules = {
             "BE THANKFUL": time(23, 59, 59)
         },
         "off": {
-            "ENJOY YOUR DAY": time(23, 59, 59)
+            "ENJOY YOUR DAY OFF": time(23, 59, 59)
         },
         "end": {
             "ENJOY THE WEEKEND": time(23, 59, 59)
@@ -627,7 +637,7 @@ var schedules = {
     }
 }
 
-function get() {
+function get()
     var now = Date.now()
     var d = new Date()
     if(d.getMonth() != just_now.getMonth() || d.getDate() != just_now.getDate() ||
@@ -672,6 +682,7 @@ function get() {
             var ls = "PERIOD NAME ------------------- START<br><div>";
         else
             var ls = "PERIOD NAME ---------------- START<br>";
+        var ogls = ls;
         for(var x = 0; x < Object.keys(current_schedule).length - 1; x += 1) {
             var per = Object.keys(current_schedule)[x + 1];
             if(per == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
@@ -700,7 +711,10 @@ function get() {
                 line = "<s>" + line + "</s>";
             ls += line + "<br>";
         }
-        $("#list").innerHTML = ls + "</div>";
+        if(ogls == ls)
+            $("#list").innerHTML = ""
+        else
+            $("#list").innerHTML = ls + "</div>";
     }
 }
 
@@ -1062,14 +1076,21 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
     get();
 } else {
     fetch("https://cors-anywhere.herokuapp.com/https://www.d125.org/cf_calendar/feed.cfm?type=ical&feedID=AF5167036E214C99B84D252995DB9199").then((resp) => {
-        resp.text((text) => {
-            tt = day.getFullYear() + "" + (d.getMonth() + 1 + "").padStart(2, "0") + (d.getDate() + "").padStart(2, "0")
-            for(var evt of text.split("BEGIN:VEVENT\n").slice(1)) {
-                day = evt.split("DTSTART:")[1].split("\n")[0].split(":").slice(-1)[0].split("T")[0];
+        console.log("found calendar")
+        resp.text().then((text) => {
+            // console.log(text)
+            var tt = just_now.getFullYear() + "" + (just_now.getMonth() + 1 + "").padStart(2, "0") + (just_now.getDate() + "").padStart(2, "0")
+            //console.log(tt)
+            //console.log(text.split(/BEGIN\:VEVENT\n/g))
+            for(var evt of text.split(/BEGIN\:VEVENT\r?\n/g).slice(1)) {
+                //console.log(evt)
+                var day = evt.split("DTSTART")[1].split("\n")[0].split(":").slice(-1)[0].split("T")[0].trim();
+                console.log(day, tt, day == tt)//, "\n", evt)
                 if(day != tt)
                     continue
                 console.log(evt)
-                summary = evt.split("SUMMARY:")[1].split("\n")[0];
+                summary = evt.split("SUMMARY:")[1].split("\n")[0].trim();
+                console.log(summary)
                 thing = []
                 one = []
                 var skip = false
@@ -1077,7 +1098,7 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
                     one.push("corona")
                     thing.push("corona")
                 }
-                if(half_enabled)
+                if(half_period)
                     thing.push("half")
                 switch(summary) {
                     case "Spring Break":
@@ -1128,8 +1149,8 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
                     get();
                 }
             }
-        })
-    })
+        });
+    });
 }
 
 if(window.scrollMaxY) {
