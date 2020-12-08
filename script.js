@@ -712,7 +712,7 @@ function get() {
             ls += line + "<br>";
         }
         if(ogls == ls)
-            $("#list").innerHTML = ""
+            $("#list").innerHTML = (Object.keys(current_schedule)[0] + " ").padEnd(28, "-") + " ALL DAY"
         else
             $("#list").innerHTML = ls + "</div>";
     }
