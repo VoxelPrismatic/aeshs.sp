@@ -66,6 +66,12 @@ var schedule_names = {
         "7": "CUSTOM SCHEDULE 7",
         "8": "CUSTOM SCHEDULE 8",
         "9": "CUSTOM SCHEDULE 9"
+    },
+    "free": {
+        "winter": "WINTER BREAK",
+        "spring": "SPRING BREAK",
+        "off": "NO SCHOOL TODAY",
+        "end": "WEEKEND"
     }
 }
 
@@ -600,6 +606,20 @@ var schedules = {
         "9": {
             "END": time(23, 59, 59)
         }
+    },
+    "free": {
+        "winter": {
+            "HAPPY HOLIDAYS": time(23, 59, 59)
+        },
+        "spring": {
+            "ENJOY THE OUTSIDE": time(23, 59, 59)
+        },
+        "off": {
+            "ENJOY YOUR DAY": time(23, 59, 59)
+        },
+        "end": {
+            "ENJOY THE WEEKEND": time(23, 59, 59)
+        },
     }
 }
 
