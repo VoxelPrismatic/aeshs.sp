@@ -637,10 +637,12 @@ var schedules = {
     }
 }
 
+last_end = null
+
 function get() {
     var now = Date.now()
     var d = new Date()
-    var scs = diffTime(rn, end);
+    var scs = diffTime(d, last_end);
     if(last_time && $("#seconds")) {
         n = scs % 60
         if(n > 0 && n % 5) {
@@ -660,6 +662,8 @@ function get() {
             break;
         }
     }
+    last_end = end
+    var scs = diffTime(rn, end);
     var refresh = last_time < scs
     last_time = scs
     var mns = Math.floor(scs / 60);
