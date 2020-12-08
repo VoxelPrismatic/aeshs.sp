@@ -1068,9 +1068,11 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
                 day = evt.split("DTSTART:")[1].split("\n")[0].split(":").slice(-1)[0].split("T")[0];
                 if(day != tt)
                     continue
+                console.log(evt)
                 summary = evt.split("SUMMARY:")[1].split("\n")[0];
                 thing = []
                 one = []
+                var skip = false
                 if(elearn_schedule) {
                     one.push("corona")
                     thing.push("corona")
@@ -1109,18 +1111,22 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
                         } else if(summary.startsWith("Late Arrival")) {
                             one.push("late_arrival")
                             thing = one
+                        } else {
+                            skip = true
                         }
                 }
-                var c = schedules
-                var n = schedule_names
-                for(var t of thing) {
-                    c = c[t]
-                    n = n[t]
+                if(!skip) {
+                    var c = schedules
+                    var n = schedule_names
+                    for(var t of thing) {
+                        c = c[t]
+                        n = n[t]
+                    }
+                    current_schedule = c
+                    current_schedule_name = n
+                    $("#prt").textContent = current_schedule_name;
+                    get();
                 }
-                current_schedule = c
-                current_schedule_name = n
-                $("#prt").textContent = current_schedule_name;
-                get();
             }
         })
     })
