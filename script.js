@@ -643,7 +643,7 @@ function get() {
     var now = Date.now()
     var d = new Date()
     var scs = diffTime(d, last_end);
-    if(last_time && $("#seconds") && scs % 60) {
+    if(last_time && $("#seconds") && scs % 60 != 59) {
         $("#seconds").textContent = ((scs % 60) + "").padStart(2, "0")
         return
     }
