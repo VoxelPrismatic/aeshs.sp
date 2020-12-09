@@ -52,6 +52,12 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+            } #prt2 {
+                font-size: 1vw;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 10px;
             }
         </style>
     </head>
@@ -67,9 +73,9 @@
                 <div id="per" class="tC" style="font-size: 4vw;">PERIOD 0 // 00:00:00</div>
             </div>
             <div id="prt" class="tC" style="font-size: 2vw;">UNKNOWN SCHEDULE</div>
-            <div id="prt2" class="tC" style="font-size: 1vw;">*fetching calendar, may change automatically</div>
             <div id="status"></div>
             <div id="list" class="tL" style="width: 80vw; font-size: smaller;">LOADING SCHEDULE</div>
+            <div id="prt2" class="tC">*fetching calendar, may change automatically</div>
             <!-- BUTTONS -->
             <div class="tC">
                 <details id="drawer" open="" onclick="drawerThing(this)">
