@@ -747,6 +747,7 @@ function setSchedule(...args) {
     }
     if(thing == undefined)
         return
+    current_args = args
     current_schedule = thing;
     current_schedule_name = thing2;
     localStorage.setItem("current_schedule", `["${args.join('", "')}"]`)
@@ -1089,16 +1090,24 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
             // console.log(text)
             var tt = just_now.getFullYear() + "" + (just_now.getMonth() + 1 + "").padStart(2, "0") + (just_now.getDate() + "").padStart(2, "0")
             //console.log(tt)
+            var scheded = []
+            if(elearn_schedule)
+                scheded.push("corona")
+            if(half_period)
+                scheded.push("half")
+            scheded.push("normal")
+            var changed = false
             //console.log(text.split(/BEGIN\:VEVENT\n/g))
             for(var evt of text.split(/BEGIN\:VEVENT\r?\n/g).slice(1)) {
                 //console.log(evt)
                 var day = evt.split("DTSTART")[1].split("\n")[0].split(":").slice(-1)[0].split("T")[0].trim();
-                console.log(day, tt, day == tt)//, "\n", evt)
+                summary = evt.split("SUMMARY:")[1].split("\n")[0].trim();
+                //if()
+                //console.log(day, tt, day == tt)//, "\n", evt)
                 if(day != tt)
                     continue
-                console.log(evt)
-                summary = evt.split("SUMMARY:")[1].split("\n")[0].trim();
-                console.log(summary)
+                //console.log(evt)
+                //console.log(summary)
                 thing = []
                 one = []
                 var skip = false
@@ -1145,18 +1154,25 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
                         }
                 }
                 if(!skip) {
-                    var c = schedules
-                    var n = schedule_names
-                    for(var t of thing) {
-                        c = c[t]
-                        n = n[t]
+                    if(thing[0] == "free") {
+                        var c = schedules
+                        var n = schedule_names
+                        for(var t of thing) {
+                            c = c[t]
+                            n = n[t]
+                        }
+                        current_schedule = c
+                        current_schedule_name = n
+                        $("#prt").textContent = current_schedule_name;
+                        get();
+                    } else {
+                        setSchedule(...thing)
                     }
-                    current_schedule = c
-                    current_schedule_name = n
-                    $("#prt").textContent = current_schedule_name;
-                    get();
+                    changed = true
                 }
             }
+            if(!changed && !current_args.includes("custom"))
+                setSchedule(...scheded)
         });
     });
 }
