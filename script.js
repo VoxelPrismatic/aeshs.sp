@@ -1030,108 +1030,116 @@ window.onresize = () => {
         $("#drawer").classList.add("drawer_bottom")
 }
 
+function calendar(text) {
+    // console.log(text)
+    //console.log(tt)
+    var scheded = [];
+    if(elearn_schedule)
+        scheded.push("corona");
+    if(half_period)
+        scheded.push("half");
+    scheded.push("normal")
+    var changed = false;
+    var in_summer = false;
+    //console.log(text.split(/BEGIN\:VEVENT\n/g))
+    for(var evt of text.split(/BEGIN\:VEVENT\r?\n/g).slice(1)) {
+        //console.log(evt)
+        var day = evt.split("DTSTART")[1].split("\n")[0].split(":").slice(-1)[0].split("T")[0].trim();
+        var summary = evt.split("SUMMARY:")[1].split("\n")[0].trim();
+        if(/Summer School (Session \d )?Begins/i.test(summary))
+            in_summer = true;
+        else if(/Summer School (Session \d )?Ends/i.test(summary))
+            in_summer = false;
+        //console.log(day, tt, day == tt)//, "\n", evt)
+        if(day != tt)
+            continue;
+        //console.log(evt)
+        //console.log(summary)
+        var thing = [];
+        var one = [];
+        var skip = false;
+        if(elearn_schedule) {
+            one.push("corona");
+            thing.push("corona");
+        }
+        if(half_period)
+            thing.push("half");
+        switch(summary) {
+            case "Spring Break":
+                thing = ["free", "spring"];
+                break;
+            case "Activity Period":
+                thing.push("activity");
+                break;
+            case "Early Dismissal":
+                thing.push("early_dismissal");
+                break;
+            case "No School - Thanksgiving Break":
+                thing = ["free", "thanks"];
+                break;
+            case "Late Arrival":
+                one.push("late_arrival");
+                thing = one;
+                break;
+            case "Winter Break":
+                thing = ["free", "winter"];
+                break;
+            case "Non-Attendance Day":
+                thing = ["free", "off"];
+                break;
+            default:
+                if(/Exams - Day \d$/i.test(summary)) {
+                    one.push("finals", summary.slice(-1)[0]);
+                    thing = one;
+                } else if(summary.startsWith("No School")) {
+                    thing = ["free", "off"];
+                } else if(summary.startsWith("Late Arrival")) {
+                    one.push("late_arrival");
+                    thing = one;
+                } else if(in_summer) {
+                    thing = ["summer"];
+                } else {
+                    skip = true
+                }
+        }
+        if(!skip) {
+            if(thing[0] == "free") {
+                var c = schedules
+                var n = schedule_names
+                for(var t of thing) {
+                    c = c[t]
+                    n = n[t]
+                }
+                current_schedule = c
+                current_schedule_name = n
+                $("#prt").textContent = current_schedule_name;
+                get();
+            } else {
+                setSchedule(...thing)
+            }
+            changed = true
+        }
+    }
+    if(!changed && !current_args.includes("custom"))
+        setSchedule(...scheded)
+    $("#prt2").style.display = "none"
+}
+
+var tt = just_now.getFullYear() + "" + zf(just_now.getMonth() + 1) + zf(just_now.getDate())
 if(just_now.getDay() == 6 || just_now.getDay() == 0) {
     current_schedule = schedules["free"]["end"]
     current_schedule_name = schedule_names["free"]["end"]
     $("#prt").textContent = current_schedule_name;
     get();
+} else if(localStorage.getItem("calendar_load") == tt) {
+    calendar(localStorage.getItem("calendar_text"))
 } else {
     fetch("https://cors-anywhere.herokuapp.com/https://www.d125.org/cf_calendar/feed.cfm?type=ical&feedID=AF5167036E214C99B84D252995DB9199").then((resp) => {
         console.log("found calendar")
         resp.text().then((text) => {
-            // console.log(text)
-            var tt = just_now.getFullYear() + "" + zf(just_now.getMonth() + 1) + zf(just_now.getDate())
-            //console.log(tt)
-            var scheded = [];
-            if(elearn_schedule)
-                scheded.push("corona");
-            if(half_period)
-                scheded.push("half");
-            scheded.push("normal")
-            var changed = false;
-            var in_summer = false;
-            //console.log(text.split(/BEGIN\:VEVENT\n/g))
-            for(var evt of text.split(/BEGIN\:VEVENT\r?\n/g).slice(1)) {
-                //console.log(evt)
-                var day = evt.split("DTSTART")[1].split("\n")[0].split(":").slice(-1)[0].split("T")[0].trim();
-                var summary = evt.split("SUMMARY:")[1].split("\n")[0].trim();
-                if(/Summer School (Session \d )?Begins/i.test(summary))
-                    in_summer = true;
-                else if(/Summer School (Session \d )?Ends/i.test(summary))
-                    in_summer = false;
-                //console.log(day, tt, day == tt)//, "\n", evt)
-                if(day != tt)
-                    continue;
-                //console.log(evt)
-                //console.log(summary)
-                var thing = [];
-                var one = [];
-                var skip = false;
-                if(elearn_schedule) {
-                    one.push("corona");
-                    thing.push("corona");
-                }
-                if(half_period)
-                    thing.push("half");
-                switch(summary) {
-                    case "Spring Break":
-                        thing = ["free", "spring"];
-                        break;
-                    case "Activity Period":
-                        thing.push("activity");
-                        break;
-                    case "Early Dismissal":
-                        thing.push("early_dismissal");
-                        break;
-                    case "No School - Thanksgiving Break":
-                        thing = ["free", "thanks"];
-                        break;
-                    case "Late Arrival":
-                        one.push("late_arrival");
-                        thing = one;
-                        break;
-                    case "Winter Break":
-                        thing = ["free", "winter"];
-                        break;
-                    case "Non-Attendance Day":
-                        thing = ["free", "off"];
-                        break;
-                    default:
-                        if(/Exams - Day \d$/i.test(summary)) {
-                            one.push("finals", summary.slice(-1)[0]);
-                            thing = one;
-                        } else if(summary.startsWith("No School")) {
-                            thing = ["free", "off"];
-                        } else if(summary.startsWith("Late Arrival")) {
-                            one.push("late_arrival");
-                            thing = one;
-                        } else if(in_summer) {
-                            thing = ["summer"];
-                        } else {
-                            skip = true
-                        }
-                }
-                if(!skip) {
-                    if(thing[0] == "free") {
-                        var c = schedules
-                        var n = schedule_names
-                        for(var t of thing) {
-                            c = c[t]
-                            n = n[t]
-                        }
-                        current_schedule = c
-                        current_schedule_name = n
-                        $("#prt").textContent = current_schedule_name;
-                        get();
-                    } else {
-                        setSchedule(...thing)
-                    }
-                    changed = true
-                }
-            }
-            if(!changed && !current_args.includes("custom"))
-                setSchedule(...scheded)
-            $("#prt2").style.display = "none"
+            localStorage.setItem("calendar_load", tt)
+            localStorage.setItem("calendar_text", text)
+            calendar(text)
         });
     });
 }
