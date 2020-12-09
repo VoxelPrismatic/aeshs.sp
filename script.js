@@ -21,6 +21,8 @@ var half_period = false;
 var light_theme = Number(localStorage.getItem("light_theme") || 0);
 var last_time = 0;
 var just_now = new Date()
+var last_end = null
+var full_screen = false
 
 var schedule_names = {
     "normal": "NORMAL SCHEDULE",
@@ -637,14 +639,12 @@ var schedules = {
     }
 }
 
-last_end = null
-
 function get() {
     var now = Date.now()
     var d = new Date()
     var scs = diffTime(d, last_end) % 60;
     if(last_time && scs != 59) {
-        $("#seconds").textContent = (scs + "").padStart(2, "0")
+        $("#seconds").textContent = zf(scs)
         return
     }
     if(d.getMonth() != just_now.getMonth() || d.getDate() != just_now.getDate() ||
@@ -671,18 +671,8 @@ function get() {
 
     if(refresh) {
         var endhr = end.getHours();
-        if(hr12) {
-            if(endhr > 12) {
-                endhr -= 12;
-                var ampm = " PM"
-            } else if(endhr == 12) {
-                var ampm = " PM"
-            } else {
-                var ampm = " AM"
-            }
-        } else {
-            var ampm = ""
-        }
+        var ampm;
+        [endhr, ampm] = hr24(endhr)
         $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
         if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
             period = "ENJOY THE WEEKEND";
@@ -699,18 +689,8 @@ function get() {
             var line = per + " ";
             line = line.padEnd(28, "-") + " ";
             var hr = end2.getHours()
-            if(hr12) {
-                if(hr > 12) {
-                    hr -= 12
-                    ampm = " PM"
-                } else if(endhr == 12) {
-                    var ampm = " PM"
-                } else {
-                    ampm = " AM"
-                }
-            } else {
-                ampm = ""
-            }
+            var ampm;
+            [hr, ampm] = hr24(hr)
 
             line += `${zf(hr)}:${zf(end2.getMinutes())}${ampm}`;
             if(per == period)
@@ -738,6 +718,8 @@ for(var x = 0; x < 10; x += 1) {
 }
 
 function setSchedule(...args) {
+    if(!args.length)
+        args = eval(localStorage.getItem("current_schedule") + "") || ["normal"]
     console.log(args)
     thing = schedules;
     thing2 = schedule_names;
@@ -759,24 +741,12 @@ function setSchedule(...args) {
         for(var key of Object.keys(current_schedule)) {
             val = current_schedule[key];
             sec = val.getSeconds();
-            if(sec)
-                sec = ":" + (sec + "").padStart(2, "0")
-            else
-                sec = ""
-            min = (val.getMinutes() + "").padStart(2, "0");
+            sec = sec ? ":" + zf(sec) : "";
+            min = zf(val.getMinutes());
             hr = val.getHours();
-            if(hr12) {
-                if(hr > 12) {
-                    hr -= 12;
-                    ampm = " pm"
-                } else {
-                    ampm = " am"
-                }
-            } else {
-                ampm = ""
-            }
-            $("#customizer").value +=
-                `${key.padEnd(28)}| ${hr}:${min}${sec}${ampm}\n`;
+            var ampm;
+            [hr, ampm] = hr24(hr)
+            $("#customizer").value += `${key.padEnd(28)}| ${hr}:${min}${sec}${ampm}\n`;
         }
         $("#customizer").onchange = function() { changer(s); };
         $("#customizer").style.height = "30vw";
@@ -796,9 +766,7 @@ function setSchedule(...args) {
     get();
 }
 
-setSchedule(...eval(localStorage.getItem("current_schedule") + "") || ["normal"])
-
-var date = Date()
+setSchedule()
 
 function toTheSecond() {
     if(Date() == date)
@@ -807,6 +775,7 @@ function toTheSecond() {
     get()
 }
 
+var date = Date()
 toTheSecond();
 
 function color(s) {
@@ -817,19 +786,11 @@ function color(s) {
         Math.floor(Number.parseInt(s.slice(3, 5), 16) / 7),
         Math.floor(Number.parseInt(s.slice(5, 7), 16) / 7)
     ];
-    var c = [0, 0, 0]
-    if(colors[0] == 0)
-        c[0] = Math.floor((colors[1] + colors[2]) / 4);
-    else
-        c[0] = colors[0];
-    if(colors[1] == 0)
-        c[1] = Math.floor((colors[0] + colors[2]) / 4);
-    else
-        c[1] = colors[1];
-    if(colors[2] == 0)
-        c[2] = Math.floor((colors[1] + colors[0]) / 4);
-    else
-        c[2] = colors[2];
+    var c = [
+        colors[0] || Math.floor((colors[1] + colors[2]) / 4),
+        colors[1] || Math.floor((colors[0] + colors[2]) / 4),
+        colors[2] || Math.floor((colors[1] + colors[0]) / 4)
+    ]
     var bg_dark = `rgb(${c[0]}, ${c[1]}, ${c[2]}`;
     var bg_light = `rgb(${200 + c[0]}, ${200 + c[1]}, ${200 + c[2]}`;
     var bg = bg_dark;
@@ -871,7 +832,7 @@ function hideScheds(except) {
         "c19_finals_schedules"
     ]
     for(var e of elements)
-        $("#" + e).classList.add("inv")
+        $("#" + e).classList.add("inv");
     if(except)
         $("#" + except).classList.remove("inv");
 }
@@ -893,8 +854,8 @@ function toggleHalf() {
         sched = "c19_" + sched
         sched_ls = ["corona", ...sched_ls];
     }
-    sched_ls.push(eval(localStorage.getItem("current_schedule") + "").slice(-1)[0])
-    setSchedule(...sched_ls)
+    sched_ls.push(current_args.slice(-1)[0])
+    setSchedule(...sched_ls);
     localStorage.setItem("half_enabled", Number(half_period));
     hideScheds(sched);
 }
@@ -904,12 +865,12 @@ function toggleELearning() {
     if(custom_schedule)
         return
     sched_ls = [];
-    if(half_period && !finals_schedule) {
-        sched = "half_schedules";
-        sched_ls.push("half");
-    } else if(finals_schedule) {
+    if(finals_schedule) {
         sched = "finals_schedules";
         sched_ls.push("finals");
+    } else if(half_period) {
+        sched = "half_schedules";
+        sched_ls.push("half");
     } else {
         sched = "full_schedules";
     }
@@ -920,7 +881,7 @@ function toggleELearning() {
     } else {
         $("#toggle-corona").textContent = "[E-LEARNING]"
     }
-    sched_ls.push(eval(localStorage.getItem("current_schedule") + "").slice(-1)[0])
+    sched_ls.push(current_args.slice(-1)[0])
     setSchedule(...sched_ls)
     localStorage.setItem("corona_enabled", Number(elearn_schedule));
     hideScheds(sched);
@@ -929,16 +890,12 @@ function toggleELearning() {
 function toggleFinals() {
     finals_schedule = !finals_schedule
     hideScheds();
+    $("#toggle-half").classList.toggle("inv", finals_schedule);
     if(finals_schedule) {
         $("#toggle-final").textContent = "[NON-FINALS]"
-        if(elearn_schedule)
-            $("#c19_finals_schedules").classList.remove("inv");
-        else
-            $("#finals_schedules").classList.remove("inv");
-        $("#toggle-half").classList.add("inv");
+        $(elearn_schedule ? "#c19_finals_schedules" : "#finals_schedules").classList.remove("inv");
     } else {
         $("#toggle-final").textContent = "[FINALS]"
-        $("#toggle-half").classList.remove("inv");
         toggleHalf();
         toggleHalf();
     }
@@ -948,17 +905,14 @@ function toggleFinals() {
 function toggleCustom() {
     custom_schedule = !custom_schedule
     hideScheds();
+    $("#toggle-half").classList.toggle("inv", custom_schedule);
+    $("#toggle-final").classList.toggle("inv", custom_schedule);
+    $("#toggle-corona").classList.toggle("inv", custom_schedule);
     if(custom_schedule) {
         $("#toggle-custom").textContent = "[PRESET]"
         $("#custom_schedules").classList.remove("inv");
-        $("#toggle-half").classList.add("inv");
-        $("#toggle-final").classList.add("inv");
-        $("#toggle-corona").classList.add("inv");
     } else {
         $("#toggle-custom").textContent = "[CUSTOM]"
-        $("#toggle-half").classList.remove("inv");
-        $("#toggle-final").classList.remove("inv");
-        $("#toggle-corona").classList.remove("inv");
         toggleHalf();
         toggleHalf();
     }
@@ -968,16 +922,11 @@ function toggleCustom() {
 function toggleHour() {
     hr12 = !hr12
     localStorage.setItem("12hour", Number(hr12))
-    if(hr12)
-        $("#toggle-hour").textContent = "[24 HOUR]"
-    else
-        $("#toggle-hour").textContent = "[12 HOUR]"
-    setSchedule(...eval(localStorage.getItem("current_schedule") + ""))
+    $("#toggle-hour").textContent = `[${hr12 ? 24 : 12} HOUR]`
+    setSchedule();
     last_time = 0;
     get();
 }
-
-full_screen = false
 
 function fullScreen() {
     full_screen = $("#main").classList.toggle("fullscreen");
@@ -988,17 +937,7 @@ function fullScreen() {
     $("#bar").classList.toggle("bottom");
     $("#customizer").classList.toggle("mustinv");
     localStorage.setItem("full_screen", Number(full_screen));
-    if(full_screen)
-        $("#time").style.fontSize = "20vw";
-    else
-        $("#time").style.fontSize = "18vw";
-}
-
-window.onresize = () => {
-    $("#drawer").classList.remove("drawer_bottom")
-    if(!window.scrollMaxY) {
-        $("#drawer").classList.add("drawer_bottom")
-    }
+    $("#time").style.fontSize = full_screen ? "20vw" : "18vw";
 }
 
 function customSchedule(text) {
@@ -1013,13 +952,13 @@ function customSchedule(text) {
             var min = Number(tm.split(":")[1].slice(0, 2))
             try {
                 if(Number(tm.split(":")[2].slice(0, 2)))
-                    var sec = Number(tm.split(":")[2])
+                    var sec = Number(tm.split(":")[2]);
                 else
                     var sec = 0
             } catch(err) {
                 var sec = 0
             }
-            if(line.trim().toLowerCase().endsWith("pm"))
+            if(line.trim().toLowerCase().endsWith("pm") && hr < 12)
                 hr += 12
             st += `"${per}": time(${hr}, ${min}, ${sec}),`
             dic[per] = time(hr, min, sec)
@@ -1044,11 +983,6 @@ function drawerThing(elem) {
     }, 1);
 }
 
-
-function diff(t1) {
-    return new Date(Date.now() - t1);
-}
-
 function diffTime(a, b = new Date(0)) {
     return Math.round((Math.abs(a - b) / 1000), 0);
 }
@@ -1057,26 +991,44 @@ function zf(itm) {
     return String(itm).padStart(2, "0");
 }
 
-function apply_storage() {
-    if(Number(localStorage.getItem("half_enabled")))
-        toggleHalf();
-    if(Number(localStorage.getItem("corona_enabled")))
-        toggleELearning();
-    if(Number(localStorage.getItem("finals_enabled")))
-        toggleFinals();
-    if(Number(localStorage.getItem("custom_enabled")))
-        toggleCustom();
-    if(Number(localStorage.getItem("full_screen")))
-        fullScreen();
-    if(Number(localStorage.getItem("12hour")))
-        toggleHour();
-    n = Number(localStorage.getItem('drawer_open'))
-    if(!isNaN(n))
-        $("#drawer").open = n
+function hr24(hr) {
+    if(hr12) {
+        if(hr >= 12) {
+            if(hr > 12)
+                hr -= 12;
+            var ampm = " PM"
+        } else {
+            var ampm = " AM"
+        }
+    } else {
+        var ampm = ""
+    }
+    return [hr, ampm]
 }
 
-apply_storage()
+if(Number(localStorage.getItem("half_enabled")))
+    toggleHalf();
+if(Number(localStorage.getItem("corona_enabled")))
+    toggleELearning();
+if(Number(localStorage.getItem("finals_enabled")))
+    toggleFinals();
+if(Number(localStorage.getItem("custom_enabled")))
+    toggleCustom();
+if(Number(localStorage.getItem("full_screen")))
+    fullScreen();
+if(Number(localStorage.getItem("12hour")))
+    toggleHour();
+n = Number(localStorage.getItem('drawer_open'))
+if(!isNaN(n))
+    $("#drawer").open = n;
 
+$("#drawer").classList.toggle("drawer_bottom", !window.scrollMaxY)
+
+window.onresize = () => {
+    $("#drawer").classList.remove("drawer_bottom")
+    if(!window.scrollMaxY)
+        $("#drawer").classList.add("drawer_bottom")
+}
 
 if(just_now.getDay() == 6 || just_now.getDay() == 0) {
     current_schedule = schedules["free"]["end"]
@@ -1088,35 +1040,39 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
         console.log("found calendar")
         resp.text().then((text) => {
             // console.log(text)
-            var tt = just_now.getFullYear() + "" + (just_now.getMonth() + 1 + "").padStart(2, "0") + (just_now.getDate() + "").padStart(2, "0")
+            var tt = just_now.getFullYear() + "" + zf(just_now.getMonth() + 1) + zf(just_now.getDate())
             //console.log(tt)
-            var scheded = []
+            var scheded = [];
             if(elearn_schedule)
-                scheded.push("corona")
+                scheded.push("corona");
             if(half_period)
-                scheded.push("half")
+                scheded.push("half");
             scheded.push("normal")
-            var changed = false
+            var changed = false;
+            var in_summer = false;
             //console.log(text.split(/BEGIN\:VEVENT\n/g))
             for(var evt of text.split(/BEGIN\:VEVENT\r?\n/g).slice(1)) {
                 //console.log(evt)
                 var day = evt.split("DTSTART")[1].split("\n")[0].split(":").slice(-1)[0].split("T")[0].trim();
-                summary = evt.split("SUMMARY:")[1].split("\n")[0].trim();
-                //if()
+                var summary = evt.split("SUMMARY:")[1].split("\n")[0].trim();
+                if(/Summer School (Session \d )?Begins/i.test(summary))
+                    in_summer = true;
+                else if(/Summer School (Session \d )?Ends/i.test(summary))
+                    in_summer = false;
                 //console.log(day, tt, day == tt)//, "\n", evt)
                 if(day != tt)
-                    continue
+                    continue;
                 //console.log(evt)
                 //console.log(summary)
-                thing = []
-                one = []
-                var skip = false
+                var thing = [];
+                var one = [];
+                var skip = false;
                 if(elearn_schedule) {
-                    one.push("corona")
-                    thing.push("corona")
+                    one.push("corona");
+                    thing.push("corona");
                 }
                 if(half_period)
-                    thing.push("half")
+                    thing.push("half");
                 switch(summary) {
                     case "Spring Break":
                         thing = ["free", "spring"];
@@ -1131,24 +1087,26 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
                         thing = ["free", "thanks"];
                         break;
                     case "Late Arrival":
-                        one.push("late_arrival")
-                        thing = one
+                        one.push("late_arrival");
+                        thing = one;
                         break;
                     case "Winter Break":
-                        thing = ["free", "winter"]
+                        thing = ["free", "winter"];
                         break;
                     case "Non-Attendance Day":
-                        thing = ["free", "off"]
+                        thing = ["free", "off"];
                         break;
                     default:
                         if(/Exams - Day \d$/i.test(summary)) {
-                            one.push("finals", summary.slice(-1)[0])
-                            thing = one
+                            one.push("finals", summary.slice(-1)[0]);
+                            thing = one;
                         } else if(summary.startsWith("No School")) {
-                            thing = ["free", "off"]
+                            thing = ["free", "off"];
                         } else if(summary.startsWith("Late Arrival")) {
-                            one.push("late_arrival")
-                            thing = one
+                            one.push("late_arrival");
+                            thing = one;
+                        } else if(in_summer) {
+                            thing = ["summer"];
                         } else {
                             skip = true
                         }
@@ -1175,10 +1133,4 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
                 setSchedule(...scheded)
         });
     });
-}
-
-if(window.scrollMaxY) {
-    $("#drawer").classList.remove("drawer_bottom")
-} else {
-    $("#drawer").classList.add("drawer_bottom")
 }

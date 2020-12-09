@@ -10,7 +10,7 @@
             .mustinv {display: none !important;}
             tr {margin: 0px;}
             th {background-color: #00ffff88;}
-            * {font-family: "Ubuntu Mono";}
+            * {font-family: "Ubuntu Mono", monospace;}
             .cc {left: 0; right: 0; margin: auto;}
             body {width: 90vw; left: 0; right: 0; margin: auto;}
             .bottom {position: fixed; bottom: 5px; left: 0px; right: 0px;}
@@ -53,8 +53,33 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
+
+            @font-face {
+                font-family: "Ubuntu Mono";
+                font-style: italic;
+                font-weight: 400;
+                font-display: swap;
+                src: local("Ubuntu Mono Italic"), local("UbuntuMono-Italic"), local("UbuntuMono-RI"), url("font/UbuntuMono-RI.ttf");
+            } @font-face {
+                font-family: "Ubuntu Mono";
+                font-style: italic;
+                font-weight: 700;
+                font-display: swap;
+                src: local("Ubuntu Mono Bold Italic"), local("UbuntuMono-BoldItalic"), local("UbuntuMono-BI"), url("font/UbuntuMono-BI.ttf");
+            } @font-face {
+                font-family: "Ubuntu Mono";
+                font-style: normal;
+                font-weight: 400;
+                font-display: swap;
+                src: local("Ubuntu Mono"), local("UbuntuMono"), local("UbuntuMono-R"), url("font/UbuntuMono-R.ttf");
+            } @font-face {
+                font-family: "Ubuntu Mono";
+                font-style: normal;
+                font-weight: 700;
+                font-display: swap;
+                src: local("Ubuntu Mono Bold"), local("UbuntuMono-Bold"), local("UbuntuMono-B"), url("font/UbuntuMono-B.ttf");
+            }
         </style>
-        <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     </head>
     <body style="color: #00ffffff; background-color: #112222ff;">
         <div id="block">
