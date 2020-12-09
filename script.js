@@ -775,7 +775,7 @@ function toTheSecond() {
     get()
 }
 
-var date = Date()
+var date = Date();
 toTheSecond();
 
 function color(s) {
@@ -1131,6 +1131,7 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
             }
             if(!changed && !current_args.includes("custom"))
                 setSchedule(...scheded)
+            $("#prt2").style.display = "none"
         });
     });
 }
