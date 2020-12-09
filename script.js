@@ -687,9 +687,9 @@ function get() {
         if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
             period = "ENJOY THE WEEKEND";
         if(hr12)
-            var ls = "<b><u>PERIOD NAME ------------------- START</u></b><br><div>";
+            var ls = "<b>PERIOD NAME ------------------- START</b><br><div>";
         else
-            var ls = "<b><u>PERIOD NAME ---------------- START</u></b><br>";
+            var ls = "<b>PERIOD NAME ---------------- START</b><br>";
         var ogls = ls;
         for(var x = 0; x < Object.keys(current_schedule).length - 1; x += 1) {
             var per = Object.keys(current_schedule)[x + 1];
