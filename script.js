@@ -677,9 +677,9 @@ function get() {
         var endhr = end.getHours();
         var ampm;
         [endhr, ampm] = hr24(endhr)
-        $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
         if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
             period = "ENJOY THE WEEKEND";
+        $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
         if(hr12)
             var ls = "<b>PERIOD NAME ------------------- START</b><br><div>";
         else
