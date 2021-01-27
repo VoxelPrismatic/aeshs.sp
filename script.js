@@ -1066,7 +1066,6 @@ function changeThing(elem) {
     if(elem.value.includes("full_schedules") || elem.value.includes("half_schedules")) {
         e_.classList.remove("disabled");
         e_.onclick = function() { toggleHalf() }
-        half_period = elem.value.includes("half_schedules");
         toggleHalf();
         toggleHalf();
     } else {
