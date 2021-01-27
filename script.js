@@ -990,9 +990,20 @@ function color(s) {
     }
     document.body.style.backgroundColor = bg;
     $("#change").style.color = bg_inv;
-    $("#customizer").style.backgroundColor = bg_des
+    
+    $("#toggle-half").style.backgroundColor = bg_des;
+    $("#sched_chooser").style.backgroundColor = bg_des;
+    $("#cat_chooser").style.backgroundColor = bg_des;
+    
+    $("#toggle-half").style.color = s;
+    $("#sched_chooser").style.color = s;
+    $("#cat_chooser").style.color = s;
+    
+    $("#customizer").style.backgroundColor = bg_des;
+    
     $("#colorswap").style.backgroundColor = bg_des;
     $("#colorswap").style.borderColor = bg_des;
+    
     $("hr").style.borderColor = s;
     localStorage.setItem("current_color", s);
 }
