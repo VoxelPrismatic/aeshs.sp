@@ -15,6 +15,7 @@ function time(hr = 0, mn = 0, sc = 0) {
 
 var custom_schedule = false;
 var elearn_schedule = false;
+var hybrid_schedule = false;
 var finals_schedule = false;
 var hr12 = false;
 var half_period = false;
