@@ -1083,10 +1083,10 @@ function toggleHalf() {
     if(half_period) {
         sched = "half_schedules";
         sched_ls.push("half");
-        $("#toggle-half").textContent = "[FULL PERIODS]"
+        $("#toggle-half").textContent = "Full periods"
     } else {
         sched = "full_schedules";
-        $("#toggle-half").textContent = "[HALF PERIODS]"
+        $("#toggle-half").textContent = "Half periods"
     }
     if(elearn_schedule) {
         sched = "c19_" + sched
@@ -1261,6 +1261,7 @@ if(Number(localStorage.getItem("custom_enabled")))
     st = "custom_schedules"
 
 $("#cat_chooser").value = st;
+changeThing($("#cat_chooser"));
 
 if(Number(localStorage.getItem("half_enabled")))
     toggleHalf();
