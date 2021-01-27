@@ -62,10 +62,17 @@
                 cursor: not-allowed !important;
                 text-decoration: line-through;
                 opacity: 50%;
-            } select {
+            } select, button, textarea {
                 appearance: none;
+                padding: 4px;
+                border-radius: 4px;
+                border: none;
             } #sel_block::after {
                 content: "V";
+                position: absolute;
+                top: 50%;
+                right: 5px;
+                font-size: x-small;
             }
         </style>
     </head>
@@ -90,7 +97,7 @@
                     <summary></summary>
                     <div id="buttons">
                         <h3>-- SCHEDULES --</h3>
-                        <span onclick="toggleHalf()" id="toggle-half">[HALF PERIODS]</span>
+                        <button onclick="toggleHalf()" id="toggle-half">Half periods</button>
                         <span id="sel_block">
                             <select id="cat_chooser" onchange="changeThing(this)">
                                 <optgroup label="Normal">
@@ -106,12 +113,12 @@
                                     <option value="custom_schedules">Custom schedules</option>
                                 </optgroup>
                             </select>
-                        </div>
+                        </span>
                         <span id="sel_block">
                             <select id="sched_chooser" onchange="setSchedule(...this.value.split(','))">
                                 <option value="normal">Normal</option>
                             </select>
-                        </div>
+                        </span>
                         <!--<span onclick="toggleELearning()" id="toggle-corona">[E-LEARNING]</span>
                         <span onclick="toggleFinals()" id="toggle-final">[FINALS]</span>
                         <span onclick="toggleCustom()" id="toggle-custom">[CUSTOM]</span>
