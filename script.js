@@ -77,7 +77,13 @@ var schedule_names = {
         "6": "CUSTOM SCHEDULE 6",
         "7": "CUSTOM SCHEDULE 7",
         "8": "CUSTOM SCHEDULE 8",
-        "9": "CUSTOM SCHEDULE 9"
+        "9": "CUSTOM SCHEDULE 9",
+        "a": "CUSTOM SCHEDULE A",
+        "b": "CUSTOM SCHEDULE B",
+        "c": "CUSTOM SCHEDULE C",
+        "d": "CUSTOM SCHEDULE D",
+        "e": "CUSTOM SCHEDULE E",
+        "f": "CUSTOM SCHEDULE F",
     },
     "free": {
         "winter": "WINTER BREAK",
@@ -738,7 +744,31 @@ var schedules = {
         "9": {
             "START": time(0, 0, 0),
             "END": time(23, 59, 59)
-        }
+        },
+        "a": {
+            "START": time(0, 0, 0),
+            "END": time(23, 59, 59)
+        },
+        "b": {
+            "START": time(0, 0, 0),
+            "END": time(23, 59, 59)
+        },
+        "c": {
+            "START": time(0, 0, 0),
+            "END": time(23, 59, 59)
+        },
+        "d": {
+            "START": time(0, 0, 0),
+            "END": time(23, 59, 59)
+        },
+        "e": {
+            "START": time(0, 0, 0),
+            "END": time(23, 59, 59)
+        },
+        "f": {
+            "START": time(0, 0, 0),
+            "END": time(23, 59, 59)
+        },
     },
     "free": {
         "winter": {
@@ -794,7 +824,13 @@ var buttons = {
         "Custom 6": "custom,6",
         "Custom 7": "custom,7",
         "Custom 8": "custom,8",
-        "Custom 9": "custom,9"
+        "Custom 9": "custom,9",
+        "Custom A": "custom,a",
+        "Custom B": "custom,b",
+        "Custom C": "custom,c",
+        "Custom D": "custom,d",
+        "Custom E": "custom,e",
+        "Custom F": "custom,f"
     },
     "finals_schedules": {
         "Finals Day 1": "finals,1",
@@ -1046,7 +1082,7 @@ function changeThing(elem) {
     for(var e of Object.keys(buttons[elem.value])) {
         var opt = document.createElement("option");
         opt.value = buttons[elem.value][e];
-        opt.innerHTML = e + "  ";
+        opt.innerHTML = e + "&nbsp;&nbsp;";
         if(e == h)
             s = opt.value
         $("#sched_chooser").add(opt);
