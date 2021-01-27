@@ -43,6 +43,11 @@ var schedule_names = {
         "pm_assembly": "PM ASSEMBLY SCHEDULE - HALF PERIODS",
         "early_dismissal": "EARLY DISMISSAL SCHEDULE - HALF PERIODS"
     },
+    "hybrid": {
+        "normal": "NORMAL SCHEDULE - HYBRID LEARNING",
+        "remote": "REMOTE SCHEDULE - HYBRID LEARNING",
+        "late_arrival": "LATE ARRIVAL - HYBRID LEARNING"
+    },
     "corona": {
         "half": {
             "normal": "NORMAL SCHEDULE - E-LEARNING HALF PERIODS",
@@ -412,7 +417,7 @@ var schedules = {
             "PERIOD 3":      time(10,  5),
             "PASSING TO 4":  time(10, 15),
             "PERIOD 4":      time(10, 55),
-            "BREAK & BUS":   time(12, 05),
+            "BREAK & BUS":   time(12,  5),
             "PASSING TO 5":  time(12, 15),
             "PERIOD 5":      time(12, 55),
             "PASSING TO 6":  time(13,  5),
@@ -424,16 +429,16 @@ var schedules = {
             "SCHOOL IS TOMORROW": time(23, 59, 59)
         },
         "remote": {
-            "SCHOOL STARTS": time( 7, 30),
-            "PASSING TO 1":  time( 7, 45),
-            "PERIOD 1":      time( 8, 25),
-            "PASSING TO 2":  time( 8, 35),
-            "PERIOD 2":      time( 9, 15),
-            "PASSING TO 3":  time( 9, 25),
-            "PERIOD 3":      time(10,  5),
-            "PASSING TO 4":  time(10, 15),
-            "PERIOD 4":      time(10, 55),
-            "BREAK & BUS":   time(12, 05),
+            "SCHOOL STARTS": time( 8, 25),
+            "PASSING TO 1":  time( 8, 35),
+            "PERIOD 1":      time( 9, 15),
+            "PASSING TO 2":  time( 9, 25),
+            "PERIOD 2":      time(10,  5),
+            "PASSING TO 3":  time(10, 15),
+            "PERIOD 3":      time(10, 55),
+            "PASSING TO 4":  time(11,  5),
+            "PERIOD 4":      time(11, 45),
+            "BREAK & BUS":   time(12,  5),
             "PASSING TO 5":  time(12, 15),
             "PERIOD 5":      time(12, 55),
             "PASSING TO 6":  time(13,  5),
@@ -444,6 +449,26 @@ var schedules = {
             "PERIOD 8":      time(15, 25),
             "SCHOOL IS TOMORROW": time(23, 59, 59)
         },
+        "late_arrival": {
+            "SCHOOL STARTS": time(10, 20),
+            "PASSING TO 1":  time(10, 30),
+            "PERIOD 1":      time(11,  5),
+            "PASSING TO 2":  time(11, 10),
+            "PERIOD 2":      time(11, 40),
+            "PASSING TO 3":  time(11, 45),
+            "PERIOD 3":      time(12, 15),
+            "PASSING TO 4":  time(12, 20),
+            "PERIOD 4":      time(12, 55),
+            "PASSING TO 5":  time(13,  0),
+            "PERIOD 5":      time(13, 35),
+            "PASSING TO 6":  time(13, 40),
+            "PERIOD 6":      time(14, 15),
+            "PASSING TO 7":  time(14, 20),
+            "PERIOD 7":      time(14, 50),
+            "PASSING TO 8":  time(14, 55),
+            "PERIOD 8":      time(15, 25),
+            "SCHOOL IS TOMORROW": time(23, 59, 59)
+        }
     },
 
     "corona": {
@@ -684,6 +709,61 @@ var schedules = {
     }
 }
 
+var buttons = {
+    "full_schedules": {
+        "Normal": "normal",
+        "Late Arrival": "late_arrival",
+        "Activity Period": "activity",
+        "PM Assembly": "pm_assembly",
+        "Early Dismissal": "early_dismissal",
+        "Summer School": "summer",
+        "Odyssey": "odyssey"
+    },
+    "half_schedules": {
+        "Normal": "half,normal",
+        "Activity Period": "half,activity",
+        "PM Assembly": "half,pm_assembly",
+        "Early Dismissal": "half,early_dismissal"
+    },
+    "c19_full_schedules": {
+        "Normal": "corona,normal",
+        "Late Arrival": "corona,late_arrival",
+        "Early Dismissal": "corona,early_dismissal"
+    },
+    "c19_half_schedules": {
+        "Normal": "corona,half,normal",
+        "Early Dismissal": "corona,half,early_dismissal"
+    },
+    "custom_schedules": {
+        "Custom 0": "custom,0",
+        "Custom 1": "custom,1",
+        "Custom 2": "custom,2",
+        "Custom 3": "custom,3",
+        "Custom 4": "custom,4",
+        "Custom 5": "custom,5",
+        "Custom 6": "custom,6",
+        "Custom 7": "custom,7",
+        "Custom 8": "custom,8",
+        "Custom 9": "custom,9"
+    },
+    "finals_schedules": {
+        "Finals Day 1": "finals,1",
+        "Finals Day 2": "finals,2",
+        "Finals Day 3": "finals,3"
+    },
+    "c19_finals_schedules": {
+        "Finals Day 1": "corona,finals,1",
+        "Finals Day 2": "corona,finals,2",
+        "Finals Day 3": "corona,finals,3",
+    },
+    "hybrid_schedules": {
+        "Normal": "hybrid,normal",
+        "Remote": "hybrid,remote",
+        "Late Arrival": "hybrid,late_arrival"
+    }
+}
+        
+
 function get() {
     var now = Date.now()
     var d = new Date()
@@ -871,7 +951,7 @@ function toggleTheme() {
 color(localStorage.getItem("current_color") || "#00ffff");
 
 function hideScheds(except) {
-    var elements = [
+    /*var elements = [
         "full_schedules",
         "half_schedules",
         "c19_full_schedules",
@@ -879,11 +959,15 @@ function hideScheds(except) {
         "custom_schedules",
         "finals_schedules",
         "c19_finals_schedules"
-    ]
-    for(var e of elements)
+    ]*/
+    $("#cat_chooser").value = except
+    /*for(var e of elements)
         $("#" + e).classList.add("inv");
     if(except)
-        $("#" + except).classList.remove("inv");
+        $("#" + except).classList.remove("inv");*/
+}
+
+function changeThing(elem) {
 }
 
 function toggleHalf() {
