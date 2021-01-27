@@ -944,7 +944,7 @@ function setSchedule(...args) {
         $("#hider").textContent = "";
     }
     //$(`span[onclick="setSchedule('${args.join("', '")}')"]`).classList.add("selected")
-    $("#sched_chooser").value = args.join(",");
+    $("#sched_chooser").value = args.join(",").replace("half,", "");
     $("#prt").textContent = current_schedule_name;
     last_time = 0;
     get();
