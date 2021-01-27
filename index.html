@@ -59,9 +59,13 @@
                 transform: translateX(-50%);
                 bottom: 10px;
             } .disabled {
-                cursor: not-allowed;
+                cursor: not-allowed !important;
                 text-decoration: line-through;
                 opacity: 50%;
+            } select {
+                appearance: none;
+            } #sel_block::after {
+                content: "V";
             }
         </style>
     </head>
