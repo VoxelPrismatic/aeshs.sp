@@ -1015,7 +1015,7 @@ function hideScheds(except) {
         "finals_schedules",
         "c19_finals_schedules"
     ]*/
-    $("#cat_chooser").value = except
+    $("#cat_chooser").value = except.replace("half_", "full_");
     /*for(var e of elements)
         $("#" + e).classList.add("inv");
     if(except)
@@ -1041,13 +1041,9 @@ function changeThing(elem) {
         $("#sched_chooser").add(opt);
     }
     $("#sched_chooser").value = s;
-    if(elem.value == "custom_schedules") {
-        $("#custom_schedules").classList.remove("inv");
-        custom_schedule = true
-    } else {
-        $("#custom_schedules").classList.add("inv");
-        custom_schedule = false
-    }
+    if(s)
+        setSchedule(...s.split(","));
+    custom_schedule = elem.value.includes("custom");
     finals_schedule = elem.value.includes("final");
     hybrid_schedule = elem.value.startsWith("hybrid");
     elearn_schedule = elem.value.startsWith("c19");
@@ -1064,7 +1060,7 @@ function changeThing(elem) {
         toggleHalf();
     } else {
         e_.classList.add("disabled");
-        e_.onclick = null
+        e_.onclick = null;
     }
 }
 
