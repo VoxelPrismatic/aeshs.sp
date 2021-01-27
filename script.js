@@ -1,7 +1,7 @@
-function $(...a) {
-    return document.querySelector(...a);
-} function $$(...a) {
-    return document.querySelectorAll(...a);
+function $(a, e = document) {
+    return e.querySelector(a);
+} function $$(a, e = document) {
+    return e.querySelectorAll(a);
 }
 $("#time").textContent = "-~-"
 
@@ -44,6 +44,10 @@ var schedule_names = {
         "early_dismissal": "EARLY DISMISSAL SCHEDULE - HALF PERIODS"
     },
     "hybrid": {
+        "half": {
+            "normal": "NORMAL SCHEDULE - HYBRID HALF PERIODS",
+            "remote": "REMOTE SCHEDULE - HYBRID HALF PERIODS"
+        }
         "normal": "NORMAL SCHEDULE - HYBRID LEARNING",
         "remote": "REMOTE SCHEDULE - HYBRID LEARNING",
         "late_arrival": "LATE ARRIVAL - HYBRID LEARNING"
@@ -407,6 +411,51 @@ var schedules = {
     },
     
     "hybrid": {
+        "half": {
+            "normal": {
+                "SCHOOL STARTS": time( 7, 45),
+                "PASSING TO SCI-SEMINAR":  time( 8,  5),
+                "SCIENCE SEMINAR":         time( 8, 25),
+                "PASSING TO 2":  time( 8, 35),
+                "PERIOD 2":      time( 9, 15),
+                "PASSING TO 3":  time( 9, 25),
+                "PERIOD 3":      time(10,  5),
+                "PASSING TO 4":  time(10, 15),
+                "PERIOD 4":      time(10, 55),
+                "BREAK & BUS":   time(12,  5),
+                "PASSING TO 5":  time(12, 15),
+                "PERIOD 5":      time(12, 55),
+                "PASSING TO 6":  time(13,  5),
+                "PERIOD 6":      time(13, 45),
+                "PASSING TO 7":  time(13, 55),
+                "PERIOD 7":      time(14, 35),
+                "PASSING TO 8":  time(14, 45),
+                "PERIOD 8":      time(15, 25),
+                "SCHOOL IS TOMORROW": time(23, 59, 59)
+            },
+            "remote": {
+                "SCHOOL STARTS": time( 8, 35),
+                "PASSING TO SCI-SEMINAR":  time( 8, 55),
+                "SCIENCE SEMINAR":         time( 9, 15),
+                "PASSING TO 2":  time( 9, 25),
+                "PERIOD 2":      time(10,  5),
+                "PASSING TO 3":  time(10, 15),
+                "PERIOD 3":      time(10, 55),
+                "PASSING TO 4":  time(11,  5),
+                "PERIOD 4":      time(11, 45),
+                "BREAK & BUS":   time(12,  5),
+                "PASSING TO 5":  time(12, 15),
+                "PERIOD 5":      time(12, 55),
+                "PASSING TO 6":  time(13,  5),
+                "PERIOD 6":      time(13, 45),
+                "PASSING TO 7":  time(13, 55),
+                "PERIOD 7":      time(14, 35),
+                "PASSING TO 8":  time(14, 45),
+                "PERIOD 8":      time(15, 25),
+                "SCHOOL IS TOMORROW": time(23, 59, 59)
+            }
+        },
+
         "normal": {
             "SCHOOL STARTS": time( 7, 30),
             "PASSING TO 1":  time( 7, 45),
@@ -756,10 +805,14 @@ var buttons = {
         "Finals Day 2": "corona,finals,2",
         "Finals Day 3": "corona,finals,3",
     },
-    "hybrid_schedules": {
+    "hybrid_full_schedules": {
         "Normal": "hybrid,normal",
         "Remote": "hybrid,remote",
         "Late Arrival": "hybrid,late_arrival"
+    },
+    "hybrid_half_schedules": {
+        "Normal": "hybrid,half,normal",
+        "Remote": "hybrid,half,remote",
     }
 }
         
@@ -889,7 +942,8 @@ function setSchedule(...args) {
         $("#customizer").style.width = "0px";
         $("#hider").textContent = " ";
     }
-    $(`span[onclick="setSchedule('${args.join("', '")}')"]`).classList.add("selected")
+    //$(`span[onclick="setSchedule('${args.join("', '")}')"]`).classList.add("selected")
+    $("#sched_chooser").value = args.join(",");
     $("#prt").textContent = current_schedule_name;
     last_time = 0;
     get();
@@ -968,6 +1022,45 @@ function hideScheds(except) {
 }
 
 function changeThing(elem) {
+    var l = $("#sched_chooser").options;
+    var h = l[l.selectedIndex].innerHTML;
+    for(var e of $$("option", $("#sched_chooser"))
+        e.remove();
+    var s = "";
+    for(var e of Object.keys(buttons[elem.value])) {
+        var opt = document.createElement("option");
+        opt.value = buttons[elem.value][e];
+        opt.innerHTML = e;
+        if(e == h)
+            s = opt.value
+        $("#sched_chooser").add(opt);
+    }
+    $("#sched_chooser").value = s;
+    if(elem.value == "custom_schedules") {
+        $("#custom_schedules").classList.remove("inv");
+        custom_schedule = true
+    } else {
+        $("#custom_schedules").classList.add("inv");
+        custom_schedule = false
+    }
+    finals_schedule = elem.value.includes("final");
+    hybrid_schedule = elem.value.startsWith("hybrid");
+    elearn_schedule = elem.value.startsWith("c19");
+    localStorage.setItem("corona_enabled", Number(elearn_schedule));
+    localStorage.setItem("finals_enabled", Number(finals_schedule));
+    localStorage.setItem("custom_enabled", Number(custom_schedule));
+    localStorage.setItem("hybrid_enabled", Number(hybrid_schedule));
+    e_ = $("#toggle-half");
+    if(elem.value.includes("full_schedules") || elem.value.includes("half_schedules")) {
+        e_.classList.remove("disabled");
+        e_.onclick = function() { toggleHalf() }
+        half_period = elem.value.includes("half_schedules");
+        toggleHalf();
+        toggleHalf();
+    } else {
+        e_.classList.add("disabled");
+        e_.onclick = null
+    }
 }
 
 function toggleHalf() {
@@ -986,6 +1079,9 @@ function toggleHalf() {
     if(elearn_schedule) {
         sched = "c19_" + sched
         sched_ls = ["corona", ...sched_ls];
+    } else if(hybrid_schedule) {
+        sched = "hybrid_" + sched
+        sched_ls = ["hybrid", ...sched_ls];
     }
     sched_ls.push(current_args.slice(-1)[0])
     setSchedule(...sched_ls);
@@ -993,7 +1089,7 @@ function toggleHalf() {
     hideScheds(sched);
 }
 
-function toggleELearning() {
+/*function toggleELearning() {
     elearn_schedule = !elearn_schedule
     if(custom_schedule)
         return
@@ -1050,7 +1146,7 @@ function toggleCustom() {
         toggleHalf();
     }
     localStorage.setItem("custom_enabled", Number(custom_schedule));
-}
+}*/
 
 function toggleHour() {
     hr12 = !hr12
@@ -1139,14 +1235,21 @@ function hr24(hr) {
     return [hr, ampm]
 }
 
+var st = "full_schedules"
 if(Number(localStorage.getItem("half_enabled")))
-    toggleHalf();
-if(Number(localStorage.getItem("corona_enabled")))
-    toggleELearning();
+    st = "half_schedules"
 if(Number(localStorage.getItem("finals_enabled")))
-    toggleFinals();
+    st = "finals_schedules"
+
+if(Number(localStorage.getItem("corona_enabled")))
+    st = "c19_" + st
+if(Number(localStorage.getItem("hybrid_enabled")))
+    st = "hybrid_" + st
 if(Number(localStorage.getItem("custom_enabled")))
-    toggleCustom();
+    st = "custom_schedules"
+
+$("#cat_chooser").value = st;
+
 if(Number(localStorage.getItem("full_screen")))
     fullScreen();
 if(Number(localStorage.getItem("12hour")))
@@ -1169,6 +1272,8 @@ function calendar(text) {
     var scheded = [];
     if(elearn_schedule)
         scheded.push("corona");
+    if(hybrid_schedule)
+        scheded.push("hybrid");
     if(half_period)
         scheded.push("half");
     scheded.push("normal")
@@ -1194,6 +1299,10 @@ function calendar(text) {
         if(elearn_schedule) {
             one.push("corona");
             thing.push("corona");
+        }
+        if(hybrid_schedule) {
+            one.push("hybrid");
+            thing.push("hybrid");
         }
         if(half_period)
             thing.push("half");
