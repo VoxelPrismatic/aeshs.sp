@@ -1204,12 +1204,14 @@ function customSchedule(text) {
 }
 
 function drawerThing(elem) {
-    localStorage.setItem('drawer_open', Number(!elem.open))
     elem.classList.remove("drawer_bottom")
-    window.setTimeout(() => {
-        if(!window.scrollMaxY)
-            elem.classList.add("drawer_bottom");
-    }, 1);
+    if(!elem.open) {
+        window.setTimeout(() => {
+            if(!window.scrollMaxY)
+                elem.classList.add("drawer_bottom");
+                localStorage.setItem('drawer_open', Number(elem.open))
+        }, 10);
+    }
 }
 
 function diffTime(a, b = new Date(0)) {
