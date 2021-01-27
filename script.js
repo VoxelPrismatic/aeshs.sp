@@ -1024,7 +1024,7 @@ function hideScheds(except) {
 function changeThing(elem) {
     var l = $("#sched_chooser").options;
     var h = l[l.selectedIndex].innerHTML;
-    for(var e of $$("option", $("#sched_chooser"))
+    for(var e of $$("option", $("#sched_chooser")))
         e.remove();
     var s = "";
     for(var e of Object.keys(buttons[elem.value])) {
