@@ -400,6 +400,51 @@ var schedules = {
             "SCHOOL IS TOMORROW": time(23, 59, 59),
         }
     },
+    
+    "hybrid": {
+        "normal": {
+            "SCHOOL STARTS": time( 7, 30),
+            "PASSING TO 1":  time( 7, 45),
+            "PERIOD 1":      time( 8, 25),
+            "PASSING TO 2":  time( 8, 35),
+            "PERIOD 2":      time( 9, 15),
+            "PASSING TO 3":  time( 9, 25),
+            "PERIOD 3":      time(10,  5),
+            "PASSING TO 4":  time(10, 15),
+            "PERIOD 4":      time(10, 55),
+            "BREAK & BUS":   time(12, 05),
+            "PASSING TO 5":  time(12, 15),
+            "PERIOD 5":      time(12, 55),
+            "PASSING TO 6":  time(13,  5),
+            "PERIOD 6":      time(13, 45),
+            "PASSING TO 7":  time(13, 55),
+            "PERIOD 7":      time(14, 35),
+            "PASSING TO 8":  time(14, 45),
+            "PERIOD 8":      time(15, 25),
+            "SCHOOL IS TOMORROW": time(23, 59, 59)
+        },
+        "remote": {
+            "SCHOOL STARTS": time( 7, 30),
+            "PASSING TO 1":  time( 7, 45),
+            "PERIOD 1":      time( 8, 25),
+            "PASSING TO 2":  time( 8, 35),
+            "PERIOD 2":      time( 9, 15),
+            "PASSING TO 3":  time( 9, 25),
+            "PERIOD 3":      time(10,  5),
+            "PASSING TO 4":  time(10, 15),
+            "PERIOD 4":      time(10, 55),
+            "BREAK & BUS":   time(12, 05),
+            "PASSING TO 5":  time(12, 15),
+            "PERIOD 5":      time(12, 55),
+            "PASSING TO 6":  time(13,  5),
+            "PERIOD 6":      time(13, 45),
+            "PASSING TO 7":  time(13, 55),
+            "PERIOD 7":      time(14, 35),
+            "PASSING TO 8":  time(14, 45),
+            "PERIOD 8":      time(15, 25),
+            "SCHOOL IS TOMORROW": time(23, 59, 59)
+        },
+    },
 
     "corona": {
         "half": {
