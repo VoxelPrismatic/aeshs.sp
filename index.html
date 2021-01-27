@@ -87,23 +87,27 @@
                     <div id="buttons">
                         <h3>-- SCHEDULES --</h3>
                         <span onclick="toggleHalf()" id="toggle-half">[HALF PERIODS]</span>
-                        <select id="cat_chooser" onchange="changeThing(this)">
-                            <optgroup label="Normal">
-                                <option value="full_schedules">Normal schedules</option>
-                                <option value="finals_schedules">Finals schedules</option>
-                            </optgroup>
-                            <optgroup label="E-Learning">
-                                <option value="c19_full_schedules">E-Learning: Normal</option>
-                                <option value="c19_finals_schedules">E-Learning: Finals</option>
-                                <option value="hybrid_full_schedules">Hybrid schedules</option>
-                            </optgroup>
-                            <optgroup label="Other">
-                                <option value="custom_schedules">Custom schedules</option>
-                            </optgroup>
-                        </select>
-                        <select id="sched_chooser" onchange="setSchedule(...this.value.split(','))">
-                            <option value="normal">Normal</option>
-                        </select>
+                        <div id="sel_block">
+                            <select id="cat_chooser" onchange="changeThing(this)">
+                                <optgroup label="Normal">
+                                    <option value="full_schedules">Normal schedules</option>
+                                    <option value="finals_schedules">Finals schedules</option>
+                                </optgroup>
+                                <optgroup label="E-Learning">
+                                    <option value="c19_full_schedules">E-Learning: Normal</option>
+                                    <option value="c19_finals_schedules">E-Learning: Finals</option>
+                                    <option value="hybrid_full_schedules">Hybrid schedules</option>
+                                </optgroup>
+                                <optgroup label="Other">
+                                    <option value="custom_schedules">Custom schedules</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div id="sel_block">
+                            <select id="sched_chooser" onchange="setSchedule(...this.value.split(','))">
+                                <option value="normal">Normal</option>
+                            </select>
+                        </div>
                         <!--<span onclick="toggleELearning()" id="toggle-corona">[E-LEARNING]</span>
                         <span onclick="toggleFinals()" id="toggle-final">[FINALS]</span>
                         <span onclick="toggleCustom()" id="toggle-custom">[CUSTOM]</span>
