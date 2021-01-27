@@ -941,7 +941,7 @@ function setSchedule(...args) {
         $("#customizer").value = "";
         $("#customizer").style.height = "0px";
         $("#customizer").style.width = "0px";
-        $("#hider").textContent = " ";
+        $("#hider").textContent = "";
     }
     //$(`span[onclick="setSchedule('${args.join("', '")}')"]`).classList.add("selected")
     $("#sched_chooser").value = args.join(",");
@@ -1024,7 +1024,11 @@ function hideScheds(except) {
 
 function changeThing(elem) {
     var l = $("#sched_chooser").options;
-    var h = l[l.selectedIndex].innerHTML;
+    try {
+        var h = l[l.selectedIndex].innerHTML;
+    } catch(err) {
+        var h = "";
+    }
     for(var e of $$("option", $("#sched_chooser")))
         e.remove();
     var s = "";
