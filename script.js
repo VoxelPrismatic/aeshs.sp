@@ -1192,7 +1192,7 @@ function customSchedule(text) {
             var min = Number(tm.split(":")[1].slice(0, 2))
             try {
                 if(Number(tm.split(":")[2].slice(0, 2)))
-                    var sec = Number(tm.split(":")[2]);
+                    var sec = Number(tm.split(":")[2].slice(0, 2));
                 else
                     var sec = 0
             } catch(err) {
