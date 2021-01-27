@@ -1215,7 +1215,9 @@ function customSchedule(text) {
     }
 }
 
-function drawerThing(elem) {
+function drawerThing(evt, elem) {
+    if(evt.target != $("#drawer"))
+        return;
     elem.classList.remove("drawer_bottom")
     if(!elem.open) {
         window.setTimeout(() => {
