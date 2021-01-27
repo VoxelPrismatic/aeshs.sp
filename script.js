@@ -47,7 +47,7 @@ var schedule_names = {
         "half": {
             "normal": "NORMAL SCHEDULE - HYBRID HALF PERIODS",
             "remote": "REMOTE SCHEDULE - HYBRID HALF PERIODS"
-        }
+        },
         "normal": "NORMAL SCHEDULE - HYBRID LEARNING",
         "remote": "REMOTE SCHEDULE - HYBRID LEARNING",
         "late_arrival": "LATE ARRIVAL - HYBRID LEARNING"
