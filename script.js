@@ -217,7 +217,7 @@ var schedules = {
         "SCHOOL STARTS": time( 7, 40),
         "GO TO CLASS":   time( 7, 45),
         "SUMMER SCHOOL": time(12, 59),
-        "SCHOOL IS TMO": time(23, 59, 59),
+        "SCHOOL IS TOMORROW": time(23, 59, 59),
     },
 
     "finals": {
