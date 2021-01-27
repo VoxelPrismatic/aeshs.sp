@@ -91,7 +91,7 @@
                     <div id="buttons">
                         <h3>-- SCHEDULES --</h3>
                         <span onclick="toggleHalf()" id="toggle-half">[HALF PERIODS]</span>
-                        <div id="sel_block">
+                        <span id="sel_block">
                             <select id="cat_chooser" onchange="changeThing(this)">
                                 <optgroup label="Normal">
                                     <option value="full_schedules">Normal schedules</option>
@@ -107,7 +107,7 @@
                                 </optgroup>
                             </select>
                         </div>
-                        <div id="sel_block">
+                        <span id="sel_block">
                             <select id="sched_chooser" onchange="setSchedule(...this.value.split(','))">
                                 <option value="normal">Normal</option>
                             </select>
