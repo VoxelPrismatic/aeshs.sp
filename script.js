@@ -1284,6 +1284,9 @@ function hr24(hr) {
     return [hr, ampm]
 }
 
+if(Number(localStorage.getItem("half_enabled")))
+    toggleHalf();
+
 var st = "full_schedules"
 if(Number(localStorage.getItem("finals_enabled")))
     st = "finals_schedules"
@@ -1298,8 +1301,6 @@ if(Number(localStorage.getItem("custom_enabled")))
 $("#cat_chooser").value = st;
 changeThing($("#cat_chooser"));
 
-if(Number(localStorage.getItem("half_enabled")))
-    toggleHalf();
 if(Number(localStorage.getItem("full_screen")))
     fullScreen();
 if(Number(localStorage.getItem("12hour")))
