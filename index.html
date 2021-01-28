@@ -10,7 +10,7 @@
             .mustinv {display: none !important;}
             tr {margin: 0px;}
             th {background-color: #00ffff88;}
-            * {font-family: "Ubuntu Mono", monospace;}
+            body {font-family: "Ubuntu Mono", monospace;}
             .cc {left: 0; right: 0; margin: auto;}
             body {width: 90vw; left: 0; right: 0; margin: auto;}
             .bottom {position: fixed; bottom: 5px; left: 0px; right: 0px;}
@@ -77,6 +77,9 @@
                 font-size: x-small;
             } #sel_block {
                 position: relative;
+            } button, select, #prt, #prt2, #per, #tC {
+                font-family: "Ubuntu", "sans-serif";
+            }
         </style>
     </head>
     <body style="color: #00ffffff; background-color: #112222ff;">
@@ -222,6 +225,30 @@
                 font-weight: 700;
                 font-display: swap;
                 src: local("Ubuntu Mono Bold"), local("UbuntuMono-Bold"), local("UbuntuMono-B"), url("font/UbuntuMono-B.ttf");
+            } @font-face {
+                font-family: "Ubuntu";
+                font-style: italic;
+                font-weight: 400;
+                font-display: swap;
+                src: local("Ubuntu Italic"), local("Ubuntu-Italic"), local("Ubuntu-RI"), url("font/Ubuntu-RI.ttf");
+            } @font-face {
+                font-family: "Ubuntu";
+                font-style: italic;
+                font-weight: 700;
+                font-display: swap;
+                src: local("Ubuntu Bold Italic"), local("Ubuntu-BoldItalic"), local("Ubuntu-BI"), url("font/Ubuntu-BI.ttf");
+            } @font-face {
+                font-family: "Ubuntu";
+                font-style: normal;
+                font-weight: 400;
+                font-display: swap;
+                src: local("Ubuntu"), local("Ubuntu"), local("Ubuntu-R"), url("font/Ubuntu-R.ttf");
+            } @font-face {
+                font-family: "Ubuntu";
+                font-style: normal;
+                font-weight: 700;
+                font-display: swap;
+                src: local("Ubuntu Bold"), local("Ubuntu-Bold"), local("Ubuntu-B"), url("font/Ubuntu-B.ttf");
             }
         </style>
     </body>
