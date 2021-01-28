@@ -880,7 +880,7 @@ function get() {
     }
     last_end = end
     var scs = diffTime(rn, end);
-    var refresh = last_time < scs
+    var refresh = last_time < scs || scs % 4 == 0
     last_time = scs
     var mns = Math.floor(scs / 60);
     scs %= 60;
