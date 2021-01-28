@@ -858,9 +858,9 @@ function get() {
     var now = Date.now()
     var d = new Date()
     var scs = diffTime(d, last_end);
-    if(last_time && scs % 60 != 59) {
+    if(last_time && scs % 2) {
         last_time = scs
-        scs %= 2
+        scs %= 60
         if(Number($("#seconds").textContent) > scs) {
             $("#seconds").textContent = zf(scs)
             return
