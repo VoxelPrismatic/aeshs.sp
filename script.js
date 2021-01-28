@@ -1254,13 +1254,11 @@ function drawerThing(evt, elem) {
     if(evt.target != $("#drawer"))
         return;
     elem.classList.remove("drawer_bottom")
-    if(!elem.open) {
-        window.setTimeout(() => {
-            if(!window.scrollMaxY)
-                elem.classList.add("drawer_bottom");
-                localStorage.setItem('drawer_open', Number(elem.open))
-        }, 10);
-    }
+    localStorage.setItem('drawer_open', Number(!elem.open))
+    window.setTimeout(() => {
+        if(!window.scrollMaxY)
+            elem.classList.add("drawer_bottom");
+    }, 10);
 }
 
 function diffTime(a, b = new Date(0)) {
