@@ -217,7 +217,7 @@ var schedules = {
         "ODYSSEY 4":      time(14, 25),
         "PASSING TO 5":   time(14, 35),
         "ODYSSEY 5":      time(15, 25),
-        "ODYSSEY/SCHOOL IS TOMORROW": time(23, 59, 59),
+        "SCHOOL IS TOMORROW": time(23, 59, 59),
     },
     "summer": {
         "SCHOOL STARTS": time( 7, 40),
