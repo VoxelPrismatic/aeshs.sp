@@ -1050,7 +1050,8 @@ function color(s) {
         $("#sched_chooser").style,
         $("#cat_chooser").style,
         $("#hider").style,
-        $("#toggle-hour").style
+        $("#toggle-hour").style,
+        $("#fuller").style
     ]
     for(var style of l) {
         style.backgroundColor = bg_des;
