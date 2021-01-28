@@ -1251,7 +1251,7 @@ function customSchedule(text) {
 }
 
 function drawerThing(evt, elem) {
-    if(evt.target != $("#drawer"))
+    if(evt.target != $("#drawer summary"))
         return;
     elem.classList.remove("drawer_bottom")
     localStorage.setItem('drawer_open', Number(!elem.open))
