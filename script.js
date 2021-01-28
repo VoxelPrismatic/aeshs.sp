@@ -970,7 +970,7 @@ function setSchedule(...args) {
         $("#customizer").onchange = function() { changer(s); };
         $("#customizer").style.height = "30vw";
         $("#customizer").style.width = "90vw";
-        $("#hider").textContent = "[TOGGLE CUSTOM SCHEDULE EDITOR]";
+        $("#hider").textContent = "Toggle editor";
     } else {
         $("#customizer").className = "inv cc";
         $("#customizer").onchange = function(){};
@@ -1035,20 +1035,25 @@ function color(s) {
         bg = bg_light;
         bg_inv = bg_dark;
         bg_des = `rgb(${190 + c[0]}, ${190 + c[1]}, ${190 + c[2]}`;
-        $("#change").innerHTML = "[DARK THEME]"
+        $("#change").innerHTML = "Dark"
     } else {
-        $("#change").innerHTML = "[LIGHT THEME]"
+        $("#change").innerHTML = "Light"
     }
     document.body.style.backgroundColor = bg;
-    $("#change").style.color = bg_inv;
+    $("#change").style.color = bg;
+    $("#change").style.backgroundColor = bg_inv;
     
-    $("#toggle-half").style.backgroundColor = bg_des;
-    $("#sched_chooser").style.backgroundColor = bg_des;
-    $("#cat_chooser").style.backgroundColor = bg_des;
-    
-    $("#toggle-half").style.color = s;
-    $("#sched_chooser").style.color = s;
-    $("#cat_chooser").style.color = s;
+    var l = [
+        $("#toggle-half").style,
+        $("#sched_chooser").style,
+        $("#cat_chooser").style,
+        $("#hider").style,
+        $("#toggle-hour").style
+    ]
+    for(var style of l) {
+        style.backgroundColor = bg_des;
+        style.color = s;
+    }
     
     $("#customizer").style.backgroundColor = bg_des;
     
@@ -1213,7 +1218,7 @@ function toggleCustom() {
 function toggleHour() {
     hr12 = !hr12
     localStorage.setItem("12hour", Number(hr12))
-    $("#toggle-hour").textContent = `[${hr12 ? 24 : 12} HOUR]`
+    $("#toggle-hour").textContent = `${hr12 ? 24 : 12}hr`
     setSchedule();
     last_time = 0;
     get();
