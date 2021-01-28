@@ -981,6 +981,21 @@ function setSchedule(...args) {
     }
     //$(`span[onclick="setSchedule('${args.join("', '")}')"]`).classList.add("selected")
     $("#sched_chooser").value = args.join(",").replace("half,", "");
+    e_ = $("#toggle-half");
+    d = schedules;
+    for(var thh of args.slice(0, -1).filter(v => v != "half").concat("half").concat(args.slice(-1)[0])) {
+        try {
+            d = d[thh]
+        } catch(err) {
+        }
+    }
+    if(d) {
+        e_.classList.remove("disabled");
+        e_.onclick = function() { toggleHalf() }
+    } else {
+        e_.classList.add("disabled");
+        e_.onclick = null;
+    }
     $("#prt").textContent = current_schedule_name;
     last_time = 0;
     get();
