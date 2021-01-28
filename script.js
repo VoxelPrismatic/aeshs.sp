@@ -971,6 +971,7 @@ function setSchedule(...args) {
         $("#customizer").style.height = "30vw";
         $("#customizer").style.width = "90vw";
         $("#hider").textContent = "Toggle editor";
+        $("#hider").style.display = ""
     } else {
         $("#customizer").className = "inv cc";
         $("#customizer").onchange = function(){};
@@ -978,6 +979,7 @@ function setSchedule(...args) {
         $("#customizer").style.height = "0px";
         $("#customizer").style.width = "0px";
         $("#hider").textContent = "";
+        $("#hider").style.display = "none"
     }
     //$(`span[onclick="setSchedule('${args.join("', '")}')"]`).classList.add("selected")
     $("#sched_chooser").value = args.join(",").replace("half,", "");
