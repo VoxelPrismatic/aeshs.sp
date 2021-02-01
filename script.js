@@ -1459,3 +1459,5 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
         });
     });
 }
+
+window.onfocus = () => { last_time = 0; }
