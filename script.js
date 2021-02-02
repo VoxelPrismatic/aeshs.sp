@@ -1475,7 +1475,7 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
 } else if(localStorage.getItem("calendar_load") == tt) {
     calendar(localStorage.getItem("calendar_text"))
 } else {
-    fetch("https://cors-anywhere.herokuapp.com/https://www.d125.org/cf_calendar/feed.cfm?type=ical&feedID=AF5167036E214C99B84D252995DB9199").then((resp) => {
+    fetch("https://cors-container.herokuapp.com/https://www.d125.org/cf_calendar/feed.cfm?type=ical&feedID=AF5167036E214C99B84D252995DB9199").then((resp) => {
         console.log("found calendar")
         resp.text().then((text) => {
             localStorage.setItem("calendar_load", tt)
