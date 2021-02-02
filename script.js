@@ -26,7 +26,7 @@ var just_now = offset_day();
 var last_now = offset_day();
 
 function time(hr = 0, mn = 0, sc = 0) {
-    var now = last_now;
+    var now = new Date(last_now);
     now.setHours(hr);
     now.setMinutes(mn);
     now.setSeconds(sc);
