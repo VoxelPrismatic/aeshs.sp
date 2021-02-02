@@ -12,9 +12,9 @@ if(url.includes("?")) {
     offset_time.setDate(Number(url.split("day=")[1].split("&")[0]) || offset_time.getDate())
     offset_time.setMonth((Number(url.split("month=")[1].split("&")[0]) - 1) || offset_time.getMonth());
     offset_time.setFullYear(Number(url.split("year=")[1].split("&")[0]) || offset_time.getFullYear());
-    offset_time.setHours((Number(url.split("hour=")[1].split("&")[0]) - 1) || offset_time.getHours());
-    offset_time.setMinutes((Number(url.split("minute=")[1].split("&")[0]) - 1) || offset_time.getMinutes());
-    offset_time.setSeconds((Number(url.split("seconds=")[1].split("&")[0]) - 1) || offset_time.getSeconds());
+    offset_time.setHours(Number(url.split("hour=")[1].split("&")[0]) || offset_time.getHours());
+    offset_time.setMinutes(Number(url.split("minute=")[1].split("&")[0]) || offset_time.getMinutes());
+    offset_time.setSeconds(Number(url.split("seconds=")[1].split("&")[0]) || offset_time.getSeconds());
 }
 function offset_day(now = new Date()) {
     if(url.includes("?"))
@@ -895,7 +895,7 @@ function get() {
             p_l = x.length + 3
         if(current_schedule[x] - now >= 0) {
             period = x;
-            var rn = new Date();
+            var rn = offset_day();
             break;
         }
     }
