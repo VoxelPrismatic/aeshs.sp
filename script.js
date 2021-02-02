@@ -907,14 +907,14 @@ function get() {
     var endhr = end.getHours();
     var ampm;
     [endhr, ampm] = hr24(endhr)
-    if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() >= 4)
+    if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
         period = "ENJOY THE WEEKEND";
     $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
     var ls = `<b>PERIOD NAME ${"-".repeat(p_l - 9)} START</b><br><div>`;
     var ogls = ls;
     for(var x = 0; x < Object.keys(current_schedule).length - 1; x += 1) {
         var per = Object.keys(current_schedule)[x + 1];
-        if(per == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() >= 4)
+        if(per == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
             per = "ENJOY THE WEEKEND";
         var end2 = Object.values(current_schedule)[x];
         var hr = end2.getHours();
