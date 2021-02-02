@@ -1130,7 +1130,7 @@ function changeThing(elem) {
     for(var e of Object.keys(buttons[elem.value])) {
         var opt = document.createElement("option");
         opt.value = buttons[elem.value][e];
-        opt.innerHTML = e + "&nbsp;&nbsp;";
+        opt.innerHTML = e
         if(e == h)
             s = opt.value
         $("#sched_chooser").add(opt);
