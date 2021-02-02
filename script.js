@@ -24,7 +24,7 @@ if(url.includes("?")) {
 }
 function offset_day(now = new Date()) {
     if(url.includes("?"))
-        return new Date(now - load_time + offset_time);
+        return new Date(Number(now) - Number(load_time) + Number(offset_time));
     return now
 }
 
