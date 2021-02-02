@@ -5,22 +5,32 @@ function $(a, e = document) {
 }
 $("#time").textContent = "-~-"
 
+var offset_time = new Date();
+var load_time = new Date();
+var url = document.URL;
+if(url.includes("?")) {
+    offset_time.setDate(Number(url.split("day=")[1].split("&")[0]) || offset_time.getDate())
+    offset_time.setMonth((Number(url.split("month=")[1].split("&")[0]) - 1) || offset_time.getMonth());
+    offset_time.setFullYear(Number(url.split("year=")[1].split("&")[0]) || offset_time.getFullYear());
+    offset_time.setHours((Number(url.split("hour=")[1].split("&")[0]) - 1) || offset_time.getHours());
+    offset_time.setMinutes((Number(url.split("minute=")[1].split("&")[0]) - 1) || offset_time.getMinutes());
+    offset_time.setSeconds((Number(url.split("seconds=")[1].split("&")[0]) - 1) || offset_time.getSeconds());
+}
 function offset_day(now = new Date()) {
-    var url = document.URL;
-    if(url.includes("?")) {
-        now.setDate(Number(url.split("day=")[1].split("&")[0]) || now.getDate());
-        now.setMonth((Number(url.split("month=")[1].split("&")[0]) - 1) || now.getMonth());
-        now.setFullYear(Number(url.split("year=")[1].split("&")[0]) || now.getFullYear());
-    }
+    if(url.includes("?"))
+        return new Date(now - load_time + offset_time);
     return now
 }
 
+var just_now = offset_day();
+var last_now = offset_day();
+
 function time(hr = 0, mn = 0, sc = 0) {
-    var now = new Date();
+    var now = last_now;
     now.setHours(hr);
     now.setMinutes(mn);
     now.setSeconds(sc);
-    return offset_day(now);
+    return now;
 }
 
 var custom_schedule = false;
@@ -31,7 +41,6 @@ var hr12 = false;
 var half_period = false;
 var light_theme = Number(localStorage.getItem("light_theme") || 0);
 var last_time = 0;
-var just_now = offset_day();
 var last_end = null;
 var full_screen = false;
 
