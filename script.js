@@ -5,12 +5,22 @@ function $(a, e = document) {
 }
 $("#time").textContent = "-~-"
 
+function offset_day(now = new Date()) {
+    var url = document.URL;
+    if(url.includes("?")) {
+        now.setDate(Number(url.split("day=")[1].split("&")[0]) || now.getDate());
+        now.setMonth((Number(url.split("month=")[1].split("&")[0]) - 1) || now.getMonth());
+        now.setFullYear(Number(url.split("year=")[1].split("&")[0]) || now.getFullYear());
+    }
+    return now
+}
+
 function time(hr = 0, mn = 0, sc = 0) {
     var now = new Date();
     now.setHours(hr);
     now.setMinutes(mn);
     now.setSeconds(sc);
-    return now;
+    return offset_day(now);
 }
 
 var custom_schedule = false;
@@ -21,9 +31,9 @@ var hr12 = false;
 var half_period = false;
 var light_theme = Number(localStorage.getItem("light_theme") || 0);
 var last_time = 0;
-var just_now = new Date()
-var last_end = null
-var full_screen = false
+var just_now = new Date();
+var last_end = null;
+var full_screen = false;
 
 var schedule_names = {
     "normal": "NORMAL SCHEDULE",
@@ -856,31 +866,34 @@ var buttons = {
 
 function get() {
     var now = Date.now()
-    var d = new Date()
+    var d = offset_day()
     var scs = diffTime(d, last_end);
-    if(last_time && scs % 2) {
+    if(last_time && scs % 10) {
         last_time = scs
         scs %= 60
         if(Number($("#seconds").textContent) > scs) {
-            $("#seconds").textContent = zf(scs)
-            return
+            $("#seconds").textContent = zf(scs);
+            return;
         }
     }
-    if(d.getMonth() != just_now.getMonth() || d.getDate() != just_now.getDate() ||
-       d.getYear() != just_now.getYear() || d.getDay() != just_now.getDay())
+    if(d.toDateString() != just_now.toDateString())
         window.location.reload()
+    var x_i = -1;
+    var p_l = 28;
     for(var x of Object.keys(current_schedule)) {
-        var per = x;
-        var end = current_schedule[x];
-        if(end - now >= 0) {
-            var period = per;
+        x_i += 1;
+        if(x.length + 3 > p_l)
+            p_l = x.length + 3
+        if(current_schedule[x] - now >= 0) {
+            period = x;
             var rn = new Date();
             break;
         }
     }
+    var end = current_schedule[period]
     last_end = end
     var scs = diffTime(rn, end);
-    var refresh = last_time < scs || scs % 4 == 0
+    var refresh = last_time < scs || scs % 60 == 0
     last_time = scs
     var mns = Math.floor(scs / 60);
     scs %= 60;
@@ -888,41 +901,36 @@ function get() {
     mns %= 60;
     $("#time").innerHTML = `${zf(hrs)}:${zf(mns)}:<span id='seconds'>${zf(scs)}</span>`;
 
-    if(refresh) {
-        var endhr = end.getHours();
+    if(!refresh)
+        return
+    
+    var endhr = end.getHours();
+    var ampm;
+    [endhr, ampm] = hr24(endhr)
+    if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() >= 4)
+        period = "ENJOY THE WEEKEND";
+    $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
+    var ls = `<b>PERIOD NAME ${"-".repeat(p_l - 9)} START</b><br><div>`;
+    var ogls = ls;
+    for(var x = 0; x < Object.keys(current_schedule).length - 1; x += 1) {
+        var per = Object.keys(current_schedule)[x + 1];
+        if(per == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() >= 4)
+            per = "ENJOY THE WEEKEND";
+        var end2 = Object.values(current_schedule)[x];
+        var hr = end2.getHours();
         var ampm;
-        [endhr, ampm] = hr24(endhr)
-        if(period == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
-            period = "ENJOY THE WEEKEND";
-        $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
-        if(hr12)
-            var ls = "<b>PERIOD NAME ------------------- START</b><br><div>";
-        else
-            var ls = "<b>PERIOD NAME ---------------- START</b><br>";
-        var ogls = ls;
-        for(var x = 0; x < Object.keys(current_schedule).length - 1; x += 1) {
-            var per = Object.keys(current_schedule)[x + 1];
-            if(per == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
-                per = "ENJOY THE WEEKEND";
-            var end2 = Object.values(current_schedule)[x];
-            var line = per + " ";
-            line = line.padEnd(28, "-") + " ";
-            var hr = end2.getHours()
-            var ampm;
-            [hr, ampm] = hr24(hr)
-
-            line += `${zf(hr)}:${zf(end2.getMinutes())}${ampm}`;
-            if(per == period)
-                line = "<b class='glow'><i>" + line + "</i></b>"
-            else if(end2 - now < 0)
-                line = "<s>" + line + "</s>";
-            ls += line + "<br>";
-        }
-        if(ogls == ls)
-            $("#list").innerHTML = (Object.keys(current_schedule)[0] + " ").padEnd(28, "-") + " ALL DAY"
-        else
-            $("#list").innerHTML = ls + "</div>";
+        [hr, ampm] = hr24(hr)
+        var line = (per + " ").padEnd(p_l, "-") + " " + `${zf(hr)}:${zf(end2.getMinutes())}${ampm}`;
+        if(per == period)
+            line = "<b class='glow'><i>" + line + "</i></b>";
+        else if(x < x_i)
+            line = "<s>" + line + "</s>";
+        ls += line + "<br>";
     }
+    if(ogls == ls)
+        $("#list").innerHTML = (Object.keys(current_schedule)[0] + " ").padEnd(p_l - 5, "-") + " ALL DAY"
+    else
+        $("#list").innerHTML = ls + "</div>";
 }
 
 for(var x = 0; x < 10; x += 1) {
@@ -940,20 +948,20 @@ function setSchedule(...args) {
     if(!args.length)
         args = eval(localStorage.getItem("current_schedule") + "") || ["normal"]
     console.log(args)
-    thing = schedules;
-    thing2 = schedule_names;
+    var thing = schedules;
+    var thing2 = schedule_names;
     for(var arg of args) {
-        thing = thing[arg]
+        thing = thing[arg];
         thing2 = thing2[arg];
     }
     if(thing == undefined)
         return
-    current_args = args
+    current_args = args;
     current_schedule = thing;
     current_schedule_name = thing2;
     localStorage.setItem("current_schedule", `["${args.join('", "')}"]`)
-     while($(".selected"))
-        $(".selected").classList.remove("selected")
+    /*for(var e of $$(".selected"))
+        e.classList.remove("selected")*/
     if(args[0] == "custom") {
         $("#customizer").className = "cc";
         $("#customizer").value = "period name                 | ending time - 24hr or add AM/PM\n"
@@ -982,6 +990,10 @@ function setSchedule(...args) {
         $("#hider").style.display = "none"
     }
     //$(`span[onclick="setSchedule('${args.join("', '")}')"]`).classList.add("selected")
+    $("#prt").textContent = current_schedule_name;
+    last_time = 0;
+    get();
+    
     $("#sched_chooser").value = args.join(",").replace("half,", "");
     e_ = $("#toggle-half");
     d = schedules;
@@ -989,6 +1001,7 @@ function setSchedule(...args) {
         try {
             d = d[thh]
         } catch(err) {
+            break;
         }
     }
     if(d) {
@@ -998,12 +1011,9 @@ function setSchedule(...args) {
         e_.classList.add("disabled");
         e_.onclick = null;
     }
-    $("#prt").textContent = current_schedule_name;
-    last_time = 0;
-    get();
 }
 
-setSchedule()
+setSchedule();
 
 function toTheSecond() {
     if(Date() == date)
@@ -1037,9 +1047,9 @@ function color(s) {
         bg = bg_light;
         bg_inv = bg_dark;
         bg_des = `rgb(${190 + c[0]}, ${190 + c[1]}, ${190 + c[2]}`;
-        $("#change").innerHTML = "Dark"
+        $("#change").innerHTML = "Dark";
     } else {
-        $("#change").innerHTML = "Light"
+        $("#change").innerHTML = "Light";
     }
     document.body.style.backgroundColor = bg;
     $("#change").style.color = bg;
@@ -1310,16 +1320,17 @@ function hr24(hr) {
 if(Number(localStorage.getItem("half_enabled")))
     toggleHalf();
 
-var st = "full_schedules"
-if(Number(localStorage.getItem("finals_enabled")))
-    st = "finals_schedules"
-
-if(Number(localStorage.getItem("corona_enabled")))
-    st = "c19_" + st
-if(Number(localStorage.getItem("hybrid_enabled")))
-    st = "hybrid_" + st
-if(Number(localStorage.getItem("custom_enabled")))
-    st = "custom_schedules"
+if(Number(localStorage.getItem("custom_enabled"))) {
+    var st = "custom_schedules"
+} else {
+    var st = "full_schedules"
+    if(Number(localStorage.getItem("finals_enabled")))
+        st = "finals_schedules"
+    if(Number(localStorage.getItem("corona_enabled")))
+        st = "c19_" + st
+    else if(Number(localStorage.getItem("hybrid_enabled")))
+        st = "hybrid_" + st
+}
 
 $("#cat_chooser").value = st;
 changeThing($("#cat_chooser"));
@@ -1373,8 +1384,7 @@ function calendar(text) {
         if(elearn_schedule) {
             one.push("corona");
             thing.push("corona");
-        }
-        if(hybrid_schedule) {
+        } else if(hybrid_schedule) {
             one.push("hybrid");
             thing.push("hybrid");
         }
