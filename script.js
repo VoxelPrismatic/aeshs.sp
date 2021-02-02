@@ -1433,9 +1433,9 @@ function calendar(text) {
                 if(/exams - day \d$/i.test(summary)) {
                     one.push("finals", summary.slice(-1)[0]);
                     thing = one;
-                } else if(summary.test(/(no school|non[- ]attendance)/i)) {
+                } else if(/(no school|non[- ]attendance)/i.test(summary)) {
                     thing = ["free", "off"];
-                } else if(summary.test(/late arrival/i)) {
+                } else if(/late arrival/i.test(summary)) {
                     one.push("late_arrival");
                     thing = one;
                 } else if(in_summer) {
