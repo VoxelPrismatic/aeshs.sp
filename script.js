@@ -9,12 +9,18 @@ var offset_time = new Date();
 var load_time = new Date();
 var url = document.URL;
 if(url.includes("?")) {
-    offset_time.setDate(Number(url.split("day=")[1].split("&")[0]) || offset_time.getDate())
-    offset_time.setMonth((Number(url.split("month=")[1].split("&")[0]) - 1) || offset_time.getMonth());
-    offset_time.setFullYear(Number(url.split("year=")[1].split("&")[0]) || offset_time.getFullYear());
-    offset_time.setHours(Number(url.split("hour=")[1].split("&")[0]) || offset_time.getHours());
-    offset_time.setMinutes(Number(url.split("minute=")[1].split("&")[0]) || offset_time.getMinutes());
-    offset_time.setSeconds(Number(url.split("seconds=")[1].split("&")[0]) || offset_time.getSeconds());
+    if(url.includes("day="))
+        offset_time.setDate(Number(url.split("day=")[1].split("&")[0]) || offset_time.getDate());
+    if(url.includes("month="))
+        offset_time.setMonth((Number(url.split("month=")[1].split("&")[0]) - 1) || offset_time.getMonth());
+    if(url.includes("year="))
+        offset_time.setFullYear(Number(url.split("year=")[1].split("&")[0]) || offset_time.getFullYear());
+    if(url.includes("hour="))
+        offset_time.setHours(Number(url.split("hour=")[1].split("&")[0]) || offset_time.getHours());
+    if(url.includes("minute="))
+        offset_time.setMinutes(Number(url.split("minute=")[1].split("&")[0]) || offset_time.getMinutes());
+    if(url.includes("second="))
+        offset_time.setSeconds(Number(url.split("second=")[1].split("&")[0]) || offset_time.getSeconds());
 }
 function offset_day(now = new Date()) {
     if(url.includes("?"))
