@@ -57,7 +57,7 @@ var schedule_names = {
     "pm_assembly": "PM ASSEMBLY SCHEDULE",
     "early_dismissal": "EARLY DISMISSAL SCHEDULE",
     "odyssey": "ODYSSEY SCHEDULE",
-    "summer_school": "SUMMER SCHEDULE - KINDA USELESS",
+    "summer": "SUMMER SCHEDULE - KINDA USELESS",
     "finals": {
         "1": "FINALS DAY 1 SCHEDULE",
         "2": "FINALS DAY 2 SCHEDULE",
