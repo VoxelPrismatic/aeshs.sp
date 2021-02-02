@@ -1405,36 +1405,37 @@ function calendar(text) {
         }
         if(half_period)
             thing.push("half");
-        switch(summary) {
-            case "Spring Break":
+        switch(summary.toLowerCase()) {
+            case "spring break":
                 thing = ["free", "spring"];
                 break;
-            case "Activity Period":
+            case "activity period":
                 thing.push("activity");
                 break;
-            case "Early Dismissal":
+            case "early dismissal":
                 thing.push("early_dismissal");
                 break;
-            case "No School - Thanksgiving Break":
+            case "no school - thanksgiving break":
                 thing = ["free", "thanks"];
                 break;
-            case "Late Arrival":
+            case "late arrival":
                 one.push("late_arrival");
                 thing = one;
                 break;
-            case "Winter Break":
+            case "winter break":
                 thing = ["free", "winter"];
                 break;
-            case "Non-Attendance Day":
+            case "non-attendance day":
+            case "non attendance day":
                 thing = ["free", "off"];
                 break;
             default:
-                if(/Exams - Day \d$/i.test(summary)) {
+                if(/exams - day \d$/i.test(summary)) {
                     one.push("finals", summary.slice(-1)[0]);
                     thing = one;
-                } else if(summary.startsWith("No School")) {
+                } else if(summary.test(/(no school|non[- ]attendance)/i)) {
                     thing = ["free", "off"];
-                } else if(summary.startsWith("Late Arrival")) {
+                } else if(summary.test(/late arrival/i)) {
                     one.push("late_arrival");
                     thing = one;
                 } else if(in_summer) {
