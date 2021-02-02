@@ -31,7 +31,7 @@ var hr12 = false;
 var half_period = false;
 var light_theme = Number(localStorage.getItem("light_theme") || 0);
 var last_time = 0;
-var just_now = new Date();
+var just_now = offset_day();
 var last_end = null;
 var full_screen = false;
 
@@ -865,7 +865,6 @@ var buttons = {
         
 
 function get() {
-    var now = Date.now()
     var d = offset_day()
     var scs = diffTime(d, last_end);
     if(last_time && scs % 10) {
@@ -880,6 +879,7 @@ function get() {
         window.location.reload()
     var x_i = -1;
     var p_l = 28;
+    var now = Number(d);
     for(var x of Object.keys(current_schedule)) {
         x_i += 1;
         if(x.length + 3 > p_l)
