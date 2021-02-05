@@ -1305,7 +1305,7 @@ function drawerThing(evt, elem) {
     elem.classList.remove("drawer_bottom")
     localStorage.setItem('drawer_open', Number(!elem.open))
     window.setTimeout(() => {
-        if(!window.scrollMaxY && /ipad/i.test(navigator.userAgent))
+        if(!window.scrollMaxY && !/ipad/i.test(navigator.userAgent))
             elem.classList.add("drawer_bottom");
     }, 1);
 }
@@ -1359,11 +1359,11 @@ n = Number(localStorage.getItem('drawer_open'))
 if(!isNaN(n))
     $("#drawer").open = n;
 
-$("#drawer").classList.toggle("drawer_bottom", !window.scrollMaxY)
+$("#drawer").classList.toggle("drawer_bottom", !window.scrollMaxY && !/ipad/i.test(navigator.userAgent))
 
 window.onresize = () => {
     $("#drawer").classList.remove("drawer_bottom")
-    if(!window.scrollMaxY)
+    if(!window.scrollMaxY && !/ipad/i.test(navigator.userAgent))
         $("#drawer").classList.add("drawer_bottom")
 }
 
