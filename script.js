@@ -120,7 +120,7 @@ var schedule_names = {
 }
 
 var schedules = {
-    "normal": {
+    "normal":
         "SCHOOL STARTS": time( 7, 30),
         "EARLY BIRD":    time( 8, 25),
         "PASSING TO 1":  time( 8, 30),
@@ -1298,6 +1298,12 @@ function customSchedule(text) {
         get();
     }
 }
+            
+function scrollMaxY_() {
+    if(window.scrollMaxY != undefined)
+        return window.scrollMaxY;
+    return document.documentElement.scrollHeight - document.documentElement.clientHeight;
+}
 
 function drawerThing(evt, elem) {
     if(evt.target != $("#drawer summary"))
@@ -1305,9 +1311,9 @@ function drawerThing(evt, elem) {
     elem.classList.remove("drawer_bottom")
     localStorage.setItem('drawer_open', Number(!elem.open))
     window.setTimeout(() => {
-        if(!window.scrollMaxY) {
+        if(!scrollMaxY_()) {
             if(/safari/i.test(navigator.userAgent))
-                alert(scrollMaxY + "/" + document.body.scrollHeight)
+                alert(scrollMaxY_() + "/" + document.body.scrollHeight)
             elem.classList.add("drawer_bottom");
     }, 50 * /safari/i.test(navigator.userAgent) || 1);
 }
@@ -1361,11 +1367,11 @@ n = Number(localStorage.getItem('drawer_open'))
 if(!isNaN(n))
     $("#drawer").open = n;
 
-$("#drawer").classList.toggle("drawer_bottom", !window.scrollMaxY && !/ipad/i.test(navigator.userAgent))
+$("#drawer").classList.toggle("drawer_bottom", !scrollMaxY_())
 
 window.onresize = () => {
     $("#drawer").classList.remove("drawer_bottom")
-    if(!window.scrollMaxY && !/ipad/i.test(navigator.userAgent))
+    if(!scrollMaxY_())
         $("#drawer").classList.add("drawer_bottom")
 }
 
