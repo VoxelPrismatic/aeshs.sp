@@ -132,7 +132,7 @@ var schedules = {
         "PASSING TO 4":  time(11, 10),
         "PERIOD 4":      time(11, 57),
         "PASSING TO 5":  time(12,  2),
-        "PERIOD 5":      time(12, 49),
+        "PERIOD 5":      time(12, 49), 
         "PASSING TO 6":  time(12, 54),
         "PERIOD 6":      time(13, 41),
         "PASSING TO 7":  time(13, 46),
@@ -927,7 +927,7 @@ function get() {
     $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
     var ls = `<b>PERIOD NAME ${"-".repeat(p_l - 9)} START</b><br><div>`;
     var ogls = ls;
-    var p_q = p_l + 2 * !ampm;
+    var p_q = p_l + 3 * !ampm;
     for(var x = 0; x < Object.keys(current_schedule).length - 1; x += 1) {
         var per = Object.keys(current_schedule)[x + 1];
         if(per == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
