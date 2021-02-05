@@ -1307,7 +1307,7 @@ function drawerThing(evt, elem) {
     window.setTimeout(() => {
         if(!window.scrollMaxY)
             elem.classList.add("drawer_bottom");
-    }, 100 * /safari/i.test(navigator.userAgent) || 1;
+    }, 50 * /safari/i.test(navigator.userAgent) || 1);
 }
 
 function diffTime(a, b = new Date(0)) {
