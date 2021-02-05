@@ -1315,6 +1315,7 @@ function drawerThing(evt, elem) {
             if(/safari/i.test(navigator.userAgent))
                 alert(scrollMaxY_() + "/" + document.body.scrollHeight)
             elem.classList.add("drawer_bottom");
+        }
     }, 50 * /safari/i.test(navigator.userAgent) || 1);
 }
 
