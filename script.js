@@ -1305,9 +1305,9 @@ function drawerThing(evt, elem) {
     elem.classList.remove("drawer_bottom")
     localStorage.setItem('drawer_open', Number(!elem.open))
     window.setTimeout(() => {
-        if(!window.scrollMaxY && !/ipad/i.test(navigator.userAgent))
+        if(!window.scrollMaxY)
             elem.classList.add("drawer_bottom");
-    }, 1);
+    }, 100 * /safari/i.test(navigator.userAgent) || 1;
 }
 
 function diffTime(a, b = new Date(0)) {
