@@ -927,6 +927,7 @@ function get() {
     $("#per").textContent = `${period} // ENDS AT ${endhr}:${zf(end.getMinutes())}${ampm}`;
     var ls = `<b>PERIOD NAME ${"-".repeat(p_l - 9)} START</b><br><div>`;
     var ogls = ls;
+    var p_q = p_l + 2 * !ampm;
     for(var x = 0; x < Object.keys(current_schedule).length - 1; x += 1) {
         var per = Object.keys(current_schedule)[x + 1];
         if(per == "SCHOOL IS TOMORROW" && !current_schedule_name.startsWith("CUSTOM") && d.getDay() == 5)
@@ -935,7 +936,7 @@ function get() {
         var hr = end2.getHours();
         var ampm;
         [hr, ampm] = hr24(hr)
-        var line = (per + " ").padEnd(p_l, "-") + " " + `${zf(hr)}:${zf(end2.getMinutes())}${ampm}`;
+        var line = (per + " ").padEnd(p_q, "-") + " " + `${zf(hr)}:${zf(end2.getMinutes())}${ampm}`;
         if(per == period)
             line = "<b class='glow'><i>" + line + "</i></b>";
         else if(x < x_i)
