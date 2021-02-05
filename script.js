@@ -1305,7 +1305,7 @@ function drawerThing(evt, elem) {
     elem.classList.remove("drawer_bottom")
     localStorage.setItem('drawer_open', Number(!elem.open))
     window.setTimeout(() => {
-        if(!window.scrollMaxY)
+        if(!window.scrollMaxY && /ipad/i.test(navigator.userAgent))
             elem.classList.add("drawer_bottom");
     }, 1);
 }
