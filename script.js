@@ -120,7 +120,7 @@ var schedule_names = {
 }
 
 var schedules = {
-    "normal":
+    "normal": {
         "SCHOOL STARTS": time( 7, 30),
         "EARLY BIRD":    time( 8, 25),
         "PASSING TO 1":  time( 8, 30),
