@@ -1311,11 +1311,8 @@ function drawerThing(evt, elem) {
     elem.classList.remove("drawer_bottom")
     localStorage.setItem('drawer_open', Number(!elem.open))
     window.setTimeout(() => {
-        if(!scrollMaxY_()) {
-            if(/safari/i.test(navigator.userAgent))
-                alert(scrollMaxY_() + "/" + document.body.scrollHeight)
+        if(!scrollMaxY_())
             elem.classList.add("drawer_bottom");
-        }
     }, 50 * /safari/i.test(navigator.userAgent) || 1);
 }
 
