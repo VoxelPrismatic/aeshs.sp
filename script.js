@@ -914,7 +914,7 @@ function get() {
     scs %= 60;
     var hrs = Math.floor(mns / 60);
     mns %= 60;
-    $("#time").innerHTML = `${hrs ? zf(hrs) + ":" : ""}${zf(mns)}:<span id='seconds'>${zf(scs)}</span>`;
+    $("#time").innerHTML = `${(hrs || !full_screen)} ? zf(hrs) + ":" : ""}${zf(mns)}:<span id='seconds'>${zf(scs)}</span>`;
 
     if(!refresh)
         return
