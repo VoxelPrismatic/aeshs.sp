@@ -1263,6 +1263,8 @@ function fullScreen() {
     $("#customizer").classList.toggle("mustinv");
     localStorage.setItem("full_screen", Number(full_screen));
     $("#time").style.fontSize = full_screen ? "20vw" : "18vw";
+    last_time = 0;
+    get();
 }
 
 function customSchedule(text) {
