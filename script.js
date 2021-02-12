@@ -915,7 +915,12 @@ function get() {
     var hrs = Math.floor(mns / 60);
     mns %= 60;
     $("#time").innerHTML = `${(hrs || !full_screen) ? zf(hrs) + ":" : ""}${zf(mns)}:<span id='seconds'>${zf(scs)}</span>`;
-
+    if(full_screen) {
+        if(hrs)
+            $("#time").style.fontSize = "20vw";
+        else
+            $("#time").style.fontSize = "26vw";
+    }
     if(!refresh)
         return
     
