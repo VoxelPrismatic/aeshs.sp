@@ -1487,6 +1487,7 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
     current_schedule_name = schedule_names["free"]["end"]
     $("#prt").textContent = current_schedule_name;
     get();
+    $("#prt2").style.display = "none"
 } else if(localStorage.getItem("calendar_load") == tt) {
     calendar(localStorage.getItem("calendar_text"))
 } else {
