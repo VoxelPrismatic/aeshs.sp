@@ -986,7 +986,10 @@ function setSchedule(...args) {
         e.classList.remove("selected")*/
     if(args[0] == "custom") {
         $("#customizer").className = "cc";
-        $("#customizer").value = "period name                 | ending time - 24hr or add AM/PM\n"
+        if(alt_format)
+            $("#customizer").value = "period name\\\\ending time - 24hr or add AM/PM;;;";
+        else
+            $("#customizer").value = "period name                 | ending time - 24hr or add AM/PM\n"
         for(var key of Object.keys(current_schedule)) {
             val = current_schedule[key];
             sec = val.getSeconds();
