@@ -1279,10 +1279,11 @@ function customSchedule(text) {
     for(var line of text.split("\n"))
         lines.push(...line.split(";;;"));
     for(var line of lines) {
-        if(line.search(/.+\| *\d{1,2}:\d{2}(:\d{2})?( *(am|pm))?/) > -1) {
-            var per = line.split("|")[0].trim()
-            console.log(line.split("|"))
-            var tm = line.split("|")[1].trim()
+        if(line.search(/.+(\||\\\\) *\d{1,2}:\d{2}(:\d{2})?( *(am|pm))?/) > -1) {
+            var sp = line.includes("|") ? "|" : "\\\\"
+            var per = line.split(sp)[0].trim()
+            console.log(line.split(sp))
+            var tm = line.split(sp)[1].trim()
             var hr = Number(tm.split(":")[0])
             var min = Number(tm.split(":")[1].slice(0, 2))
             try {
