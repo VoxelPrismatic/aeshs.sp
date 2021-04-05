@@ -137,7 +137,7 @@
                         <button onclick="toggleTheme()" style="background-color: #ccddddff; color: #122;" id="change">Light</button>
                         <input id="colorswap" type="color" value="#00ffff" onchange="color(this.value)">
                         <button onclick="$('#customizer').classList.toggle('inv')" id="hider"></button>
-                        <button onclick="alt_format = !alt_format; setSchedule();" id="alt_format"></button>
+                        <button onclick="alt_format = !alt_format; setSchedule(); localStorage.setItem('alt_format', Number(alt_format))" id="alt_format"></button>
                         <button onclick="toggleHour()" id="toggle-hour">12hr</button>
                     </div>
                     <textarea class="inv" id="customizer" onload="textareaTheme()" onkeyup="customSchedule(this.value)"></textarea>
