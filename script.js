@@ -43,6 +43,7 @@ var custom_schedule = false;
 var elearn_schedule = false;
 var hybrid_schedule = false;
 var finals_schedule = false;
+var alt_format = Number(localStorage.getItem("alt_format") || 0);
 var hr12 = false;
 var half_period = false;
 var light_theme = Number(localStorage.getItem("light_theme") || 0);
@@ -994,7 +995,10 @@ function setSchedule(...args) {
             hr = val.getHours();
             var ampm;
             [hr, ampm] = hr24(hr)
-            $("#customizer").value += `${key.padEnd(28)}| ${hr}:${min}${sec}${ampm}\n`;
+            if(alt_format) 
+                $("#customizer").value += `${key}\\\\${hr}:${min}:${sec}${ampm};;;`;
+            else
+                $("#customizer").value += `${key.padEnd(28)}| ${hr}:${min}${sec}${ampm}\n`;
         }
         $("#customizer").onchange = function() { changer(s); };
         $("#customizer").style.height = "30vw";
@@ -1280,7 +1284,9 @@ function customSchedule(text) {
         lines.push(...line.split(";;;"));
     for(var line of lines) {
         if(line.search(/.+(\||\\\\) *\d{1,2}:\d{2}(:\d{2})?( *(am|pm))?/) > -1) {
-            var sp = line.includes("|") ? "|" : "\\\\"
+            var sp = line.includes("|") ? "|" : "\\\\";
+            if(sp == "\\\\")
+                alt_format = 1;
             var per = line.split(sp)[0].trim()
             console.log(line.split(sp))
             var tm = line.split(sp)[1].trim()
