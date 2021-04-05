@@ -1003,7 +1003,7 @@ function setSchedule(...args) {
             else
                 $("#customizer").value += `${key.padEnd(28)}| ${hr}:${min}${sec}${ampm}\n`;
         }
-        $("#customizer").onchange = function() { changer(s); };
+        $("#customizer").onchange = function() { customSchedule(this.value); };
         $("#customizer").style.height = "30vw";
         $("#customizer").style.width = "90vw";
         $("#hider").textContent = "Toggle editor";
