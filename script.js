@@ -1289,7 +1289,7 @@ function customSchedule(text) {
         if(line.search(/.+(\||\\\\) *\d{1,2}:\d{2}(:\d{2})?( *(am|pm))?/) > -1) {
             var sp = line.includes("|") ? "|" : "\\\\";
             alt_format = sp == "\\\\";
-            localStorage.setItem("alt_format", alt_format);
+            localStorage.setItem("alt_format", Number(alt_format));
             
             var per = line.split(sp)[0].trim()
             console.log(line.split(sp))
