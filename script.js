@@ -999,7 +999,7 @@ function setSchedule(...args) {
             var ampm;
             [hr, ampm] = hr24(hr)
             if(alt_format) 
-                $("#customizer").value += `${key}\\\\${hr}:${min}:${sec}${ampm};;;`;
+                $("#customizer").value += `${key}\\\\${hr}:${min}${sec}${ampm};;;`;
             else
                 $("#customizer").value += `${key.padEnd(28)}| ${hr}:${min}${sec}${ampm}\n`;
         }
