@@ -1092,6 +1092,7 @@ function color(s) {
         $("#sched_chooser").style,
         $("#cat_chooser").style,
         $("#hider").style,
+        $("#alt_format").style,
         $("#toggle-hour").style,
         $("#fuller").style
     ]
