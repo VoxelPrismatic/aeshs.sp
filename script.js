@@ -1275,7 +1275,10 @@ function fullScreen() {
 function customSchedule(text) {
     var dic = {}
     var st = "{"
-    for(var line of text.split("\n")) {
+    var lines = [];
+    for(var line of text.split("\n"))
+        lines.push(...line.split(";;;"));
+    for(var line of lines) {
         if(line.search(/.+\| *\d{1,2}:\d{2}(:\d{2})?( *(am|pm))?/) > -1) {
             var per = line.split("|")[0].trim()
             console.log(line.split("|"))
