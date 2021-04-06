@@ -918,7 +918,7 @@ function get() {
     $("#time").innerHTML = `${(hrs || !full_screen) ? zf(hrs) + ":" : ""}${zf(mns)}:<span id='seconds'>${zf(scs)}</span>`;
     if(full_screen) {
         if(window.navigator.userAgent.includes("Tizen"))
-            $("#time").style.fontSize = hrs ? "20vw" : "36vw";
+            $("#time").style.fontSize = hrs ? "20vw" : "33vw";
         else
             $("#time").style.fontSize = hrs ? "20vw" : "26vw";
     }
