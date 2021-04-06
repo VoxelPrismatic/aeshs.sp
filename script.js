@@ -1046,12 +1046,14 @@ function setSchedule(...args) {
 }
 
 setSchedule();
+get_timeout = 0;
 
 function toTheSecond() {
     if(Date() == date)
-        return window.setTimeout(toTheSecond, 10)
-    console.log(window.setInterval(get, 1000));
-    get()
+        return window.setTimeout(toTheSecond, 10);
+    get_timeout = window.setInterval(get, 1000);
+    console.log(get_timeout);
+    get();
 }
 
 var date = Date();
@@ -1520,8 +1522,16 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
     });
 }
 
-window.onfocus = () => { last_time = 0; get(); }
-window.onclick = () => { last_time = 0; get(); }
+function refocus() {
+    last_time = 0;
+    get();
+    window.clearInterval(get_timeout);
+    toTheSecond();
+}
+
+window.onfocus = refocus;
+window.onclick = refocus; 
+
 window.onkeyup = (evt) => {
     switch(evt.key) {
         case "f":
