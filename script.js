@@ -917,10 +917,10 @@ function get() {
     mns %= 60;
     $("#time").innerHTML = `${(hrs || !full_screen) ? zf(hrs) + ":" : ""}${zf(mns)}:<span id='seconds'>${zf(scs)}</span>`;
     if(full_screen) {
-        if(hrs)
-            $("#time").style.fontSize = "20vw";
+        if(window.navigator.userAgent.includes("Tizen")
+            $("#time").style.fontSize = hrs ? "31vw" : "25vw";
         else
-            $("#time").style.fontSize = "26vw";
+            $("#time").style.fontSize = hrs ? "26vw" : "20vw";
     }
     if(!refresh)
         return
@@ -1499,4 +1499,4 @@ window.onkeydown = (evt) => {
     }
 }
 
-$("#space").innerHTML = window.navigator.userAgent
+//$("#space").innerHTML = window.navigator.userAgent
