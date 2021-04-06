@@ -1474,7 +1474,7 @@ function refocus() {
 window.onfocus = refocus;
 window.onclick = refocus; 
 
-window.onkeyup = (evt) => {
+window.onkeydown = (evt) => {
     switch(evt.key.toLowerCase()) {
         case "f":
             fullScreen();
