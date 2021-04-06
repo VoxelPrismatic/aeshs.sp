@@ -1499,4 +1499,4 @@ window.onkeydown = (evt) => {
     }
 }
 
-$("#seconds").onclick = () => { $("#per").innerHTML window.navigator.userAgent }
+$("#seconds").onclick = () => { window.setTimeout(() => $("#per").innerHTML window.navigator.userAgent, 500) }
