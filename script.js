@@ -917,14 +917,14 @@ function get() {
     mns %= 60;
     $("#time").innerHTML = `${(hrs || !full_screen) ? zf(hrs) + ":" : ""}${zf(mns)}:<span id='seconds'>${zf(scs)}</span>`;
     if(full_screen) {
-        if(window.navigator.userAgent.includes("Tizen")
+        if(window.navigator.userAgent.includes("Tizen"))
             $("#time").style.fontSize = hrs ? "31vw" : "25vw";
         else
             $("#time").style.fontSize = hrs ? "26vw" : "20vw";
     }
     if(!refresh)
         return
-    
+
     var endhr = end.getHours();
     var ampm;
     [endhr, ampm] = hr24(endhr)
