@@ -1527,9 +1527,18 @@ window.onkeyup = (evt) => {
         case "f":
         case "F":
             fullScreen();
+            $("#drawer").open = false;
             break;
         case "h":
         case "H":
+            toggleHalf();
+            break;
+        case "m":
+        case "M":
+        case "a":
+        case "A":
+        case "p":
+        case "P":
             toggleHour();
             break;
         case "d":
