@@ -1498,3 +1498,5 @@ window.onkeydown = (evt) => {
             $("#change").click();
     }
 }
+
+$("#seconds").onclick = () => { alert(window.navigator.userAgent) }
