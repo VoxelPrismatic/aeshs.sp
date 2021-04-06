@@ -1204,65 +1204,6 @@ function toggleHalf() {
     hideScheds(sched);
 }
 
-/*function toggleELearning() {
-    elearn_schedule = !elearn_schedule
-    if(custom_schedule)
-        return
-    sched_ls = [];
-    if(finals_schedule) {
-        sched = "finals_schedules";
-        sched_ls.push("finals");
-    } else if(half_period) {
-        sched = "half_schedules";
-        sched_ls.push("half");
-    } else {
-        sched = "full_schedules";
-    }
-    if(elearn_schedule) {
-        sched = "c19_" + sched
-        sched_ls = ["corona", ...sched_ls];
-        $("#toggle-corona").textContent = "[IRL LEARNING]"
-    } else {
-        $("#toggle-corona").textContent = "[E-LEARNING]"
-    }
-    sched_ls.push(current_args.slice(-1)[0])
-    setSchedule(...sched_ls)
-    localStorage.setItem("corona_enabled", Number(elearn_schedule));
-    hideScheds(sched);
-}
-
-function toggleFinals() {
-    finals_schedule = !finals_schedule
-    hideScheds();
-    $("#toggle-half").classList.toggle("inv", finals_schedule);
-    if(finals_schedule) {
-        $("#toggle-final").textContent = "[NON-FINALS]"
-        $(elearn_schedule ? "#c19_finals_schedules" : "#finals_schedules").classList.remove("inv");
-    } else {
-        $("#toggle-final").textContent = "[FINALS]"
-        toggleHalf();
-        toggleHalf();
-    }
-    localStorage.setItem("finals_enabled", Number(finals_schedule));
-}
-
-function toggleCustom() {
-    custom_schedule = !custom_schedule
-    hideScheds();
-    $("#toggle-half").classList.toggle("inv", custom_schedule);
-    $("#toggle-final").classList.toggle("inv", custom_schedule);
-    $("#toggle-corona").classList.toggle("inv", custom_schedule);
-    if(custom_schedule) {
-        $("#toggle-custom").textContent = "[PRESET]"
-        $("#custom_schedules").classList.remove("inv");
-    } else {
-        $("#toggle-custom").textContent = "[CUSTOM]"
-        toggleHalf();
-        toggleHalf();
-    }
-    localStorage.setItem("custom_enabled", Number(custom_schedule));
-}*/
-
 function toggleHour() {
     hr12 = !hr12
     localStorage.setItem("12hour", Number(hr12))
@@ -1537,7 +1478,7 @@ window.onkeyup = (evt) => {
     switch(evt.key.toLowerCase()) {
         case "f":
             fullScreen();
-            $("#drawer").open = false;
+            $("#drawer").open = !full_screen;
             break;
         case "h":
             toggleHalf();
@@ -1553,5 +1494,7 @@ window.onkeyup = (evt) => {
         case "c":
             $("#colorswap").click();
             break;
+        case "b":
+            $("#change").click();
     }
 }
