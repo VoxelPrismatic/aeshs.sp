@@ -1281,7 +1281,7 @@ function fullScreen() {
     $("#bar").classList.toggle("bottom");
     $("#customizer").classList.toggle("mustinv");
     localStorage.setItem("full_screen", Number(full_screen));
-    //$("#time").style.fontSize = full_screen ? "20vw" : "18vw";
+    $("#time").style.fontSize = full_screen ? "20vw" : "18vw";
     $("#time").classList.toggle("fs");
     last_time = 0;
     get();
