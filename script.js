@@ -1499,4 +1499,4 @@ window.onkeydown = (evt) => {
     }
 }
 
-$("#seconds").onclick = () => { alert(window.navigator.userAgent) }
+$("#seconds").onclick = () => { $("#per").innerHTML window.navigator.userAgent }
