@@ -1522,3 +1522,19 @@ if(just_now.getDay() == 6 || just_now.getDay() == 0) {
 
 window.onfocus = () => { last_time = 0; get(); }
 window.onclick = () => { last_time = 0; get(); }
+window.onkeyup = (evt) => {
+    switch(evt.key) {
+        case "f":
+        case "F":
+            fullScreen();
+            break;
+        case "h":
+        case "H":
+            toggleHour();
+            break;
+        case "d":
+        case "D":
+            $("#drawer > summary").click();
+            break;
+    }
+}
