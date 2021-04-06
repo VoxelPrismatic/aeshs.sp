@@ -1556,5 +1556,9 @@ window.onkeyup = (evt) => {
         case "D":
             $("#drawer > summary").click();
             break;
+        case "c":
+        case "C":
+            $("#colorswap").click();
+            break;
     }
 }
