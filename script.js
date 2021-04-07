@@ -1468,6 +1468,7 @@ function refocus() {
     last_time = 0;
     get();
     window.clearInterval(get_timeout);
+    date = Date();
     toTheSecond();
 }
 
