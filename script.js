@@ -1106,7 +1106,8 @@ function color(s) {
     $("#customizer").style.backgroundColor = bg_des;
     
     $("#colorswap").style.backgroundColor = bg_des;
-    $("#colorswap").style.borderColor = bg_des;
+    $("#colorswap").
+    Color = bg_des;
     
     $("hr").style.borderColor = s;
     localStorage.setItem("current_color", s);
@@ -1417,6 +1418,9 @@ function calendar(text) {
                     thing = one;
                 } else if(in_summer) {
                     thing = ["summer"];
+                } else if(summary.toLowerCase().startsWith("activity period")) {
+                    thing.push("activity");
+                    break;
                 } else {
                     skip = true
                 }
