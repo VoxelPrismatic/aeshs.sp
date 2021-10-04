@@ -182,7 +182,7 @@ var schedules = {
         "PERIOD 6":      time(13, 53),
         "PASSING TO 7":  time(13, 58),
         "PERIOD 7":      time(14, 39),
-        "PASSING TO 8":  time(14, 55),
+        "PASSING TO 8":  time(14, 44),
         "PERIOD 8":      time(15, 25),
         "SCHOOL IS TOMORROW": time(23, 59, 59),
     },
